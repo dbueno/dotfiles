@@ -49,7 +49,7 @@ if has('gui')
     set guioptions-=l
     set guioptions-=L
     set guioptions-=b
-    set guifont=Anonymous\ Pro\ 11
+    set guifont=Envy\ Code\ R:h12
 endif
 " }}}
 
