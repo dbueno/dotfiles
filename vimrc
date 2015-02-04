@@ -49,7 +49,7 @@ if has('gui')
     set guioptions-=l
     set guioptions-=L
     set guioptions-=b
-    set guifont=Envy\ Code\ R\ 14px
+    set guifont=Anonymous\ Pro\ 11
 endif
 " }}}
 
@@ -99,6 +99,7 @@ set ruler
 set et sts=4 sw=4
 
 set showcmd
+set ignorecase smartcase
 
 set wildmenu wildmode=longest,list
 
