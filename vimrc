@@ -78,6 +78,7 @@ nnoremap <Leader>t :<C-u>CtrlPTag<CR>
 nnoremap <Leader>r :<C-u>CtrlPBufTag<CR>
 
 nnoremap <Leader>h :nohls<CR>
+nnoremap <Space> zz
 
 nnoremap <Leader>c <C-w>c
 nnoremap <Leader>o <C-w>o
