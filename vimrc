@@ -102,6 +102,7 @@ set showcmd
 set ignorecase smartcase
 
 set wildmenu wildmode=longest,list
+set hlsearch
 
 set laststatus=2 "always include status line
 
