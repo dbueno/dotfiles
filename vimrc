@@ -107,6 +107,9 @@ set hlsearch
 
 set laststatus=2 "always include status line
 
+" Keep them around for now
+set hidden
+
 if executable('grin')
     set grepprg=grin\ -nH\ --emacs
 endif
