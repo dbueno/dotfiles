@@ -1,0 +1,5 @@
+:set -cpp
+:set -XFlexibleContexts
+:set -XMultiParamTypeClasses
+:set -XTypeSynonymInstances
+:set -XFlexibleInstances

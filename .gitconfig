@@ -1,0 +1,17 @@
+[alias]
+        di = diff --cached
+        pa = push --all
+        co = checkout
+        st = status
+	ci = commit
+[color]
+	interactive = auto
+	diff = auto
+[core]
+	fsyncobjectfiles = true
+	excludesfile = /Users/bueno/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[push]
+	default = simple
