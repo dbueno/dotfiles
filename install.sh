@@ -30,20 +30,15 @@ mkdir -p "$HOME/bin"
 mkdir -p "$HOME/sw/bin"
 mkdir -p "$HOME/.mutt" "$HOME/.mutt/cache/bodies" "$HOME/.mutt/cache/headers"
 
-${INSTALL} ${INSTALL_FLAGS} "${PWD}/ssh-config" "$HOME/.ssh/config"
 ${INSTALL} ${INSTALL_FLAGS} "${PWD}/wtf" "$HOME/sw/bin/wtf"
 ${INSTALL} ${INSTALL_FLAGS} "${PWD}/wtf" "$HOME/sw/bin/erg"
 
 ${INSTALL} ${INSTALL_FLAGS}                        \
+    "${PWD}/.bashrc"                              \
+    "${PWD}/.bashrc_personal"                              \
     "${PWD}/.inputrc"                              \
     "${PWD}/.Xresources"                           \
     "$HOME"
-
-${INSTALL} ${INSTALL_FLAGS} \
-  "${PWD}/mutt-gmailrc" \
-  "${PWD}/mutt-umrc" \
-  "${PWD}/mutt-crypto" \
-  "$HOME/.mutt"
 
 ${INSTALL} ${INSTALL_FLAGS} \
   "${PWD}/getpw" \
