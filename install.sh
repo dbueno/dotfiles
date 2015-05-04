@@ -40,9 +40,6 @@ ${INSTALL} ${INSTALL_FLAGS}                        \
     "${PWD}/.Xresources"                           \
     "$HOME"
 
-${INSTALL} ${INSTALL_FLAGS} \
-  "${PWD}/getpw" \
-  "${HOME}/bin/"
 
 # copy this because otherwise our merges can screw up if there is a conflict in
 # .gitconfig
