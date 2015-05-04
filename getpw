@@ -1,0 +1,5 @@
+#!/bin/sh
+
+pwpath="$HOME/Google Drive/me/passwords.gpg"
+
+gpg -d "$pwpath" | grep -A 4 -i $@

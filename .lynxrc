@@ -1,0 +1,3 @@
+accept_all_cookies=true
+EXTERNAL:http:open %s:TRUE
+EXTERNAL:https:open %s:TRUE

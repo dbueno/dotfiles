@@ -1,0 +1,4 @@
+#text/html; lynx -force_html %s
+text/html; open -W %s
+image/*; open -W %s
+file/pdf; open -W %s

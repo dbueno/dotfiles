@@ -1,0 +1,8 @@
+Rxvt.scrollBar:       True
+Rxvt.visualBell:      True
+Rxvt.loginShell:      True
+Rxvt.background:      White
+Rxvt.foreground:      Black
+Rxvt.saveLines:       10000
+Rxvt.cursorColor:     Green
+Rxvt.scrollBar_right: True
