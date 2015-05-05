@@ -39,17 +39,14 @@ let g:NERDTreeHijackNetrw=0
 
 " GUI options {{{
 if has('gui')
-    " no menu
-    set guioptions-=m
-    " no toolbar
-    set guioptions-=T
-    " no scrollbars
-    set guioptions-=r
+    set guioptions-=m " no menu
+    set guioptions-=T " no toolbar
+    set guioptions-=r " no scrollbars
     set guioptions-=R
     set guioptions-=l
     set guioptions-=L
     set guioptions-=b
-    set guifont=Envy\ Code\ R\ 14px
+    set guifont=Envy\ Code\ R:h13
 endif
 " }}}
 
@@ -90,6 +87,8 @@ nnoremap <silent> <Bar> :rightbelow vsp<CR>:exe "normal \<Plug>VinegarUp"<CR>
 
 noremap <F1> <Esc>
 inoremap <F1> <Esc>
+
+nmap <space> zz
 " }}}
 
 
@@ -103,6 +102,9 @@ set showcmd
 set wildmenu wildmode=longest,list
 
 set laststatus=2 "always include status line
+
+set ignorecase smartcase
+set hlsearch
 
 if executable('grin')
     set grepprg=grin\ -nH\ --emacs
