@@ -92,11 +92,7 @@ num_jobs() {
     local num_jobs
     num_jobs="$(jobs | wc -l)"
     if [ $num_jobs -ne 0 ]; then
-        if [ $num_jobs -eq 1 ]; then
-            printf " (1 job)"
-        else
-            printf " (%s jobs)" $num_jobs
-        fi
+        printf "%s > " $num_jobs
     fi
 }
 
