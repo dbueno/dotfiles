@@ -38,6 +38,8 @@ ${INSTALL} ${INSTALL_FLAGS}                        \
     "${PWD}/.inputrc"                              \
     "${PWD}/.Xresources"                           \
     "${PWD}/.tmux.conf"                            \
+    "${PWD}/.tmux-macosx"                            \
+    "${PWD}/.tmux-linux"                            \
     "${PWD}/.mailcap"                            \
     "${PWD}/.ghci"                            \
     "${PWD}/.gdbinit"                            \
