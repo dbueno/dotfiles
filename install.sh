@@ -38,6 +38,10 @@ ${INSTALL} ${INSTALL_FLAGS}                        \
     "${PWD}/.bashrc_personal"                              \
     "${PWD}/.inputrc"                              \
     "${PWD}/.Xresources"                           \
+    "${PWD}/.tmux.conf"                            \
+    "${PWD}/.mailcap"                            \
+    "${PWD}/.ghci"                            \
+    "${PWD}/.gdbinit"                            \
     "$HOME"
 
 
