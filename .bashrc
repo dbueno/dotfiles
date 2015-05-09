@@ -60,8 +60,10 @@ alias makeiso="mkisofs -l -pad -U -J -r -allow-leading-dots -iso-level 4"
 alias grabhttp="wget -v -F -N -x --cache=off --recursive --convert links"
 
 # bash completion from homebrew
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
+if command -v brew >/dev/null 2>&1; then
+    if [ -f $(brew --prefix)/etc/bash_completion ]; then
+        . $(brew --prefix)/etc/bash_completion
+    fi
 fi
 
 
