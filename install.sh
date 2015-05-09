@@ -35,7 +35,6 @@ ${INSTALL} ${INSTALL_FLAGS} "${PWD}/wtf" "$HOME/sw/bin/erg"
 
 ${INSTALL} ${INSTALL_FLAGS}                        \
     "${PWD}/.bashrc"                              \
-    "${PWD}/.bashrc_personal"                              \
     "${PWD}/.inputrc"                              \
     "${PWD}/.Xresources"                           \
     "${PWD}/.tmux.conf"                            \
