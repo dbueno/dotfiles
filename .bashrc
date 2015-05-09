@@ -5,7 +5,9 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
-. ~/.bashrc_personal
+if [ -f $HOME/.bashrc_personal ]; then
+    . ~/.bashrc_personal
+fi
 
 my_uname="$(uname)"
 
