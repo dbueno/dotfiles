@@ -1,13 +1,9 @@
 # Settings for interactive shells
 # .bashrc is executed for interactive non-login shells
     
-if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
-fi
+[[ -f /etc/bashrc ]] && source /etc/bashrc
 
-if [ -f $HOME/.bashrc_personal ]; then
-    . ~/.bashrc_personal
-fi
+[[ -f "$HOME/.bashrc_personal" ]] && source "$HOME/.bashrc_personal"
 
 my_uname="$(uname)"
 
@@ -21,7 +17,6 @@ then
     alias lt='ls -alFGtr'
     alias lth='ls -alFGtrh'
 
-    alias dusage='du -Pskx * 2>&1 | grep -v "Permission denied" | sort -nr | less'
     export EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs"
 
 ## Linux-dependent aliases
@@ -38,7 +33,6 @@ then
     alias lo='ls -alF --color'
     alias lt='ls -alF --color -tr'
     alias lth='ls -alF --color -trh'
-    alias dusage='ls -d */ | xargs du -cs | sort -nr'
 #else
 #    echo "Unrecognized host (i.e. not Darwin or Linux). Run 'uname'."
 fi
@@ -72,11 +66,6 @@ fi
 # In absence of special direction, EDITOR is a running emacs instance.
 export EDITOR="vim"
 export ED="$EDITOR"
-
-# Send command's output to less.  e.g. so ls
-function so {
-    eval "$@" | less
-}
 
 
 # Prompt settings #############################################################
