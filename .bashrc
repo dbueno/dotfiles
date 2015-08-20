@@ -27,8 +27,6 @@ then
     else
         alias remove="bcwipe -vf"
     fi
-    alias aoeu="xmodmap /usr/X11R6/lib/X11/etc/xmodmap.std"
-    alias asdf="xmodmap /usr/share/xmodmap/xmodmap.dvorak"
     alias no='ls -F --color'
     alias lo='ls -alF --color'
     alias lt='ls -alF --color -tr'
@@ -63,21 +61,11 @@ if command -v brew >/dev/null 2>&1; then
 fi
 
 
-# In absence of special direction, EDITOR is a running emacs instance.
 export EDITOR="vim"
 export ED="$EDITOR"
 
 
 # Prompt settings #############################################################
-
-# Echo "root" if the current user has root privs.  This is used to set my PS1I
-# think, so I know I'm root.
-my_whoami=`whoami`
-disp_root_name() {
-    if [ $my_whoami = "root" ]; then
-        echo -n "root"
-    fi
-}
 
 # Print out the number of jobs running with an argument format-string suitable
 # for printf.  I use this to get an "(n jobs)" string in my prompt.
