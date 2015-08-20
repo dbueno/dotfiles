@@ -13,9 +13,7 @@ then
     alias remove="/usr/bin/srm -mv"
     alias no='ls -FG'
     alias lo='ls -alFG'
-    alias ho='ls -alFGh'
-    alias lt='ls -alFGtr'
-    alias lth='ls -alFGtrh'
+    alias lt='ls -alFGtrh'
 
     export EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs"
 
@@ -29,8 +27,7 @@ then
     fi
     alias no='ls -F --color'
     alias lo='ls -alF --color'
-    alias lt='ls -alF --color -tr'
-    alias lth='ls -alF --color -trh'
+    alias lt='ls -alF --color -trh'
 #else
 #    echo "Unrecognized host (i.e. not Darwin or Linux). Run 'uname'."
 fi
