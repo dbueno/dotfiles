@@ -1,9 +1,9 @@
 # Settings for interactive shells
 # .bashrc is executed for interactive non-login shells
     
-[[ -f /etc/bashrc ]] && source /etc/bashrc
+[[ -e /etc/bashrc ]] && source /etc/bashrc
 
-[[ -f "$HOME/.bashrc_personal" ]] && source "$HOME/.bashrc_personal"
+[[ -e "$HOME/.bashrc_personal" ]] && source "$HOME/.bashrc_personal"
 
 my_uname="$(uname)"
 
