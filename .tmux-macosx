@@ -1,3 +1,4 @@
+set -g status-right '#[fg=yellow]#[default] #[fg=white]%H:%M#[default]'
 
 # Integrate with osx clipboard
 # make sure to do brew install reattach-to-user-namespace first
