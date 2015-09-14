@@ -48,7 +48,7 @@ if has('gui')
     set guioptions-=l
     set guioptions-=L
     set guioptions-=b
-    set guifont=Envy\ Code\ R:h13
+    set guifont=Source\ Code\ Pro\ Light:h11
 endif
 " }}}
 
@@ -77,6 +77,7 @@ nnoremap <Leader>t :<C-u>CtrlPTag<CR>
 nnoremap <Leader>r :<C-u>CtrlPBufTag<CR>
 
 nnoremap <Leader>h :nohls<CR>
+nnoremap <Space> zz
 
 nnoremap <Leader>c <C-w>c
 nnoremap <Leader>o <C-w>o
@@ -100,13 +101,16 @@ set ruler
 set et sts=4 sw=4
 
 set showcmd
+set ignorecase smartcase
 
-set wildmenu wildmode=longest,list
+set wildmenu wildmode=list,list:longest
+set hlsearch
 
 set laststatus=2 "always include status line
 
 set ignorecase smartcase
-set hlsearch
+" Keep them around for now
+set hidden
 
 if executable('grin')
     set grepprg=grin\ -nH\ --emacs
