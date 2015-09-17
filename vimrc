@@ -1,4 +1,6 @@
 " Early settings {{{
+let g:auto_addons = ['The_NERD_tree', 'Solarized','neocomplcache','vim-addon-goto-thing-at-cursor', 'fugitive', 'vim-addon-scala']
+runtime initialize_vam.vim
 
 set nocompatible
 let mapleader = ";"
@@ -39,17 +41,14 @@ let g:NERDTreeHijackNetrw=0
 
 " GUI options {{{
 if has('gui')
-    " no menu
-    set guioptions-=m
-    " no toolbar
-    set guioptions-=T
-    " no scrollbars
-    set guioptions-=r
+    set guioptions-=m " no menu
+    set guioptions-=T " no toolbar
+    set guioptions-=r " no scrollbars
     set guioptions-=R
     set guioptions-=l
     set guioptions-=L
     set guioptions-=b
-    set guifont=Source\ Code\ Pro:h12
+    set guifont=Source\ Code\ Pro\ Light:h12
 endif
 " }}}
 
@@ -94,6 +93,8 @@ nnoremap <silent> <Bar> :rightbelow vsp<CR>:exe "normal \<Plug>VinegarUp"<CR>
 
 noremap <F1> <Esc>
 inoremap <F1> <Esc>
+
+nmap <space> zz
 " }}}
 
 
@@ -111,6 +112,7 @@ set hlsearch
 
 set laststatus=2 "always include status line
 
+set ignorecase smartcase
 " Keep them around for now
 set hidden
 
