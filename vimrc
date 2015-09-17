@@ -49,7 +49,7 @@ if has('gui')
     set guioptions-=l
     set guioptions-=L
     set guioptions-=b
-    set guifont=Envy\ Code\ R:h12
+    set guifont=Source\ Code\ Pro:h12
 endif
 " }}}
 
@@ -77,6 +77,9 @@ nnoremap <Leader>F :<C-u>CtrlPMixed<CR>
 nnoremap <Leader>t :<C-u>CtrlPTag<CR>
 nnoremap <Leader>r :<C-u>CtrlPBufTag<CR>
 
+" Insert current date into buffer. Used for note taking.
+nnoremap <Leader>it "=strftime("%c")<CR>p
+
 nnoremap <Leader>h :nohls<CR>
 nnoremap <Space> zz
 
@@ -98,6 +101,7 @@ inoremap <F1> <Esc>
 colors jellybeans
 set ruler
 set et sts=4 sw=4
+set so=5
 
 set showcmd
 set ignorecase smartcase
