@@ -73,3 +73,6 @@
 [submodule "bundle/derekwyatt-vim-scala"]
 	path = bundle/derekwyatt-vim-scala
 	url = https://github.com/derekwyatt/vim-scala.git
+[submodule "bundle/victoredwardocallaghan-cryptol.vim"]
+	path = bundle/victoredwardocallaghan-cryptol.vim
+	url = https://github.com/victoredwardocallaghan/cryptol.vim.git
