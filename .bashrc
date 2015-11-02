@@ -12,8 +12,8 @@ if [ $my_uname = "Darwin" ]
 then
     alias remove="/usr/bin/srm -mv"
     alias no='ls -FG'
-    alias lo='ls -alFG'
-    alias lt='ls -alFGtrh'
+    alias lo='ls -lFGh'
+    alias lt='ls -lFGtrh'
 
     export EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs"
 
@@ -26,8 +26,8 @@ then
         alias remove="bcwipe -vf"
     fi
     alias no='ls -F --color'
-    alias lo='ls -alF --color'
-    alias lt='ls -alF --color -trh'
+    alias lo='ls -lF --color -h'
+    alias lt='ls -lF --color -trh'
 #else
 #    echo "Unrecognized host (i.e. not Darwin or Linux). Run 'uname'."
 fi
