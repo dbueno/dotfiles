@@ -56,7 +56,7 @@ endif
 " }}}
 
 " Pathogen invocation {{{
-let g:pathogen_disabled = ['valloric-youcompleteme',]
+let g:pathogen_disabled = ['valloric-youcompleteme', 'kien-ctrlp']
 runtime bundle/tpope-vim-pathogen/autoload/pathogen.vim
 exec pathogen#infect()
 syntax on
@@ -151,6 +151,7 @@ endfunction
 let g:pyindent_nested_paren='PythonParenIndent(a:lnum)'
 let g:pyindent_open_paren='PythonParenIndent(a:lnum)'
 " }}}
+
 
 runtime ftplugin/man.vim
 
