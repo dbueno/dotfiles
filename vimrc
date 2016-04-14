@@ -9,9 +9,12 @@ let maplocalleader = mapleader
 " Prevent jedi from loading (may be installed system-wide)
 let g:loaded_jedi = 1
 
+
+" Ignore files when completing
 set suffixes+=.class,.pyc,.pyo
-set suffixes-=.h
 set suffixes+=.lo,.swo
+" Don't ignore headers when completing
+set suffixes-=.h
 
 " }}}
 
