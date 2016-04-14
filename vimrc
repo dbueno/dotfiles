@@ -116,6 +116,8 @@ set ignorecase smartcase
 " Keep them around for now
 set hidden
 
+set sessionoptions-=options
+
 if executable('grin')
     set grepprg=grin\ -nH\ --emacs
 endif
