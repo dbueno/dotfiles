@@ -58,6 +58,5 @@ printf 'Email: '
 read email
 git config --global user.name "${real_name}"
 git config --global user.email "${email}"
-
-
+git config --global core.excludesfile ~/.gitignore_global
 
