@@ -51,7 +51,7 @@ if has('gui')
     set guioptions-=l
     set guioptions-=L
     set guioptions-=b
-    set guifont=Source\ Code\ Pro\ Light:h12
+    set guifont=Source\ Code\ Pro\ Light:h13
 endif
 " }}}
 
@@ -102,6 +102,7 @@ nmap <space> zz
 
 
 " Basic configuration {{{
+let g:jellybeans_background_color = "191919"
 colors jellybeans
 set ruler
 set et sts=4 sw=4
