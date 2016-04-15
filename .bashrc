@@ -103,4 +103,5 @@ export HISTIGNORE="&:[ ]*:exit:[bf]g:no:lo:pd"
 
 export HISTSIZE=10000
 
-export PS1='$(num_jobs "%s>")\A $ '
+export PS1='\[\033[0;31m\]================================================================================\[\033[0m\]
+$(num_jobs "%s>")\A $ '
