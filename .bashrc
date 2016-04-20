@@ -55,6 +55,11 @@ if command -v brew >/dev/null 2>&1; then
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
         . $(brew --prefix)/etc/bash_completion
     fi
+    source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+else
+    __git_ps1() {
+        :;
+    }
 fi
 
 
@@ -103,5 +108,5 @@ export HISTIGNORE="&:[ ]*:exit:[bf]g:no:lo:pd"
 
 export HISTSIZE=10000
 
-export PS1='\[\033[0;31m\]================================================================================\[\033[0m\]
+export PS1='\[\033[0;31m\]$(__git_ps1 "(%s) ")================================================================================\[\033[0m\]
 $(num_jobs "%s>")\A $ '
