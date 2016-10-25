@@ -102,8 +102,11 @@ nmap <space> zz
 
 
 " Basic configuration {{{
-let g:jellybeans_background_color = "191919"
+let g:jellybeans_overrides = {
+            \ 'background': { 'guibg': '191919' },
+            \ }
 colors jellybeans
+hi CursorLine guibg=#404040
 set ruler
 set et sts=4 sw=4
 set so=5
