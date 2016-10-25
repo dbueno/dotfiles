@@ -107,6 +107,7 @@ let g:jellybeans_overrides = {
             \ }
 colors jellybeans
 hi CursorLine guibg=#404040
+hi CursorColumn guibg=#404040
 set ruler
 set et sts=4 sw=4
 set so=5
