@@ -15,7 +15,6 @@ then
     alias lo='ls -lFGh'
     alias lt='ls -lFGtrh'
 
-    export EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs"
 
 ## Linux-dependent aliases
 elif [ $my_uname = "Linux" -o $my_uname = "CYGWIN_NT-5.1"  -o $my_uname = "MINGW32_NT-5.1" ]
