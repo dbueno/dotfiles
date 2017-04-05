@@ -51,7 +51,7 @@ if has('gui')
     set guioptions-=l
     set guioptions-=L
     set guioptions-=b
-    set guifont=Source\ Code\ Pro\ Light:h13
+    set guifont=Source\ Code\ Pro\ Light:h10
 endif
 " }}}
 
@@ -81,6 +81,8 @@ nnoremap <Leader>r :<C-u>CtrlPBufTag<CR>
 
 " Insert current date into buffer. Used for note taking.
 nnoremap <Leader>it "=strftime("%c")<CR>p
+" Insert comment separator
+nnoremap <Leader>is i/*-----------------------------------------------------------------------------------*/
 
 nnoremap <Leader>h :nohls<CR>
 nnoremap <Space> zz
