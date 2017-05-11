@@ -51,7 +51,7 @@ if has('gui')
     set guioptions-=l
     set guioptions-=L
     set guioptions-=b
-    set guifont=Source\ Code\ Pro\ Light:h13
+    set guifont=Source\ Code\ Pro\ Light:h11
 endif
 " }}}
 
