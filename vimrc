@@ -81,6 +81,8 @@ nnoremap <Leader>r :<C-u>CtrlPBufTag<CR>
 
 " Insert current date into buffer. Used for note taking.
 nnoremap <Leader>it "=strftime("%c")<CR>p
+" Insert comment separator
+nnoremap <Leader>is i/*-----------------------------------------------------------------------------------*/
 
 nnoremap <Leader>h :nohls<CR>
 nnoremap <Space> zz
