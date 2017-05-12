@@ -78,6 +78,7 @@ nnoremap <Leader><C-f> :<C-u>CtrlP %:h<CR>
 nnoremap <Leader>F :<C-u>CtrlPMixed<CR>
 nnoremap <Leader>t :<C-u>CtrlPTag<CR>
 nnoremap <Leader>r :<C-u>CtrlPBufTag<CR>
+nnoremap <Leader>d :bd<CR>
 
 " Insert current date into buffer. Used for note taking.
 nnoremap <Leader>it "=strftime("%c")<CR>p
