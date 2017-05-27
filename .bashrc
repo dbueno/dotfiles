@@ -10,7 +10,6 @@ my_uname="$(uname)"
 ## OS-dependent aliases, Darwin first
 if [ $my_uname = "Darwin" ]
 then
-    alias remove="/usr/bin/srm -mv"
     alias no='ls -FG'
     alias lo='ls -lFGh'
     alias lt='ls -lFGtrh'
@@ -19,11 +18,6 @@ then
 ## Linux-dependent aliases
 elif [ $my_uname = "Linux" -o $my_uname = "CYGWIN_NT-5.1"  -o $my_uname = "MINGW32_NT-5.1" ]
 then
-    if test -n "$(which bcwipe 2>/dev/null)"; then
-        alias remove="echo bcwipe install not detected"
-    else
-        alias remove="bcwipe -vf"
-    fi
     alias no='ls -F --color'
     alias lo='ls -lF --color -h'
     alias lt='ls -lF --color -trh'
@@ -80,8 +74,8 @@ num_jobs() {
 
 # For Linux, pretty colors.
 export LS_COLORS='di=00;36;40:ln=00;35:ex=00;31'
-# For Darwin, pretty colors.
-export LSCOLORS="ga"
+# For mac, pretty colors.
+export LSCOLORS="gxfxcxdxbxegedabagacad"
 
 
 # Shell settings
@@ -103,7 +97,7 @@ shopt -s shift_verbose
 
 # The & removes dups; [ ]* ignores commands prefixed with spaces.  Other
 # commands, like job control and ls'ing are also ignored.
-export HISTIGNORE="&:[ ]*:exit:[bf]g:no:lo:pd"
+export HISTIGNORE="&:[ ]*:exit:[bf]g:no:lo:lt:pd"
 
 export HISTSIZE=10000
 
