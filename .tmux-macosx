@@ -1,4 +1,4 @@
-set -g status-right '#[fg=yellow]#[default] #[fg=white]%H:%M#[default]'
+set -g status-right '#(tmux-mem-cpu-load -q -t 1)'
 
 # Integrate with osx clipboard
 # make sure to do brew install reattach-to-user-namespace first
