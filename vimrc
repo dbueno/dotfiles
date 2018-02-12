@@ -121,6 +121,7 @@ endfunc
 
 
 " Basic configuration {{{
+<<<<<<< HEAD
 "let g:jellybeans_overrides = {
 "            \ 'background': { 'guibg': '191919' },
 "            \ }
@@ -128,6 +129,18 @@ endfunc
 colors mayansmoke
 "hi CursorLine guibg=#404040
 "hi CursorColumn guibg=#404040
+=======
+let g:jellybeans_overrides = {
+          \ 'background': { 'guibg': '191919' },
+          \ }
+""if has('gui')
+  colors mayansmoke
+""else
+  "colors jellybeans
+  "hi CursorLine guibg=#404040
+  "hi CursorColumn guibg=#404040
+"endif
+>>>>>>> 376b80eb2d7acbf58b6b86c2479b8a5dfad1ba47
 set ruler
 set et sts=4 sw=4
 set so=5
