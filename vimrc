@@ -16,6 +16,8 @@ set suffixes+=.lo,.swo
 " Don't ignore headers when completing
 set suffixes-=.h
 
+set cm=blowfish2
+
 " }}}
 
 command MkDirs call mkdir(expand('%:h'), 'p')
@@ -125,7 +127,7 @@ let g:jellybeans_overrides = {
           \ 'background': { 'guibg': '191919' },
           \ }
 ""if has('gui')
-  colors mayansmoke
+colorscheme spacegray
 ""else
   "colors jellybeans
   "hi CursorLine guibg=#404040
@@ -148,6 +150,8 @@ set ignorecase smartcase
 set hidden
 
 set sessionoptions-=options
+
+set makeprg=make\ -j8
 
 if executable('grin')
     set grepprg=grin\ -nH\ --emacs
