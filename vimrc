@@ -53,7 +53,8 @@ if has('gui')
     set guioptions-=l
     set guioptions-=L
     set guioptions-=b
-    set guifont=Iosevka\ Term:h12
+    "set guifont=Iosevka\ Term\ Medium:h11
+    set guifont=SF\ Mono\ Regular:h11
 endif
 " }}}
 
@@ -127,7 +128,7 @@ let g:jellybeans_overrides = {
           \ 'background': { 'guibg': '191919' },
           \ }
 ""if has('gui')
-colorscheme spacegray
+colorscheme deus "spacegray
 ""else
   "colors jellybeans
   "hi CursorLine guibg=#404040
