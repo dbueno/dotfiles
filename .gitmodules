@@ -79,3 +79,6 @@
 [submodule "bundle/vimtex"]
 	path = bundle/vimtex
 	url = https://github.com/lervag/vimtex.git
+[submodule "bundle/vim-deus"]
+	path = bundle/vim-deus
+	url = https://github.com/ajmwagar/vim-deus.git
