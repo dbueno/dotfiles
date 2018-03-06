@@ -82,3 +82,6 @@
 [submodule "bundle/vim-deus"]
 	path = bundle/vim-deus
 	url = https://github.com/ajmwagar/vim-deus.git
+[submodule "bundle/jnurmine-Zenburn"]
+	path = bundle/jnurmine-Zenburn
+	url = https://github.com/jnurmine/Zenburn
