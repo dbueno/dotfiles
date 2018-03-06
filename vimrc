@@ -152,6 +152,8 @@ set hidden
 
 set sessionoptions-=options
 
+set fdo-=search
+
 set makeprg=make\ -j8
 
 if executable('grin')
