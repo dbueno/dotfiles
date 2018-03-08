@@ -86,7 +86,7 @@ nnoremap <Leader>d :bd<CR>
 " Insert current date into buffer. Used for note taking.
 nnoremap <Leader>it "=strftime("%c")<CR>p
 " Insert comment separator
-nnoremap <Leader>is i/*-----------------------------------------------------------------------------------*/
+nnoremap <Leader>os o/*-----------------------------------------------------------------------------------*/<CR>
 
 nnoremap <Leader>h :nohls<CR>
 nnoremap <Space> zz
@@ -128,7 +128,7 @@ let g:jellybeans_overrides = {
           \ 'background': { 'guibg': '191919' },
           \ }
 ""if has('gui')
-colorscheme deus "spacegray
+colorscheme zenburn "deus "spacegray
 ""else
   "colors jellybeans
   "hi CursorLine guibg=#404040
