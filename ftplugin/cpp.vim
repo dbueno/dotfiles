@@ -1,3 +1,4 @@
-set shiftwidth=2
+set sw=2
 set sts=-1
-set cino=l1,(0,g0
+" google style, basically
+set cino=l1,(0,g1,h1,i4,t0,+4,w1,W4,N-s
