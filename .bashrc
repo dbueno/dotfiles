@@ -73,9 +73,9 @@ num_jobs() {
 }
 
 # For Linux, pretty colors.
-export LS_COLORS='di=00;36;40:ln=00;35:ex=00;31'
+#export LS_COLORS='di=00;36;40:ln=00;35:ex=00;31'
 # For mac, pretty colors.
-export LSCOLORS="gxfxcxdxbxegedabagacad"
+#export LSCOLORS="gxfxcxdxbxegedabagacad"
 
 
 # Shell settings
@@ -98,8 +98,8 @@ shopt -s shift_verbose
 # The & removes dups; [ ]* ignores commands prefixed with spaces.  Other
 # commands, like job control and ls'ing are also ignored.
 export HISTIGNORE="&:[ ]*:exit:[bf]g:no:lo:lt:pd"
-
 export HISTSIZE=10000
+export PROMPT_COMMAND="history -a"
 
 export PS1='\[\033[0;31m\]\w$(__git_ps1 " (%s)") ======================================\[\033[0m\]
 $(num_jobs "%s>")\A $ '
