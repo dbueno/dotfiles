@@ -86,10 +86,13 @@ nnoremap <Leader>d :bd<CR>
 " Insert current date into buffer. Used for note taking.
 nnoremap <Leader>it "=strftime("%c")<CR>p
 " Insert comment separator
-nnoremap <Leader>is o/*-----------------------------------------------------------------------------------*/<CR>
+nnoremap <Leader>is o/*----------------------------------------------------------------------------*/<CR>
+
+" select some text, then type // and it will search for the literal
+vnoremap // y/\V<C-R>"<CR>
 
 nnoremap <Leader>h :nohls<CR>
-nnoremap <Space> zt
+nnoremap <Space> zz
 
 nnoremap <Leader>c <C-w>c
 nnoremap <Leader>o <C-w>o
