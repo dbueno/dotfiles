@@ -138,25 +138,34 @@ colorscheme zenburn "deus "spacegray
   "hi CursorColumn guibg=#404040
 "endif
 set ruler
+" expand tabs, default shiftwidth is 4
 set et sts=4 sw=4
-set so=5
+" keep 4 lines above and below the cursor
+set so=4
 
 set showcmd
+" ignore case except mixed lower and uppercase in patterns
 set ignorecase smartcase
 
+" unexplainable but helpful completion settings
 set wildmenu wildmode=list,list:longest
+
+" highlight matches in search
 set hlsearch
 
-set laststatus=2 "always include status line
+" always include status line
+set laststatus=2 
 
-set ignorecase smartcase
-" Keep them around for now
+" keep buffers around when they are not visible
 set hidden
 
+" don't remember options in seccions
 set sessionoptions-=options
 
+" don't let search open a fold (very annoying)
 set fdo-=search
 
+" i have cores for a reason
 set makeprg=make\ -j8
 
 if executable('grin')
@@ -193,6 +202,7 @@ let g:pyindent_open_paren='PythonParenIndent(a:lnum)'
 " }}}
 
 
+" XXX is this necessary?
 runtime ftplugin/man.vim
 
 " vim: set foldmethod=marker :
