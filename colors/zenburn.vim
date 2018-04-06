@@ -1,1 +1,0 @@
-../bundle/jnurmine-Zenburn/colors/zenburn.vim
