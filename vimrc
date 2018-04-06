@@ -92,7 +92,7 @@ nnoremap <Leader>is o/*---------------------------------------------------------
 vnoremap // y/\V<C-R>"<CR>
 
 nnoremap <Leader>h :nohls<CR>
-nnoremap <Space> zz
+"nnoremap <Space> zz
 
 nnoremap <Leader>c <C-w>c
 nnoremap <Leader>o <C-w>o
@@ -106,7 +106,6 @@ nnoremap <silent> <Bar> :rightbelow vsp<CR>:exe "normal \<Plug>VinegarUp"<CR>
 noremap <F1> <Esc>
 inoremap <F1> <Esc>
 
-nmap <space> zz
 
 
 " From: https://github.com/kien/ctrlp.vim/issues/280
@@ -131,7 +130,8 @@ let g:jellybeans_overrides = {
           \ 'background': { 'guibg': '191919' },
           \ }
 ""if has('gui')
-colorscheme zenburn "deus "spacegray
+colorscheme zenburn
+"deus "spacegray
 ""else
   "colors jellybeans
   "hi CursorLine guibg=#404040
