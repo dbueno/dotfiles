@@ -85,3 +85,6 @@
 [submodule "bundle/jnurmine-Zenburn"]
 	path = bundle/jnurmine-Zenburn
 	url = https://github.com/jnurmine/Zenburn
+[submodule "bundle/vhda-verilog_systemverilog.vim"]
+	path = bundle/vhda-verilog_systemverilog.vim
+	url = git@github.com:vhda/verilog_systemverilog.vim.git
