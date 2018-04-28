@@ -1,0 +1,27 @@
+# Sample minimal config file.  Copy this to ~/.offlineimaprc and edit to
+# get started fast.
+
+[general]
+ui = ttyui
+accounts = PersonalGmail
+
+[Account PersonalGmail]
+localrepository = Local
+remoterepository = PersonalGmailRemote
+synclabels = yes
+# This header is where labels go.  Usually you will be fine
+# # with default value (X-Keywords), but in case you want it
+# # different, here we go:
+labelsheader = X-Label
+autorefresh = 8
+
+[Repository Local]
+type = GmailMaildir
+localfolders = ~/Gmail
+
+[Repository PersonalGmailRemote]
+type = Gmail
+remoteuser = dbueno@gmail.com
+ssl = true
+sslcacertfile = /usr/local/etc/openssl/cert.pem
+folderfilter = lambda folder: not (folder.startswith('[Gmail]/Trash') or folder.startswith('Promotions'))
