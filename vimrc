@@ -86,7 +86,7 @@ nnoremap <Leader>d :bd<CR>
 " Insert current date into buffer. Used for note taking.
 nnoremap <Leader>it "=strftime("%c")<CR>p
 " Insert comment separator
-nnoremap <Leader>is o/*----------------------------------------------------------------------------*/<CR>
+nnoremap <Leader>is o//*-------------------------------------------------------------------------------*<CR>
 
 " select some text, then type // and it will search for the literal
 vnoremap // y/\V<C-R>"<CR>
@@ -131,6 +131,8 @@ let g:jellybeans_overrides = {
           \ }
 ""if has('gui')
 colorscheme zenburn
+" extra space between lines because this helps with smaller font sizes
+set linespace=1
 "deus "spacegray
 ""else
   "colors jellybeans
