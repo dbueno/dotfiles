@@ -88,3 +88,6 @@
 [submodule "bundle/vhda-verilog_systemverilog.vim"]
 	path = bundle/vhda-verilog_systemverilog.vim
 	url = git@github.com:vhda/verilog_systemverilog.vim.git
+[submodule "bundle/godlygeek-tabular"]
+	path = bundle/godlygeek-tabular
+	url = git://github.com/godlygeek/tabular.git
