@@ -22,18 +22,12 @@
 [submodule "bundle/scrooloose-syntastic"]
 	path = bundle/scrooloose-syntastic
 	url = https://github.com/scrooloose/syntastic.git
-[submodule "bundle/Shougo-unite"]
-	path = bundle/Shougo-unite
-	url = https://github.com/Shougo/unite.vim.git
 [submodule "bundle/tpope-vim-vinegar"]
 	path = bundle/tpope-vim-vinegar
 	url = https://github.com/tpope/vim-vinegar.git
 [submodule "bundle/bling-vim-airline"]
 	path = bundle/bling-vim-airline
 	url = https://github.com/bling/vim-airline
-[submodule "bundle/MarcWeber-vim-addon-nix"]
-	path = bundle/MarcWeber-vim-addon-nix
-	url = https://github.com/MarcWeber/vim-addon-nix.git
 [submodule "bundle/MarcWeber-vim-addon-mw-utils"]
 	path = bundle/MarcWeber-vim-addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
