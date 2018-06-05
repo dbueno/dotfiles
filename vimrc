@@ -84,7 +84,7 @@ endfunction
 
 " Global mappings {{{
 
-" nnoremap <Leader>n :<C-u>NERDTreeToggle<CR>
+nnoremap <Leader>n :<C-u>NERDTreeToggle<CR>
 " nnoremap <Leader>N :<C-u>NERDTreeFind<CR>
 
 nnoremap <Leader>u :<C-u>CtrlPBuffer<CR>
