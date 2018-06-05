@@ -87,6 +87,8 @@ endfunction
 nnoremap <Leader>n :<C-u>NERDTreeToggle<CR>
 " nnoremap <Leader>N :<C-u>NERDTreeFind<CR>
 
+nnoremap <Leader>T :TagbarToggle<CR>
+
 nnoremap <Leader>u :<C-u>CtrlPBuffer<CR>
 nnoremap <Leader>f :<C-u>CtrlP<CR>
 nnoremap <Leader><C-f> :<C-u>CtrlP %:h<CR>
