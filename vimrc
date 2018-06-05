@@ -23,16 +23,17 @@ set cm=blowfish2
 command MkDirs call mkdir(expand('%:h'), 'p')
 
 " Airline configuration {{{
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-let g:airline_left_sep="▓▒░"
-let g:airline_right_sep="░▒▓"
-
-let g:airline_inactive_collapse=0
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#show_buffers=0
+"if !exists('g:airline_symbols')
+"    let g:airline_symbols = {}
+"endif
+"
+"let g:airline_left_sep="▓▒░"
+"let g:airline_right_sep="░▒▓"
+"
+"let g:airline_inactive_collapse=0
+"let g:airline#extensions#tabline#enabled=1
+"let g:airline#extensions#tabline#show_buffers=0
+let g:airline_theme='zenburn'
 " }}}
 
 " CtrlP Configuration {{{
