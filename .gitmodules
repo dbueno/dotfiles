@@ -37,12 +37,6 @@
 [submodule "bundle/MarcWeber-vim-addon-mw-utils"]
 	path = bundle/MarcWeber-vim-addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
-[submodule "bundle/MarcWeber-vim-addon-actions"]
-	path = bundle/MarcWeber-vim-addon-actions
-	url = https://github.com/MarcWeber/vim-addon-actions.git
-[submodule "bundle/MarcWeber-vim-addon-completion"]
-	path = bundle/MarcWeber-vim-addon-completion
-	url = https://github.com/MarcWeber/vim-addon-completion.git
 [submodule "bundle/MarcWeber-vim-addon-goto-thing-at-cursor"]
 	path = bundle/MarcWeber-vim-addon-goto-thing-at-cursor
 	url = https://github.com/MarcWeber/vim-addon-goto-thing-at-cursor.git
