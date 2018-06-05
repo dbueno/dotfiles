@@ -31,7 +31,7 @@ command MkDirs call mkdir(expand('%:h'), 'p')
 "let g:airline_right_sep="░▒▓"
 "
 "let g:airline_inactive_collapse=0
-"let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#enabled=1
 "let g:airline#extensions#tabline#show_buffers=0
 let g:airline_theme='zenburn'
 " }}}
@@ -44,6 +44,17 @@ let g:ctrlp_custom_ignore = {
 " }}}
 
 let g:NERDTreeHijackNetrw=0
+
+" Syntastic options from their website {{{
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+" }}}
 
 " GUI options {{{
 if has('gui')
