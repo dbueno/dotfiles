@@ -1,9 +1,6 @@
 [submodule "bundle/tpope-vim-pathogen"]
 	path = bundle/tpope-vim-pathogen
 	url = https://github.com/tpope/vim-pathogen.git
-[submodule "bundle/tpope-vim-scriptease"]
-	path = bundle/tpope-vim-scriptease
-	url = https://github.com/tpope/vim-scriptease.git
 [submodule "bundle/tpope-vim-fugitive"]
 	path = bundle/tpope-vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
