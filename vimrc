@@ -32,7 +32,7 @@ command MkDirs call mkdir(expand('%:h'), 'p')
 "
 "let g:airline_inactive_collapse=0
 let g:airline#extensions#tabline#enabled=1
-"let g:airline#extensions#tabline#show_buffers=0
+let g:airline#extensions#tabline#show_buffers=0
 let g:airline_theme='zenburn'
 " }}}
 
