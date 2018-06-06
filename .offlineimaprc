@@ -1,5 +1,8 @@
-# Sample minimal config file.  Copy this to ~/.offlineimaprc and edit to
-# get started fast.
+# amended by http://stevelosh.com/blog/2012/10/the-homely-mutt/
+# git clone git://github.com/spaetz/offlineimap.git
+# cd offlineimap
+# git checkout 679c491c56c981961e18aa43b31955900491d7a3
+# python setup.py install
 
 [general]
 ui = ttyui
@@ -9,6 +12,7 @@ accounts = PersonalGmail
 localrepository = Local
 remoterepository = PersonalGmailRemote
 synclabels = yes
+status_backend = sqlite
 # This header is where labels go.  Usually you will be fine
 # # with default value (X-Keywords), but in case you want it
 # # different, here we go:
@@ -16,12 +20,22 @@ labelsheader = X-Label
 autorefresh = 8
 
 [Repository Local]
-type = GmailMaildir
-localfolders = ~/Gmail
+type = Maildir
+localfolders = ~/.mail
 
 [Repository PersonalGmailRemote]
+maxconnections = 1
 type = Gmail
 remoteuser = dbueno@gmail.com
 ssl = true
 sslcacertfile = /usr/local/etc/openssl/cert.pem
-folderfilter = lambda folder: not (folder.startswith('[Gmail]/Trash') or folder.startswith('Promotions'))
+nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
+                            '[Gmail]/Sent Mail': 'sent',
+                            '[Gmail]/Starred':   'flagged',
+                            '[Gmail]/Trash':     'trash',
+                            '[Gmail]/All Mail':  'archive',
+                            }.get(folder, folder)
+folderfilter = lambda folder: folder not in ['[Gmail]/Trash',
+                                             '[Gmail]/Important',
+                                             '[Gmail]/Spam',
+                                             'Promotions']

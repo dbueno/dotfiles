@@ -1,0 +1,83 @@
+set sendmail = /usr/local/bin/msmtp
+
+# Paths -------------------------------------------
+set folder="~/.mail"
+set alias_file       = ~/.mutt/alias         # where to store aliases
+set header_cache     = ~/.mutt/cache/headers # where to store headers
+set message_cachedir = ~/.mutt/cache/bodies  # where to store bodies
+set certificate_file = ~/.mutt/certificates  # where to store certs
+set mailcap_path     = ~/.mutt/mailcap       # entries for filetypes
+set tmpdir           = ~/.mutt/temp          # where to keep temp files
+#set signature        = ~/.mutt/sig           # my signature file
+set signature="~/.signature"
+
+# Basic options -----------------------------------
+set mbox_type=Maildir    # mailbox type
+set wait_key = no        # shut up, mutt
+set timeout = 3          # idle time before scanning
+set mail_check = 0       # minimum time between scans
+unset move               # gmail does that
+#set delete               # don't ask, just do
+unset confirmappend      # don't ask, just do!
+set quit                 # don't ask, just do!!
+unset mark_old           # read/new is good enough for me
+#set beep_new             # bell on new mails
+set pipe_decode          # strip headers and eval mimes when piping
+set thorough_search      # strip headers and eval mimes before searching
+
+
+# Sidebar patch -----------------------------------
+set sidebar_delim   = '  │'
+set sidebar_visible = yes
+set sidebar_width   = 24
+color sidebar_new color221 color233
+
+
+# Status Bar --------------------------------------
+set status_chars  = " *%A"
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+
+# Header options ----------------------------------
+ignore *                                # ignore all headers
+unignore from: to: cc: date: subject:   # show only these
+unhdr_order *                           # some distros order things by default
+hdr_order from: to: cc: date: subject:  # and in this order
+
+# Account settings --------------------------------
+set spoolfile="+INBOX" # default inbex
+alternates dlbueno@umich.edu
+unset record
+
+# mailboxes to show in the sidebar
+mailboxes +INBOX \
+          +archive \
+          +sent \
+          +drafts
+set mbox="+archive"
+set postponed ="+drafts"
+#set mbox = "+[Gmail]/
+
+set realname   = "Denis Bueno"
+set from       = "dbueno@gmail.com"
+
+# Keybindings -------------------------------------
+
+macro index,pager D \
+    "<edit-label> \\Trash<enter>" \
+    "move message to the trash"
+
+macro index S \
+    "<save-message>+[Gmail].Spam<enter>" \
+    "mark message as spam"
+
+set query_command = "contacts -Sf '%eTOKEN%n' '%s' | sed -e 's/TOKEN/\t/g'"
+
+set envelope_from
+
+
+# Sort options -----------------------------------
+set sort     = threads
+set sort_aux = reverse-last-date-received
+set sort_re
+
+
