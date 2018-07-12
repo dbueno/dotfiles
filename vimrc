@@ -33,7 +33,8 @@ command MkDirs call mkdir(expand('%:h'), 'p')
 "let g:airline_inactive_collapse=0
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#show_buffers=0
-let g:airline_theme='zenburn'
+"let g:airline_theme='zenburn'
+let g:airline_theme='dracula'
 " }}}
 
 " CtrlP Configuration {{{
@@ -144,7 +145,8 @@ let g:jellybeans_overrides = {
           \ 'background': { 'guibg': '191919' },
           \ }
 ""if has('gui')
-colorscheme zenburn
+"colorscheme zenburn
+colorscheme dracula
 " extra space between lines because this helps with smaller font sizes
 set linespace=1
 "deus "spacegray
