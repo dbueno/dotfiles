@@ -194,7 +194,7 @@ if executable('grin')
     set grepprg=grin\ -nH\ --emacs
 endif
 
-set tags=../tags,./tags,./TAGS,tags,TAGS,./.tags,./.TAGS,.tags,.TAGS
+set tags=../../tags,../tags,./tags,./TAGS,tags,TAGS,./.tags,./.TAGS,.tags,.TAGS
 
 " set this to add to places where vim searches #includes
 "set path+=
