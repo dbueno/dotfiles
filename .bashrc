@@ -5,6 +5,8 @@
 
 [[ -e "$HOME/.bashrc_personal" ]] && source "$HOME/.bashrc_personal"
 
+alias c=clear
+
 my_uname="$(uname)"
 
 ## OS-dependent aliases, Darwin first
@@ -12,7 +14,7 @@ if [ $my_uname = "Darwin" ]
 then
     alias no='ls -FG'
     alias lo='ls -lFGh'
-    alias lt='ls -lFGtrh'
+    alias a='ls -lFGtrh'
 
 
 ## Linux-dependent aliases
@@ -20,7 +22,7 @@ elif [ $my_uname = "Linux" -o $my_uname = "CYGWIN_NT-5.1"  -o $my_uname = "MINGW
 then
     alias no='ls -F --color'
     alias lo='ls -lF --color -h'
-    alias lt='ls -lF --color -trh'
+    alias a='ls -lF --color -trh'
 #else
 #    echo "Unrecognized host (i.e. not Darwin or Linux). Run 'uname'."
 fi
