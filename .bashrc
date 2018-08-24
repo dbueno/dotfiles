@@ -103,5 +103,7 @@ export HISTIGNORE="&:[ ]*:exit:[bf]g:no:lo:lt:pd"
 export HISTSIZE=10000
 export PROMPT_COMMAND="history -a"
 
+export CDPATH="$HOME/work/inprogress"
+
 export PS1='\[\033[0;31m\]\w$(__git_ps1 " (%s)") ======================================\[\033[0m\]
 $(num_jobs "%s>")\A $ '
