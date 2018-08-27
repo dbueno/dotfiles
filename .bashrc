@@ -103,7 +103,12 @@ export HISTIGNORE="&:[ ]*:exit:[bf]g:no:lo:lt:pd"
 export HISTSIZE=10000
 export PROMPT_COMMAND="history -a"
 
-export CDPATH="$HOME/work/inprogress"
+# When I type 'cd somewhere', if somewhere is relative, try out looking into all
+# the paths in $CDPATH for completions.  This can speed up common directory
+# switching.
+#
+# The . is here so that if I type cd <dir> it goes to curdir first
+export CDPATH=".:$HOME/work/inprogress"
 
 export PS1='\[\033[0;31m\]\w$(__git_ps1 " (%s)") ======================================\[\033[0m\]
 $(num_jobs "%s>")\A $ '
