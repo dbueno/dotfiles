@@ -28,8 +28,8 @@ done
 mkdir -p "$HOME/.ssh"
 mkdir -p "$HOME/bin"
 mkdir -p "$HOME/sw"
-mkdir -p "$HOME/{code,papers,docs,benchmarks,writing}"
-mkdir -p "$HOME/work/{inprogress,submitted,published}"
+mkdir -p "$HOME/"{code,papers,docs,benchmarks,writing}
+mkdir -p "$HOME/work/"{inprogress,submitted,published}
 mkdir -p "$HOME/.mutt" "$HOME/.mutt/cache/bodies" "$HOME/.mutt/cache/headers"
 
 ${INSTALL} ${INSTALL_FLAGS} "${PWD}/wtf" "$HOME/sw/bin/wtf"
