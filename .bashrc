@@ -45,6 +45,10 @@ alias makeiso="mkisofs -l -pad -U -J -r -allow-leading-dots -iso-level 4"
 # grabhttp is for mirroring a website onto a drive.  example: grabhttp --level=2
 alias grabhttp="wget -v -F -N -x --cache=off --recursive --convert links"
 
+# git aliases
+alias s='git status'
+alias gx='git pull && git push'
+
 # bash completion from homebrew
 if command -v brew >/dev/null 2>&1; then
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
@@ -101,7 +105,21 @@ shopt -s shift_verbose
 # commands, like job control and ls'ing are also ignored.
 export HISTIGNORE="&:[ ]*:exit:[bf]g:no:lo:lt:pd"
 export HISTSIZE=10000
-export PROMPT_COMMAND="history -a"
+export LASTDIR="$HOME"
+ 
+function prompt_command {
+  history -a
+ 
+  # Record new directory on change.
+  newdir=`pwd`
+  if [ ! "$LASTDIR" = "$newdir" ]; then
+    # List contents:
+    ls -t | head -7
+  fi
+ 
+  export LASTDIR=$newdir
+}
+export PROMPT_COMMAND="prompt_command"
 
 # When I type 'cd somewhere', if somewhere is relative, try out looking into all
 # the paths in $CDPATH for completions.  This can speed up common directory
