@@ -114,7 +114,7 @@ function prompt_command {
   newdir=`pwd`
   if [ ! "$LASTDIR" = "$newdir" ]; then
     # List contents:
-    ls -t | head -7
+    ls -tF | head -7
   fi
  
   export LASTDIR=$newdir
