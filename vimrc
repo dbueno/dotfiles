@@ -6,6 +6,8 @@ set nocompatible
 let mapleader = ";"
 let maplocalleader = mapleader
 
+set mouse=a
+
 " Prevent jedi from loading (may be installed system-wide)
 let g:loaded_jedi = 1
 
@@ -71,7 +73,7 @@ if has('gui')
     set guioptions-=L
     set guioptions-=b
     "set guifont=Iosevka\ Term\ Medium:h11
-    set guifont=SF\ Mono\ Regular:h11
+    set guifont=SF\ Mono\ Regular:h13
 endif
 " }}}
 
