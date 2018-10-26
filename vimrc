@@ -230,3 +230,8 @@ let g:pyindent_open_paren='PythonParenIndent(a:lnum)'
 runtime ftplugin/man.vim
 
 " vim: set foldmethod=marker :
+
+runtime vimrc_local
+
+
+
