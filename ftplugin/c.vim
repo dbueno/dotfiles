@@ -4,4 +4,5 @@ set sw=2
 setlocal foldmethod=syntax
 "marker
 setlocal foldnestmax=4
+setlocal foldminlines=4
 set cursorline
