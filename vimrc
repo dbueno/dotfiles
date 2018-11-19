@@ -225,7 +225,6 @@ let g:pyindent_nested_paren='PythonParenIndent(a:lnum)'
 let g:pyindent_open_paren='PythonParenIndent(a:lnum)'
 " }}}
 
-
 " XXX is this necessary?
 runtime ftplugin/man.vim
 
