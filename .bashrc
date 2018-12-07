@@ -15,6 +15,7 @@ then
     alias no='ls -FG'
     alias lo='ls -lFGh'
     alias a='ls -lFGtrh'
+    alias mk="make -j$(sysctl -a | grep ^hw[.]ncpu | cut -d' ' -f2)"
 
 
 ## Linux-dependent aliases
@@ -23,6 +24,7 @@ then
     alias no='ls -F --color'
     alias lo='ls -lF --color -h'
     alias a='ls -lF --color -trh'
+    alias mk='make'
 #else
 #    echo "Unrecognized host (i.e. not Darwin or Linux). Run 'uname'."
 fi
