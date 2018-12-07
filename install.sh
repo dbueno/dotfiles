@@ -36,16 +36,17 @@ mkdir -p "$HOME/sw/bin"
 ${INSTALL} ${INSTALL_FLAGS} "${PWD}/wtf" "$HOME/sw/bin/wtf"
 ${INSTALL} ${INSTALL_FLAGS} "${PWD}/wtf" "$HOME/sw/bin/erg"
 
-${INSTALL} ${INSTALL_FLAGS}                        \
-    "${PWD}/.bashrc"                              \
-    "${PWD}/.inputrc"                              \
-    "${PWD}/.Xresources"                           \
-    "${PWD}/.tmux.conf"                            \
-    "${PWD}/.tmux-macosx"                            \
-    "${PWD}/.tmux-linux"                            \
-    "${PWD}/.mailcap"                            \
-    "${PWD}/.ghci"                            \
-    "${PWD}/.gdbinit"                            \
+${INSTALL} ${INSTALL_FLAGS} \
+    "${PWD}/.bashrc"        \
+    "${PWD}/.inputrc"       \
+    "${PWD}/.Xresources"    \
+    "${PWD}/.tmux.conf"     \
+    "${PWD}/.tmux-macosx"   \
+    "${PWD}/.tmux-linux"    \
+    "${PWD}/.mailcap"       \
+    "${PWD}/.ghci"          \
+    "${PWD}/.gdbinit"       \
+    "${PWD}/lispwords"      \
     "$HOME"
 
 
