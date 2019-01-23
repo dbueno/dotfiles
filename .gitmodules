@@ -94,3 +94,6 @@
 [submodule "bundle/tpope-vim-sexp-mappings-for-regular-people"]
 	path = bundle/tpope-vim-sexp-mappings-for-regular-people
 	url = https://github.com/tpope/vim-sexp-mappings-for-regular-people.git
+[submodule "bundle/vim-euforia"]
+	path = bundle/vim-euforia
+	url = git@github.com:greedy/vim-euforia.git
