@@ -6,3 +6,6 @@ setlocal foldmethod=syntax
 setlocal foldnestmax=4
 setlocal foldminlines=4
 set cursorline
+
+" Insert comment separator
+nnoremap <buffer> <Leader>is o//*-------------------------------------------------------------------------------*<CR>
