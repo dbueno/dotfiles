@@ -61,6 +61,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_ocaml_checkers = ["merlin"]
 " }}}
 
 " GUI options {{{
@@ -78,9 +79,10 @@ endif
 " }}}
 
 " Pathogen invocation {{{
-let g:pathogen_disabled = ['valloric-youcompleteme', 'kien-ctrlp']
+let s:opamshare = substitute(system('opam config var share'),'\n$','','''')
+let g:pathogen_disabled = ['valloric-youcompleteme', 'kien-ctrlp', s:opamshare.'/ocp-index/vim']
 runtime bundle/tpope-vim-pathogen/autoload/pathogen.vim
-exec pathogen#infect()
+exec pathogen#infect('bundle/{}',s:opamshare.'/{}/vim')
 syntax on
 filetype plugin indent on
 " }}}
@@ -189,6 +191,9 @@ set fdo-=search
 
 " i have cores for a reason
 set makeprg=make\ -j8
+
+" disables mappings from default ocaml ftplugin
+let g:no_ocaml_maps = 1
 
 if executable('grin')
     set grepprg=grin\ -nH\ --emacs
