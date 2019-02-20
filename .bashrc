@@ -50,6 +50,7 @@ alias grabhttp="wget -v -F -N -x --cache=off --recursive --convert links"
 # git aliases
 alias s='git status'
 alias gx='git pull && git push'
+alias ga='git add -p'
 
 # bash completion from homebrew
 if command -v brew >/dev/null 2>&1; then
