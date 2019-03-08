@@ -1,7 +1,7 @@
 set aw
 set cino+=l1,(0
 set sw=2
-setlocal foldmethod=syntax
+setlocal foldmethod=indent
 "marker
 setlocal foldnestmax=4
 setlocal foldminlines=4
