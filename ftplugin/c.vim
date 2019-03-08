@@ -8,4 +8,5 @@ setlocal foldminlines=4
 set cursorline
 
 " Insert comment separator
-nnoremap <buffer> <Leader>is o//*-------------------------------------------------------------------------------*<CR>
+nnoremap <buffer> <Leader>is o//^----------------------------------------------------------------------------^<CR>
+nnoremap <silent> <buffer> <F9> :TagbarToggle<CR>
