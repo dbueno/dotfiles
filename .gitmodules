@@ -31,9 +31,6 @@
 [submodule "bundle/tomtom-tlib_vim"]
 	path = bundle/tomtom-tlib_vim
 	url = https://github.com/tomtom/tlib_vim.git
-[submodule "bundle/_chriskempson-tomorrow-theme"]
-	path = bundle/_chriskempson-tomorrow-theme
-	url = https://github.com/chriskempson/tomorrow-theme
 [submodule "bundle/junegunn-seoul256.vim"]
 	path = bundle/junegunn-seoul256.vim
 	url = https://github.com/junegunn/seoul256.vim
