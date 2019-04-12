@@ -24,7 +24,7 @@ set cm=blowfish2
 
 command MkDirs call mkdir(expand('%:h'), 'p')
 
-set statusline=%q%t\ @\ %P\ [ft=%Y%M%R%W%H]\ pos\ %l:%c\ %=%<%{expand('%:p:h')}
+set statusline=%q%t\ @\ %P\ [ft=%Y%M%R%W%H]\ pos\ %l:%c\ %=%<%{expand('%:~:h')}
 
 " Airline configuration {{{
 "if !exists('g:airline_symbols')
