@@ -125,11 +125,15 @@ nnoremap <Leader>h :nohls<CR>
 nnoremap <Leader>c <C-w>c
 nnoremap <Leader>o <C-w>o
 
+" C-w ] will open tag in a split
+" C-w g } will let you select tag for preview
 nnoremap <C-n> :cnext<CR>
 nnoremap <C-p> :cprevious<CR>
+nnoremap <Leader>n :tnext<CR>
+nnoremap <Leader>p :tprev<CR>
 
 nnoremap <silent> _ :aboveleft sp<CR>:exe "normal \<Plug>VinegarUp"<CR>
-nnoremap <silent> <Bar> :rightbelow vsp<CR>:exe "normal \<Plug>VinegarUp"<CR>
+nnoremap <silent> <Bar> :aboveleft vsp<CR>:exe "normal \<Plug>VinegarUp"<CR>
 " }}}
 
 
@@ -186,7 +190,7 @@ if executable('grin')
     set grepprg=grin\ -nH\ --emacs
 endif
 
-set tags=../../tags,../tags,./tags,./TAGS,tags,TAGS,./.tags,./.TAGS,.tags,.TAGS
+set tags=./tags,./TAGS,tags,TAGS,./.tags,./.TAGS,.tags,.TAGS,../../tags,../tags
 
 " set this to add to places where vim searches #includes
 "set path+=
