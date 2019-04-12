@@ -55,15 +55,15 @@ endif
 let g:NERDTreeHijackNetrw=0
 
 " Syntastic options from their website {{{
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_ocaml_checkers = ["merlin"]
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_ocaml_checkers = ["merlin"]
 " }}}
 
 " GUI options {{{
@@ -82,7 +82,7 @@ endif
 
 " Pathogen invocation {{{
 let s:opamshare = substitute(system('opam config var share'),'\n$','','''')
-let g:pathogen_disabled = ['valloric-youcompleteme', 'kien-ctrlp', s:opamshare.'/ocp-index/vim', 'bling-vim-airline']
+let g:pathogen_disabled = ['valloric-youcompleteme', 'kien-ctrlp', s:opamshare.'/ocp-index/vim', 'bling-vim-airline', 'vim-airline-vim-airline-themes', 'scrooloose-syntastic']
 runtime bundle/tpope-vim-pathogen/autoload/pathogen.vim
 exec pathogen#infect('bundle/{}',s:opamshare.'/{}/vim')
 syntax on
