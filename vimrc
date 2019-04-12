@@ -3,6 +3,7 @@ set nocompatible
 let mapleader = ";"
 let maplocalleader = mapleader
 
+" enable mouse
 set mouse=a
 
 " Prevent jedi from loading (may be installed system-wide)
@@ -15,12 +16,15 @@ set suffixes+=.lo,.swo
 " Don't ignore headers when completing
 set suffixes-=.h
 
+" use blowfish2 if i ask for crypto
 set cm=blowfish2
 
 " }}}
 
+" defines a command like mkdir -p
 command MkDirs call mkdir(expand('%:h'), 'p')
 
+" my simple statusline, airline was a steaming pile
 set statusline=%q%t\ @\ %P\ [ft=%Y%M%R%W%H]\ pos\ %l:%c\ %=%<%{expand('%:~:.:h')}
 
 " Airline configuration {{{
