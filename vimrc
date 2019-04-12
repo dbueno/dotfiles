@@ -32,10 +32,10 @@ set statusline=%q%t\ @\ %P\ [ft=%Y%M%R%W%H]\ pos\ %l:%c\ %=%<%{expand('%:~:.:h')
 "let g:airline_right_sep="░▒▓"
 "
 "let g:airline_inactive_collapse=0
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#show_buffers=0
+"let g:airline#extensions#tabline#enabled=1
+"let g:airline#extensions#tabline#show_buffers=0
 "let g:airline_theme='zenburn'
-let g:airline_theme='dracula'
+"let g:airline_theme='dracula'
 " }}}
 
 " CtrlP Configuration {{{
@@ -48,8 +48,6 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 " }}}
-
-let g:NERDTreeHijackNetrw=0
 
 " Syntastic options from their website {{{
 "set statusline+=%#warningmsg#
@@ -79,7 +77,7 @@ endif
 
 " Pathogen invocation {{{
 let s:opamshare = substitute(system('opam config var share'),'\n$','','''')
-let g:pathogen_disabled = ['valloric-youcompleteme', 'kien-ctrlp', s:opamshare.'/ocp-index/vim', 'bling-vim-airline', 'vim-airline-vim-airline-themes', 'scrooloose-syntastic']
+let g:pathogen_disabled = [s:opamshare.'/ocp-index/vim', 'bling-vim-airline', 'vim-airline-vim-airline-themes', 'scrooloose-syntastic', 'scrooloose-nerdtree', 'ctrlp']
 runtime bundle/tpope-vim-pathogen/autoload/pathogen.vim
 exec pathogen#infect('bundle/{}',s:opamshare.'/{}/vim')
 syntax on
