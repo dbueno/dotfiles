@@ -76,3 +76,6 @@
 [submodule "bundle/vim-euforia"]
 	path = bundle/vim-euforia
 	url = git@github.com:greedy/vim-euforia.git
+[submodule "bundle/junegunn-fzf.vim"]
+	path = bundle/junegunn-fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
