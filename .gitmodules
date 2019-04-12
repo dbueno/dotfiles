@@ -37,9 +37,6 @@
 [submodule "bundle/_chriskempson-tomorrow-theme"]
 	path = bundle/_chriskempson-tomorrow-theme
 	url = https://github.com/chriskempson/tomorrow-theme
-[submodule "bundle/goatslacker-mango.vim"]
-	path = bundle/goatslacker-mango.vim
-	url = https://github.com/goatslacker/mango.vim
 [submodule "bundle/junegunn-seoul256.vim"]
 	path = bundle/junegunn-seoul256.vim
 	url = https://github.com/junegunn/seoul256.vim
