@@ -126,9 +126,6 @@ nnoremap <C-p> :cprevious<CR>
 nnoremap <silent> _ :aboveleft sp<CR>:exe "normal \<Plug>VinegarUp"<CR>
 nnoremap <silent> <Bar> :rightbelow vsp<CR>:exe "normal \<Plug>VinegarUp"<CR>
 
-noremap <F1> <Esc>
-inoremap <F1> <Esc>
-
 
 
 " From: https://github.com/kien/ctrlp.vim/issues/280
