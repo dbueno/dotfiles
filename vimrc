@@ -60,6 +60,16 @@ endif
 "let g:syntastic_check_on_wq = 0
 "let g:syntastic_ocaml_checkers = ["merlin"]
 " }}}
+"
+" FZF config {{{
+if executable('fzf')
+  set rtp+=/usr/local/opt/fzf
+  set rtp+=bundle/junegunn-fzf.vim
+
+  let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore "*.o" --ignore "*.so" --ignore "*.tmp" --ignore "*.class" --ignore-dir ".git"'
+endif
+" }}}
+
 
 " GUI options {{{
 if has('gui')
@@ -89,18 +99,14 @@ function s:camel_word(dir)
 endfunction
 
 " Global mappings {{{
-
-nnoremap <Leader>n :<C-u>NERDTreeToggle<CR>
-" nnoremap <Leader>N :<C-u>NERDTreeFind<CR>
-
 nnoremap <Leader>T :TagbarToggle<CR>
 
-nnoremap <Leader>u :<C-u>CtrlPBuffer<CR>
-nnoremap <Leader>f :<C-u>CtrlP<CR>
-nnoremap <Leader><C-f> :<C-u>CtrlP %:h<CR>
-nnoremap <Leader>F :<C-u>CtrlPMixed<CR>
-nnoremap <Leader>t :<C-u>CtrlPTag<CR>
-nnoremap <Leader>r :<C-u>CtrlPBufTag<CR>
+" functions from junegunn-fzf.vim
+nnoremap <Leader>u :Buffers<CR>
+nnoremap <Leader>f :<C-u>GitFiles<CR>
+nnoremap <Leader>F :<C-u>Files<CR>
+nnoremap <Leader>t :Tags<CR>
+
 nnoremap <Leader>d :bd<CR>
 
 " Insert current date into buffer. Used for note taking.
