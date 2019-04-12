@@ -143,6 +143,8 @@ let g:jellybeans_overrides = {
           \ }
 ""if has('gui')
 "colorscheme zenburn
+" kthxbye
+let g:dracula_italic = 0
 colorscheme dracula
 " extra space between lines because this helps with smaller font sizes
 "set linespace=0
