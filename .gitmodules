@@ -64,9 +64,6 @@
 [submodule "bundle/vim-deus"]
 	path = bundle/vim-deus
 	url = https://github.com/ajmwagar/vim-deus.git
-[submodule "bundle/jnurmine-Zenburn"]
-	path = bundle/jnurmine-Zenburn
-	url = https://github.com/jnurmine/Zenburn
 [submodule "bundle/vhda-verilog_systemverilog.vim"]
 	path = bundle/vhda-verilog_systemverilog.vim
 	url = https://github.com/vhda/verilog_systemverilog.vim.git
