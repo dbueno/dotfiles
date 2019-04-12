@@ -91,7 +91,7 @@ endif
 
 " Pathogen invocation {{{
 let s:opamshare = substitute(system('opam config var share'),'\n$','','''')
-let g:pathogen_disabled = [s:opamshare.'/ocp-index/vim', 'bling-vim-airline', 'vim-airline-vim-airline-themes', 'scrooloose-syntastic', 'scrooloose-nerdtree', 'ctrlp']
+let g:pathogen_disabled = [s:opamshare.'/ocp-index/vim', 'bling-vim-airline', 'vim-airline-vim-airline-themes', 'scrooloose-syntastic', 'scrooloose-nerdtree', 'ctrlp.vim']
 runtime bundle/tpope-vim-pathogen/autoload/pathogen.vim
 exec pathogen#infect('bundle/{}',s:opamshare.'/{}/vim')
 syntax on
