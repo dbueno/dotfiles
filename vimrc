@@ -153,7 +153,7 @@ let g:jellybeans_overrides = {
 "colorscheme zenburn
 colorscheme dracula
 " extra space between lines because this helps with smaller font sizes
-set linespace=1
+"set linespace=0
 "deus "spacegray
 ""else
   "colors jellybeans
