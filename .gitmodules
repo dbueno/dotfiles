@@ -52,9 +52,6 @@
 [submodule "bundle/vimtex"]
 	path = bundle/vimtex
 	url = https://github.com/lervag/vimtex.git
-[submodule "bundle/vim-deus"]
-	path = bundle/vim-deus
-	url = https://github.com/ajmwagar/vim-deus.git
 [submodule "bundle/vhda-verilog_systemverilog.vim"]
 	path = bundle/vhda-verilog_systemverilog.vim
 	url = https://github.com/vhda/verilog_systemverilog.vim.git
