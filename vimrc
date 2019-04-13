@@ -146,6 +146,10 @@ let g:jellybeans_overrides = {
 " kthxbye
 let g:dracula_italic = 0
 colorscheme dracula
+
+" default for .tex files is latex
+let g:tex_flavor = "latex"
+
 " extra space between lines because this helps with smaller font sizes
 "set linespace=0
 "deus "spacegray
@@ -197,6 +201,10 @@ set tags=./tags,./TAGS,tags,TAGS,./.tags,./.TAGS,.tags,.TAGS,../../tags,../tags
 " set this to add to places where vim searches #includes
 "set path+=
 
+" }}}
+
+" vimtex config {{{
+let g:vimtex_disable_recursive_main_file_detection = 1
 " }}}
 
 let g:syntastic_mode_map = { 'mode': 'passive' }
