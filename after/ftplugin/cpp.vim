@@ -10,3 +10,7 @@ set comments+=://
 "set comments+=sO://\ -,mO://\ \ ,exO://
 "set comments^=sO://!,mbO://\ ,eO://
 "set comments^=fb://\ -
+
+
+" Setting this for now because of euforia
+set makeprg+=\ all\ tags
