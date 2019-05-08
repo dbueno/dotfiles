@@ -19,3 +19,5 @@ euforia_path="$HOME/work/inprogress/euforia/vmt4/code/euforia/build/$flavor/bin"
 add_to_path "$euforia_path"
 
 add_to_path "$HOME/code/ic3ia-bueno/build"
+
+add_to_path "$HOME/code/seahorn/build/bin"
