@@ -79,3 +79,6 @@
 [submodule "bundle/junegunn-fzf.vim"]
 	path = bundle/junegunn-fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
+[submodule "bundle/dhruvasagar-vim-markify"]
+	path = bundle/dhruvasagar-vim-markify
+	url = https://github.com/dhruvasagar/vim-markify.git

@@ -209,6 +209,9 @@ let g:vimtex_disable_recursive_main_file_detection = 1
 
 let g:syntastic_mode_map = { 'mode': 'passive' }
 
+" turn off markify automatically; use :MarkifyToggle or :Markify[Clear]
+" let g:markify_autocmd = 0
+
 " Python indenting {{{
 function PythonParenIndent(lnum)
     call cursor(a:lnum, 1)
