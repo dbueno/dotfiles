@@ -12,8 +12,6 @@ my_uname="$(uname)"
 ## OS-dependent aliases, Darwin first
 if [ $my_uname = "Darwin" ]
 then
-    alias no='ls -FG'
-    alias lo='ls -lFGh'
     alias a='ls -lFGtrh'
     alias mk="make -j$(sysctl -a | grep ^hw[.]ncpu | cut -d' ' -f2)"
 
@@ -21,8 +19,6 @@ then
 ## Linux-dependent aliases
 elif [ $my_uname = "Linux" -o $my_uname = "CYGWIN_NT-5.1"  -o $my_uname = "MINGW32_NT-5.1" ]
 then
-    alias no='ls -F --color'
-    alias lo='ls -lF --color -h'
     alias a='ls -lF --color -trh'
     alias mk='make'
 #else
@@ -32,8 +28,8 @@ fi
 
 
 alias pd='cd "$OLDPWD"'
-alias packet_dump="sudo /usr/sbin/tcpdump -a -i en1 -vvv -XX -s 1500"
-alias rmws="awk '{sub(/[ \t]+$/, \"\");print}'"
+#alias packet_dump="sudo /usr/sbin/tcpdump -a -i en1 -vvv -XX -s 1500"
+#alias rmws="awk '{sub(/[ \t]+$/, \"\");print}'"
 
 # Evaluates to an iso-conformant date.  The iso-conformance is good because
 # lexicographic order coincides with date order.  'nows' just has seconds and
@@ -42,10 +38,10 @@ alias now="date '+%Y-%m-%dT%H%M'"
 alias nows="date '+%Y-%m-%dT%H%M%S'"
 
 # example: makeiso -V vol_id -o output_filename
-alias makeiso="mkisofs -l -pad -U -J -r -allow-leading-dots -iso-level 4"
+#alias makeiso="mkisofs -l -pad -U -J -r -allow-leading-dots -iso-level 4"
 
 # grabhttp is for mirroring a website onto a drive.  example: grabhttp --level=2
-alias grabhttp="wget -v -F -N -x --cache=off --recursive --convert links"
+#alias grabhttp="wget -v -F -N -x --cache=off --recursive --convert links"
 
 # git aliases
 alias s='git status'
