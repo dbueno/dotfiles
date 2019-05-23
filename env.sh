@@ -16,7 +16,7 @@ if test -n "$1"; then
   flavor="$1"
 fi
 
-euforia_path="$HOME/work/inprogress/euforia/master/code/euforia/build/$flavor/bin"
+euforia_path="$HOME/work/inprogress/euforia/dev/code/euforia/build/$flavor/bin"
 add_to_path "$euforia_path"
 
 add_to_path "$HOME/code/ic3ia-bueno/build"
