@@ -4,7 +4,7 @@ set sw=2
 setlocal foldmethod=indent
 setlocal foldnestmax=4
 setlocal foldminlines=4
-set cursorline
+" set cursorline
 
 " Insert comment separator
 nnoremap <buffer> <Leader>is o//^----------------------------------------------------------------------------^<CR>
