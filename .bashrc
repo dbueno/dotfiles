@@ -64,6 +64,14 @@ fi
 export EDITOR="vim"
 export ED="$EDITOR"
 
+function add_cwd_to_path {
+  path="$(pwd)"
+  # Checks f or the presence of the string in PATH before adding.
+  # Ideally, we would check whether $path is a PATH entry, not whether the string is there
+  [ -d "$path" ] && [[ $PATH != *"$path"* ]] && PATH="$path:$PATH" || \
+    printf "path '%s' not added\n" "$path"
+}
+
 
 # Prompt settings #############################################################
 
