@@ -85,3 +85,9 @@
 [submodule "bundle/tpope-vim-commentary"]
 	path = bundle/tpope-vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
+[submodule "bundle/morhetz-gruvbox"]
+	path = bundle/morhetz-gruvbox
+	url = https://github.com/morhetz/gruvbox.git
+[submodule "bundle/arcticicestudio-nord-vim"]
+	path = bundle/arcticicestudio-nord-vim
+	url = https://github.com/arcticicestudio/nord-vim.git
