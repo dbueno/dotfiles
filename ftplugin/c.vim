@@ -4,6 +4,7 @@ set sw=2
 setlocal foldmethod=indent
 setlocal foldnestmax=4
 setlocal foldminlines=4
+setlocal fdc=4
 " set cursorline
 
 " Insert comment separator
