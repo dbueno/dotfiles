@@ -91,3 +91,6 @@
 [submodule "bundle/arcticicestudio-nord-vim"]
 	path = bundle/arcticicestudio-nord-vim
 	url = https://github.com/arcticicestudio/nord-vim.git
+[submodule "bundle/altercation-vim-colors-solarized"]
+	path = bundle/altercation-vim-colors-solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
