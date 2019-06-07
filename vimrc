@@ -142,8 +142,8 @@ let g:jellybeans_overrides = {
           \ 'background': { 'guibg': '191919' },
           \ }
 " kthxbye
-let g:dracula_italic = 0
-colorscheme dracula
+" let g:dracula_italic = 0
+" colorscheme dracula
 
 " set background=light
 " colorscheme cosmic_latte
@@ -152,7 +152,7 @@ colorscheme dracula
 " colorscheme gruvbox
 
 " too muted for now
-" colorscheme nord
+colorscheme nord
 
 " default for .tex files is latex
 let g:tex_flavor = "latex"
