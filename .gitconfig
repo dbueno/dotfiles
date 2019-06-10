@@ -4,6 +4,7 @@
         co = checkout
         st = status
 	ci = commit
+        push-it-real-good = push -f
 [color]
 	interactive = auto
 	diff = auto
