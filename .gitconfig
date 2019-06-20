@@ -10,8 +10,19 @@
 	diff = auto
 [core]
 	fsyncobjectfiles = true
+	excludesfile = /Users/denbuen/.gitignore_global
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [push]
 	default = simple
+[guitool "stash/keeping index"]
+	cmd = git stash -k -u
+	noconsole = yes
+[guitool "stash/pop"]
+	cmd = git stash pop
+	noconsole = yes
+[guitool "delete file"]
+	cmd = rm \"$FILENAME\"
+	needsfile = yes
+        confirm = yes
