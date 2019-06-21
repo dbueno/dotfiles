@@ -14,6 +14,7 @@ if [ $my_uname = "Darwin" ]
 then
     alias a='ls -lFGtrh'
     alias mk="make -j$(sysctl -a | grep ^hw[.]ncpu | cut -d' ' -f2)"
+    alias lldb='PATH=/usr/bin:$PATH lldb'
 
 
 ## Linux-dependent aliases
@@ -27,6 +28,8 @@ fi
 
 
 
+# there's always a story behind aliases like these
+alias rm='rm -i'
 alias pd='cd "$OLDPWD"'
 #alias packet_dump="sudo /usr/sbin/tcpdump -a -i en1 -vvv -XX -s 1500"
 #alias rmws="awk '{sub(/[ \t]+$/, \"\");print}'"
