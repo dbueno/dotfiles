@@ -10,7 +10,6 @@
 	diff = auto
 [core]
 	fsyncobjectfiles = true
-	excludesfile = /Users/denbuen/.gitignore_global
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
