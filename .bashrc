@@ -48,6 +48,7 @@ alias nows="date '+%Y-%m-%dT%H%M%S'"
 
 # git aliases
 alias s='git status'
+alias gp='git pull'
 alias gx='git pull && git push'
 alias ga='git add -p'
 
