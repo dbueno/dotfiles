@@ -1,10 +1,12 @@
 [alias]
+        d  = diff
         di = diff --cached
         pa = push --all
         co = checkout
         st = status
 	ci = commit
         push-it-real-good = push -f
+	dt = difftool
 [color]
 	interactive = auto
 	diff = auto
@@ -25,3 +27,11 @@
 	cmd = rm \"$FILENAME\"
 	needsfile = yes
         confirm = yes
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[difftool "vimdiff"]
+	path = /Applications/MacVim.app/Contents/bin/vimdiff

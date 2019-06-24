@@ -48,6 +48,7 @@ alias nows="date '+%Y-%m-%dT%H%M%S'"
 
 # git aliases
 alias s='git status'
+alias gp='git pull'
 alias gx='git pull && git push'
 alias ga='git add -p'
 
@@ -138,5 +139,5 @@ export PROMPT_COMMAND="prompt_command"
 # The . is here so that if I type cd <dir> it goes to curdir first
 export CDPATH=".:$HOME/work/inprogress"
 
-export PS1='\[\033[0;31m\]\w$(__git_ps1 " (%s)") ======================================\[\033[0m\]
-$(num_jobs "%s>")\A $ '
+export PS1='\[\033[0;31m\]\w$(__git_ps1 " (%s)") ====================================== [ \! \# ]\[\033[0m\]
+\j | \A $ '
