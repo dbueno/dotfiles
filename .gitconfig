@@ -26,3 +26,11 @@
 	cmd = rm \"$FILENAME\"
 	needsfile = yes
         confirm = yes
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[difftool "vimdiff"]
+	path = /Applications/MacVim.app/Contents/bin/vimdiff
