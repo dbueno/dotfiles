@@ -46,14 +46,13 @@ ${INSTALL} ${INSTALL_FLAGS} \
     "${PWD}/.mailcap"       \
     "${PWD}/.ghci"          \
     "${PWD}/.gdbinit"       \
-    "${PWD}/.gitconfig"     \
     "${PWD}/lispwords"      \
     "$HOME"
 
 
 # copy this because otherwise our merges can screw up if there is a conflict in
-# .gitconfig. I'm going to live dangerously again and symlink it
-#cp "${PWD}/.gitconfig" "$HOME/"
+# .gitconfig. Also, I feel better putting user info only in local file
+cp "${PWD}/.gitconfig" "$HOME/"
 
 # Ask for my name, email, update programs.
 echo 'Setting git name and email'
