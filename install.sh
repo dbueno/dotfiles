@@ -55,12 +55,16 @@ ${INSTALL} ${INSTALL_FLAGS} \
 cp "${PWD}/.gitconfig" "$HOME/"
 
 # Ask for my name, email, update programs.
-echo 'Setting git name and email'
-printf 'Name: '
-read real_name
-printf 'Email: '
-read email
-git config --global user.name "${real_name}"
-git config --global user.email "${email}"
+if ! git config --get user.name &> /dev/null; then
+    echo 'Setting git name and email'
+    printf 'Name: '
+    read real_name
+    git config --global user.name "${real_name}"
+fi
+if ! git config --get user.email &> /dev/null; then
+    printf 'Email: '
+    read email
+    git config --global user.email "${email}"
+fi
 git config --global core.excludesfile ~/.gitignore_global
 
