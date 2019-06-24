@@ -49,6 +49,11 @@ ${INSTALL} ${INSTALL_FLAGS} \
     "${PWD}/lispwords"      \
     "$HOME"
 
+mkdir -p $HOME/.hammerspoon
+${INSTALL} ${INSTALL_FLAGS} \
+    "${PWD}/hammerspoon.lua" \
+    "$HOME/.hammerspoon/init.lua"
+
 
 # copy this because otherwise our merges can screw up if there is a conflict in
 # .gitconfig. Also, I feel better putting user info only in local file
