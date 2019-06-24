@@ -1,10 +1,12 @@
 [alias]
+        d  = diff
         di = diff --cached
         pa = push --all
         co = checkout
         st = status
 	ci = commit
         push-it-real-good = push -f
+	dt = difftool
 [color]
 	interactive = auto
 	diff = auto
