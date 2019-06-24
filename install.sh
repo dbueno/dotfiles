@@ -46,22 +46,30 @@ ${INSTALL} ${INSTALL_FLAGS} \
     "${PWD}/.mailcap"       \
     "${PWD}/.ghci"          \
     "${PWD}/.gdbinit"       \
-    "${PWD}/.gitconfig"     \
     "${PWD}/lispwords"      \
     "$HOME"
 
+mkdir -p $HOME/.hammerspoon
+${INSTALL} ${INSTALL_FLAGS} \
+    "${PWD}/hammerspoon.lua" \
+    "$HOME/.hammerspoon/init.lua"
+
 
 # copy this because otherwise our merges can screw up if there is a conflict in
-# .gitconfig. I'm going to live dangerously again and symlink it
-#cp "${PWD}/.gitconfig" "$HOME/"
+# .gitconfig. Also, I feel better putting user info only in local file
+cp "${PWD}/.gitconfig" "$HOME/"
 
 # Ask for my name, email, update programs.
-echo 'Setting git name and email'
-printf 'Name: '
-read real_name
-printf 'Email: '
-read email
-git config --global user.name "${real_name}"
-git config --global user.email "${email}"
+if ! git config --get user.name &> /dev/null; then
+    echo 'Setting git name and email'
+    printf 'Name: '
+    read real_name
+    git config --global user.name "${real_name}"
+fi
+if ! git config --get user.email &> /dev/null; then
+    printf 'Email: '
+    read email
+    git config --global user.email "${email}"
+fi
 git config --global core.excludesfile ~/.gitignore_global
 
