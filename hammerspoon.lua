@@ -38,17 +38,16 @@ hs.hotkey.bind(mash, 'n', function() hs.window.focusedWindow():move(units.right3
 -- hs.hotkey.bind(mash, "'", function() hs.window.focusedWindow():move(units.botright30, nil, true) end)
 -- hs.hotkey.bind(mash, 'm', function() hs.window.focusedWindow():move(units.maximum,    nil, true) end)
 
--- Move current window 20 pixels left
 hs.hotkey.bind(mash, "left", function()
   local win = hs.window.focusedWindow()
-  local f = win:frame()
-  f.x = f.x - 20
-  win:setFrame(f)
+  local sz = win:size()
+  sz.w = sz.w - 100
+  win:setSize(sz)
 end)
 hs.hotkey.bind(mash, "right", function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
-  f.x = f.x + 20
+  f.x = f.x + 100
   win:setFrame(f)
 end)
 hs.hotkey.bind(mash, "up", function()
@@ -59,9 +58,9 @@ hs.hotkey.bind(mash, "up", function()
 end)
 hs.hotkey.bind(mash, "down", function()
   local win = hs.window.focusedWindow()
-  local sz = win:size()
-  sz.h = sz.h + 100
-  win:setSize(sz)
+  local f = win:frame()
+  f.y = f.y + 100
+  win:setFrame(f)
 end)
 -- Maximize the height of the window
 hs.hotkey.bind(mash, "c", function()
