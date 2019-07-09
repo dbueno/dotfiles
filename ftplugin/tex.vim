@@ -10,4 +10,4 @@ set iskeyword+=:
 " autowrite for builds
 set aw
 
-set cursorline
+" set cursorline
