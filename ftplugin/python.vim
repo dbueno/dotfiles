@@ -1,2 +1,2 @@
-set cc=80
-set fdm=indent
+setlocal cc=80
+setlocal fdm=indent
