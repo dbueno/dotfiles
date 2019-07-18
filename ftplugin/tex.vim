@@ -11,3 +11,5 @@ set iskeyword+=:
 set aw
 
 " set cursorline
+
+nnoremap <buffer> <Leader>is o%-----------------------------------------------------------------------------
