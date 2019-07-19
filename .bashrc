@@ -51,6 +51,7 @@ alias s='git status'
 alias gp='git pull'
 alias gx='git pull && git push'
 alias ga='git add -p'
+alias gci='git commit'
 # CD to the root directory of the git repo
 alias cdg='pushd $(git rev-parse --show-toplevel)'
 
