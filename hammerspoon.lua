@@ -38,6 +38,8 @@ hs.hotkey.bind(mash, 'n', function() hs.window.focusedWindow():move(units.right3
 hs.hotkey.bind(mash, 'g', function() hs.window.focusedWindow():move(units.left33, nil, true) end)
 hs.hotkey.bind(mash, 'c', function() hs.window.focusedWindow():move(units.mid33, nil, true) end)
 hs.hotkey.bind(mash, 'r', function() hs.window.focusedWindow():move(units.right33, nil, true) end)
+-- full screen
+hs.hotkey.bind(mash, 't', function() hs.window.focusedWindow():move(units.maximum, nil, true) end)
 -- the h key in dvorak produces d
 -- hs.hotkey.bind(mash, 'd', function() hs.window.focusedWindow():move(units.left70,     nil, true) end)
 -- hs.hotkey.bind(mash, 'k', function() hs.window.focusedWindow():move(units.top50,      nil, true) end)
