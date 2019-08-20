@@ -4,6 +4,7 @@ units = {
   left70        = { x = 0.00, y = 0.00, w = 0.70, h = 1.00 },
   left30        = { x = 0.00, y = 0.00, w = 0.30, h = 1.00 },
   left50        = { x = 0.00, y = 0.00, w = 0.4999, h = 1.00 },
+  right50       = { x = 0.50, y = 0.00, w = 0.50, h = 1.00 },
   -- i think x and y are the top-left of the desktop
   -- w is the width in pct
   left63        = { x = 0.00, y = 0.00, w = 0.62999, h = 1.00 },
@@ -32,8 +33,8 @@ animationDuration = 0
 mash = { 'shift', 'ctrl', 'cmd' }
 -- the n key in dvorak produces l
 -- when i hit j, it produces h because of dvorak
-hs.hotkey.bind(mash, 'h', function() hs.window.focusedWindow():move(units.left63,     nil, true) end)
-hs.hotkey.bind(mash, 'n', function() hs.window.focusedWindow():move(units.right37,     nil, true) end)
+hs.hotkey.bind(mash, 'h', function() hs.window.focusedWindow():move(units.left50,     nil, true) end)
+hs.hotkey.bind(mash, 'n', function() hs.window.focusedWindow():move(units.right50,     nil, true) end)
 -- 'u', 'i', and 'o' will layout three windows perfectly taking up a third of the screen, left-to-right
 hs.hotkey.bind(mash, 'g', function() hs.window.focusedWindow():move(units.left33, nil, true) end)
 hs.hotkey.bind(mash, 'c', function() hs.window.focusedWindow():move(units.mid33, nil, true) end)
