@@ -21,7 +21,8 @@ set cm=blowfish2
 
 " }}}
 
-" defines a command like mkdir -p
+" defines a command, MkDirs, that will make all the directories necessary so
+" that the path to current buffer-file exists
 command MkDirs call mkdir(expand('%:h'), 'p')
 
 " my simple statusline, airline was a steaming pile
@@ -106,23 +107,34 @@ endfunction
 nnoremap <Leader>T :TagbarToggle<CR>
 
 " functions from junegunn-fzf.vim
+" each brings up fuzzy completion list
+" <Leader>u - list of buffers
 nnoremap <Leader>u :Buffers<CR>
+" <Leader>f - list of files under the current Git repo
 nnoremap <Leader>f :<C-u>GitFiles<CR>
+" <Leader>f - list of files under the current directory
 nnoremap <Leader>F :<C-u>Files<CR>
+" <Leader>f - list of tags
 nnoremap <Leader>t :Tags<CR>
 
+" <Leader>d deletes the current buffer
 nnoremap <Leader>d :bd<CR>
 
 " Insert current date into buffer. Used for note taking.
 nnoremap <Leader>it "=strftime("%c")<CR>p
 
-" select some text, then type // and it will search for the literal
+" select some text, then type // and it will search for the literal text
 vnoremap // y/\V<C-R>"<CR>
 
+" highlight matches in search
+set hlsearch
+" <Leader>h will turn off highlights
 nnoremap <Leader>h :nohls<CR>
 "nnoremap <Space> zz
 
+" close the current window
 nnoremap <Leader>c <C-w>c
+" make the current window the only window
 nnoremap <Leader>o <C-w>o
 
 " C-w ] will open tag in a split
@@ -177,9 +189,6 @@ set ignorecase smartcase
 
 " unexplainable but helpful completion settings
 set wildmenu wildmode=list,list:longest
-
-" highlight matches in search
-set hlsearch
 
 " always include status line
 set laststatus=2 
