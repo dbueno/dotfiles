@@ -31,6 +31,7 @@ mkdir -p "$HOME/sw"
 mkdir -p "$HOME/"{code,papers,docs,benchmarks,writing}
 mkdir -p "$HOME/work/"{inprogress,submitted,published}
 mkdir -p "$HOME/.mutt" "$HOME/.mutt/cache/bodies" "$HOME/.mutt/cache/headers"
+mkdir -p "$HOME/tmp"
 
 mkdir -p "$HOME/sw/bin"
 ${INSTALL} ${INSTALL_FLAGS} "${PWD}/wtf" "$HOME/sw/bin/wtf"
