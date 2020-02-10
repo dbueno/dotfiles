@@ -52,8 +52,8 @@ alias gp='git pull'
 alias gx='git pull && git push'
 alias ga='git add -p'
 alias gci='git commit'
-# CD to the root directory of the git repo
-alias cdg='pushd $(git rev-parse --show-toplevel)'
+# print git directory, toplevel of current repo
+alias pgd='git rev-parse --show-toplevel'
 
 # bash completion from homebrew
 if command -v brew >/dev/null 2>&1; then
