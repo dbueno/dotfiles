@@ -5,6 +5,7 @@ units = {
   left30        = { x = 0.00, y = 0.00, w = 0.30, h = 1.00 },
   left50        = { x = 0.00, y = 0.00, w = 0.4999, h = 1.00 },
   right50       = { x = 0.50, y = 0.00, w = 0.50, h = 1.00 },
+  center50      = { x = 0.25, y = 0.00, w = 0.50, h = 1.00 },
   -- i think x and y are the top-left of the desktop
   -- w is the width in pct
   left63        = { x = 0.00, y = 0.00, w = 0.62999, h = 1.00 },
@@ -41,6 +42,8 @@ hs.hotkey.bind(mash, 'c', function() hs.window.focusedWindow():move(units.mid33,
 hs.hotkey.bind(mash, 'r', function() hs.window.focusedWindow():move(units.right33, nil, true) end)
 -- full screen
 hs.hotkey.bind(mash, 't', function() hs.window.focusedWindow():move(units.maximum, nil, true) end)
+-- center half width
+hs.hotkey.bind(mash, 'w', function() hs.window.focusedWindow():move(units.center50, nil, true) end)
 -- the h key in dvorak produces d
 -- hs.hotkey.bind(mash, 'd', function() hs.window.focusedWindow():move(units.left70,     nil, true) end)
 -- hs.hotkey.bind(mash, 'k', function() hs.window.focusedWindow():move(units.top50,      nil, true) end)
