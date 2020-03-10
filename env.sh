@@ -11,7 +11,7 @@ function add_to_path {
 conf="$HOME/work/inprogress/fmcad19/code"
 add_to_path "$conf"
 
-flavor="Release"
+flavor="Debug"
 if test -n "$1"; then
   flavor="$1"
 fi
@@ -21,6 +21,6 @@ add_to_path "$euforia_path"
 
 add_to_path "$HOME/code/ic3ia-bueno/build"
 
-seahorn="seahorn-debug"
-[[ $flavor = "Release" ]] && seahorn="seahorn-release"
+seahorn="seahorn-release"
+# [[ $flavor = "Release" ]] && seahorn="seahorn-release"
 add_to_path "$HOME/code/seahorn/$seahorn/build/run/bin"
