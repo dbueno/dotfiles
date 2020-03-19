@@ -2,6 +2,7 @@
 set nocompatible
 let mapleader = ";"
 let maplocalleader = mapleader
+set modeline modelines=5
 
 " enable mouse
 set mouse=a
