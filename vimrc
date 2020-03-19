@@ -73,6 +73,7 @@ if executable('fzf')
   set rtp+=bundle/junegunn-fzf.vim
 
   let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore "*.o" --ignore "*.so" --ignore "*.tmp" --ignore "*.class" --ignore-dir ".git"'
+  let g:fzf_preview_window = ''
 endif
 " }}}
 
