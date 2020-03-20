@@ -94,3 +94,6 @@
 [submodule "bundle/altercation-vim-colors-solarized"]
 	path = bundle/altercation-vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule "bundle/jalvesaq-Nvim-R"]
+	path = bundle/jalvesaq-Nvim-R
+	url = https://github.com/jalvesaq/Nvim-R.git
