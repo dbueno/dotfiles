@@ -97,3 +97,6 @@
 [submodule "bundle/jalvesaq-Nvim-R"]
 	path = bundle/jalvesaq-Nvim-R
 	url = https://github.com/jalvesaq/Nvim-R.git
+[submodule "bundle/tpope-vim-unimpaired"]
+	path = bundle/tpope-vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired.git
