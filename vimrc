@@ -141,10 +141,10 @@ nnoremap <Leader>o <C-w>o
 
 " C-w ] will open tag in a split
 " C-w g } will let you select tag for preview
-nnoremap <C-n> :cnext<CR>
-nnoremap <C-p> :cprevious<CR>
-nnoremap <Leader>n :tnext<CR>
-nnoremap <Leader>p :tprev<CR>
+"nnoremap <C-n> :cnext<CR>
+"nnoremap <C-p> :cprevious<CR>
+"nnoremap <Leader>n :tnext<CR>
+"nnoremap <Leader>p :tprev<CR>
 
 nnoremap <silent> _ :aboveleft sp<CR>:exe "normal \<Plug>VinegarUp"<CR>
 nnoremap <silent> <Bar> :aboveleft vsp<CR>:exe "normal \<Plug>VinegarUp"<CR>
