@@ -26,6 +26,8 @@ set cm=blowfish2
 " that the path to current buffer-file exists
 command MkDirs call mkdir(expand('%:h'), 'p')
 
+command CtagsCpp !ctags --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q -Rnu .
+
 " my simple statusline, airline was a steaming pile
 set statusline=%q%t\ @\ %P\ [ft=%Y%M%R%W%H]\ pos\ %l:%c\ %=%<%{expand('%:~:.:h')}
 
@@ -74,6 +76,24 @@ if executable('fzf')
 
   let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore "*.o" --ignore "*.so" --ignore "*.tmp" --ignore "*.class" --ignore-dir ".git"'
   let g:fzf_preview_window = ''
+ 
+  " :BD function to use fzf to delete buffers
+  function! s:list_buffers()
+      redir => list
+      silent ls
+      redir END
+      return split(list, "\n")
+  endfunction
+
+  function! s:delete_buffers(lines)
+      execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+  endfunction
+
+  command! BD call fzf#run(fzf#wrap({
+              \ 'source': s:list_buffers(),
+              \ 'sink*': { lines -> s:delete_buffers(lines) },
+              \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+              \ }))
 endif
 " }}}
 
