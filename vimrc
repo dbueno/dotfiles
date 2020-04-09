@@ -221,8 +221,8 @@ set hidden
 " don't remember options in seccions
 set sessionoptions-=options
 
-" don't let search open a fold (very annoying)
-set fdo-=search
+" don't let search open a fold
+" set fdo-=search
 
 " i have cores for a reason
 set makeprg=make\ -j8
