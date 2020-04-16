@@ -28,6 +28,9 @@ command MkDirs call mkdir(expand('%:h'), 'p')
 
 command CtagsCpp !ctags --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q -Rnu .
 
+command HighlightCurrentLine :call matchadd('Search', '\%'.line('.').'l')<CR>
+command ClearHighlightCurrentLine :call clearmatches()<CR>
+
 " my simple statusline, airline was a steaming pile
 set statusline=%q%t\ @\ %P\ [ft=%Y%M%R%W%H]\ pos\ %l:%c\ %=%<%{expand('%:~:.:h')}
 
@@ -149,9 +152,9 @@ nnoremap <Leader>it "=strftime("%c")<CR>p
 vnoremap // y/\V<C-R>"<CR>
 
 " highlight matches in search
-set hlsearch
+" set hlsearch
 " <Leader>h will turn off highlights
-nnoremap <Leader>h :nohls<CR>
+nnoremap <Leader>h :set hls!<CR>
 "nnoremap <Space> zz
 
 " close the current window
