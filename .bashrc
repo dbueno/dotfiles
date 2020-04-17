@@ -137,7 +137,7 @@ function prompt_command {
  
   export LASTDIR=$newdir
 }
-export PROMPT_COMMAND="prompt_command"
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }prompt_command"
 
 # When I type 'cd somewhere', if somewhere is relative, try out looking into all
 # the paths in $CDPATH for completions.  This can speed up common directory
