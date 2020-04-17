@@ -39,6 +39,7 @@ alias pd='cd "$OLDPWD"'
 # is also iso-conformant.
 alias now="date '+%Y-%m-%dT%H%M'"
 alias nows="date '+%Y-%m-%dT%H%M%S'"
+alias today="date '+%Y-%m-%d'"
 
 # example: makeiso -V vol_id -o output_filename
 #alias makeiso="mkisofs -l -pad -U -J -r -allow-leading-dots -iso-level 4"
@@ -54,6 +55,9 @@ alias ga='git add -p'
 alias gci='git commit'
 # print git directory, toplevel of current repo
 alias pgd='git rev-parse --show-toplevel'
+
+# uses universal-ctags or something
+alias make_cpptags='ctags --c++-kinds=+pf --c-kinds=+p --fields=+imaSft --extra=+q -Rnu'
 
 # bash completion from homebrew
 if command -v brew >/dev/null 2>&1; then
