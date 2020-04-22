@@ -195,6 +195,9 @@ colorscheme nord
 " default for .tex files is latex
 let g:tex_flavor = "latex"
 
+" R mode customizations
+let R_assign = 2
+
 " extra space between lines because this helps with smaller font sizes
 "set linespace=0
 "deus "spacegray
