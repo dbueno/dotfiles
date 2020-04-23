@@ -100,3 +100,6 @@
 [submodule "bundle/tpope-vim-unimpaired"]
 	path = bundle/tpope-vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
+[submodule "bundle/rkaminsk-vim-syntax-clingo"]
+	path = bundle/rkaminsk-vim-syntax-clingo
+	url = https://github.com/rkaminsk/vim-syntax-clingo.git
