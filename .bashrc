@@ -1,8 +1,6 @@
 # Settings for interactive shells
 # .bashrc is executed for interactive non-login shells
-    
-[[ -e /etc/bashrc ]] && source /etc/bashrc
-
+ 
 [[ -e "$HOME/.bashrc_personal" ]] && source "$HOME/.bashrc_personal"
 
 alias c=clear
@@ -125,7 +123,7 @@ export HISTIGNORE="&:[ ]*:exit:[bf]g:no:lo:lt:pd:c:a:s"
 export HISTSIZE=1000000
 export LASTDIR="$HOME"
  
-function prompt_command {
+function bueno_prompt_command {
   history -a
  
   # Record new directory on change.
@@ -137,7 +135,7 @@ function prompt_command {
  
   export LASTDIR=$newdir
 }
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }prompt_command"
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }bueno_prompt_command"
 
 # When I type 'cd somewhere', if somewhere is relative, try out looking into all
 # the paths in $CDPATH for completions.  This can speed up common directory
