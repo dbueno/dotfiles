@@ -123,6 +123,7 @@ export HISTIGNORE="&:[ ]*:exit:[bf]g:no:lo:lt:pd:c:a:s"
 export HISTSIZE=1000000
 export LASTDIR="$HOME"
  
+[[ -z "$PROMPT_COMMAND_ORIG" ]] && export PROMPT_COMMAND_ORIG="$PROMPT_COMMAND"
 function bueno_prompt_command {
   history -a
  
@@ -135,7 +136,7 @@ function bueno_prompt_command {
  
   export LASTDIR=$newdir
 }
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }bueno_prompt_command"
+export PROMPT_COMMAND="${PROMPT_COMMAND_ORIG:+$PROMPT_COMMAND_ORIG; }bueno_prompt_command"
 
 # When I type 'cd somewhere', if somewhere is relative, try out looking into all
 # the paths in $CDPATH for completions.  This can speed up common directory
