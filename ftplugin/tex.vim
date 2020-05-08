@@ -13,3 +13,8 @@ set aw
 " set cursorline
 
 nnoremap <buffer> <Leader>is o%-----------------------------------------------------------------------------
+
+" remaps Command-B
+" don't just automatically during build
+nnoremap D-b :make!<CR>
+nnoremap D-B :make!<CR>
