@@ -32,7 +32,7 @@ command HighlightCurrentLine :call matchadd('Search', '\%'.line('.').'l')<CR>
 command ClearHighlightCurrentLine :call clearmatches()<CR>
 
 " my simple statusline, airline was a steaming pile
-set statusline=%q%t\ @\ %P\ [ft=%Y%M%R%W%H]\ pos\ %l:%c\ %=%<%{expand('%:~:.:h')}
+set statusline=%q%t\ @\ %P\ [ft=%Y%M%R%W%H]\ char:0x%B\ pos\ %l:%c\ %=%<%{expand('%:~:.:h')}
 
 " Airline configuration {{{
 "if !exists('g:airline_symbols')
