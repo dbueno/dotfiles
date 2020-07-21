@@ -22,6 +22,8 @@ add_to_path "$euforia_path/../../../lib/boolector/build/bin"
 
 add_to_path "$HOME/code/ic3ia-bueno/build"
 
-seahorn="seahorn-release"
-# [[ $flavor = "Release" ]] && seahorn="seahorn-release"
-add_to_path "$HOME/code/seahorn/$seahorn/build/run/bin"
+# seahorn="seahorn-release"
+# # [[ $flavor = "Release" ]] && seahorn="seahorn-release"
+# add_to_path "$HOME/code/seahorn/$seahorn/build/run/bin"
+
+add_to_path "/opt/z3-4.8.7/bin"
