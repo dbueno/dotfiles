@@ -103,3 +103,6 @@
 [submodule "bundle/rkaminsk-vim-syntax-clingo"]
 	path = bundle/rkaminsk-vim-syntax-clingo
 	url = https://github.com/rkaminsk/vim-syntax-clingo.git
+[submodule "bundle/souffle-lang-souffle.vim"]
+	path = bundle/souffle-lang-souffle.vim
+	url = https://github.com/souffle-lang/souffle.vim.git
