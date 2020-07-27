@@ -8,10 +8,7 @@ function add_to_path {
   [ -d "$path" ] && [[ $PATH != *"$path"* ]] && PATH="$path:$PATH"
 }
 
-conf="$HOME/work/inprogress/fmcad19/code"
-add_to_path "$conf"
-
-flavor="Debug"
+flavor="RelWithDebInfo"
 if test -n "$1"; then
   flavor="$1"
 fi
