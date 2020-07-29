@@ -63,6 +63,11 @@ if command -v brew >/dev/null 2>&1; then
         . $(brew --prefix)/etc/bash_completion
     fi
     source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+    
+    if test -d $(brew --prefix)/opt/fzf/shell; then
+        source $(brew --prefix)/opt/fzf/shell/completion.bash
+        source $(brew --prefix)/opt/fzf/shell/key-bindings.bash
+    fi
 else
     __git_ps1() {
         :;
