@@ -76,6 +76,8 @@ endif
 "
 " FZF config {{{
 if executable('fzf')
+  let thepath=fnamemodify(exepath('fzf'), ':h:h')
+  execute "set rtp+=" . thepath
   set rtp+=/usr/local/opt/fzf
   set rtp+=bundle/junegunn-fzf.vim
 
