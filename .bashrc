@@ -48,7 +48,11 @@ alias today="date '+%Y-%m-%d'"
 #alias grabhttp="wget -v -F -N -x --cache=off --recursive --convert links"
 
 # git aliases
-alias s='git status'
+function s {
+    git status -uno
+    git status --short | awk '/[?][?]/ { c += 1 } END { if (c > 0) { printf("\n... and %s untracked files\n", c) } }'
+}
+function ss { git status; }
 alias gp='git pull'
 alias gx='git pull && git push'
 alias ga='git add -p'
