@@ -10,7 +10,7 @@ my_uname="$(uname)"
 ## OS-dependent aliases, Darwin first
 if [ $my_uname = "Darwin" ]
 then
-    alias a='ls -lFGtrh | tail -n 20 && echo "[showing at most 20 files]"'
+    function a { ls -lFGtrh "$@" | tail -n 20 && echo "[showing at most 20 files]"; }
     alias aa='ls -lFGtrh'
     alias mk="make -j$(sysctl -a | grep ^hw[.]ncpu | cut -d' ' -f2)"
     alias lldb='PATH=/usr/bin:$PATH lldb'
@@ -19,7 +19,7 @@ then
 ## Linux-dependent aliases
 elif [ $my_uname = "Linux" -o $my_uname = "CYGWIN_NT-5.1"  -o $my_uname = "MINGW32_NT-5.1" ]
 then
-    alias a='ls -lF --color -trh | tail -n 20 && echo "[showing at most 20 files]"'
+    function a { ls -lF --color -trh "$@" | tail -n 20 && echo "[showing at most 20 files]"; }
     alias aa='ls -lF --color -trh'
     alias mk='make'
 #else
