@@ -2,12 +2,6 @@
 # source <this> puts Debug euforia into path
 # source <this> Release
 
-function add_to_path {
-  path="$1"
-  # Checks f or the presence of the string in PATH before adding
-  [ -d "$path" ] && [[ $PATH != *"$path"* ]] && PATH="$path:$PATH"
-}
-
 flavor="RelWithDebInfo"
 if test -n "$1"; then
   flavor="$1"
