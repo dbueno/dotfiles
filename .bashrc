@@ -63,6 +63,12 @@ alias pgd='git rev-parse --show-toplevel'
 # uses universal-ctags or something
 alias make_cpptags='ctags --c++-kinds=+pf --c-kinds=+p --fields=+imaSft --extra=+q -Rnu'
 
+## Adds to path but only if it's not there
+function add_to_path {
+  path="$1"
+  [ -d "$path" ] && [[ $PATH != *"$path"* ]] && PATH="$path:$PATH"
+}
+
 # bash completion from homebrew
 if command -v brew >/dev/null 2>&1; then
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
