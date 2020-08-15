@@ -49,8 +49,8 @@ alias today="date '+%Y-%m-%d'"
 
 # git aliases
 function s {
-    git status -uno
-    git status --short | awk '/[?][?]/ { c += 1 } END { if (c > 0) { printf("\n... and %s untracked files\n", c) } }'
+    git status -uno || return
+    git status --short | awk '/[?][?]/ { c += 1 } END { if (c > 0) { printf("\n... and %s untracked files\n", c) } }' || return
 }
 function ss { git status; }
 alias gp='git pull'
