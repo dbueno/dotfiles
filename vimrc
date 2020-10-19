@@ -167,6 +167,11 @@ nnoremap <Leader>h :set hls!<CR>
 nnoremap <Leader>c <C-w>c
 " make the current window the only window
 nnoremap <Leader>o <C-w>o
+" easier movement in splits
+nnoremap <C-h> <C-w><C-h>
+nnoremap <C-j> <C-w><C-j>
+nnoremap <C-k> <C-w><C-k>
+nnoremap <C-l> <C-w><C-l>
 
 " C-w ] will open tag in a split
 " C-w g } will let you select tag for preview
