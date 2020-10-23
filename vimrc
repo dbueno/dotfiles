@@ -186,9 +186,9 @@ nnoremap <silent> <Bar> :aboveleft vsp<CR>:exe "normal \<Plug>VinegarUp"<CR>
 
 
 " Basic configuration {{{
-let g:jellybeans_overrides = {
-          \ 'background': { 'guibg': '191919' },
-          \ }
+" let g:jellybeans_overrides = {
+"           \ 'background': { 'guibg': '191919' },
+"           \ }
 " kthxbye
 " let g:dracula_italic = 0
 " colorscheme dracula
@@ -196,11 +196,11 @@ let g:jellybeans_overrides = {
 " set background=light
 " colorscheme cosmic_latte
 
-" let g:gruvbox_contrast_light = 'soft'
-" colorscheme gruvbox
-
 " too muted for now
-colorscheme nord
+" colorscheme nord
+
+let g:gruvbox_contrast_dark = 'medium'
+autocmd vimenter * colorscheme gruvbox
 
 " default for .tex files is latex
 let g:tex_flavor = "latex"
