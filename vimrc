@@ -197,12 +197,20 @@ nnoremap <silent> <Bar> :aboveleft vsp<CR>:exe "normal \<Plug>VinegarUp"<CR>
 " colorscheme cosmic_latte
 
 " too muted for now
-" colorscheme nord
+let g:nord_bold_vertical_split_line = 1
+augroup nord-theme-overrides
+    autocmd!
+    " Brighten the vertical split so I don't confuse it with the color column.
+    " Even brighter than the bold_vertical_split option.
+    autocmd ColorScheme nord hi VertSplit guibg=#616E88 guifg=#434C5E
+    " autocmd ColorScheme nord hi ColorColumn guibg=#2E3440 guifg=#434C5E
+augroup END
+colorscheme nord
 
 " set background=dark
 " colorscheme solarized
 
-colorscheme molokai
+" colorscheme molokai
 
 " let g:gruvbox_contrast_dark = 'medium'
 " autocmd vimenter * colorscheme gruvbox
@@ -221,6 +229,8 @@ let R_assign = 2
   "hi CursorLine guibg=#404040
   "hi CursorColumn guibg=#404040
 "endif
+
+" show line number and character pos
 set ruler
 " expand tabs, default shiftwidth is 4
 set et sts=4 sw=4
@@ -251,10 +261,6 @@ set makeprg=make\ -j8
 
 " disables mappings from default ocaml ftplugin
 let g:no_ocaml_maps = 1
-
-if executable('grin')
-    set grepprg=grin\ -nH\ --emacs
-endif
 
 set tags=./tags,./TAGS,tags,TAGS,./.tags,./.TAGS,.tags,.TAGS,../../tags,../tags
 
