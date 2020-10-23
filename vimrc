@@ -199,8 +199,13 @@ nnoremap <silent> <Bar> :aboveleft vsp<CR>:exe "normal \<Plug>VinegarUp"<CR>
 " too muted for now
 " colorscheme nord
 
-let g:gruvbox_contrast_dark = 'medium'
-autocmd vimenter * colorscheme gruvbox
+" set background=dark
+" colorscheme solarized
+
+colorscheme molokai
+
+" let g:gruvbox_contrast_dark = 'medium'
+" autocmd vimenter * colorscheme gruvbox
 
 " default for .tex files is latex
 let g:tex_flavor = "latex"
