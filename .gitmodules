@@ -106,3 +106,9 @@
 [submodule "bundle/souffle-lang-souffle.vim"]
 	path = bundle/souffle-lang-souffle.vim
 	url = https://github.com/souffle-lang/souffle.vim.git
+[submodule "bundle/morhetz-gruvbox-contrib"]
+	path = bundle/morhetz-gruvbox-contrib
+	url = https://github.com/morhetz/gruvbox-contrib.git
+[submodule "bundle/tomasr-molokai"]
+	path = bundle/tomasr-molokai
+	url = https://github.com/tomasr/molokai.git
