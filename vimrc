@@ -81,7 +81,9 @@ if executable('fzf')
   set rtp+=/usr/local/opt/fzf
   set rtp+=bundle/junegunn-fzf.vim
 
-  let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore "*.o" --ignore "*.so" --ignore "*.tmp" --ignore "*.class" --ignore-dir ".git"'
+  if executable('ag')
+      let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore "*.o" --ignore "*.so" --ignore "*.tmp" --ignore "*.class" --ignore-dir ".git"'
+  endif
   let g:fzf_preview_window = ''
  
   " :BD function to use fzf to delete buffers
