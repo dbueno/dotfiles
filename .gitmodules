@@ -112,3 +112,6 @@
 [submodule "bundle/tomasr-molokai"]
 	path = bundle/tomasr-molokai
 	url = https://github.com/tomasr/molokai.git
+[submodule "bundle/wlangstroth-vim-racket"]
+	path = bundle/wlangstroth-vim-racket
+	url = https://github.com/wlangstroth/vim-racket.git
