@@ -127,8 +127,9 @@ if has('gui')
     set guioptions-=l
     set guioptions-=L
     set guioptions-=b
-    "set guifont=Iosevka\ Term\ Medium:h11
-    set guifont=SF\ Mono\ Regular:h13
+    set guifont=Iosevka\ Term\ Medium:h13
+    " set guifont=SF\ Mono\ Regular:h13
+    " set guifont=Source\ Code\ Pro\ Regular:h13
 endif
 " }}}
 
