@@ -1,5 +1,8 @@
 # Settings for interactive shells
 # .bashrc is executed for interactive non-login shells
+
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
  
 [[ -e "$HOME/.bashrc_personal" ]] && source "$HOME/.bashrc_personal"
 
@@ -86,6 +89,11 @@ else
     }
 fi
 
+# Kitty bash completion.
+if [[ "$TERM" = *"kitty"* ]]; then
+    source <(kitty + complete setup bash)
+fi
+
 
 export EDITOR="vim"
 export ED="$EDITOR"
@@ -140,20 +148,20 @@ export HISTIGNORE="&:[ ]*:exit:[bf]g:no:lo:lt:pd:c:a:s"
 export HISTSIZE=1000000
 export LASTDIR="$HOME"
  
-[[ -z "$PROMPT_COMMAND_ORIG" ]] && export PROMPT_COMMAND_ORIG="$PROMPT_COMMAND"
-function bueno_prompt_command {
-  history -a
+# [[ -z "$PROMPT_COMMAND_ORIG" ]] && export PROMPT_COMMAND_ORIG="$PROMPT_COMMAND"
+# function bueno_prompt_command {
+#   history -a
  
-  # Record new directory on change.
-  newdir=`pwd`
-  if [ ! "$LASTDIR" = "$newdir" ]; then
-    # List contents:
-    ls -tF | head -7
-  fi
+#   # Record new directory on change.
+#   newdir=`pwd`
+#   if [ ! "$LASTDIR" = "$newdir" ]; then
+#     # List contents:
+#     ls -tF | head -7
+#   fi
  
-  export LASTDIR=$newdir
-}
-export PROMPT_COMMAND="${PROMPT_COMMAND_ORIG:+$PROMPT_COMMAND_ORIG; }bueno_prompt_command"
+#   export LASTDIR=$newdir
+# }
+# export PROMPT_COMMAND="${PROMPT_COMMAND_ORIG:+$PROMPT_COMMAND_ORIG; }bueno_prompt_command"
 
 # When I type 'cd somewhere', if somewhere is relative, try out looking into all
 # the paths in $CDPATH for completions.  This can speed up common directory
@@ -162,17 +170,28 @@ export PROMPT_COMMAND="${PROMPT_COMMAND_ORIG:+$PROMPT_COMMAND_ORIG; }bueno_promp
 # The . is here so that if I type cd <dir> it goes to curdir first
 export CDPATH=".:$HOME/work/inprogress"
 
+# Colors the prompt red if the last command doesn't exit cleanly.
 function __colorcode_exit {
     if test $? -eq 0; then
-        printf "; "
+        printf ";"
     else
-        printf "\033[01;31m; \033[0m"
+        printf "\[\033[01;31m\];\[\033[0m\]"
     fi
 }
 
-function bueno_minimalist_prompt {
-    export PS1='$(__colorcode_exit)'
+function __colorcode_setps1 {
+    history -a
+    # I tried, at first, setting PS1 in .bashrc alone. But I ran into a problem
+    # where the \[ and \] in __colorcode_exit were being literally printed in
+    # the prompt, instead of interpreted as directives for bash. Setting PS1 in
+    # PROMPT_COMMAND fixes this problem.
+    PS1="$(__colorcode_exit) "
 }
+
+function bueno_minimalist_prompt {
+    PROMPT_COMMAND='__colorcode_setps1'
+}
+
 function bueno_verbose_prompt {
     export PS1='\[\033[0;31m\]$(hostname -s) @ \w$(__git_ps1 " (%s)") ====================================== [ \! \# ]\[\033[0m\]
 \j | \A $ '
