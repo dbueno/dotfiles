@@ -162,5 +162,20 @@ export PROMPT_COMMAND="${PROMPT_COMMAND_ORIG:+$PROMPT_COMMAND_ORIG; }bueno_promp
 # The . is here so that if I type cd <dir> it goes to curdir first
 export CDPATH=".:$HOME/work/inprogress"
 
-export PS1='\[\033[0;31m\]$(hostname -s) @ \w$(__git_ps1 " (%s)") ====================================== [ \! \# ]\[\033[0m\]
+function __colorcode_exit {
+    if test $? -eq 0; then
+        printf "; "
+    else
+        printf "\033[01;31m; \033[0m"
+    fi
+}
+
+function bueno_minimalist_prompt {
+    export PS1='$(__colorcode_exit)'
+}
+function bueno_verbose_prompt {
+    export PS1='\[\033[0;31m\]$(hostname -s) @ \w$(__git_ps1 " (%s)") ====================================== [ \! \# ]\[\033[0m\]
 \j | \A $ '
+}
+
+bueno_minimalist_prompt
