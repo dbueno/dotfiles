@@ -44,6 +44,9 @@ alias now="date '+%Y-%m-%dT%H%M'"
 alias nows="date '+%Y-%m-%dT%H%M%S'"
 alias today="date '+%Y-%m-%d'"
 
+# alias average="Rscript -e 'd<-scan(\"stdin\", quiet=TRUE)' -e 'cat(min(d), max(d), median(d), mean(d), sep=\"\n\")'"
+alias average="Rscript -e 'd<-scan(\"stdin\", quiet=TRUE)' -e 'summary(d)'"
+
 # example: makeiso -V vol_id -o output_filename
 #alias makeiso="mkisofs -l -pad -U -J -r -allow-leading-dots -iso-level 4"
 
