@@ -114,7 +114,18 @@ if executable('fzf')
               \ 'sink*': { lines -> s:delete_buffers(lines) },
               \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
               \ }))
-endif
+
+  " https://github.com/junegunn/fzf.vim/issues/556
+  " remap `gf` to pick up files anywhere inside current directory rather than
+  " just the literal `<cfile>` when you want the same for some *other*
+  " directory, you put your cursor on the filename and type `:GF other-dir`
+  function! GF(...)
+      call fzf#run({'dir': a:1, 'source': 'find . -type f', 'options':['-1', '--query', expand('<cfile>')], 'sink': 'e'})
+  endfunction
+  command! -nargs=* GF :call GF(<f-args>)
+  " nnoremap gf :GF .<CR>
+  nnoremap gf :call fzf#vim#files('.', {'options':'-1 --query '.expand('<cword>')})<CR>
+  endif
 " }}}
 
 
@@ -193,6 +204,9 @@ nnoremap <C-l> <C-w><C-l>
 "nnoremap <C-p> :cprevious<CR>
 "nnoremap <Leader>n :tnext<CR>
 "nnoremap <Leader>p :tprev<CR>
+
+" Put timestamp in filename?
+cmap <F3> <C-R>=strftime("%Y%m%d%H%M")<CR>
 
 nnoremap <silent> _ :aboveleft sp<CR>:exe "normal \<Plug>VinegarUp"<CR>
 nnoremap <silent> <Bar> :aboveleft vsp<CR>:exe "normal \<Plug>VinegarUp"<CR>
