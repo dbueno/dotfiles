@@ -172,32 +172,3 @@ export LASTDIR="$HOME"
 #
 # The . is here so that if I type cd <dir> it goes to curdir first
 export CDPATH=".:$HOME/work/inprogress"
-
-# Colors the prompt red if the last command doesn't exit cleanly.
-function __colorcode_exit {
-    if test $? -eq 0; then
-        printf ";"
-    else
-        printf "\[\033[01;31m\];\[\033[0m\]"
-    fi
-}
-
-function __colorcode_setps1 {
-    history -a
-    # I tried, at first, setting PS1 in .bashrc alone. But I ran into a problem
-    # where the \[ and \] in __colorcode_exit were being literally printed in
-    # the prompt, instead of interpreted as directives for bash. Setting PS1 in
-    # PROMPT_COMMAND fixes this problem.
-    PS1="$(__colorcode_exit) "
-}
-
-function bueno_minimalist_prompt {
-    PROMPT_COMMAND='__colorcode_setps1'
-}
-
-function bueno_verbose_prompt {
-    export PS1='\[\033[0;31m\]$(hostname -s) @ \w$(__git_ps1 " (%s)") ====================================== [ \! \# ]\[\033[0m\]
-\j | \A $ '
-}
-
-bueno_minimalist_prompt
