@@ -148,7 +148,7 @@ shopt -s shift_verbose
 
 # The & removes dups; [ ]* ignores commands prefixed with spaces.  Other
 # commands, like job control and ls'ing are also ignored.
-export HISTIGNORE="&:[ ]*:exit:[bf]g:no:lo:lt:pd:c:a:s"
+export HISTIGNORE="&:[ ]*:exit:pwd:[bf]g:no:lo:lt:pd:c:a:aa:s:ss"
 export HISTSIZE=1000000
 export LASTDIR="$HOME"
  
