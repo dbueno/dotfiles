@@ -87,9 +87,8 @@ endif
 "
 " FZF config {{{
 if executable('fzf')
-  let thepath=fnamemodify(exepath('fzf'), ':h:h')
-  execute "set rtp+=" . thepath
-  set rtp+=/usr/local/opt/fzf
+  let fzfpath=fnamemodify(resolve(exepath('fzf')), ':h:h')
+  execute "set rtp+=" . fzfpath . "/share/vim-plugins/fzf"
   set rtp+=bundle/junegunn-fzf.vim
 
   if executable('ag')
