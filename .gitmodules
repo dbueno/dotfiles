@@ -115,3 +115,6 @@
 [submodule "bundle/wlangstroth-vim-racket"]
 	path = bundle/wlangstroth-vim-racket
 	url = https://github.com/wlangstroth/vim-racket.git
+[submodule "bundle/LnL7-vim-nix"]
+	path = bundle/LnL7-vim-nix
+	url = https://github.com/LnL7/vim-nix.git
