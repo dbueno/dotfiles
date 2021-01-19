@@ -7,7 +7,7 @@
 set bell-style visible
 
 # Immediately show all TAB-completions -- don't require two TABs.
-# set show-all-if-ambiguous on
+set show-all-if-ambiguous on
 
 # Show status of completed filenames, like ls -F does.
 set visible-stats on
