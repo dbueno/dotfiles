@@ -85,25 +85,6 @@ if test -d ~/.nix-profile; then
     . ~/.nix-profile/share/bash-completion/bash_completion
 fi
 
-# bash completion from homebrew
-# if command -v brew >/dev/null 2>&1; then
-#     if [ -f $(brew --prefix)/etc/bash_completion ]; then
-#         . $(brew --prefix)/etc/bash_completion
-#     fi
-#     if [ -f $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]; then
-#         source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
-#     fi
-    
-#     if test -d $(brew --prefix)/opt/fzf/shell; then
-#         source $(brew --prefix)/opt/fzf/shell/completion.bash
-#         source $(brew --prefix)/opt/fzf/shell/key-bindings.bash
-#     fi
-# else
-#     __git_ps1() {
-#         :;
-#     }
-# fi
-
 # Kitty bash completion.
 if [[ "$TERM" = *"kitty"* ]]; then
     source <(kitty + complete setup bash)
