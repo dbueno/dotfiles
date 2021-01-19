@@ -76,37 +76,33 @@ function add_to_path {
   [ -d "$path" ] && [[ $PATH != *"$path"* ]] && PATH="$path:$PATH"
 }
 
+# default
+__git_ps1() {
+    :;
+}
 # bash completion from nix
-if command -v nix-env >/dev/null 2>&1; then
-    git_path="$(nix-env --query --installed --no-name --out-path git)"
-    if [ -n "$git_path" ]; then
-        source "$git_path/share/bash-completion/completions/git"
-        source "$git_path/share/bash-completion/completions/git-prompt.sh"
-    fi
-    if command -v fzf-share >/dev/null; then
-        source "$(fzf-share)/key-bindings.bash"
-        source "$(fzf-share)/completion.bash"
-    fi
+if test -d ~/.nix-profile; then
+    . ~/.nix-profile/share/bash-completion/bash_completion
 fi
 
 # bash completion from homebrew
-if command -v brew >/dev/null 2>&1; then
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-        . $(brew --prefix)/etc/bash_completion
-    fi
-    if [ -f $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]; then
-        source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
-    fi
+# if command -v brew >/dev/null 2>&1; then
+#     if [ -f $(brew --prefix)/etc/bash_completion ]; then
+#         . $(brew --prefix)/etc/bash_completion
+#     fi
+#     if [ -f $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]; then
+#         source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+#     fi
     
-    if test -d $(brew --prefix)/opt/fzf/shell; then
-        source $(brew --prefix)/opt/fzf/shell/completion.bash
-        source $(brew --prefix)/opt/fzf/shell/key-bindings.bash
-    fi
-else
-    __git_ps1() {
-        :;
-    }
-fi
+#     if test -d $(brew --prefix)/opt/fzf/shell; then
+#         source $(brew --prefix)/opt/fzf/shell/completion.bash
+#         source $(brew --prefix)/opt/fzf/shell/key-bindings.bash
+#     fi
+# else
+#     __git_ps1() {
+#         :;
+#     }
+# fi
 
 # Kitty bash completion.
 if [[ "$TERM" = *"kitty"* ]]; then
