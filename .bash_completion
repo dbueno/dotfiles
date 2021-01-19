@@ -3,23 +3,28 @@
 shopt -s direxpand
 
 completions=(
-    "git"
-    "git-prompt.sh"
+    "git" "git-prompt.sh"
     "cmake"
     "chown"
     "chmod"
     "rg"
     "sqlite3"
-    "ssh"
-    "ssh-add"
+    "ssh" "ssh-add"
     "ninja"
     "make"
     "man"
     "java"
+    # Nix stuff
+    "nix"                   "nix-copy-closure"      "nix-instantiate"       "nix-store"
+    "nix-build"             "nix-env"               "nix-prefetch-url"
+    "nix-channel"           "nix-hash"              "nix-push"
+    "nix-collect-garbage"   "nix-install-package"   "nix-shell"
 )
+
 for s in completions; do
     __load_completion "$s"
 done
+
 # Maintained apart from normal completions...
 if command -v fzf-share >/dev/null; then
     source "$(fzf-share)/key-bindings.bash"
