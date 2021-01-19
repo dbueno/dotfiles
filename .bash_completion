@@ -26,6 +26,7 @@ for s in completions; do
 done
 
 # Maintained apart from normal completions...
+# This depends on PATH being set properly.
 if command -v fzf-share >/dev/null; then
     source "$(fzf-share)/key-bindings.bash"
     source "$(fzf-share)/completion.bash"
