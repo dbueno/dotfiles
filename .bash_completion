@@ -1,3 +1,7 @@
+# With this, cd $HOME/<TAB> expands the variable instead of escaping it.
+# Ideally, bash would just leave it alone.
+shopt -s direxpand
+
 completions=(
     "git"
     "git-prompt.sh"
