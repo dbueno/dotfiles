@@ -65,7 +65,9 @@ alias ga='git add -p'
 alias gci='git commit'
 # print git directory, toplevel of current repo
 alias pgd='git rev-parse --show-toplevel'
-alias lag="ag --pager='less -R'"
+function lrg {
+    rg --line-buffered --pretty "$@" | less -R
+}
 
 # uses universal-ctags or something
 alias make_cpptags='ctags --c++-kinds=+pf --c-kinds=+p --fields=+imaSft --extra=+q -Rnu'
