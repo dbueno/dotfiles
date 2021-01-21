@@ -165,6 +165,9 @@ function s:camel_word(dir)
 endfunction
 
 " Global mappings {{{
+" disable keymapping for Ex mode
+nnoremap Q <nop>
+
 nnoremap <Leader>T :TagbarToggle<CR>
 
 " functions from junegunn-fzf.vim
