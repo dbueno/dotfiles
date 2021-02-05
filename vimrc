@@ -115,7 +115,7 @@ if executable('fzf')
       execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
   endfunction
 
-  command! BD call fzf#run(fzf#wrap({
+  command! BuffersDelete call fzf#run(fzf#wrap({
               \ 'source': s:list_buffers(),
               \ 'sink*': { lines -> s:delete_buffers(lines) },
               \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
