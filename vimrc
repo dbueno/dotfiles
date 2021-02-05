@@ -100,6 +100,7 @@ if executable('fzf')
   if executable('ag')
       let $FZF_DEFAULT_COMMAND = 'ag -g "" --ignore "*.o" --ignore "*.so" --ignore "*.tmp" --ignore "*.class" --ignore-dir ".git"'
   endif
+  let $FZF_DEFAULT_COMMAND = 'rg --iglob "!/_opam" --iglob "!/_build" --iglob "!*.o" --files'
   let g:fzf_preview_window = ''
  
   " :BD function to use fzf to delete buffers
