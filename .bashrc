@@ -145,21 +145,6 @@ shopt -s shift_verbose
 export HISTIGNORE="&:[ ]*:exit:pwd:[bf]g:no:lo:lt:pd:c:a:aa:s:ss"
 export HISTSIZE=1000000
 export LASTDIR="$HOME"
- 
-# [[ -z "$PROMPT_COMMAND_ORIG" ]] && export PROMPT_COMMAND_ORIG="$PROMPT_COMMAND"
-# function bueno_prompt_command {
-#   history -a
- 
-#   # Record new directory on change.
-#   newdir=`pwd`
-#   if [ ! "$LASTDIR" = "$newdir" ]; then
-#     # List contents:
-#     ls -tF | head -7
-#   fi
- 
-#   export LASTDIR=$newdir
-# }
-# export PROMPT_COMMAND="${PROMPT_COMMAND_ORIG:+$PROMPT_COMMAND_ORIG; }bueno_prompt_command"
 
 # When I type 'cd somewhere', if somewhere is relative, try out looking into all
 # the paths in $CDPATH for completions.  This can speed up common directory
