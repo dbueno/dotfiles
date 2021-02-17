@@ -96,11 +96,9 @@ fi
 export EDITOR="vim"
 export ED="$EDITOR"
 
-PAGER=less
 if test -x /Applications/MacVim.app/Contents/Resources/vim/runtime/macros/less.sh; then
-    PAGER='/Applications/MacVim.app/Contents/Resources/vim/runtime/macros/less.sh'
+    VIM_PAGER='/Applications/MacVim.app/Contents/Resources/vim/runtime/macros/less.sh'
 fi
-export PAGER
 
 function add_cwd_to_path {
   path="$(pwd)"
