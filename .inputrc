@@ -14,3 +14,5 @@ set visible-stats on
 
 set completion-ignore-case on
 
+# comment in to make C-j prefix commands with time
+# "\C-j": "\C-atime \C-m"
