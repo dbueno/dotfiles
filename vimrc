@@ -345,6 +345,9 @@ autocmd BufRead
      \ ~/work/inprogress/z3/*/{src,tools,tests}/*.{cc,cpp,h,inc}
      \ setlocal makeprg=make\ -C\ .vimbuild\ -j24\ all sw=4 cino=:0,l1,g0,t0,(0,w1,W4
 
+" Trailing whitespace
+autocmd FileType c,cpp,ocaml autocmd BufWritePre <buffer> %s/\s\+$//e
+
 if !has('gui') && stridx($TERM, "kitty")
   " turn off background color erase for kitty
   let &t_ut=''
