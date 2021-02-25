@@ -118,3 +118,6 @@
 [submodule "bundle/LnL7-vim-nix"]
 	path = bundle/LnL7-vim-nix
 	url = https://github.com/LnL7/vim-nix.git
+[submodule "bundle/ocaml-vim-ocaml"]
+	path = bundle/ocaml-vim-ocaml
+	url = https://github.com/ocaml/vim-ocaml.git
