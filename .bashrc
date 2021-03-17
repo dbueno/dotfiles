@@ -72,6 +72,9 @@ function lrg {
 # uses universal-ctags or something
 alias make_cpptags='ctags --c++-kinds=+pf --c-kinds=+p --fields=+imaSft --extra=+q -Rnu'
 
+alias pause="osascript -e 'tell application \"Spotify\" to pause'"
+alias play="osascript -e 'tell application \"Spotify\" to play'"
+
 ## Adds to path but only if it's not there
 function add_to_path {
   path="$1"
