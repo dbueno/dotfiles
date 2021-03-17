@@ -6,6 +6,7 @@ set modeline modelines=5
 
 " enable mouse
 set mouse=a
+set bs=2
 
 " Prevent jedi from loading (may be installed system-wide)
 let g:loaded_jedi = 1
