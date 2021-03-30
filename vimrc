@@ -189,6 +189,13 @@ nnoremap <Leader>d :bd<CR>
 " Insert current date into buffer. Used for note taking.
 nnoremap <Leader>it "=strftime("%c")<CR>p
 
+" Opens a zettel markdown file based on the current time.
+function! ZettelNew()
+    let b:zettel_fname = strftime("%Y%m%d%H%M") . '.md'
+    execute "split" b:zettel_fname
+endfunction
+command! ZettelNew :call ZettelNew()
+
 " select some text, then type // and it will search for the literal text
 vnoremap // y/\V<C-R>"<CR>
 
