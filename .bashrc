@@ -47,6 +47,27 @@ alias today="date '+%Y-%m-%d'"
 # alias average="Rscript -e 'd<-scan(\"stdin\", quiet=TRUE)' -e 'cat(min(d), max(d), median(d), mean(d), sep=\"\n\")'"
 alias average="Rscript -e 'd<-scan(\"stdin\", quiet=TRUE)' -e 'summary(d)'"
 
+# Displays an image (png) in the terminal
+alias icat="kitty +kitten icat --align=left"
+# Displays an SVG in the terminal
+alias isvg="nix-shell -p librsvg --run rsvg-convert | icat"
+# Displays a DOT graph in the terminal
+# see ratio="compress" or unflatten | idot
+alias idot="dot -Gbgcolor=transparent -Nfontcolor=#2E3440 -Nstyle=filled -Nfillcolor=#D8DEE9 -Ecolor=#5E81AC -Efontcolor=#8FBCBB -Nfontname=Helvetica -Efontname=Helvetica -Nfontsize=11 -Efontsize=10 -Gratio=compress -Tsvg | isvg"
+# Displays examples of font with features turned on/off
+# e.g. hb-feat /Users/dbueno/Library/Fonts/libertinussans-regular.otf +onum,-smcp 'Fish 123456'
+function hb-feat() {
+    # from @thingskatedid
+    # otfinfo --features <file.otf> to see features
+    # Default color is black so the sed changes it to whitish (nord palette).
+    nix-shell -p harfbuzz --run "hb-view --features=\"$2\" -O svg \"$1\" \"$3\"" | \
+        grep -v '<rect' | \
+        sed 's/<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">/<g style="fill:#ECEFF4">/' | \
+        nix-shell -p librsvg --run rsvg-convert | \
+        convert -trim -resize '25%' - - | \
+        kitty +kitten icat --align=left
+}
+
 # example: makeiso -V vol_id -o output_filename
 #alias makeiso="mkisofs -l -pad -U -J -r -allow-leading-dots -iso-level 4"
 
