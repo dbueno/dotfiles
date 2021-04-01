@@ -76,12 +76,13 @@ function hb-feat() {
 
 # git aliases
 function s {
+    # Prints status without untracked files
     git status -uno || return
+    # Prints only a count summary of untracked files
     git status --short | awk '/[?][?]/ { c += 1 } END { if (c > 0) { printf("\n... and %s untracked files\n", c) } }' || return
 }
 function ss { git status; }
 alias gp='git pull'
-alias gx='git pull && git push'
 alias ga='git add -p'
 alias gci='git commit'
 # print git directory, toplevel of current repo
