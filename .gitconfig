@@ -12,9 +12,10 @@
 	diff = auto
 [core]
 	fsyncobjectfiles = true
+	excludesfile = /Users/dbueno/.gitignore_global
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [push]
 	default = simple
 [guitool "stash/keeping index"]
@@ -34,4 +35,15 @@
 [difftool]
 	prompt = false
 [difftool "vimdiff"]
-	path = /Applications/MacVim.app/Contents/bin/vimdiff
+	path = vimdiff
+
+[include]
+        path = ~/.gitconfig_personal
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[init]
+	defaultBranch = main
+
