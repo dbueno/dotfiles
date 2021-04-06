@@ -13,7 +13,16 @@ my_uname="$(uname)"
 ## OS-dependent aliases, Darwin first
 if [ $my_uname = "Darwin" ]
 then
-    function a { CLICOLOR_FORCE=1 ls -lFGtrh "$@" | tail -n 20 && echo "[showing at most 20 files]"; }
+    function a {
+        num_files=$(ls -1 "$@" 2>/dev/null | wc -l | sed 's/[[:space:]]//g')
+        cutoff=20
+        if [ $num_files -gt $cutoff ]; then
+            CLICOLOR_FORCE=1 ls -lFGtrh "$@" | tail -n $cutoff
+            printf "[showing 20 of %d files]\n" $num_files
+        else
+            CLICOLOR_FORCE=1 ls -lFGtrh "$@"
+        fi
+    }
     alias aa='ls -lFGtrh'
     alias mk="make -j$(sysctl -a | grep ^hw[.]ncpu | cut -d' ' -f2)"
     alias lldb='PATH=/usr/bin:$PATH lldb'
@@ -22,7 +31,16 @@ then
 ## Linux-dependent aliases
 elif [ $my_uname = "Linux" -o $my_uname = "CYGWIN_NT-5.1"  -o $my_uname = "MINGW32_NT-5.1" ]
 then
-    function a { ls -lF --color -trh "$@" | tail -n 20 && echo "[showing at most 20 files]"; }
+    function a {
+        num_files=$(ls -1 "$@" 2>/dev/null | wc -l | sed 's/[[:space:]]//g')
+        cutoff=20
+        if [ $num_files -gt $cutoff ]; then
+            ls -lF --color -trh "$@" | tail -n $cutoff
+            printf "[showing 20 of %d files]\n" $num_files
+        else
+            ls -lF --color -trh "$@"
+        fi
+    }
     alias aa='ls -lF --color -trh'
     alias mk='make'
 #else
