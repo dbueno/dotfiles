@@ -92,5 +92,6 @@ if [ -e /Users/dbueno/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/dbueno/
 test -r /Users/dbueno/.opam/opam-init/init.sh && . /Users/dbueno/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 
 [[ -e "$HOME/.bashrc" ]] && source "$HOME/.bashrc"
+[[ -e "$HOME/.bash_profile_local" ]] && source "$HOME/.bash_profile_local"
 
 history -a
