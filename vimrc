@@ -8,6 +8,8 @@ set modeline modelines=5
 set mouse=a
 set bs=2
 
+set number
+
 " Prevent jedi from loading (may be installed system-wide)
 let g:loaded_jedi = 1
 
@@ -42,6 +44,16 @@ function! SearchMultiLine(bang, ...)
   endif
 endfunction
 command! -bang -nargs=* -complete=tag S call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
+
+" Opens a zettel rst file based on the current time.
+function! ZettelNew()
+    let l:zettel_fname = strftime("%Y%m%d%H%M") . '.rst'
+    execute "split" l:zettel_fname
+    " Put anchor into the new split buffer
+    let l:anchor = ".. _" . l:zettel_fname . ":"
+    return append(0, l:anchor)
+endfunction
+command! ZettelNew :call ZettelNew()
 
 " my simple statusline, airline was a steaming pile
 set statusline=%q%t\ @\ %P\ [ft=%Y%M%R%W%H]\ char:0x%B\ pos\ %l:%c\ %=%<%{expand('%:~:.:h')}
@@ -116,6 +128,8 @@ if executable('fzf')
       execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
   endfunction
 
+  " Call :BuffersDelete to pop up window of buffers to delete, unfortunately
+  " one by one
   command! BuffersDelete call fzf#run(fzf#wrap({
               \ 'source': s:list_buffers(),
               \ 'sink*': { lines -> s:delete_buffers(lines) },
@@ -132,6 +146,16 @@ if executable('fzf')
   command! -nargs=* GF :call GF(<f-args>)
   " nnoremap gf :GF .<CR>
   nnoremap gf :call fzf#vim#files('.', {'options':'-1 --query '.expand('<cword>')})<CR>
+
+  " Opens the link source from a file in the current directory (in FZF window
+  " if there are multiple).
+  function! FzfRgRstLinkSource()
+      let word_under_cursor = expand("<cword>")
+      " remove underscore at end of word and put one at beginning
+      let search_term = '_' . substitute(word_under_cursor, '[_]$', '', '')
+      let command = 'rg -m 1 --column --line-number --no-heading --color=always --smart-case '.shellescape(search_term)
+      call fzf#vim#grep(command, 1, fzf#vim#with_preview({'options': ['-1']}), 0)
+  endfunction
   endif
 " }}}
 
@@ -188,13 +212,6 @@ nnoremap <Leader>d :bd<CR>
 
 " Insert current date into buffer. Used for note taking.
 nnoremap <Leader>it "=strftime("%c")<CR>p
-
-" Opens a zettel markdown file based on the current time.
-function! ZettelNew()
-    let b:zettel_fname = strftime("%Y%m%d%H%M") . '.md'
-    execute "split" b:zettel_fname
-endfunction
-command! ZettelNew :call ZettelNew()
 
 " select some text, then type // and it will search for the literal text
 vnoremap // y/\V<C-R>"<CR>
