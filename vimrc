@@ -117,7 +117,7 @@ if executable('fzf')
   endif
   let $FZF_DEFAULT_COMMAND = 'rg --iglob "!/_opam" --iglob "!/_build" --iglob "!*.o" --files'
   let g:fzf_preview_window = ''
- 
+
   " :BD function to use fzf to delete buffers
   function! s:list_buffers()
       redir => list
@@ -130,8 +130,8 @@ if executable('fzf')
       execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
   endfunction
 
-  " Call :BuffersDelete to pop up window of buffers to delete, unfortunately
-  " one by one
+  " Call :BuffersDelete to pop up window of buffers to delete, use tab to
+  " select a buffer for deletion, enter to delete all
   command! BuffersDelete call fzf#run(fzf#wrap({
               \ 'source': s:list_buffers(),
               \ 'sink*': { lines -> s:delete_buffers(lines) },
@@ -146,8 +146,6 @@ if executable('fzf')
       call fzf#run({'dir': a:1, 'source': 'find . -type f', 'options':['-1', '--query', expand('<cfile>')], 'sink': 'e'})
   endfunction
   command! -nargs=* GF :call GF(<f-args>)
-  " nnoremap gf :GF .<CR>
-  nnoremap gf :call fzf#vim#files('.', {'options':'-1 --query '.expand('<cword>')})<CR>
 
   " Opens the link source from a file in the current directory (in FZF window
   " if there are multiple).
@@ -158,7 +156,16 @@ if executable('fzf')
       let command = 'rg -m 1 --column --line-number --no-heading --color=always --smart-case '.shellescape(search_term)
       call fzf#vim#grep(command, 1, fzf#vim#with_preview({'options': ['-1']}), 0)
   endfunction
-  endif
+
+  " goto fzf file at cursor
+  nnoremap gf :call fzf#vim#files('.', {'options':'-1 --query '.expand('<cword>')})<CR>
+  " search from cwd
+  nnoremap \ :Rg<CR>
+  " fzf over buffer list
+  nnoremap <Leader>b :Buffers<CR>
+  " fzf over lines in current buffer, :Lines for all buffers
+  nnoremap <Leader>s :BLines<CR>
+endif
 " }}}
 
 
@@ -309,7 +316,7 @@ set ignorecase smartcase
 set wildmenu wildmode=list,list:longest
 
 " always include status line
-set laststatus=2 
+set laststatus=2
 
 " keep buffers around when they are not visible
 set hidden
