@@ -121,3 +121,7 @@
 [submodule "bundle/ocaml-vim-ocaml"]
 	path = bundle/ocaml-vim-ocaml
 	url = https://github.com/ocaml/vim-ocaml.git
+[submodule "bundle/sk1418-QFGrep"]
+	path = bundle/sk1418-QFGrep
+	url = https://github.com/dbueno/QFGrep.git
+	branch = filter-contents
