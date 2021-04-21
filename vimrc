@@ -53,7 +53,9 @@ function! ZettelNew()
     let l:anchor = ".. _" . l:zettel_fname . ":"
     return append(0, l:anchor)
 endfunction
+
 command! ZettelNew :call ZettelNew()
+command! ZettelFollowLink :call FzfRgRstLinkSource()
 
 " my simple statusline, airline was a steaming pile
 set statusline=%q%t\ @\ %P\ [ft=%Y%M%R%W%H]\ char:0x%B\ pos\ %l:%c\ %=%<%{expand('%:~:.:h')}
