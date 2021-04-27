@@ -47,10 +47,11 @@ command! -bang -nargs=* -complete=tag S call SearchMultiLine(<bang>0, <f-args>)|
 
 " Opens a zettel rst file based on the current time.
 function! ZettelNew()
-    let l:zettel_fname = strftime("%Y%m%d%H%M") . '.rst'
+    let l:zettel_name = strftime("%Y%m%d%H%M")
+    let l:zettel_fname = l:zettel_name . '.rst'
     execute "split" l:zettel_fname
     " Put anchor into the new split buffer
-    let l:anchor = ".. _" . l:zettel_fname . ":"
+    let l:anchor = ".. _" . l:zettel_name . ":"
     return append(0, l:anchor)
 endfunction
 
@@ -165,6 +166,7 @@ if executable('fzf')
   nnoremap <Leader>b :Buffers<CR>
   " fzf over lines in current buffer, :Lines for all buffers
   nnoremap <Leader>s :BLines<CR>
+  nnoremap <Leader>S :Lines<CR>
 endif
 " }}}
 
