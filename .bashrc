@@ -108,6 +108,17 @@ alias pgd='git rev-parse --show-toplevel'
 function lrg {
     rg --line-buffered --pretty "$@" | less -R
 }
+function frg {
+    rg "$@" | fzf
+}
+
+function ssh {
+    if [[ "${TERM}" = *kitty ]]; then
+        env TERM=xterm-256color ssh "$@"
+    else
+        ssh "@"
+    fi
+}
 
 # uses universal-ctags or something
 alias make_cpptags='ctags --c++-kinds=+pf --c-kinds=+p --fields=+imaSft --extra=+q -Rnu'
@@ -140,6 +151,8 @@ fi
 
 export EDITOR="vim"
 export ED="$EDITOR"
+export FZF_DEFAULT_COMMAND='rg --iglob "!/_opam" --iglob "!/_build" --iglob "!*.o" --files --hidden'
+
 
 if test -x /Applications/MacVim.app/Contents/Resources/vim/runtime/macros/less.sh; then
     VIM_PAGER='/Applications/MacVim.app/Contents/Resources/vim/runtime/macros/less.sh'
