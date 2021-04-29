@@ -49,8 +49,10 @@ command! -bang -nargs=* -complete=tag S call SearchMultiLine(<bang>0, <f-args>)|
 function! ZettelNew()
     let l:zettel_name = strftime("%Y%m%d%H%M")
     let l:zettel_fname = l:zettel_name . '.rst'
+    " inserts link to new zettel
+    call append(line('.'), l:zettel_name . '_')
     execute "split" l:zettel_fname
-    " Put anchor into the new split buffer
+    " puts anchor into the new split buffer
     let l:anchor = ".. _" . l:zettel_name . ":"
     return append(0, l:anchor)
 endfunction
