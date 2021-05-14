@@ -153,9 +153,8 @@ export EDITOR="vim"
 export ED="$EDITOR"
 export FZF_DEFAULT_COMMAND='rg --iglob "!/_opam" --iglob "!/_build" --iglob "!*.o" --files --hidden'
 
-
-if test -x /Applications/MacVim.app/Contents/Resources/vim/runtime/macros/less.sh; then
-    VIM_PAGER='/Applications/MacVim.app/Contents/Resources/vim/runtime/macros/less.sh'
+if command -v direnv >/dev/null; then
+    eval "$(direnv hook bash)"
 fi
 
 function add_cwd_to_path {
