@@ -139,6 +139,8 @@ __git_ps1() {
 # bash completion from nix
 if test -d ~/.nix-profile; then
     . ~/.nix-profile/share/bash-completion/bash_completion
+elif test -d /usr/share/bash-completion; then
+    . /usr/share/bash-completion/bash_completion
 fi
 
 # Kitty bash completion.
