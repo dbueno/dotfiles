@@ -195,8 +195,6 @@ if executable('fzf')
   nnoremap gf :call fzf#vim#files('.', {'options':'-1 --query '.expand('<cword>')})<CR>
   " search from cwd
   nnoremap \ :Rg<CR>
-  " fzf over buffer list
-  nnoremap <Leader>b :Buffers<CR>
   " fzf over lines in current buffer, :Lines for all buffers
   nnoremap <Leader>s :BLines<CR>
   nnoremap <Leader>S :Lines<CR>
