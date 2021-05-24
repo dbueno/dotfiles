@@ -47,3 +47,6 @@
 [init]
 	defaultBranch = main
 
+[http]
+	cookiefile = /Users/dbueno/.gitcookies
+	savecookies = true
