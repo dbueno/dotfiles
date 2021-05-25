@@ -83,7 +83,8 @@ function! ZettelFindLinksTo()
     " patterns: anchor_, `anchor`_, `link text <anchor>`_
     let search_term = l:prev_zettel_name . '([>][`])?' . '[_]'
     let command = 'rg -m 1 --column --line-number --no-heading --color=always --smart-case '.shellescape(search_term)
-    call fzf#vim#grep(command, 1, fzf#vim#with_preview({'options': ['-1']}), 0)
+    " don't use '-1' option because i want a list regardless
+    call fzf#vim#grep(command, 1, fzf#vim#with_preview({'options': []}), 0)
 endfunction
 
 command! ZettelNew :call ZettelNew()
