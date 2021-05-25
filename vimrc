@@ -181,13 +181,14 @@ if executable('fzf')
   endfunction
   command! -nargs=* GF :call GF(<f-args>)
 
-  " Opens the link source from a file in the current directory (in FZF window
-  " if there are multiple).
+  " Opens in a split the link source from a file in the current directory (in
+  " FZF window if there are multiple).
   function! FzfRgRstLinkSource()
       let word_under_cursor = expand("<cword>")
       " remove underscore at end of word and put one at beginning
       let search_term = '_' . substitute(word_under_cursor, '[_]$', '', '')
       let command = 'rg -m 1 --column --line-number --no-heading --color=always --smart-case '.shellescape(search_term)
+      execute "split"
       call fzf#vim#grep(command, 1, fzf#vim#with_preview({'options': ['-1']}), 0)
   endfunction
 
