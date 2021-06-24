@@ -56,6 +56,16 @@ ${INSTALL} ${INSTALL_FLAGS} \
     "${PWD}/hammerspoon.lua" \
     "$HOME/.hammerspoon/init.lua"
 
+mkdir -p $HOME/.config/kitty
+${INSTALL} ${INSTALL_FLAGS} \
+    "${PWD}/kitty.conf" \
+    "${PWD}/kitty-nord-theme.conf" \
+    "$HOME/.config/kitty"
+
+mkdir -p $HOME/.config/nixpkgs
+${INSTALL} ${INSTALL_FLAGS} \
+    "${PWD}/config.nix" \
+    "$HOME/.config/nixpkgs"
 
 # copy this because otherwise our merges can screw up if there is a conflict in
 # .gitconfig. Also, I feel better putting user info only in local file
