@@ -10,6 +10,9 @@ set bs=2
 
 set number
 
+" one space after period
+set nojoinspaces
+
 " Prevent jedi from loading (may be installed system-wide)
 let g:loaded_jedi = 1
 
