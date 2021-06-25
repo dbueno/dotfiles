@@ -37,18 +37,19 @@ mkdir -p "$HOME/sw/bin"
 ${INSTALL} ${INSTALL_FLAGS} "${PWD}/wtf" "$HOME/sw/bin/wtf"
 ${INSTALL} ${INSTALL_FLAGS} "${PWD}/wtf" "$HOME/sw/bin/erg"
 
-${INSTALL} ${INSTALL_FLAGS} \
-    "${PWD}/.bashrc"        \
-    "${PWD}/.bash_profile"  \
-    "${PWD}/.inputrc"       \
-    "${PWD}/.Xresources"    \
-    "${PWD}/.tmux.conf"     \
-    "${PWD}/.tmux-macosx"   \
-    "${PWD}/.tmux-linux"    \
-    "${PWD}/.mailcap"       \
-    "${PWD}/.ghci"          \
-    "${PWD}/.gdbinit"       \
-    "${PWD}/lispwords"      \
+${INSTALL} ${INSTALL_FLAGS}   \
+    "${PWD}/.bashrc"          \
+    "${PWD}/.bash_profile"    \
+    "${PWD}/.bash_completion" \
+    "${PWD}/.inputrc"         \
+    "${PWD}/.Xresources"      \
+    "${PWD}/.tmux.conf"       \
+    "${PWD}/.tmux-macosx"     \
+    "${PWD}/.tmux-linux"      \
+    "${PWD}/.mailcap"         \
+    "${PWD}/.ghci"            \
+    "${PWD}/.gdbinit"         \
+    "${PWD}/lispwords"        \
     "$HOME"
 
 mkdir -p $HOME/.hammerspoon
