@@ -137,9 +137,9 @@ __git_ps1() {
     :;
 }
 # bash completion from nix
-if test -d ~/.nix-profile; then
+if test -f ~/.nix-profile/share/bash-completion/bash_completion; then
     . ~/.nix-profile/share/bash-completion/bash_completion
-elif test -d /usr/share/bash-completion; then
+elif test -f /usr/share/bash-completion/bash_completion; then
     . /usr/share/bash-completion/bash_completion
 fi
 
