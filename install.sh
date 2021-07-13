@@ -37,18 +37,19 @@ mkdir -p "$HOME/sw/bin"
 ${INSTALL} ${INSTALL_FLAGS} "${PWD}/wtf" "$HOME/sw/bin/wtf"
 ${INSTALL} ${INSTALL_FLAGS} "${PWD}/wtf" "$HOME/sw/bin/erg"
 
-${INSTALL} ${INSTALL_FLAGS} \
-    "${PWD}/.bashrc"        \
-    "${PWD}/.bash_profile"  \
-    "${PWD}/.inputrc"       \
-    "${PWD}/.Xresources"    \
-    "${PWD}/.tmux.conf"     \
-    "${PWD}/.tmux-macosx"   \
-    "${PWD}/.tmux-linux"    \
-    "${PWD}/.mailcap"       \
-    "${PWD}/.ghci"          \
-    "${PWD}/.gdbinit"       \
-    "${PWD}/lispwords"      \
+${INSTALL} ${INSTALL_FLAGS}   \
+    "${PWD}/.bashrc"          \
+    "${PWD}/.bash_profile"    \
+    "${PWD}/.bash_completion" \
+    "${PWD}/.inputrc"         \
+    "${PWD}/.Xresources"      \
+    "${PWD}/.tmux.conf"       \
+    "${PWD}/.tmux-macosx"     \
+    "${PWD}/.tmux-linux"      \
+    "${PWD}/.mailcap"         \
+    "${PWD}/.ghci"            \
+    "${PWD}/.gdbinit"         \
+    "${PWD}/lispwords"        \
     "$HOME"
 
 mkdir -p $HOME/.hammerspoon
@@ -56,6 +57,16 @@ ${INSTALL} ${INSTALL_FLAGS} \
     "${PWD}/hammerspoon.lua" \
     "$HOME/.hammerspoon/init.lua"
 
+mkdir -p $HOME/.config/kitty
+${INSTALL} ${INSTALL_FLAGS} \
+    "${PWD}/kitty.conf" \
+    "${PWD}/kitty-nord-theme.conf" \
+    "$HOME/.config/kitty"
+
+mkdir -p $HOME/.config/nixpkgs
+${INSTALL} ${INSTALL_FLAGS} \
+    "${PWD}/config.nix" \
+    "$HOME/.config/nixpkgs"
 
 # copy this because otherwise our merges can screw up if there is a conflict in
 # .gitconfig. Also, I feel better putting user info only in local file

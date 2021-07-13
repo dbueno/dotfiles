@@ -84,10 +84,6 @@ function bueno_verbose_prompt {
 
 bueno_minimalist_prompt
 
-# Perlbrew
-# source ~/perl5/perlbrew/etc/bashrc
-if [ -e /Users/dbueno/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/dbueno/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
 # opam configuration
 test -r /Users/dbueno/.opam/opam-init/init.sh && . /Users/dbueno/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 
