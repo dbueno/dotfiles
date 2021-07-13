@@ -50,36 +50,6 @@ export CLASSPATH
 # is essentially useless for some scripts. And bash_completion, when you run
 # tab completion, errors.
 
-# Colors the prompt red if the exit code argument isn't 0.
-function __colorcode_exit {
-    if test "$1" -eq 0; then
-        # printf ";"
-        printf "\[\033[01;32m\]:;\[\033[0m\]"
-    else
-        printf "\[\033[01;31m\]:;\[\033[0m\]"
-    fi
-}
-
-function __colorcode_setps1 {
-    local last_exit="$?"
-    # I tried, at first, setting PS1 in .bashrc alone. But I ran into a problem
-    # where the \[ and \] in __colorcode_exit were being literally printed in
-    # the prompt, instead of interpreted as directives for bash. Setting PS1 in
-    # PROMPT_COMMAND fixes this problem.
-    PS1="$(__colorcode_exit $last_exit) "
-}
-
-function bueno_minimalist_prompt {
-    PROMPT_COMMAND+=('__colorcode_setps1')
-}
-
-function bueno_verbose_prompt {
-    export PS1='\[\033[0;31m\]$(hostname -s) @ \w$(__git_ps1 " (%s)") ====================================== [ \! \# ]\[\033[0m\]
-\j | \A $ '
-}
-
-bueno_minimalist_prompt
-
 # opam configuration
 test -r /Users/dbueno/.opam/opam-init/init.sh && . /Users/dbueno/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 
