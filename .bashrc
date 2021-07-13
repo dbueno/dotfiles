@@ -168,6 +168,8 @@ function add_cwd_to_path {
 }
 
 # Prompt settings #############################################################
+# PS1 settings are for interactive shells (login or no), so they should be
+# set in .bashrc.
 # Colors the prompt red if the exit code argument isn't 0.
 function __colorcode_exit {
     if test "$1" -eq 0; then
