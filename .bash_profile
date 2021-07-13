@@ -50,10 +50,6 @@ export CLASSPATH
 # is essentially useless for some scripts. And bash_completion, when you run
 # tab completion, errors.
 
-# OPAM configuration
-# OPAM_FILE=/Users/dbueno/.opam/opam-init/init.sh
-# [[ -e "$OPAM_FILE" ]] && . "$OPAM_FILE" >&/dev/null
-
 # Colors the prompt red if the exit code argument isn't 0.
 function __colorcode_exit {
     if test "$1" -eq 0; then
