@@ -116,7 +116,7 @@ function ssh {
     if [[ "${TERM}" = *kitty ]]; then
         env TERM=xterm-256color ssh "$@"
     else
-        ssh "@"
+        env ssh "$@"
     fi
 }
 
