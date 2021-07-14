@@ -45,6 +45,7 @@ in
     pkgs.graphviz
     pkgs.wget
     pkgs.htop
+    pkgs.parallel
     nixFlakes
   ];
 }
