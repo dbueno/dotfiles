@@ -229,6 +229,9 @@ let g:pathogen_disabled = ['bling-vim-airline', 'vim-airline-vim-airline-themes'
 runtime bundle/tpope-vim-pathogen/autoload/pathogen.vim
 exec pathogen#infect('bundle/{}')
 "exec pathogen#infect('bundle/{}',s:opamshare.'/{}/vim')
+for opam2flake_dep in split($OPAM2FLAKE_OPAM_PACKAGES)
+    call pathogen#infect(opam2flake_dep . "/share/{}/vim")
+endfor
 filetype plugin indent on
 syntax on
 " }}}
