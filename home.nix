@@ -1,9 +1,8 @@
 { config, pkgs, ... }:
-
 let
   nixFlakes =
     (pkgs.writeShellScriptBin "nixFlakes" ''
-        exec ${pkgs.nixUnstable}/bin/nix --experimental-features "nix-command flakes" "$@"
+      exec ${pkgs.nixUnstable}/bin/nix --experimental-features "nix-command flakes" "$@"
     '');
 in
 
@@ -32,20 +31,21 @@ in
     nix-direnv.enableFlakes = true;
   };
 
-  home.packages = [
-    pkgs.bashInteractive_5
-    pkgs.git
-    pkgs.git-lfs
-    pkgs.kitty
-    pkgs.myVim
-    pkgs.fzf
-    pkgs.ripgrep
-    pkgs.bash-completion
-    pkgs.nix-bash-completions
-    pkgs.graphviz
-    pkgs.wget
-    pkgs.htop
-    pkgs.parallel
+  # My packages
+  home.packages = with pkgs; [
+    bashInteractive_5
+    git
+    git-lfs
+    kitty
+    myVim
+    fzf
+    ripgrep
+    bash-completion
+    nix-bash-completions
+    graphviz
+    wget
+    parallel
+    htop
     nixFlakes
   ];
 }
