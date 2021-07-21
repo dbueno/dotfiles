@@ -375,6 +375,7 @@ set makeprg=make\ -j8
 let g:no_ocaml_maps = 1
 
 set tags=./tags,./TAGS,tags,TAGS,./.tags,./.TAGS,.tags,.TAGS,../../tags,../tags
+let &tags.=expand(",$TAGS")
 
 " set this to add to places where vim searches #includes
 "set path+=
