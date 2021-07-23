@@ -75,6 +75,9 @@ in
       ci = "commit";
       push-it-real-good = "push -f";
       dt = "difftool";
+      b = "branch";
+      l = "log --graph --pretty='%Cred%h%Creset - %C(bold blue)<%an>%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)' --abbrev-commit --date=relative";
+      f = "fetch";
     };
 
     extraConfig = {
