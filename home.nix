@@ -35,11 +35,14 @@ let
             fi
         done
       '';
+      google = pkgs.writeShellScriptBin "google" ''
+        ${pkgs.lynx}/bin/lynx http://www.google.com/search?q="$@"
+      '';
     in [
       onChange
+      google
       (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./ifnewer.sh))
       (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./wtf.sh))
-      (pkgs.writeShellScriptBin "google" (builtins.readFile ./google.sh))
     ];
 in
 
