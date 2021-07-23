@@ -10,8 +10,8 @@ let
   myScripts = [
     (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./ifnewer.sh))
     (pkgs.writeShellScriptBin "onchange" (builtins.readFile ./onchange.sh))
-    (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./wtf))
-    (pkgs.writeShellScriptBin "google" (builtins.readFile ./google))
+    (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./wtf.sh))
+    (pkgs.writeShellScriptBin "google" (builtins.readFile ./google.sh))
   ];
 in
 
