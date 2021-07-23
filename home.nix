@@ -355,6 +355,7 @@ in
       vim-pathogen
       vim-commentary
       vim-repeat
+      tabular
     ];
     extraConfig = builtins.readFile ./vimrc_extra;
   };
