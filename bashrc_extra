@@ -1,0 +1,82 @@
+#alias packet_dump="sudo ${pkgs.tcpdump}/bin/tcpdump -a -i en1 -vvv -XX -s 1500"
+#alias rmws="awk '{sub(/[ \t]+$/, \"\");print}'"
+# alias average="Rscript -e 'd<-scan(\"stdin\", quiet=TRUE)' -e 'cat(min(d), max(d), median(d), mean(d), sep=\"\n\")'"
+
+## Adds to path but only if it's not there
+function add_to_path {
+  path="$1"
+  [ -d "$path" ] && [[ $PATH != *"$path"* ]] && PATH="$path:$PATH"
+}
+
+# bash completion support from nix
+. ~/.nix-profile/share/bash-completion/bash_completion
+
+# Kitty bash completion.
+if [[ "$TERM" = *"kitty"* ]]; then
+    if command -v kitty >/dev/null; then
+        source <(kitty + complete setup bash)
+    fi
+fi
+
+function add_cwd_to_path {
+  path="$(pwd)"
+  # Checks f or the presence of the string in PATH before adding.
+  # Ideally, we would check whether $path is a PATH entry, not whether the string is there
+  [ -d "$path" ] && [[ $PATH != *"$path"* ]] && PATH="$path:$PATH" || \
+    printf "path '%s' not added\n" "$path"
+}
+
+# Prompt settings #############################################################
+# default
+__my_ps1() {
+    :;
+}
+# PS1 settings are for interactive shells (login or no), so they should be
+# set in .bashrc.
+# Colors the prompt red if the exit code argument isn't 0.
+function __colorcode_exit {
+    if test "$1" -eq 0; then
+        # printf ";"
+        printf "\[\033[01;32m\]:;\[\033[0m\]"
+    else
+        printf "\[\033[01;31m\]:;\[\033[0m\]"
+    fi
+}
+
+function __colorcode_setps1 {
+    local last_exit="$?"
+    # I tried, at first, setting PS1 in .bashrc alone. But I ran into a problem
+    # where the \[ and \] in __colorcode_exit were being literally printed in
+    # the prompt, instead of interpreted as directives for bash. Setting PS1 in
+    # PROMPT_COMMAND fixes this problem.
+    PS1="$(__colorcode_exit $last_exit) "
+}
+
+function bueno_minimalist_prompt {
+    PROMPT_COMMAND+=('__colorcode_setps1')
+}
+
+function bueno_verbose_prompt {
+    PS1='\[\033[0;31m\]$(hostname -s) @ \w$(__my_ps1 " (%s)") ====================================== [ \! \# ]\[\033[0m\]
+\j | \A $ '
+}
+
+bueno_minimalist_prompt
+
+# Print out the number of jobs running with an argument format-string suitable
+# for printf.  I use this to get an "(n jobs)" string in my prompt.
+num_jobs() {
+    local num_jobs
+    num_jobs="$(jobs | wc -l)"
+    if [ $num_jobs -ne 0 ]; then
+        printf "%s > " $num_jobs
+    fi
+}
+
+
+
+# Shell settings
+###############################################################################
+# Ctrl-D shouldn't exit the shell.  Annoying.
+set -o ignoreeof
+
