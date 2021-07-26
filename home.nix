@@ -98,14 +98,15 @@ in
     lfs = { enable = true; };
 
     aliases = {
+      a = "add -p";
       d = "diff";
       di = "diff --cached";
+      dt = "difftool";
       pa = "push --all";
       co = "checkout";
-      st = "status";
       ci = "commit";
+      ss = "status";
       push-it-real-good = "push -f";
-      dt = "difftool";
       b = "branch";
       l = "log --graph --pretty='%Cred%h%Creset - %C(bold blue)<%an>%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)' --abbrev-commit --date=relative";
       f = "fetch";
@@ -274,7 +275,8 @@ in
         in
         "${cmd}/bin/hb-feat";
 
-        # git aliases
+      g = "git";
+      # git aliases
       s = let
           # Prints status without untracked files
           cmd = pkgs.writeShellScriptBin "my-git-status" ''
@@ -285,9 +287,7 @@ in
         in
         "${cmd}/bin/my-git-status";
       ss = "git status";
-      gp = "git pull";
       ga = "git add -p";
-      gci = "git commit";
       # print git directory, toplevel of current repo
       pgd = "git rev-parse --show-toplevel";
 
