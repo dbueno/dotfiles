@@ -275,8 +275,8 @@ in
         in
         "${cmd}/bin/hb-feat";
 
-      g = "git";
       # git aliases
+      g = "git";
       s = let
           # Prints status without untracked files
           cmd = pkgs.writeShellScriptBin "my-git-status" ''
@@ -370,6 +370,7 @@ in
       shiftwidth = 4;
     };
     plugins = with pkgs.vimPlugins; [
+      vim-sensible
       fzf-vim
       nord-vim
       vim-ocaml
