@@ -1,6 +1,6 @@
 {
   packageOverrides = super: let self = super.pkgs; in {
-    vim_configurable = super.vim_configurable.override { darwinSupport = true; guiSupport = true; };
+    vim_configurable = super.vim_configurable.override { darwinSupport = super.stdenv.isDarwin; guiSupport = true; };
     rEnv = super.rWrapper.override {
       packages = with self.rPackages; [
         devtools
