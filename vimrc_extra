@@ -134,6 +134,10 @@ endfunction
 " disable keymapping for Ex mode
 nnoremap Q <nop>
 
+" one of my habits is to I<type><CR><type> or whatever and this can introduce
+" whitespace errors. let's try this.
+nnoremap I<CR> O<Esc>jI
+
 nnoremap <Leader>T :TagbarToggle<CR>
 
 " functions from junegunn-fzf.vim
