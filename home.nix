@@ -43,6 +43,8 @@ let
       google
       (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./ifnewer.sh))
       (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./wtf.sh))
+      (pkgs.writeShellScriptBin "sync-my-repos" (builtins.readFile ./sync-my-repos.sh))
+      (pkgs.writeShellScriptBin "frequency" (builtins.readFile ./automation/frequency.sh))
     ];
 in
 
@@ -324,10 +326,7 @@ in
     ".gdbinit".source = ./.gdbinit;
     ".ghci".source = ./.ghci;
     ".lynxrc".source = ./.lynxrc;
-<<<<<<< HEAD
-=======
-    ".config/automate-everything/repos".source = ./repos.conf;
->>>>>>> 223c2a6 (move things out of repo)
+    ".config/automate-everything/repos".source = ./automate-everything-repos.conf;
   };
 
   programs.tmux = {
