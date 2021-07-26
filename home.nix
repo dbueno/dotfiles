@@ -94,7 +94,7 @@ in
     enable = true;
     userName = myName;
     userEmail = "dbueno" + "@" + "gmail.com";
-    ignores = [ "*.swp" "*.swo" ];
+    ignores = [ "*.swp" "*.swo" "/.direnv/" "/.envrc" ];
     lfs = { enable = true; };
 
     aliases = {
