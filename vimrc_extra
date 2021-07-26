@@ -277,6 +277,9 @@ if has('gui')
 endif
 " }}}
 
+" load all the vim packages now, including pathogen
+packloadall
+
 for opam2flake_dep in split($OPAM2FLAKE_OPAM_PACKAGES)
     call pathogen#infect(opam2flake_dep . "/share/{}/vim")
 endfor
