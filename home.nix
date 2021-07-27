@@ -7,6 +7,19 @@ let
         exec ${pkgs.nixUnstable}/bin/nix --experimental-features "nix-command flakes" "$@"
     '');
 
+  completeAlias = pkgs.stdenv.mkDerivation {
+    name = "complete-alias";
+    src = pkgs.fetchFromGitHub {
+      owner = "cykerway";
+      repo = "complete-alias";
+      rev = "b16b183f6bf0029b9714b0e0178b6bd28eda52f3";
+      sha256 = "1a3szf0bvj0mk2kcq1052q9xzjqiwgmavfg348dspfz543nigvk2";
+    };
+    installPhase = ''
+      mkdir -p $out
+      cp complete_alias $out/
+    '';
+  };
 
   myScripts =
     let
@@ -327,7 +340,14 @@ in
   };
 
   home.file = {
-    ".bash_completion".source = ./.bash_completion;
+    ".bash_completion".text = builtins.readFile ./.bash_completion
+    + ''
+      . ${completeAlias}/complete_alias
+      complete -F _complete_alias g
+      complete -F _complete_alias rm
+      complete -F _complete_alias aa
+      complete -F _complete_alias ss
+    '';
     ".tmux-linux".source = ./.tmux-linux;
     ".hammerspoon/init.lua".source = ./hammerspoon.lua;
     ".gdbinit".source = ./.gdbinit;
