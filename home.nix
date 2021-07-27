@@ -253,7 +253,7 @@ in
               fi
             '';
           in
-          "{cmd}/bin/my-ls";
+          "${cmd}/bin/my-ls";
         aa="ls -lF --color -trh";
       })
     // {
