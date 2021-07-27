@@ -331,7 +331,15 @@ in
 
     # Settings for interactive shells
     # .bashrc is executed for interactive non-login shells
-    bashrcExtra = builtins.readFile ./bashrc_extra;
+    bashrcExtra = builtins.readFile ./bashrc_extra
+      + builtins.readFile ./.bash_completion
+      + ''
+        . ${completeAlias}/complete_alias
+        complete -F _complete_alias g
+        complete -F _complete_alias rm
+        complete -F _complete_alias aa
+        complete -F _complete_alias ss
+      '';
 
     profileExtra = ''
       [[ -e "$HOME/.bash_profile_local" ]] && source "$HOME/.bash_profile_local"
@@ -340,14 +348,6 @@ in
   };
 
   home.file = {
-    ".bash_completion".text = builtins.readFile ./.bash_completion
-    + ''
-      . ${completeAlias}/complete_alias
-      complete -F _complete_alias g
-      complete -F _complete_alias rm
-      complete -F _complete_alias aa
-      complete -F _complete_alias ss
-    '';
     ".tmux-linux".source = ./.tmux-linux;
     ".hammerspoon/init.lua".source = ./hammerspoon.lua;
     ".gdbinit".source = ./.gdbinit;
