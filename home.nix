@@ -94,7 +94,14 @@ in
     enable = true;
     userName = myName;
     userEmail = "dbueno" + "@" + "gmail.com";
-    ignores = [ "*.swp" "*.swo" "/.direnv/" "/.envrc" ];
+    ignores = [
+      # vim
+      "*.swp" "*.swo"
+      # direnv
+      "/.direnv/" "/.envrc"
+      # files I make to store things
+      "*.out"
+    ];
     lfs = { enable = true; };
 
     aliases = {
