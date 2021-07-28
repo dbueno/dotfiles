@@ -270,6 +270,7 @@ in
         aa="ls -lF --color -trh";
       })
     // {
+      hmsw = "home-manager switch";
       # there's always a story behind aliases like these
       rm = "rm -i";
       c = "clear";
