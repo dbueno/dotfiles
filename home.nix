@@ -1,7 +1,11 @@
 { config, pkgs, ... }:
 
 let
-  myName = "Denis Bueno";
+  # userconfig.json contains
+  # { "username": "...",
+  #   "homeDirectory": "/path/to/home", ... }
+  # Needs username, homeDirectory, name, email
+  myInfo = pkgs.lib.importJSON ./userconfig.json;
   nixFlakes =
     (pkgs.writeShellScriptBin "nixFlakes" ''
         exec ${pkgs.nixUnstable}/bin/nix --experimental-features "nix-command flakes" "$@"
@@ -67,8 +71,8 @@ in
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "denbuen";
-  home.homeDirectory = "/Users/denbuen";
+  home.username = myInfo.username;
+  home.homeDirectory = myInfo.homeDirectory;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -105,8 +109,8 @@ in
   programs.git = {
     package = pkgs.gitAndTools.gitFull;
     enable = true;
-    userName = myName;
-    userEmail = "dbueno" + "@" + "gmail.com";
+    userName = myInfo.name;
+    userEmail = myInfo.email;
     ignores = [
       # vim
       "*.swp" "*.swo"
