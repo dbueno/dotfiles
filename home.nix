@@ -306,7 +306,7 @@ in
             '';
         in
         "${cmd}/bin/my-git-status";
-      ss = "git status";
+      st = "git status";
       ga = "git add -p";
       # print git directory, toplevel of current repo
       pgd = "git rev-parse --show-toplevel";
