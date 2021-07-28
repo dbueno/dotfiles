@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 
 let
-  # userconfig.json contains
-  # { "username": "...",
-  #   "homeDirectory": "/path/to/home", ... }
-  # Needs username, homeDirectory, name, email
   myInfo = pkgs.lib.importJSON ./userconfig.json;
   nixFlakes =
     (pkgs.writeShellScriptBin "nixFlakes" ''
