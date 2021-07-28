@@ -10,3 +10,4 @@ setlocal fdc=4
 " Insert comment separator
 nnoremap <buffer> <Leader>is o//^----------------------------------------------------------------------------^<CR>
 nnoremap <silent> <buffer> <F9> :TagbarToggle<CR>
+nnoremap <silent> <buffer> <F5> :make<CR>
