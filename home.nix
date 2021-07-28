@@ -222,7 +222,7 @@ in
     historySize = 1000000;
     # The & removes dups; [ ]* ignores commands prefixed with spaces.  Other
     # commands, like job control and ls'ing are also ignored.
-    historyIgnore = [ "\"&\"" "\"[ ]*\"" "exit" "pwd" "\"[bf]g\"" "no" "lo" "lt" "pd" "c" "a" "aa" "s" "ss" ];
+    historyIgnore = [ "\"&\"" "\"[ ]*\"" "exit" "pwd" "\"[bf]g\"" "no" "lo" "lt" "pd" "c" "a" "aa" "s" "ss" "\"g a\"" "\"g s\"" "\"g ss\"" ];
 
     shellOptions = [
       # Correct transpositions and other minor details from 'cd DIR' command.
