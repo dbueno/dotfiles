@@ -21,6 +21,30 @@ let
     '';
   };
 
+  myVimPlugins =
+    let
+      vim-souffle = pkgs.vimUtils.buildVimPlugin {
+        name = "souffle.vim";
+        src = pkgs.fetchFromGitHub {
+          owner = "souffle-lang";
+          repo = "souffle.vim";
+          rev = "1402e6905e085bf04faf5fca36a6fddba01119d6";
+          sha256 = "1y779fi2vfaca5c2285l7yn2cmj2sv8kzj9w00v9hsh1894kj2i4";
+        };
+      };
+      vim-euforia = pkgs.vimUtils.buildVimPlugin {
+        name = "euforia.vim";
+        src = builtins.fetchGit {
+          url = "git@github.com:greedy/vim-euforia.git";
+          ref = "master";
+          rev = "96ee4c9c7296dbb75f7e927e93e4576dec1c898e";
+        };
+      };
+    in [
+      vim-souffle
+      vim-euforia
+    ];
+
   myScripts =
     let
       onChange = pkgs.writeShellScriptBin "onchange" ''
@@ -370,17 +394,6 @@ in
     // (import ./ssh_extra_blocks.nix);
   };
 
-  #Example of vim plugin from git
-    # context-vim = pkgs.vimUtils.buildVimPlugin {
-    #   name = "context-vim";
-    #   src = pkgs.fetchFromGitHub {
-    #   owner = "wellle";
-    #   repo = "context.vim";
-    #   rev = "e38496f1eb5bb52b1022e5c1f694e9be61c3714c";
-    #   sha256 = "1iy614py9qz4rwk9p4pr1ci0m1lvxil0xiv3ymqzhqrw5l55n346";
-    #   };
-    #   };
-
   programs.vim = {
     enable = true;
     settings = {
@@ -412,7 +425,8 @@ in
       vim-commentary
       vim-repeat
       tabular
-    ];
+    ]
+    ++ myVimPlugins;
     extraConfig = builtins.readFile ./vimrc_extra;
   };
 
