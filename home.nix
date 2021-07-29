@@ -28,7 +28,7 @@ let
         src = builtins.fetchGit {
           url = "git@github.com:dbueno/dotvim.git";
           ref = "nix-home-manager";
-          rev = "71774eb542d19644332ddba11bbc48adca6ad23d";
+          rev = "88847153e72e34e6039166327bbbaa9c1a51de4e";
         };
       };
       vim-souffle = pkgs.vimUtils.buildVimPlugin {
