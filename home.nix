@@ -25,11 +25,7 @@ let
     let
       my-vim-tweaks = pkgs.vimUtils.buildVimPlugin {
         name = "denisbueno-vim-tweaks.vim";
-        src = builtins.fetchGit {
-          url = "git@github.com:dbueno/dotvim.git";
-          ref = "nix-home-manager";
-          rev = "88847153e72e34e6039166327bbbaa9c1a51de4e";
-        };
+        src = ./dotvim;
       };
       vim-souffle = pkgs.vimUtils.buildVimPlugin {
         name = "souffle.vim";
