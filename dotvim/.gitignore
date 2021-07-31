@@ -1,0 +1,5 @@
+/vim-addons
+/.netrwhist
+/tags
+*.swp
+vimrc_local
