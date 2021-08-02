@@ -382,7 +382,7 @@ in
     ".gdbinit".source = ./.gdbinit;
     ".ghci".source = ./.ghci;
     ".lynxrc".source = ./.lynxrc;
-    ".config/automate-everything/repos".source = ./automate-everything-repos.conf;
+    ".config/automate-everything/repos".source = ./repos.conf;
   };
 
   programs.tmux = {
