@@ -6,10 +6,15 @@
 
 mode="none"
 num_jobs="8"
-while getopts ":j:h" opt; do
+verbose=""
+while getopts ":vj:h" opt; do
     case $opt in
         j)
             num_jobs="$OPTARG"
+            ;;
+
+        v)
+            verbose="1"
             ;;
 
         h)
@@ -75,12 +80,12 @@ export -f check_git_uptodate
 
 # Set by the git functions above if there's a failure
 ret=0
-export ret mode
+export ret mode verbose
 
 examine_repo() {
     repo="$1"
-    if ! test -d $repo; then
-        return
+    if test -n "$verbose"; then
+        echo ">>> $repo"
     fi
     cd $repo
     if [ $mode = "pull" ]; then
