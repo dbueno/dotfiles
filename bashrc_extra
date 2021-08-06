@@ -80,3 +80,4 @@ num_jobs() {
 # Ctrl-D shouldn't exit the shell.  Annoying.
 set -o ignoreeof
 
+[[ -e ~/.bashrc_local ]] && . ~/.bashrc_local
