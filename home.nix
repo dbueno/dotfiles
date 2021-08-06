@@ -177,6 +177,7 @@ in
       init = { defaultBranch = "main"; };
       core = {
         fsyncobjectfiles = "true";
+        sshCommand = "${pkgs.openssh}/bin/ssh -F ~/.ssh/config";
       };
       push = { default = "simple"; };
       pull = { rebase = "true"; };
