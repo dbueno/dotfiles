@@ -36,6 +36,15 @@ let
           sha256 = "1y779fi2vfaca5c2285l7yn2cmj2sv8kzj9w00v9hsh1894kj2i4";
         };
       };
+      vim-qfgrep = pkgs.vimUtils.buildVimPlugin {
+        name = "QFGrep.vim";
+        src = pkgs.fetchFromGitHub {
+          owner = "dbueno";
+          repo = "QFGrep";
+          rev = "filter-contents";
+          sha256 = "0jz8q0k839rw3dgb1c9ff8zlsir9qypicicxm8vw23ynmjk2zziy";
+        };
+      };
       vim-euforia = pkgs.vimUtils.buildVimPlugin {
         name = "euforia.vim";
         src = builtins.fetchGit {
@@ -48,6 +57,7 @@ let
       my-vim-tweaks
       vim-souffle
       vim-euforia
+      vim-qfgrep
     ];
 
   myScripts =
