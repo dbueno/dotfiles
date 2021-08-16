@@ -96,7 +96,7 @@ function! ZettelFindLinksTo()
     let l:line = getline(1)
     let l:prev_zettel_name = substitute(substitute(l:line, '^.. _', '', ''), ':$', '', '')
     " patterns: anchor_, `anchor`_, `link text <anchor>`_
-    let search_term = l:prev_zettel_name . '([>][`])?' . '[_]'
+    let search_term = l:prev_zettel_name . '([>`])?' . '[_]'
     let command = 'rg -m 1 --column --line-number --no-heading --color=always --smart-case '.shellescape(search_term)
     " don't use '-1' option because i want a list regardless
     call fzf#vim#grep(command, 1, fzf#vim#with_preview({'options': []}), 0)
