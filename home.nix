@@ -202,10 +202,6 @@ in
     enable = true;
   };
 
-  programs.nix-index = {
-    enable = true;
-  };
-
   programs.kitty = {
     enable = true;
     settings = {
