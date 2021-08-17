@@ -253,8 +253,8 @@ nnoremap gf :call fzf#vim#files('.', {'options':'-1 --query '.expand('<cword>')}
 " search from cwd
 nnoremap \ :Rg<CR>
 " fzf over lines in current buffer, :Lines for all buffers
-nnoremap <Leader>s :BLines<CR>
-nnoremap <Leader>S :Lines<CR>
+nnoremap <Leader>b :BLines<CR>
+nnoremap <Leader>B :Lines<CR>
 " }}}
 
 " package vimtex {{{
