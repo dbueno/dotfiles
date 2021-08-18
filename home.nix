@@ -472,6 +472,9 @@ in
     nixFlakes
     ncdu
     zip unzip p7zip
+    bat-extras.batdiff
+    colordiff
+    wdiff
   ]
   ++ myScripts;
 }
