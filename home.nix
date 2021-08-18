@@ -72,6 +72,8 @@ let
 
   # extra config for plugins
   myVimPluginsConfig = ''
+    " riv wants to use large patterns
+    set maxmempattern=2000
   '';
 
   myScripts =
