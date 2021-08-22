@@ -84,7 +84,7 @@ let
       vim-souffle
       vim-euforia
       vim-qfgrep
-      vim-riv
+      #vim-riv
     ];
 
   # extra config for plugins
