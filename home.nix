@@ -21,6 +21,23 @@ let
     '';
   };
 
+  memoryUsage = pkgs.stdenv.mkDerivation {
+    name = "memusg";
+    src = builtins.fetchGit {
+      url = "https://gist.github.com/d62145788f1dabe3097d8ba3aed4fb69.git";
+      ref = "master";
+      rev = "7f7cd17541a1d29bc978eccc80c270ab6b83ed9c";
+    };
+    patchPhase = ''
+      substituteInPlace memusg \
+        --replace 'memusg' 'memory'
+    '';
+    installPhase = ''
+      mkdir -p $out/bin
+      cp memusg $out/bin/memory
+    '';
+  };
+
   myVimPlugins =
     let
       my-vim-tweaks = pkgs.vimUtils.buildVimPlugin {
@@ -109,6 +126,7 @@ let
     in [
       onChange
       google
+      memoryUsage
       (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./ifnewer.sh))
       (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./wtf.sh))
       (pkgs.writeShellScriptBin "sync-my-repos" (builtins.readFile ./sync-my-repos.sh))
