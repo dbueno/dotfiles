@@ -38,6 +38,8 @@ let
     '';
   };
 
+  rusage = (import (builtins.fetchTarball "https://github.com/dbueno/rusage/archive/main.tar.gz")).defaultPackage.${pkgs.system};
+
   myVimPlugins =
     let
       my-vim-tweaks = pkgs.vimUtils.buildVimPlugin {
@@ -126,7 +128,6 @@ let
     in [
       onChange
       google
-      memoryUsage
       (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./ifnewer.sh))
       (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./wtf.sh))
       (pkgs.writeShellScriptBin "sync-my-repos" (builtins.readFile ./sync-my-repos.sh))
@@ -493,6 +494,8 @@ in
     bat-extras.batdiff
     colordiff
     wdiff
+    memoryUsage
+    rusage
   ]
   ++ myScripts;
 }
