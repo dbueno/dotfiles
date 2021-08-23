@@ -472,7 +472,7 @@ in
     wget
     parallel
     nixFlakes
-    ncdu
+    duc # ncdu replacement
     zip unzip p7zip
     bat-extras.batdiff
     colordiff
