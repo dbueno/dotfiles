@@ -401,7 +401,7 @@ in
       make_cpptags = "${pkgs.universal-ctags}/bin/ctags --c++-kinds=+pf --c-kinds=+p --fields=+imaSft --extra=+q -Rnu";
 
       record-my-session = ''
-        test -z "$SCRIPT" && script -a $HOME/.terminal-logs/script.$$.$(date '+%Y-%m-%dT%H%M')
+        script -a $HOME/.terminal-logs/script.$$.out
       '';
     };
 
@@ -422,12 +422,12 @@ in
       history -a
       # Keeps a record of terminal input and output inside .terminal-logs by default.
       test -d $HOME/.terminal-logs || mkdir $HOME/.terminal-logs
-      if test -z "$SCRIPT"; then
-        if test -t 0; then
-          script -a $HOME/.terminal-logs/script.$$.out
-          #exit
-        fi
-      fi
+      #if test -z "$SCRIPT"; then
+      #  if test -t 0; then
+      #    #script -a $HOME/.terminal-logs/script.$$.out
+      #    #exit
+      #  fi
+      #fi
     '';
   };
 
