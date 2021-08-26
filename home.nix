@@ -417,7 +417,11 @@ in
         complete -F _complete_alias ss
 
         test -d $HOME/.terminal-logs || mkdir $HOME/.terminal-logs
-        test -z "$SCRIPT" && script -a $HOME/.terminal-logs/script.$$.out
+        if test -z "$SCRIPT"; then
+          if test -t 0; then
+            script -a $HOME/.terminal-logs/script.$$.out
+          fi
+        fi
       '';
 
     profileExtra = ''
