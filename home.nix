@@ -399,6 +399,10 @@ in
         "${cmd}/bin/my-ssh";
 
       make_cpptags = "${pkgs.universal-ctags}/bin/ctags --c++-kinds=+pf --c-kinds=+p --fields=+imaSft --extra=+q -Rnu";
+
+      record-my-session = ''
+        test -z "$SCRIPT" && script -a $HOME/.terminal-logs/script.$$.$(date '+%Y-%m-%dT%H%M')
+      '';
     };
 
     # Settings for interactive shells
@@ -411,6 +415,9 @@ in
         complete -F _complete_alias rm
         complete -F _complete_alias aa
         complete -F _complete_alias ss
+
+        test -d $HOME/.terminal-logs || mkdir $HOME/.terminal-logs
+        test -z "$SCRIPT" && script -a $HOME/.terminal-logs/script.$$.out
       '';
 
     profileExtra = ''
