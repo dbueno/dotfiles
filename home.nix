@@ -415,18 +415,18 @@ in
         complete -F _complete_alias rm
         complete -F _complete_alias aa
         complete -F _complete_alias ss
-
-        test -d $HOME/.terminal-logs || mkdir $HOME/.terminal-logs
-        if test -z "$SCRIPT"; then
-          if test -t 0; then
-            script -a $HOME/.terminal-logs/script.$$.out
-          fi
-        fi
       '';
 
     profileExtra = ''
       [[ -e "$HOME/.bash_profile_local" ]] && source "$HOME/.bash_profile_local"
       history -a
+      test -d $HOME/.terminal-logs || mkdir $HOME/.terminal-logs
+      if test -z "$SCRIPT"; then
+        if test -t 0; then
+          script -a $HOME/.terminal-logs/script.$$.out
+          exit
+        fi
+      fi
     '';
   };
 
