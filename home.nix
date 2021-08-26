@@ -420,11 +420,12 @@ in
     profileExtra = ''
       [[ -e "$HOME/.bash_profile_local" ]] && source "$HOME/.bash_profile_local"
       history -a
+      # Keeps a record of terminal input and output inside .terminal-logs by default.
       test -d $HOME/.terminal-logs || mkdir $HOME/.terminal-logs
       if test -z "$SCRIPT"; then
         if test -t 0; then
           script -a $HOME/.terminal-logs/script.$$.out
-          exit
+          #exit
         fi
       fi
     '';
