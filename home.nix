@@ -41,6 +41,17 @@ let
     };
   };
 
+  record-my-session = pkgs.writeShellScriptBin "record-my-session" ''
+    # Keeps a record of terminal input and output inside .terminal-logs by default.
+    test -d $HOME/.terminal-logs || mkdir $HOME/.terminal-logs
+    if test -z "$SCRIPT"; then
+      if test -t 0; then
+        script -a $HOME/.terminal-logs/script.$$.out
+        exit
+      fi
+    fi
+  '';
+
   myVimPlugins =
     let
       my-vim-tweaks = pkgs.vimUtils.buildVimPlugin {
@@ -399,15 +410,6 @@ in
         "${cmd}/bin/my-ssh";
 
       make_cpptags = "${pkgs.universal-ctags}/bin/ctags --c++-kinds=+pf --c-kinds=+p --fields=+imaSft --extra=+q -Rnu";
-
-      record-my-session = ''
-        if test -z "$SCRIPT"; then
-          if test -t 0; then
-            script -a $HOME/.terminal-logs/script.$$.out
-            exit
-          fi
-        fi
-      '';
     };
 
     # Settings for interactive shells
@@ -425,8 +427,6 @@ in
     profileExtra = ''
       [[ -e "$HOME/.bash_profile_local" ]] && source "$HOME/.bash_profile_local"
       history -a
-      # Keeps a record of terminal input and output inside .terminal-logs by default.
-      test -d $HOME/.terminal-logs || mkdir $HOME/.terminal-logs
     '';
   };
 
@@ -508,6 +508,7 @@ in
     wdiff
     rusage
     GraphEasy
+    record-my-session
   ]
   ++ myScripts;
 }
