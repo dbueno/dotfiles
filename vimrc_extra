@@ -102,6 +102,23 @@ function! ZettelFindLinksTo()
     call fzf#vim#grep(command, 1, fzf#vim#with_preview({'options': []}), 0)
 endfunction
 
+function! ZettelFiles()
+    let command = 'rg -m 1 --column --line-number --no-heading --color=always --smart-case '.shellescape('#ztl')
+    call fzf#vim#grep(command, 1, fzf#vim#with_preview({'options': ['-1']}), 0)
+endfunction
+
+" Opens in a split the link source from a file in the current directory (in
+" FZF window if there are multiple).
+function! FzfRgRstLinkSource()
+    let word_under_cursor = expand("<cword>")
+    " remove underscore at end of word and put one at beginning
+    let search_term = '_' . substitute(word_under_cursor, '[_]$', '', '')
+    let command = 'rg -m 1 --column --line-number --no-heading --color=always --smart-case '.shellescape(search_term)
+    execute "split"
+    call fzf#vim#grep(command, 1, fzf#vim#with_preview({'options': ['-1']}), 0)
+endfunction
+
+command! ZettelFiles :call ZettelFiles()
 command! ZettelNew :call ZettelNew()
 command! ZettelNewLinkBack :call ZettelNewLinkBack()
 command! ZettelFindBackLinks :call ZettelFindLinksTo()
@@ -237,19 +254,9 @@ function! GF(...)
 endfunction
 command! -nargs=* GF :call GF(<f-args>)
 
-" Opens in a split the link source from a file in the current directory (in
-" FZF window if there are multiple).
-function! FzfRgRstLinkSource()
-    let word_under_cursor = expand("<cword>")
-    " remove underscore at end of word and put one at beginning
-    let search_term = '_' . substitute(word_under_cursor, '[_]$', '', '')
-    let command = 'rg -m 1 --column --line-number --no-heading --color=always --smart-case '.shellescape(search_term)
-    execute "split"
-    call fzf#vim#grep(command, 1, fzf#vim#with_preview({'options': ['-1']}), 0)
-endfunction
-
 " goto fzf file at cursor
 nnoremap gf :call fzf#vim#files('.', {'options':'-1 --query '.expand('<cword>')})<CR>
+
 " search from cwd
 nnoremap \ :Rg<CR>
 " fzf over lines in current buffer, :Lines for all buffers
