@@ -53,6 +53,8 @@ function __colorcode_setps1 {
 }
 
 function bueno_minimalist_prompt {
+    # Default for earlier bash shells where PROMPT_COMMAND doesn't work.
+    PS1="; "
     PROMPT_COMMAND+=('__colorcode_setps1')
 }
 
