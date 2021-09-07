@@ -137,9 +137,23 @@ let
       google = pkgs.writeShellScriptBin "google" ''
         ${pkgs.lynx}/bin/lynx http://www.google.com/search?q="$@"
       '';
+      uncolor = pkgs.writeShellScriptBin "uncolor" ''
+        while getopts ":h" opt; do
+          case $opt in
+              h)
+                echo "Removes escaped colors from text intended for a terminal"
+                echo "Usage: uncolor <file>"
+                exit 0
+                ;;
+          esac
+        done
+
+        ${pkgs.gnused}/bin/sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' "$@"
+      '';
     in [
       onChange
       google
+      uncolor
       (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./ifnewer.sh))
       (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./wtf.sh))
       (pkgs.writeShellScriptBin "sync-my-repos" (builtins.readFile ./sync-my-repos.sh))
