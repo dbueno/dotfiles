@@ -223,8 +223,6 @@ colorscheme nord
 " }}}
 
 " package fzf-vim {{{
-let g:fzf_preview_window = ['right:50%,~5', 'ctrl-/']
-
 " :BD function to use fzf to delete buffers
 function! s:list_buffers()
     redir => list
