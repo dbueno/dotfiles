@@ -105,6 +105,13 @@ let
   myVimPluginsConfig = ''
     " riv wants to use large patterns
     set maxmempattern=2000
+  ''
+  # Preview is broken on Linux right now
+  + pkgs.lib.optionalString pkgs.stdenv.isLinux ''
+    let g:fzf_preview_window = []
+  ''
+  + pkgs.lib.optionalString pkgs.stdenv.isDarwin ''
+    let g:fzf_preview_window = ['right:50%,~5', 'ctrl-/']
   '';
 
   myScripts =
