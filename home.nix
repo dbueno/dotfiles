@@ -458,6 +458,7 @@ in
     ".ghci".source = ./.ghci;
     ".lynxrc".source = ./.lynxrc;
     ".config/automate-everything/repos".source = ./repos.conf;
+    ".latexmkrc".source = ./.latexmkrc;
   };
 
   programs.tmux = {
