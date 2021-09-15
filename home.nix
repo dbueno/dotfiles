@@ -527,6 +527,7 @@ in
     bat-extras.batdiff
     colordiff
     wdiff
+    nix-prefetch-git
     rusage
     GraphEasy
     record-my-session
