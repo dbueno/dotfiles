@@ -535,6 +535,7 @@ in
     colordiff
     wdiff
     nix-prefetch-git
+    nix-prefetch-github
     rusage
     GraphEasy
     record-my-session
