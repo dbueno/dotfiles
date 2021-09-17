@@ -8,7 +8,8 @@ let
     '');
 
   completeAlias = pkgs.stdenv.mkDerivation {
-    name = "complete-alias";
+    pname = "complete-alias";
+    version = "dev";
     src = pkgs.fetchFromGitHub {
       owner = "cykerway";
       repo = "complete-alias";
@@ -55,29 +56,33 @@ let
   myVimPlugins =
     let
       my-vim-tweaks = pkgs.vimUtils.buildVimPlugin {
-        name = "denisbueno-vim-tweaks.vim";
+        pname = "denisbueno-vim-tweaks.vim";
+        version = "dev";
         src = ./dotvim;
       };
-      vim-souffle = pkgs.vimUtils.buildVimPlugin {
-        name = "souffle.vim";
+      vim-souffle = pkgs.vimUtils.buildVimPlugin rec {
+        pname = "souffle.vim";
+        version = "1402e6905e085bf04faf5fca36a6fddba01119d6";
         src = pkgs.fetchFromGitHub {
           owner = "souffle-lang";
           repo = "souffle.vim";
-          rev = "1402e6905e085bf04faf5fca36a6fddba01119d6";
+          rev = "${version}";
           sha256 = "1y779fi2vfaca5c2285l7yn2cmj2sv8kzj9w00v9hsh1894kj2i4";
         };
       };
-      vim-qfgrep = pkgs.vimUtils.buildVimPlugin {
-        name = "QFGrep.vim";
+      vim-qfgrep = pkgs.vimUtils.buildVimPlugin rec {
+        pname = "QFGrep.vim";
+        version = "filter-contents";
         src = pkgs.fetchFromGitHub {
           owner = "dbueno";
           repo = "QFGrep";
-          rev = "filter-contents";
+          rev = "${version}";
           sha256 = "0jz8q0k839rw3dgb1c9ff8zlsir9qypicicxm8vw23ynmjk2zziy";
         };
       };
       vim-riv = pkgs.vimUtils.buildVimPlugin {
-        name = "riv.vim";
+        pname = "riv.vim";
+        version = "201ffc4e8dbfc3deeb26c6e278980f53d81d7f6a";
         src = pkgs.fetchFromGitHub {
           owner = "gu-fan";
           repo = "riv.vim";
@@ -86,7 +91,8 @@ let
         };
       };
       vim-euforia = pkgs.vimUtils.buildVimPlugin {
-        name = "euforia.vim";
+        pname = "euforia.vim";
+        version = "master";
         src = builtins.fetchGit {
           url = "git@github.com:greedy/vim-euforia.git";
           ref = "master";
