@@ -43,9 +43,10 @@ let
   };
 
   record-my-session = pkgs.writeShellScriptBin "record-my-session" ''
-    # Keeps a record of terminal input and output inside .terminal-logs by default.
+    # Keeps a record of terminal input and output inside .terminal-logs by
+    # default.
     mkdir -p $HOME/.terminal-logs
-    # Test for infinite recursion (SCRIPT is set by script).
+    # Tests for infinite recursion (SCRIPT is set by script).
     if test -z "$SCRIPT"; then
       if test -t 0; then
         script -a $HOME/.terminal-logs/script.$$.out && exit
