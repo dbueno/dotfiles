@@ -91,12 +91,11 @@ let
           sha256 = "1drl291lq44hf7qx1g6l5ivqclfb6ih9lj5qy5cmv9w9b3svwlv4";
         };
       };
-      vim-euforia = pkgs.vimUtils.buildVimPlugin {
+      vim-euforia = pkgs.vimUtils.buildVimPlugin rec {
         pname = "euforia.vim";
         version = "master";
         src = builtins.fetchGit {
-          url = "git@github.com:greedy/vim-euforia.git";
-          ref = "master";
+          url = "ssh://git@github.com/greedy/vim-euforia.git";
           rev = "96ee4c9c7296dbb75f7e927e93e4576dec1c898e";
         };
       };
