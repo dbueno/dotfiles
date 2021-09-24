@@ -81,13 +81,13 @@ let
           sha256 = "0jz8q0k839rw3dgb1c9ff8zlsir9qypicicxm8vw23ynmjk2zziy";
         };
       };
-      vim-riv = pkgs.vimUtils.buildVimPlugin {
+      vim-riv = pkgs.vimUtils.buildVimPlugin rec {
         pname = "riv.vim";
         version = "201ffc4e8dbfc3deeb26c6e278980f53d81d7f6a";
         src = pkgs.fetchFromGitHub {
           owner = "gu-fan";
           repo = "riv.vim";
-          rev = "201ffc4e8dbfc3deeb26c6e278980f53d81d7f6a";
+          rev = "${version}";
           sha256 = "1drl291lq44hf7qx1g6l5ivqclfb6ih9lj5qy5cmv9w9b3svwlv4";
         };
       };
