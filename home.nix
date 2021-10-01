@@ -453,6 +453,7 @@ in
 
     profileExtra = ''
       export NIX_PATH=$HOME/.nix-defexpr/channels''${NIX_PATH:+:}$NIX_PATH
+      . ~/.nix-profile/etc/profile.d/nix.sh
       [[ -e "$HOME/.bash_profile_local" ]] && source "$HOME/.bash_profile_local"
       history -a
     '';
