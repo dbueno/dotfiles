@@ -4,6 +4,11 @@ let
   mod = "Mod1";
   refresh-i3status = "killall -SIGUSR1 i3status";
   term = "${pkgs.kitty}";
+  ws = n: {
+    "${mod}+${n}" = "workspace number ${n}";
+    "${mod}+Shift+${n}" = "move container to workspace number ${n}";
+  };
+  workspaces = map ws (builtins.genList (n: toString (n+1)) 10);
 in {
   xsession.windowManager.i3 = {
     enable = true;
@@ -12,7 +17,7 @@ in {
 
       fonts = ["DejaVu Sans Mono 8"];
 
-      floating.modifier = "$mod";
+      floating.modifier = "${mod}";
 
       keybindings = lib.mkOptionDefault {
         "${mod}+Return" = "exec ${term}";
@@ -40,12 +45,34 @@ in {
         "${mod}+Shift+Down" = "move down";
         "${mod}+Shift+Up" = "move up";
         "${mod}+Shift+Right" = "move right";
-      };
+
+        # split horizontally
+        "${mod}+d" = "split h";
+
+        # split vertically
+        "${mod}+v" = "split v";
+
+        "${mod}+u" = "fullscreen toggle";
+
+        # layouts: stacked, tabbed, toggle split
+        "${mod}+o" = "layout stacking";
+        "${mod}+comma" = "layout tabbed";
+        "${mod}+period" = "layout toggle split";
+
+        "${mod}+Shift+space" = "floating toggle";
+
+        "${mod}+space" = "focus mode_toggle";
+
+        "${mod}+a" = "focus parent";
+      }
+      // lib.foldl' (x: y: x//y) {} workspaces
+      ;
 
       bars = [
         {
           position = "bottom";
-          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${./i3status-rust.toml}";
+          statusCommand = "${pkgs.i3status}/bin/i3status";
+          # statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${./i3status-rust.toml}";
         }
       ];
     };
