@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
+  linuxImports = [
+    ./i3.nix
+  ];
   myInfo = pkgs.lib.importJSON ./userconfig.json;
   nixFlakes =
     (pkgs.writeShellScriptBin "nixFlakes" ''
@@ -175,6 +178,8 @@ let
 in
 
 {
+  imports = lib.optionals (builtins.currentSystem == "x86_64-linux") linuxImports;
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
