@@ -175,10 +175,11 @@ let
       (pkgs.writeShellScriptBin "sync-my-repos" (builtins.readFile ./sync-my-repos.sh))
       (pkgs.writeShellScriptBin "frequency" (builtins.readFile ./automation/frequency.sh))
     ];
+  isLinux = (builtins.currentSystem == "x86_64-linux");
 in
 
 {
-  imports = lib.optionals (builtins.currentSystem == "x86_64-linux") linuxImports;
+  imports = lib.optionals isLinux linuxImports;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -283,9 +284,17 @@ in
 
   programs.kitty = {
     enable = true;
-    settings = {
-      font_family = "SF Mono Medium";
-      font_size = "13.0";
+    settings =
+      let
+        linux = {
+          font_family = "DejaVu Sans Mono";
+          font_size = "9.0";
+        };
+        mac = {
+          font_family = "SF Mono Medium";
+          font_size = "13.0";
+        };
+      in (if isLinux then linux else mac) // {
       enabled_layouts = "tall:bias=50;full_size=1;mirrored=false,fat,stack";
       confirm_os_window_close = 1;
     };
