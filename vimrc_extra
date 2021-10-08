@@ -130,9 +130,6 @@ set statusline=%q%t\ @\ %P\ [ft=%Y%M%R%W%H]\ char:0x%B\ pos\ %l:%c\ %=%<%{expand
 " disables mappings from default ocaml ftplugin
 let g:no_ocaml_maps = 1
 
-" disables mappings from default ocaml ftplugin
-let g:no_ocaml_maps = 1
-
 set tags=./tags,./TAGS,tags,TAGS,./.tags,./.TAGS,.tags,.TAGS,../../tags,../tags
 let &tags.=expand(",$TAGS")
 " R mode customizations
