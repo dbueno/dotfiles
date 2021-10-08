@@ -301,6 +301,8 @@ in
     keybindings = {
       "ctrl+p" = "scroll_page_up";
       "ctrl+n" = "scroll_page_down";
+      "kitty_mod+h" = "previous_window";
+      "kitty_mod+l" = "next_window";
     };
     extraConfig = builtins.readFile ./kitty-nord-theme.conf;
   };
