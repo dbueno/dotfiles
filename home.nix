@@ -10,6 +10,16 @@ let
         exec ${pkgs.nixUnstable}/bin/nix --experimental-features "nix-command flakes" "$@"
     '');
 
+  onetrueawk = pkgs.stdev.mkDerivation rec {
+    pname = "onetrueawk";
+    version = "20210724";
+    src = pkgs.fetchFromGitHub {
+      owner = "${pname}";
+      repo = "awk";
+      rev = "f9affa9";
+    };
+  };
+
   completeAlias = pkgs.stdenv.mkDerivation {
     pname = "complete-alias";
     version = "dev";
