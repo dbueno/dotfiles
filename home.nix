@@ -320,6 +320,9 @@ in
       "ctrl+n" = "scroll_page_down";
       "kitty_mod+h" = "previous_window";
       "kitty_mod+l" = "next_window";
+      # kitty-mod+l defaults to next_layout so put the layout
+      # commands on brackets.
+      "kitty_mod+]" = "next_layout";
     };
     extraConfig = builtins.readFile ./kitty-nord-theme.conf;
   };
