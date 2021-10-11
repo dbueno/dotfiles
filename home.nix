@@ -487,6 +487,9 @@ in
     profileExtra = ''
       export NIX_PATH=$HOME/.nix-defexpr/channels''${NIX_PATH:+:}$NIX_PATH
       test -f ~/.nix-profile/etc/profile.d/nix.sh && . ~/.nix-profile/etc/profile.d/nix.sh
+      # On one of my machines, ~/.nix-profile/.../nix.sh doesn't exist.
+      # Temporarily work around this by sourcing from /nix/va/nix/profiles
+      test -f ~/.nix-profile/etc/profile.d/nix.sh || . /nix/var/nix/profiles/default/etc/profile.d/nix.sh
       [[ -e "$HOME/.bash_profile_local" ]] && source "$HOME/.bash_profile_local"
       history -a
     '';
