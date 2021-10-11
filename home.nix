@@ -493,6 +493,7 @@ in
       # On one of my machines, ~/.nix-profile/.../nix.sh doesn't exist.
       # Temporarily work around this by sourcing from /nix/va/nix/profiles
       test -f ~/.nix-profile/etc/profile.d/nix.sh || . /nix/var/nix/profiles/default/etc/profile.d/nix.sh
+      test -f ~/.nix-profile/etc/profile.d/nix.sh || . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
       [[ -e "$HOME/.bash_profile_local" ]] && source "$HOME/.bash_profile_local"
       history -a
     '';
