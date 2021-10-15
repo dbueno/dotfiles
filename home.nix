@@ -83,6 +83,10 @@ let
     '';
   ssh-cmd = "${ssh-script}/bin/my-ssh";
   ssh-with-env-pass = pkgs.writeShellScriptBin "ssh-with-env-pass" ''
+    # You could add a function like this in your environment:
+    # function ssh-to-host() {
+    #   SSHPASS=$(cat ~/.host-password) ssh-with-env-pass host
+    # }
     ${pkgs.sshpass}/bin/sshpass -e ${ssh-cmd} "$@"
   '';
 
