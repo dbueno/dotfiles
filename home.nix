@@ -74,6 +74,18 @@ let
     fi
   '';
 
+  ssh-script = pkgs.writeShellScriptBin "my-ssh" ''
+    if [[ "$TERM" = *kitty ]]; then
+        env TERM=xterm-256color ssh "$@"
+    else
+        env ssh "$@"
+    fi
+    '';
+  ssh-cmd = "${ssh-script}/bin/my-ssh";
+  ssh-with-env-pass = pkgs.writeShellScriptBin "ssh-with-env-pass" ''
+    ${pkgs.sshpass}/bin/sshpass -e ${ssh-cmd} "$@"
+  '';
+
   myVimPlugins =
     let
       my-vim-tweaks = pkgs.vimUtils.buildVimPlugin {
@@ -187,6 +199,7 @@ let
       onChange
       google
       uncolor
+      ssh-with-env-pass
       (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./ifnewer.sh))
       (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./wtf.sh))
       (pkgs.writeShellScriptBin "sync-my-repos" (builtins.readFile ./sync-my-repos.sh))
@@ -461,17 +474,7 @@ in
       lrg = ''rg --line-buffered --pretty "$@" | less -R'';
       # Greps and fuzzy selects
       frg = ''rg "$@" | fzf'';
-      ssh = let
-        cmd = pkgs.writeShellScriptBin "my-ssh" ''
-          if [[ "$TERM" = *kitty ]]; then
-              env TERM=xterm-256color ssh "$@"
-          else
-              env ssh "$@"
-          fi
-          '';
-      in
-        "${cmd}/bin/my-ssh";
-
+      ssh = "${ssh-cmd}";
       make_cpptags = "${pkgs.universal-ctags}/bin/ctags --c++-kinds=+pf --c-kinds=+p --fields=+imaSft --extra=+q -Rnu";
     };
 
@@ -581,6 +584,7 @@ in
     rusage
     GraphEasy
     record-my-session
+    sshpass
     (pkgs.callPackage onetrueawk {})
   ]
   ++ myScripts;
