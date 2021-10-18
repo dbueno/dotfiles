@@ -89,12 +89,8 @@ let
     # }
     ${pkgs.sshpass}/bin/sshpass -e ${ssh-cmd} "$@"
   '';
-  scp-with-env-pass = pkgs.writeShellScriptBin "scp-with-env-pass" ''
-    # You could add a function like this in your environment:
-    # function scp-to-host() {
-    #   SSHPASS=$(cat ~/.host-password) scp-with-env-pass "$@" host:
-    # }
-    ${pkgs.sshpass}/bin/sshpass -e scp "$@"
+  rsync-with-env-pass = pkgs.writeShellScriptBin "rsync-with-env-pass" ''
+    rsync --rsh='${pkgs.sshpass}/bin/sshpass -e ssh' "$@"
   '';
 
   myVimPlugins =
@@ -211,7 +207,7 @@ let
       google
       uncolor
       ssh-with-env-pass
-      scp-with-env-pass
+      rsync-with-env-pass
       (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./ifnewer.sh))
       (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./wtf.sh))
       (pkgs.writeShellScriptBin "sync-my-repos" (builtins.readFile ./sync-my-repos.sh))
