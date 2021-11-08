@@ -62,11 +62,11 @@ let
     };
   };
 
-  parcel = pkgs.writeShellScriptBin "parcel" ''
-    # Parcels stdin into multiple output files. Each new output file is based
-    # on a trigger, which is just some text (not a regex, currently). Every
-    # time a line matches the trigger a new output file is created and
-    # subsequent input is echoed to that output file.
+  bunch = pkgs.writeShellScriptBin "bunch" ''
+    # Bunches stdin lines into groups in multiple output files. Each new output
+    # file is based on a trigger, which is just some text (not a regex,
+    # currently). Every time a line matches the trigger a new output file is
+    # created and subsequent input is echoed to that output file.
 
     usage() { echo  "Usage: $0 [-d dir] trigger extension" 1>&2; exit 1; }
 
@@ -628,7 +628,7 @@ in
     rusage
     GraphEasy
     record-my-session
-    parcel
+    bunch
     sshpass
     (pkgs.callPackage onetrueawk {})
   ]
