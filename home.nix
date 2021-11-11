@@ -5,10 +5,6 @@ let
     ./i3.nix
   ];
   myInfo = pkgs.lib.importJSON ./userconfig.json;
-  nixFlakes =
-    (pkgs.writeShellScriptBin "nixFlakes" ''
-        exec ${pkgs.nixUnstable}/bin/nix --experimental-features "nix-command flakes" "$@"
-    '');
 
   onetrueawk = { stdenv, bison, yacc }: stdenv.mkDerivation rec {
     pname = "onetrueawk";
@@ -129,6 +125,9 @@ let
   rsync-with-env-pass = pkgs.writeShellScriptBin "rsync-with-env-pass" ''
     rsync --rsh='${pkgs.sshpass}/bin/sshpass -e ssh' "$@"
   '';
+
+  pythonWithNumpy = pkgs.python3.withPackages (p: with p; [
+    pandas numpy scipy ]);
 
   myVimPlugins =
     let
@@ -369,9 +368,13 @@ in
           font_size = "13.0";
         };
       in (if isLinux then linux else mac) // {
-      enabled_layouts = "tall:bias=50;full_size=1;mirrored=false,fat,stack";
-      confirm_os_window_close = 1;
-    };
+        enabled_layouts = lib.concatStringsSep "," [
+          "tall:bias=50;full_size=1;mirrored=false"
+          "tall:bias=70;full_size=3;mirrored=false"
+          "horizontal" "fat" "stack"
+        ];
+        confirm_os_window_close = 1;
+      };
     keybindings = {
       "ctrl+p" = "scroll_page_up";
       "ctrl+n" = "scroll_page_down";
@@ -484,7 +487,7 @@ in
       nows = "date '+%Y-%m-%dT%H%M%S'";
       today = "date '+%Y-%m-%d'";
 
-      average = "${pkgs.R}/bin/Rscript -e 'd<-scan(\"stdin\", quiet=TRUE)' -e 'summary(d)'";
+      # average = "${pkgs.R}/bin/Rscript -e 'd<-scan(\"stdin\", quiet=TRUE)' -e 'summary(d)'";
 
       # Displays an image (png) in the terminal
       icat = "kitty +kitten icat --align=left";
@@ -610,13 +613,13 @@ in
   };
 
   home.packages = with pkgs; [
+    nixFlakes
     bashInteractive_5
     ripgrep
     bash-completion nix-bash-completions
     graphviz
     wget
     parallel
-    nixFlakes
     duc # ncdu replacement
     zip unzip p7zip
     bat-extras.batdiff
