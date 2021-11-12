@@ -613,10 +613,10 @@ in
   };
 
   home.packages = with pkgs; [
-    nixFlakes
+    nix
     bashInteractive_5
     ripgrep
-    bash-completion nix-bash-completions
+    bash-completion
     graphviz
     wget
     parallel
