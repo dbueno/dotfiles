@@ -470,6 +470,7 @@ in
       now = "date '+%Y-%m-%dT%H%M'";
       nows = "date '+%Y-%m-%dT%H%M%S'";
       today = "date '+%Y-%m-%d'";
+      shuf = "${pkgs.coreutils}/bin/shuf";
 
       # average = "${pkgs.R}/bin/Rscript -e 'd<-scan(\"stdin\", quiet=TRUE)' -e 'summary(d)'";
 
