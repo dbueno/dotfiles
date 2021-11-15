@@ -597,7 +597,7 @@ in
   };
 
   home.packages = with pkgs; [
-    nix
+    nix nixFlakes
     bashInteractive_5
     ripgrep
     bash-completion
