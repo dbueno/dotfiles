@@ -442,40 +442,24 @@ in
     };
 
     shellAliases =
-      (if pkgs.stdenv.isDarwin then {
-        a = let
-            cmd = pkgs.writeShellScriptBin "my-ls" ''
-              num_files=$(ls -1 "$@" 2>/dev/null | wc -l | sed 's/[[:space:]]//g')
+      let
+        ls-command = if pkgs.stdenv.isDarwin then "CLICOLOR_FORCE=1 ls -lFGth" else "ls -lF --color -th";
+      in
+      (if pkgs.stdenv.isDarwin then { lldb = "PATH=/usr/bin:$PATH lldb"; } else {})
+      // {
+      a =
+        let
+          cmd = pkgs.writeShellScriptBin "my-ls" ''
               cutoff=20
-              if [ $num_files -gt $cutoff ]; then
-                CLICOLOR_FORCE=1 ls -lFGtrh "$@" | tail -n $cutoff
-                printf "[showing 20 of %d files]\n" $num_files
-              else
-                CLICOLOR_FORCE=1 ls -lFGtrh "$@"
-              fi
-            '';
-          in
-          "${cmd}/bin/my-ls";
-        aa="ls -lFGtrh";
-        mk="make -j$(sysctl -a | grep ^hw[.]ncpu | cut -d' ' -f2)";
-        lldb="PATH=/usr/bin:$PATH lldb";
-      } else {
-        a = let
-            cmd = pkgs.writeShellScriptBin "my-ls" ''
+              ${ls-command} "$@" | head -n $cutoff
               num_files=$(ls -1 "$@" 2>/dev/null | wc -l | sed 's/[[:space:]]//g')
-              cutoff=20
               if [ $num_files -gt $cutoff ]; then
-                ls -lF --color -trh "$@" | tail -n $cutoff
                 printf "[showing 20 of %d files]\n" $num_files
-              else
-                ls -lF --color -trh "$@"
               fi
-            '';
-          in
-          "${cmd}/bin/my-ls";
-        aa="ls -lF --color -trh";
-      })
-    // {
+          '';
+        in
+        "${cmd}/bin/my-ls";
+      aa = "${ls-command}";
       # there's always a story behind aliases like these
       rm = "rm -i";
       c = "clear";
