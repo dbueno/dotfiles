@@ -562,6 +562,7 @@ in
 
   programs.vim = {
     enable = true;
+    packageConfigurable = pkgs.vim_configurable.override { darwinSupport = pkgs.stdenv.isDarwin; guiSupport = false; };
     settings = {
       # keep buffers around when they are not visible
       hidden = true;
