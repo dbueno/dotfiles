@@ -372,7 +372,7 @@ in
         enabled_layouts = lib.concatStringsSep "," [
           "tall:bias=50;full_size=1;mirrored=false"
           "tall:bias=70;full_size=3;mirrored=false"
-          "horizontal" "fat" "stack"
+          "horizontal" "fat"
         ];
         confirm_os_window_close = 1;
       };
