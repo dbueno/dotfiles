@@ -384,6 +384,7 @@ in
       # kitty-mod+l defaults to next_layout so put the layout
       # commands on brackets.
       "kitty_mod+]" = "next_layout";
+      "f11" = "toggle_layout stack";
     };
     extraConfig = builtins.readFile ./kitty-nord-theme.conf;
   };
@@ -464,6 +465,7 @@ in
       # there's always a story behind aliases like these
       rm = "rm -i";
       c = "clear";
+      d = "kitty +kitten diff";
       pd = "cd \"$OLDPWD\"";
       # Evaluates to an iso-conformant date.  The iso-conformance is good because
       # lexicographic order coincides with date order.  'nows' just has seconds and
