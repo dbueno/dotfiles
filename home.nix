@@ -372,7 +372,7 @@ in
         enabled_layouts = lib.concatStringsSep "," [
           "tall:bias=50;full_size=1;mirrored=false"
           "tall:bias=70;full_size=3;mirrored=false"
-          "horizontal" "fat"
+          "horizontal" "fat" "stack"
         ];
         confirm_os_window_close = 1;
         scrollback_pager_history_size = 10000;
@@ -386,8 +386,8 @@ in
       # kitty-mod+l defaults to next_layout so put the layout
       # commands on brackets.
       "kitty_mod+]" = "next_layout";
-      "f11" = "toggle_layout stack";
       "f12" = "show_scrollback";
+      "f11" = "toggle_layout stack";
     };
     extraConfig = builtins.readFile ./kitty-nord-theme.conf;
   };
