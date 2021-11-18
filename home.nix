@@ -388,6 +388,8 @@ in
       "kitty_mod+]" = "next_layout";
       "f12" = "show_scrollback";
       "f11" = "toggle_layout stack";
+      "f1" = "create_marker";
+      "f2" = "remove_marker";
     };
     extraConfig = builtins.readFile ./kitty-nord-theme.conf;
   };
