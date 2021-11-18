@@ -375,6 +375,8 @@ in
           "horizontal" "fat"
         ];
         confirm_os_window_close = 1;
+        scrollback_pager_history_size = 10000;
+        scrollback_fill_enlarged_window = true;
       };
     keybindings = {
       "ctrl+p" = "scroll_page_up";
@@ -385,6 +387,7 @@ in
       # commands on brackets.
       "kitty_mod+]" = "next_layout";
       "f11" = "toggle_layout stack";
+      "f12" = "show_scrollback";
     };
     extraConfig = builtins.readFile ./kitty-nord-theme.conf;
   };
