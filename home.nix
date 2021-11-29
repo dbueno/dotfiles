@@ -223,7 +223,7 @@ let
         done
       '';
       google = pkgs.writeShellScriptBin "google" ''
-        ${pkgs.lynx}/bin/lynx http://www.google.com/search?q="$@"
+        ${pkgs.w3m}/bin/w3m http://www.google.com/search?q="$@"
       '';
       uncolor = pkgs.writeShellScriptBin "uncolor" ''
         while getopts ":h" opt; do
