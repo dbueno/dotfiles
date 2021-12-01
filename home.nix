@@ -610,9 +610,9 @@ in
 
   home.packages = with pkgs; [
     nix nixFlakes
-    bashInteractive_5
+    bashInteractive
     ripgrep
-    bash-completion
+    bash-completion nix-bash-completions
     graphviz
     wget
     parallel
