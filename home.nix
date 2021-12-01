@@ -597,6 +597,8 @@ in
       vim-commentary
       vim-repeat
       tabular
+      YouCompleteMe
+      jedi-vim
     ]
     ++ myVimPlugins;
     extraConfig = builtins.readFile ./vimrc_extra
