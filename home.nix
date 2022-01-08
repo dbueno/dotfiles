@@ -238,12 +238,20 @@ let
 
         ${pkgs.gnused}/bin/sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' "$@"
       '';
+      viewhex = pkgs.writeShellScriptBin "viewhex" ''${pkgs.hexyl}/bin/hexyl "$@"'';
+      viewjson = pkgs.writeShellScriptBin "viewjson" ''${pkgs.fx}/bin/fx "$@"'';
+      diff = pkgs.writeShellScriptBin "diff" ''kitty +kitten diff "$@"'';
+      cat = pkgs.writeShellScriptBin "cat" ''${pkgs.bat}/bin/bat "$@"'';
     in [
       onChange
       google
       uncolor
       ssh-with-env-pass
       rsync-with-env-pass
+      cat
+      viewjson
+      viewhex
+      diff
       (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./ifnewer.sh))
       (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./wtf.sh))
       (pkgs.writeShellScriptBin "sync-my-repos" (builtins.readFile ./sync-my-repos.sh))
@@ -314,7 +322,7 @@ in
       a = "add -p";
       d = "diff";
       di = "diff --cached";
-      dt = "difftool";
+      dt = "difftool --no-symlinks --dir-diff";
       pa = "push --all";
       co = "checkout";
       ci = "commit";
@@ -342,6 +350,25 @@ in
       core = {
         fsyncobjectfiles = "true";
         sshCommand = "${pkgs.openssh}/bin/ssh -F ~/.ssh/config";
+        pager = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=4 -RFX";
+      };
+      interactive.diffFilter = "${pkgs.diff-so-fancy}/bin/diff-so-fancy --patch";
+      diff = {
+        tool = "kitty";
+        guitool = "kitty.gui";
+      };
+      difftool = {
+        prompt = false;
+        trustExitCode = true;
+        kitty = {
+          cmd = "kitty +kitten diff $LOCAL $REMOTE";
+        };
+        "kitty.gui" = {
+          cmd = "kitty kitty +kitten diff $LOCAL $REMOTE";
+        };
+        vim = {
+          cmd = "vimdiff $LOCAL $REMOTE";
+        };
       };
       push = { default = "simple"; };
       pull = { rebase = "true"; };
@@ -470,7 +497,6 @@ in
       # there's always a story behind aliases like these
       rm = "rm -i";
       c = "clear";
-      d = "kitty +kitten diff";
       pd = "cd \"$OLDPWD\"";
       # Evaluates to an iso-conformant date.  The iso-conformance is good because
       # lexicographic order coincides with date order.  'nows' just has seconds and
@@ -515,6 +541,7 @@ in
       frg = ''rg "$@" | fzf'';
       ssh = "${ssh-cmd}";
       make_cpptags = "${pkgs.universal-ctags}/bin/ctags --c++-kinds=+pf --c-kinds=+p --fields=+imaSft --extra=+q -Rnu";
+      d = "kitty +kitten diff";
     };
 
     # Settings for interactive shells
@@ -618,9 +645,9 @@ in
     parallel
     duc # ncdu replacement
     zip unzip p7zip
-    bat-extras.batdiff
-    colordiff
     wdiff
+    fx # json viewer
+    exa # ls
     nix-prefetch-git
     nix-prefetch-github
     rusage
