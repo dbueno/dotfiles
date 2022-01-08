@@ -240,18 +240,14 @@ let
       '';
       viewhex = pkgs.writeShellScriptBin "viewhex" ''${pkgs.hexyl}/bin/hexyl "$@"'';
       viewjson = pkgs.writeShellScriptBin "viewjson" ''${pkgs.fx}/bin/fx "$@"'';
-      diff = pkgs.writeShellScriptBin "diff" ''kitty +kitten diff "$@"'';
-      cat = pkgs.writeShellScriptBin "cat" ''${pkgs.bat}/bin/bat "$@"'';
     in [
       onChange
       google
       uncolor
       ssh-with-env-pass
       rsync-with-env-pass
-      cat
       viewjson
       viewhex
-      diff
       (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./ifnewer.sh))
       (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./wtf.sh))
       (pkgs.writeShellScriptBin "sync-my-repos" (builtins.readFile ./sync-my-repos.sh))
