@@ -207,16 +207,15 @@ nnoremap <silent> <Bar> :aboveleft vsp<CR>:exe "normal \<Plug>VinegarUp"<CR>
 " package settings
 
 " package nord-vim {{{
-" too muted for now
-let g:nord_bold_vertical_split_line = 1
-augroup nord-theme-overrides
-    autocmd!
+" let g:nord_bold_vertical_split_line = 1
+" augroup nord-theme-overrides
+"     autocmd!
     " Brighten the vertical split so I don't confuse it with the color column.
     " Even brighter than the bold_vertical_split option.
-    autocmd ColorScheme nord hi VertSplit guibg=#616E88 guifg=#434C5E
+    " autocmd ColorScheme nord hi VertSplit guibg=#616E88 guifg=#434C5E
     " autocmd ColorScheme nord hi ColorColumn guibg=#2E3440 guifg=#434C5E
-augroup END
-colorscheme nord
+" augroup END
+" colorscheme nord
 " }}}
 
 " package fzf-vim {{{
@@ -285,6 +284,9 @@ packloadall
 for opam2flake_dep in split($OPAM2FLAKE_OPAM_PACKAGES)
     call pathogen#infect(opam2flake_dep . "/share/{}/vim")
 endfor
+
+" vaporwave plz
+colorscheme dracula
 
 " Python indenting {{{
 function PythonParenIndent(lnum)

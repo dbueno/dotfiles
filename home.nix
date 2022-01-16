@@ -282,16 +282,35 @@ in
 
   programs.bat = {
     enable = true;
+    config = {
+      theme = "Dracula";
+    };
+    themes = {
+      dracula = builtins.readFile (pkgs.fetchFromGitHub {
+        owner = "dracula";
+        repo = "sublime"; # Bat uses sublime syntax for its themes
+        rev = "26c57ec282abcaa76e57e055f38432bd827ac34e";
+        sha256 = "019hfl4zbn4vm4154hh3bwk6hm7bdxbr1hdww83nabxwjn99ndhv";
+        } + "/Dracula.tmTheme");
+      };
   };
 
   programs.dircolors = {
     enable = true;
     enableBashIntegration = true;
+    settings = (import ./kitty-themes/dracula/dircolors.nix);
   };
 
   programs.fzf = {
     enable = true;
     defaultCommand = ''rg --iglob "!/_opam" --iglob "!/_build" --iglob "!*.o" --files --hidden'';
+    defaultOptions = [
+      # https://draculatheme.com/fzf
+      "--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9"
+      "--color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9"
+      "--color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6"
+      "--color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4"
+    ];
   };
 
   programs.direnv = {
@@ -371,6 +390,16 @@ in
       color = {
         interactive = "auto";
         diff = "auto";
+        # diff = {
+        #   context = "#6272A4";
+        #   meta = "#6272A4";
+        #   frag = "#F8F8F2";
+        #   func = "146 bold";
+        #   commit = "yellow bold";
+        #   old = "red bold";
+        #   new = "green bold";
+        #   # whitespace "
+        # };
       };
     };
   };
@@ -414,7 +443,23 @@ in
       "f1" = "create_marker";
       "f2" = "remove_marker";
     };
-    extraConfig = builtins.readFile ./kitty-nord-theme.conf;
+    # extraConfig = builtins.readFile ./kitty-themes/nord/nord.conf;
+    extraConfig = builtins.readFile (pkgs.fetchFromGitHub {
+      owner = "dracula";
+      repo = "kitty";
+      rev = "eeaa86a730e3d38649053574dc60a74ce06a01bc";
+      sha256 = "3yi5e/wnLYt7b3Lkf4fhSByr18SrOzJ4zYympUQMslc=";
+    } + "/dracula.conf");
+  };
+
+  xdg = {
+    enable = true;
+    configFile."kitty/diff.conf".source = (pkgs.fetchFromGitHub {
+      owner = "dracula";
+      repo = "kitty";
+      rev = "eeaa86a730e3d38649053574dc60a74ce06a01bc";
+      sha256 = "3yi5e/wnLYt7b3Lkf4fhSByr18SrOzJ4zYympUQMslc=";
+    } + "/diff.conf");
   };
 
   programs.readline = {
@@ -462,7 +507,7 @@ in
       # For Linux, pretty colors.
       # LS_COLORS = "di=00;36;40:ln=00;35:ex=00;31";
       # For mac, pretty colors. -- but see also dircolors above
-      LSCOLORS = "gxfxcxdxbxegedabagacad";
+      # LSCOLORS = "gxfxcxdxbxegedabagacad";
       # When I type 'cd somewhere', if somewhere is relative, try out looking into all
       # the paths in $CDPATH for completions.  This can speed up common directory
       # switching.
@@ -608,6 +653,7 @@ in
       vim-sensible
       fzf-vim
       nord-vim
+      dracula-vim
       vim-ocaml
       vim-fugitive
       vim-surround
