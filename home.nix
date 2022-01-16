@@ -6,6 +6,41 @@ let
   ];
   myInfo = pkgs.lib.importJSON ./userconfig.json;
 
+  draculaTheme = rec {
+    Background = "#282A36";
+    Foreground = "#F8F8F2";
+    Selection = "#44475A";
+    Comment = "#6272A4";
+    Red = "#FF5555";
+    Orange = "#FFB86C";
+    Yellow = "#F1FA8C";
+    Green = "#50FA7B";
+    Purple = "#BD93F9";
+    Cyan = "#8BE9FD";
+    Pink = "#FF79C6";
+    AnsiBlack = "#21222C";
+    AnsiRed = "#FF5555";
+    AnsiGreen = "#50FA7B";
+    AnsiYellow = "#F1FA8C";
+    AnsiBlue = "#BD93F9";
+    AnsiMagenta = "#FF79C6";
+    AnsiCyan = "#8BE9FD";
+    AnsiWhite = "#F8F8F2";
+    AnsiBrightBlack = "#6272A4";
+    AnsiBrightRed = "#FF6E6E";
+    AnsiBrightGreen = "#69FF94";
+    AnsiBrightYellow = "#FFFFA5";
+    AnsiBrightBlue = "#D6ACFF";
+    AnsiBrightMagenta = "#FF92DF";
+    AnsiBrightCyan = "#A4FFFF";
+    AnsiBrightWhite = "#FFFFFF";
+    DiffText = Comment;
+    DiffHeader = Comment;
+    DiffInserted = Green;
+    DiffDeleted = Red;
+    DiffChanged = Orange;
+  };
+
   onetrueawk = { stdenv, bison, yacc }: stdenv.mkDerivation rec {
     pname = "onetrueawk";
     version = "20210724";
@@ -365,9 +400,9 @@ in
       core = {
         fsyncobjectfiles = "true";
         sshCommand = "${pkgs.openssh}/bin/ssh -F ~/.ssh/config";
-        pager = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=4 -RFX";
+        # pager = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=4 -RFX";
       };
-      interactive.diffFilter = "${pkgs.diff-so-fancy}/bin/diff-so-fancy --patch";
+      # interactive.diffFilter = "${pkgs.diff-so-fancy}/bin/diff-so-fancy --patch";
       diff = {
         tool = "kitty";
         guitool = "kitty.gui";
@@ -389,17 +424,19 @@ in
       pull = { rebase = "true"; };
       color = {
         interactive = "auto";
-        diff = "auto";
-        # diff = {
-        #   context = "#6272A4";
-        #   meta = "#6272A4";
-        #   frag = "#F8F8F2";
-        #   func = "146 bold";
-        #   commit = "yellow bold";
-        #   old = "red bold";
-        #   new = "green bold";
-        #   # whitespace "
-        # };
+        # diff = "auto";
+        diff = with draculaTheme; {
+          context = Foreground;
+          meta = Comment;
+          frag = DiffHeader;
+          func = "${Green}";
+          commit = "${Yellow} bold";
+          old = DiffDeleted;
+          oldMoved = DiffDeleted;
+          new = DiffInserted;
+          newMoved = DiffInserted;
+          whitespace = DiffDeleted;
+        };
       };
     };
   };
