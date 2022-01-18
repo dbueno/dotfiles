@@ -393,7 +393,7 @@ in
       ss = "status";
       # print git directory, toplevel of current repo
       pgd = "git rev-parse --show-toplevel";
-      push-it-real-good = "push -f";
+      push-it-real-good = "push --force-with-lease";
       b = "branch";
       l = "log --graph --pretty='%Cred%h%Creset - %C(bold blue)<%an>%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)' --abbrev-commit --date=relative";
       f = "fetch";
