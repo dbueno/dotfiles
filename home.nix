@@ -718,6 +718,10 @@ in
     '';
   };
 
+  programs.neovim = {
+    enable = true;
+  };
+
   home.packages = with pkgs; [
     nix nixFlakes
     bashInteractive
