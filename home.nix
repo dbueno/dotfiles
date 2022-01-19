@@ -292,6 +292,10 @@ let
 in
 
 {
+  nixpkgs.overlays = [
+    (import ./nixflakes.nix)
+    (import ./diff-so-fancy.nix)
+  ];
   imports = lib.optionals isLinux linuxImports;
 
   nixpkgs.config.allowUnfree = true;
@@ -400,9 +404,9 @@ in
       core = {
         fsyncobjectfiles = "true";
         sshCommand = "${pkgs.openssh}/bin/ssh -F ~/.ssh/config";
-        # pager = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=4 -RFX";
+        pager = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=4 -RFX";
       };
-      # interactive.diffFilter = "${pkgs.diff-so-fancy}/bin/diff-so-fancy --patch";
+      interactive.diffFilter = "${pkgs.diff-so-fancy}/bin/diff-so-fancy --patch";
       diff = {
         tool = "kitty";
         guitool = "kitty.gui";
