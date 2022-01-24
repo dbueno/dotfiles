@@ -742,6 +742,7 @@ in
     record-my-session
     bunch
     sshpass
+    figlet toilet # ascii art
     (pkgs.callPackage onetrueawk {})
   ]
   ++ myScripts;
