@@ -710,6 +710,7 @@ in
     ++ myVimPlugins;
     extraConfig = builtins.readFile ./vimrc_extra
     + ''
+      set cmdheight=2
 
       ${myVimPluginsConfig}
     '';
