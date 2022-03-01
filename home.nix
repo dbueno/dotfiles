@@ -76,7 +76,7 @@ let
   rusage = (import (builtins.fetchTarball "https://github.com/dbueno/rusage/archive/main.tar.gz")).defaultPackage.${pkgs.system};
 
   # ASCII graphs from graphviz input
-  GraphEasy = pkgs.buildPerlPackage {
+  GraphEasy = pkgs.perlPackages.buildPerlPackage {
     pname = "Graph-Easy";
     version = "0.76";
     src = pkgs.fetchurl {
