@@ -222,6 +222,8 @@ let
   myVimPluginsConfig = ''
     " riv wants to use large patterns
     set maxmempattern=2000
+    " don't use thesaurus_query mappings
+    let g:tq_map_keys = 0
   ''
   + lib.optionalString pkgs.stdenv.isDarwin ''
     let g:fzf_preview_window = ['right:50%,~5', 'ctrl-/']
@@ -707,6 +709,7 @@ in
       tabular
       YouCompleteMe
       jedi-vim
+      thesaurus_query-vim
     ]
     ++ myVimPlugins;
     extraConfig = builtins.readFile ./vimrc_extra
