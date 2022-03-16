@@ -285,6 +285,10 @@ for opam2flake_dep in split($OPAM2FLAKE_OPAM_PACKAGES)
     call pathogen#infect(opam2flake_dep . "/share/{}/vim")
 endfor
 
+if executable('ocamlmerlin')
+    let &rtp = &rtp . "," . fnamemodify(exepath("ocamlmerlin"), ":p:h:h") . "/share/merlin/vim"
+endif
+
 " vaporwave plz
 colorscheme dracula
 
