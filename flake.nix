@@ -16,7 +16,7 @@
         # them here.
         inherit rusage;
       };
-      defaultUsername = "denbuen";
+      defaultUsername = "dbueno";
       emptyConfig = {...}: {};
       mkHomeConfig = lib.makeOverridable ({ system, homeDirectory, username ? defaultUsername, modules, stateVersion, extraConfig ? emptyConfig }:
         home-manager.lib.homeManagerConfiguration {
@@ -31,13 +31,11 @@
       nfsHomeHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/nfs-home/${username}"; } // args );
       hosts = {
         "GREATBELOW.local" = slashUsersHost {
-          username = "dbueno";
           modules = [ ./shell.nix ./gui.nix ./darwin-host.nix ./my-email.nix ];
           stateVersion = "21.11";
           system = "x86_64-darwin";
         };
         "thinklappy" = slashHomeHost {
-          username = "dbueno";
           modules = [ ./shell.nix ./gui.nix ./nixos-host.nix ./my-email.nix ];
           stateVersion = "21.11";
           system = "x86_64-linux";
