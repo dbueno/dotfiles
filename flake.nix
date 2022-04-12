@@ -30,6 +30,12 @@
       ascldapHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/ascldap/${username}"; } // args );
       nfsHomeHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/nfs-home/${username}"; } // args );
       hosts = {
+        "thinklappy" = slashHomeHost {
+          username = "dbueno";
+          modules = [ ./shell.nix ./gui.nix ./nixos-host.nix ];
+          stateVersion = "21.11";
+          system = "x86_64-linux";
+        };
       };
     in
     {
