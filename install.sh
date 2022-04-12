@@ -1,19 +1,16 @@
-#!/bin/bash
-
-# Install various useful configuration files for my shell environment and other
-# programs.
-
-INSTALL=ln
-INSTALL_FLAGS=-sf
-
-mkdir -p "$HOME/"{code,papers,docs,benchmarks,writing}
-mkdir -p "$HOME/work/"{inprogress,submitted,published}
-mkdir -p "$HOME/.mutt" "$HOME/.mutt/cache/bodies" "$HOME/.mutt/cache/headers"
-
-
-mkdir -p "$HOME/.config/nixpkgs"
-${INSTALL} ${INSTALL_FLAGS} \
-    "${PWD}/config.nix"     \
-    "${PWD}/home.nix"       \
-    "$HOME/.config/nixpkgs"
-
+#!/usr/bin/env bash
+if nix flake metadata . > /dev/null 2>&1 ; then
+    nixwithflakes=nix
+elif nixFlakes flake metadata . > /dev/null 2>&1 ; then
+    nixwithflakes=nixFlakes
+else
+    echo "Couldn't find a nix with flakes enabled. Tried nix and nixFlakes."
+    exit 1
+fi
+linktmp="$(mktemp -d -t home-manager-install.XXXXXX)"
+cleanuptmp () {
+    rm -rf "$linktmp"
+}
+trap cleanuptmp EXIT
+$nixwithflakes build -o "$linktmp/result" .#homeConfigurations.'"'"$USER@$(hostname)"'"'.activationPackage
+"$linktmp/result/activate"

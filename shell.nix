@@ -1,11 +1,5 @@
-{ config, lib, pkgs, ... }:
-
+{ config, lib, pkgs, rusage, ... }:
 let
-  linuxImports = [
-    ./i3.nix
-  ];
-  myInfo = lib.importJSON ./userconfig.json;
-
   draculaTheme = rec {
     Background = "#282A36";
     Foreground = "#F8F8F2";
@@ -72,8 +66,6 @@ let
       cp complete_alias $out/
     '';
   };
-
-  rusage = (import (builtins.fetchTarball "https://github.com/dbueno/rusage/archive/main.tar.gz")).defaultPackage.${pkgs.system};
 
   # ASCII graphs from graphviz input
   GraphEasy = pkgs.perlPackages.buildPerlPackage {
@@ -285,34 +277,15 @@ let
       (pkgs.writeShellScriptBin "sync-my-repos" (builtins.readFile ./sync-my-repos.sh))
       (pkgs.writeShellScriptBin "frequency" (builtins.readFile ./automation/frequency.sh))
     ];
-  isLinux = (builtins.currentSystem == "x86_64-linux");
 in
-
 {
   nixpkgs.overlays = [
-    (import ./nixflakes.nix)
     (import ./diff-so-fancy.nix)
   ];
-  imports = lib.optionals isLinux linuxImports;
 
   nixpkgs.config.allowUnfree = true;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
-  home.username = myInfo.username;
-  home.homeDirectory = myInfo.homeDirectory;
-
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "21.11";
 
   programs.man.enable = true;
 
@@ -357,8 +330,7 @@ in
   programs.git = {
     package = pkgs.gitFull;
     enable = true;
-    userName = myInfo.name;
-    userEmail = myInfo.email;
+    userName = "Denis Bueno";
     ignores = [
       # vim
       "*.swp" "*.swo"
@@ -448,27 +420,17 @@ in
 
   programs.kitty = {
     enable = true;
-    settings =
-      let
-        linux = {
-          font_family = "DejaVu Sans Mono";
-          font_size = "9.0";
-        };
-        mac = {
-          font_family = "SF Mono Medium";
-          font_size = "13.0";
-        };
-      in (if isLinux then linux else mac) // {
-        enabled_layouts = lib.concatStringsSep "," [
-          "tall:bias=50;full_size=1;mirrored=false"
-          "tall:bias=70;full_size=3;mirrored=false"
-          "horizontal" "fat" "stack"
-        ];
-        confirm_os_window_close = 1;
-        scrollback_pager_history_size = 10000;
-        scrollback_fill_enlarged_window = true;
-        macos_thicken_font = "0.5";
-      };
+    settings = {
+      enabled_layouts = lib.concatStringsSep "," [
+        "tall:bias=50;full_size=1;mirrored=false"
+        "tall:bias=70;full_size=3;mirrored=false"
+        "horizontal" "fat" "stack"
+      ];
+      confirm_os_window_close = 1;
+      scrollback_pager_history_size = 10000;
+      scrollback_fill_enlarged_window = true;
+      macos_thicken_font = "0.5";
+    };
     keybindings = {
       "ctrl+p" = "scroll_page_up";
       "ctrl+n" = "scroll_page_down";
@@ -650,11 +612,10 @@ in
 
   home.file = {
     ".tmux-linux".source = ./.tmux-linux;
-    ".hammerspoon/init.lua".source = ./hammerspoon.lua;
     ".gdbinit".source = ./.gdbinit;
     ".ghci".source = ./.ghci;
     ".lynxrc".source = ./.lynxrc;
-    ".config/automate-everything/repos".source = ./repos.conf;
+    # ".config/automate-everything/repos".source = ./repos.conf;
     ".latexmkrc".source = ./.latexmkrc;
   };
 
@@ -668,13 +629,11 @@ in
     matchBlocks = {
       "*" = { identitiesOnly = true; };
       "denisbueno.net" = { user = "dbueno"; };
-    }
-    // (import ./ssh_extra_blocks.nix);
+    };
   };
 
   programs.vim = {
     enable = true;
-    packageConfigurable = pkgs.vim_configurable.override { darwinSupport = pkgs.stdenv.isDarwin; guiSupport = false; };
     settings = {
       # keep buffers around when they are not visible
       hidden = true;
