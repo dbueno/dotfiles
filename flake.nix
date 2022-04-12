@@ -30,9 +30,15 @@
       ascldapHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/ascldap/${username}"; } // args );
       nfsHomeHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/nfs-home/${username}"; } // args );
       hosts = {
+        "GREATBELOW.local" = slashUsersHost {
+          username = "dbueno";
+          modules = [ ./shell.nix ./gui.nix ./darwin-host.nix ./my-email.nix ];
+          stateVersion = "21.11";
+          system = "x86_64-darwin";
+        };
         "thinklappy" = slashHomeHost {
           username = "dbueno";
-          modules = [ ./shell.nix ./gui.nix ./nixos-host.nix ];
+          modules = [ ./shell.nix ./gui.nix ./nixos-host.nix ./my-email.nix ];
           stateVersion = "21.11";
           system = "x86_64-linux";
         };

@@ -2,5 +2,5 @@
 {
   imports = [ ./i3.nix ];
 
-  firefox.enable = true;
+  programs.firefox.enable = true;
 }
