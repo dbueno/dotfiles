@@ -1053,7 +1053,7 @@ in
     duc # ncdu replacement
     zip unzip p7zip
     wdiff
-    fx # json viewer
+    fx jless # json viewer
     exa # ls
     nix-prefetch-git
     nix-prefetch-github
