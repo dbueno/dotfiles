@@ -11,11 +11,6 @@
   outputs = { self, nixpkgs, home-manager, rusage }:
     let
       lib = nixpkgs.lib;
-      specialArgs = {
-        # If you have flake outputs that need to be passed to submodules, put
-        # them here.
-        inherit rusage;
-      };
       defaultUsername = "dbueno";
       emptyConfig = {...}: {};
       mkHomeConfig = lib.makeOverridable ({ system, homeDirectory, username ? defaultUsername, modules, stateVersion, extraConfig ? emptyConfig }:
@@ -23,7 +18,9 @@
           inherit system homeDirectory username stateVersion;
           configuration = extraConfig;
           extraModules = modules;
-          extraSpecialArgs = specialArgs;
+          extraSpecialArgs = {
+            rusage = rusage.defaultPackage.${system};
+          };
         });
       slashUsersHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/Users/${username}"; } // args );
       slashHomeHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/home/${username}"; } // args );
