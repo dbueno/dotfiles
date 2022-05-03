@@ -461,6 +461,7 @@ in
       rev = "eeaa86a730e3d38649053574dc60a74ce06a01bc";
       sha256 = "3yi5e/wnLYt7b3Lkf4fhSByr18SrOzJ4zYympUQMslc=";
     } + "/diff.conf");
+    configFile."mutt/muttrc".source = ./.muttrc;
   };
 
   programs.readline = {
@@ -617,6 +618,7 @@ in
     ".lynxrc".source = ./.lynxrc;
     # ".config/automate-everything/repos".source = ./repos.conf;
     ".latexmkrc".source = ./.latexmkrc;
+    ".mailcap".source = ./.mailcap;
   };
 
   programs.tmux = {
@@ -1064,6 +1066,7 @@ in
     sshpass
     figlet toilet # ascii art
     (pkgs.callPackage onetrueawk {})
+    mutt
   ]
   ++ myScripts;
 }
