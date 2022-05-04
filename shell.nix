@@ -371,7 +371,7 @@ in
     extraConfig = {
       init = { defaultBranch = "main"; };
       core = {
-        fsyncobjectfiles = "true";
+        fsync = "true";
         sshCommand = "${pkgs.openssh}/bin/ssh -F ~/.ssh/config";
         pager = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=4 -RFX";
       };
