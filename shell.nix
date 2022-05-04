@@ -1066,6 +1066,7 @@ in
     figlet toilet # ascii art
     (pkgs.callPackage onetrueawk {})
     mutt
+    csvkit
   ]
   ++ myScripts;
 }
