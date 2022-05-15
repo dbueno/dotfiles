@@ -375,10 +375,6 @@ in
         pager = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=4 -RFX";
       };
       interactive.diffFilter = "${pkgs.diff-so-fancy}/bin/diff-so-fancy --patch";
-      diff = {
-        tool = "kitty";
-        guitool = "kitty.gui";
-      };
       difftool = {
         prompt = false;
         trustExitCode = true;
