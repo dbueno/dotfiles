@@ -379,6 +379,10 @@ in
         sshCommand = "${pkgs.openssh}/bin/ssh -F ~/.ssh/config";
         pager = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=4 -RFX";
       };
+      diff = {
+        tool = "kitty";
+        guitool = "kitty.gui";
+      };
       interactive.diffFilter = "${pkgs.diff-so-fancy}/bin/diff-so-fancy --patch";
       difftool = {
         prompt = false;
