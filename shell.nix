@@ -52,6 +52,11 @@ let
     '';
   };
 
+  sponge = pkgs.writeShellScriptBin "sponge" ''
+    # Just calls moreutils sponge
+    ${pkgs.moreutils}/bin/sponge "$@"
+  '';
+
   completeAlias = pkgs.stdenv.mkDerivation {
     pname = "complete-alias";
     version = "dev";
@@ -1058,12 +1063,12 @@ in
     GraphEasy
     record-my-session
     bunch
+    sponge
     sshpass
     figlet toilet # ascii art
     (pkgs.callPackage onetrueawk {})
     mutt
     csvkit
-    moreutils
   ]
   ++ myScripts;
 }
