@@ -1073,6 +1073,7 @@ in
     (pkgs.callPackage onetrueawk {})
     mutt
     csvkit
+    watch
   ]
   ++ myScripts;
 }
