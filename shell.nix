@@ -1074,6 +1074,7 @@ in
     mutt
     csvkit
     watch
+    rlwrap
   ]
   ++ myScripts;
 }
