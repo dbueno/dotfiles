@@ -103,7 +103,8 @@ function! ZettelFindLinksTo()
 endfunction
 
 function! ZettelFiles()
-    let command = 'rg --column --line-number --no-heading --color=always --smart-case '.shellescape('^|#ztl')
+    " let command = 'rg --column --line-number --no-heading --color=always --smart-case '.shellescape('^|#ztl')
+    let command = 'rgztl'
     call fzf#vim#grep(command, 1, fzf#vim#with_preview({'options': ['-1']}), 0)
 endfunction
 

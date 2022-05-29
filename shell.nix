@@ -90,6 +90,10 @@ let
     };
   };
 
+  rgztl = pkgs.writeShellScriptBin "rgztl" ''
+    rg -l '#ztl' | xargs rg --column --line-number --no-heading --color=always --smart-case -- '^|#ztl'
+  '';
+
   bunch = pkgs.writeShellScriptBin "bunch" ''
     # Bunches stdin lines into groups in multiple output files. Each new output
     # file is based on a trigger, which is just some text (not a regex,
@@ -1067,6 +1071,7 @@ in
     GraphEasy
     record-my-session
     bunch
+    rgztl
     sponge
     sshpass
     figlet toilet # ascii art
