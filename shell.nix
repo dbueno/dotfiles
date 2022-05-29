@@ -91,7 +91,7 @@ let
   };
 
   rgztl = pkgs.writeShellScriptBin "rgztl" ''
-    rg -l '#ztl' | xargs rg --column --line-number --no-heading --color=always --smart-case -- '^|#ztl'
+    rg -l -0 '#ztl' | xargs -0 rg --column --line-number --no-heading --color=always --smart-case -- '^|#ztl'
   '';
 
   bunch = pkgs.writeShellScriptBin "bunch" ''
