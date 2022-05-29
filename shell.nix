@@ -90,6 +90,8 @@ let
     };
   };
 
+  # Filters all zettel notes, then print the contents of each zettel, for a
+  # subsequent fzf.vim search.
   rgztl = pkgs.writeShellScriptBin "rgztl" ''
     rg -l -0 '#ztl' | xargs -0 rg --column --line-number --no-heading --color=always --smart-case -- '^|#ztl'
   '';
