@@ -92,8 +92,12 @@ let
 
   # Filters all zettel notes, then print the contents of each zettel, for a
   # subsequent fzf.vim search.
-  rgztl = pkgs.writeShellScriptBin "rgztl" ''
+  ztl_filter = pkgs.writeShellScriptBin "ztl_filter" ''
     rg -l -0 '#ztl' | xargs -0 rg --column --line-number --no-heading --color=always --smart-case -- '^|#ztl'
+  '';
+
+  ztl_tagcloud = pkgs.writeShellScriptBin "ztl_tagcloud" ''
+    rg --no-column --no-line-number -I -o -w '#[a-zA-Z_-]\w*' | sort | uniq
   '';
 
   bunch = pkgs.writeShellScriptBin "bunch" ''
@@ -1073,7 +1077,7 @@ in
     GraphEasy
     record-my-session
     bunch
-    rgztl
+    ztl_filter ztl_tagcloud
     sponge
     sshpass
     figlet toilet # ascii art
