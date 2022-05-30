@@ -5,7 +5,10 @@
     home-manager.url = "github:nix-community/home-manager";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    rusage.url = "https://github.com/dbueno/rusage/archive/main.tar.gz";
+    rusage = {
+      url = "https://github.com/dbueno/rusage/archive/main.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, rusage }:
