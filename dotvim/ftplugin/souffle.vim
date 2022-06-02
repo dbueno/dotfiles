@@ -1,2 +1,2 @@
-set cursorline
-set sw=8
+setlocal cursorline
+setlocal sw=8
