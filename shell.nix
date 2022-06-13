@@ -682,6 +682,7 @@ in
       tabular
       YouCompleteMe
       jedi-vim
+      vimoutliner
     ]
     ++ myVimPlugins;
     extraConfig = builtins.readFile ./vimrc_extra
