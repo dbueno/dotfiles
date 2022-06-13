@@ -30,7 +30,7 @@
       ascldapHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/ascldap/${username}"; } // args );
       nfsHomeHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/nfs-home/${username}"; } // args );
       hosts = {
-        "GREATBELOW.local" = slashUsersHost {
+        "GREATBELOW.localdomain" = slashUsersHost {
           modules = [ ./shell.nix ./gui.nix ./darwin-host.nix ./my-email.nix ];
           stateVersion = "21.11";
           system = "x86_64-darwin";
