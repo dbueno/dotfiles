@@ -694,6 +694,8 @@ in
       YouCompleteMe
       jedi-vim
       vimoutliner
+      goyo-vim
+      limelight-vim
     ]
     ++ myVimPlugins;
     extraConfig = builtins.readFile ./vimrc_extra
