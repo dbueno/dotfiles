@@ -217,11 +217,22 @@ let
           rev = "96ee4c9c7296dbb75f7e927e93e4576dec1c898e";
         };
       };
+      vim-voom = pkgs.vimUtils.buildVimPlugin rec {
+        pname = "vim-voom";
+        version = "master";
+        src = pkgs.fetchFromGitHub {
+          owner = "${pname}";
+          repo = "VOoM";
+          rev = "${version}";
+          sha256 = "sha256-urmOP3BiavTPDaNlvc0Y/oIQLLe5AKhZZAWom8DK+J4=";
+        };
+      };
     in [
       my-vim-tweaks
       vim-souffle
       vim-euforia
       vim-qfgrep
+      vim-voom
       #vim-riv
     ];
 
