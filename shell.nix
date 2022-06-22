@@ -227,12 +227,23 @@ let
           sha256 = "sha256-urmOP3BiavTPDaNlvc0Y/oIQLLe5AKhZZAWom8DK+J4=";
         };
       };
+      vim-textobj-sentence = pkgs.vimUtils.buildVimPlugin rec {
+        pname = "vim-textobj-sentence";
+        version = "master";
+        src = pkgs.fetchFromGitHub {
+          owner = "preservim";
+          repo = "${pname}";
+          rev = "${version}";
+          sha256 = "sha256-T8Uyxtf0ETOI9oonGbo0gSuwSpu6DxydKpR+jwzDhno=";
+        };
+      };
     in [
       my-vim-tweaks
       vim-souffle
       vim-euforia
       vim-qfgrep
       vim-voom
+      vim-textobj-sentence
       #vim-riv
     ];
 
@@ -696,6 +707,7 @@ in
       vimoutliner
       goyo-vim
       limelight-vim
+      vim-textobj-user
     ]
     ++ myVimPlugins;
     extraConfig = builtins.readFile ./vimrc_extra
