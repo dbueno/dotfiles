@@ -1112,6 +1112,7 @@ in
     csvkit
     watch
     rlwrap
+    colordiff
   ]
   ++ myScripts;
 }
