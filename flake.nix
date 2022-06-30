@@ -15,7 +15,12 @@
     let
       lib = nixpkgs.lib;
       defaultUsername = "dbueno";
-      emptyConfig = {...}: {};
+      emptyConfig = {...}: {
+        xdg.dataFile = {
+          "hm-inputs/nixpkgs".source = nixpkgs;
+          "hm-inputs/home-manager".source = home-manager;
+        };
+      };
       mkHomeConfig = lib.makeOverridable ({ system, homeDirectory, username ? defaultUsername, modules, stateVersion, extraConfig ? emptyConfig }:
         home-manager.lib.homeManagerConfiguration {
           inherit system homeDirectory username stateVersion;
