@@ -1,5 +1,9 @@
 " for two columns on my thinkpad
-set tw=78
+set tw=0
+set wrap
+set wrapmargin=78
+set linebreak " visually wrap at word boundaries
+set breakindent
 set fixeol
 set nonumber
 
