@@ -708,6 +708,7 @@ in
       goyo-vim
       limelight-vim
       vim-textobj-user
+      vim-markdown
     ]
     ++ myVimPlugins;
     extraConfig = builtins.readFile ./vimrc_extra

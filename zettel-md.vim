@@ -26,11 +26,10 @@ endfunction
 " Pops up a list of results linking to this zettel.
 function! ZettelFindLinksTo()
     " Gets the anchor from the fimd line of the note.
-    let l:name = expand('%:t')
-    " let l:line = getline(1)
-    " let l:prev_zettel_name = substitute(substitute(l:line, '^.. _', '', ''), ':$', '', '')
-    " patterns: anchor_, `anchor`_, `link text <anchor>`_
-    let search_term = l:name . '\)'
+    let l:name = expand('%:t:r')
+    " Only the first work in the filename is the zettel id
+    let l:id = split(l:name)[0]
+    let search_term = l:id
     let command = 'rg -m 1 --column --line-number --no-heading --color=always --smart-case '.shellescape(search_term)
     " don't use '-1' option because i want a list regardless
     call fzf#vim#grep(command, 1, fzf#vim#with_preview({'options': []}), 0)
@@ -41,7 +40,6 @@ function! ZettelFiles()
     let command = 'ztl_filter'
     call fzf#vim#grep(command, 1, fzf#vim#with_preview({'options': ['-1']}), 0)
 endfunction
-
 
 " Opens in a split the link source from a file in the current directory (in
 " FZF window if there are multiple).
