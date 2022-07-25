@@ -711,6 +711,7 @@ in
     ]
     ++ myVimPlugins;
     extraConfig = builtins.readFile ./vimrc_extra
+    + builtins.readFile ./zettel-md.vim
     + ''
       set cmdheight=2
 
