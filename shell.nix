@@ -386,6 +386,7 @@ in
       pa = "push --all";
       co = "checkout";
       ci = "commit";
+      sw = "switch";
       s = let
         # Prints status without untracked files
         cmd = pkgs.writeShellScriptBin "my-git-status" ''
@@ -415,6 +416,10 @@ in
         tool = "kitty";
         guitool = "kitty.gui";
       };
+      # Works around what is apparently a git bug in parsing diff-so-fancy's
+      # ansi directives. This reverts git to an older interactive diff engine
+      # that doesn't have this parsing problem.
+      add.interactive.useBuiltin = false;
       interactive.diffFilter = "${pkgs.diff-so-fancy}/bin/diff-so-fancy --patch";
       difftool = {
         prompt = false;
