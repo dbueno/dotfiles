@@ -464,8 +464,7 @@ in
     settings = {
       enabled_layouts = lib.concatStringsSep "," [
         "tall:bias=50;full_size=1;mirrored=false"
-        "tall:bias=70;full_size=3;mirrored=false"
-        "horizontal" "fat" "stack"
+        "horizontal" "vertical" "fat"
       ];
       shell = "${pkgs.bashInteractive}/bin/bash --login -i";
       confirm_os_window_close = 1;
@@ -485,6 +484,8 @@ in
       "f11" = "toggle_layout stack";
       "f1" = "create_marker";
       "f2" = "remove_marker";
+      "ctrl+[" = "layout_action decrease_num_full_size_windows";
+      "ctrl+]" = "layout_action increase_num_full_size_windows";
     };
     # extraConfig = builtins.readFile ./kitty-themes/nord/nord.conf;
     extraConfig = builtins.readFile (pkgs.fetchFromGitHub {
