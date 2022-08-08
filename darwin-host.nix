@@ -5,8 +5,8 @@
   };
 
   programs.kitty.settings = {
-    font_family = "SF Mono Medium";
-    font_size = "13.0";
+    font_family = "SF Mono Regular";
+    font_size = "11.0";
   };
 
   programs.git.extraConfig.core.fsync = "all";
