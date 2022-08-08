@@ -467,6 +467,7 @@ in
         "tall:bias=70;full_size=3;mirrored=false"
         "horizontal" "fat" "stack"
       ];
+      shell = "${pkgs.bashInteractive}/bin/bash --login -i";
       confirm_os_window_close = 1;
       scrollback_pager_history_size = 10000;
       scrollback_fill_enlarged_window = true;
