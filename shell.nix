@@ -464,7 +464,7 @@ in
     settings = {
       enabled_layouts = lib.concatStringsSep "," [
         "tall:bias=50;full_size=1;mirrored=false"
-        "horizontal" "vertical" "fat"
+        "horizontal" "vertical" "fat" "stack"
       ];
       shell = "${pkgs.bashInteractive}/bin/bash --login -i";
       confirm_os_window_close = 1;
