@@ -482,8 +482,11 @@ in
       "kitty_mod+]" = "next_layout";
       "f12" = "show_scrollback";
       "f11" = "toggle_layout stack";
+      "f10" = "show_last_command_output";
       "f1" = "create_marker";
       "f2" = "remove_marker";
+      "ctrl+0" = "scroll_to_mark next";
+      "ctrl+9" = "scroll_to_mark prev";
       "ctrl+[" = "layout_action decrease_num_full_size_windows";
       "ctrl+]" = "layout_action increase_num_full_size_windows";
     };
