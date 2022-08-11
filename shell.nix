@@ -317,7 +317,8 @@ let
 in
 {
   nixpkgs.overlays = [
-    (import ./diff-so-fancy.nix)
+    (import ./overlays/diff-so-fancy.nix)
+    (import ./overlays/YouCompleteMe.nix)
   ];
 
   nixpkgs.config.allowUnfree = true;
