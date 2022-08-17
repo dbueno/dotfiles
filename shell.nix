@@ -563,6 +563,8 @@ in
       #
       # The . is here so that if I type cd <dir> it goes to curdir first
       CDPATH = ".:~/work/inprogress";
+      GRAPHVIZ_DOT = "${pkgs.graphviz}/bin/dot";
+      RSVG_CONVERT = "${pkgs.librsvg}/bin/rsvg-convert";
     };
 
     shellAliases =
@@ -598,15 +600,6 @@ in
 
       # average = "${pkgs.R}/bin/Rscript -e 'd<-scan(\"stdin\", quiet=TRUE)' -e 'summary(d)'";
 
-      # Displays an image (png) in the terminal
-      icat = "kitty +kitten icat --align=left";
-      # Displays an SVG in the terminal
-      isvg = "${pkgs.librsvg}/bin/rsvg-convert | icat";
-      # Displays a DOT graph in the terminal
-      # see ratio="compress" or unflatten | idot
-      idot = ''${pkgs.graphviz}/bin/dot -Gbgcolor=transparent -Nfontcolor=#2E3440 -Nstyle=filled \
-        -Nfillcolor=#D8DEE9 -Ecolor=#5E81AC -Efontcolor=#8FBCBB -Nfontname=Helvetica -Efontname=Helvetica \
-        -Nfontsize=11 -Efontsize=10 -Gratio=compress -Tsvg | isvg'';
       # XXX where is hb-view
       hb-feat =
         let cmd = pkgs.writeShellScriptBin "hb-feat" ''

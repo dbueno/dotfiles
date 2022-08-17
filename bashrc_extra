@@ -2,6 +2,22 @@
 #alias rmws="awk '{sub(/[ \t]+$/, \"\");print}'"
 # alias average="Rscript -e 'd<-scan(\"stdin\", quiet=TRUE)' -e 'cat(min(d), max(d), median(d), mean(d), sep=\"\n\")'"
 
+# Displays an image (png) in the terminal
+function icat {
+    kitty +kitten icat --align=left
+}
+# Displays an SVG in the terminal
+function isvg {
+    "$RSVG_CONVERT" | icat
+}
+# Displays a graph in the terminal
+function idot {
+    "$GRAPHVIZ_DOT" -Gbgcolor=transparent -Nfontcolor=#2E3440 -Nstyle=filled \
+        -Nfillcolor=#D8DEE9 -Ecolor=#5E81AC -Efontcolor=#8FBCBB -Nfontname=Helvetica -Efontname=Helvetica \
+        -Nfontsize=11 -Efontsize=10 -Gratio=compress "$@" -Tsvg | isvg
+}
+
+
 ## Adds to path but only if it's not there
 function add_to_path {
   path="$1"
