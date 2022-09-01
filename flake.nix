@@ -22,10 +22,12 @@
         };
       };
       mkHomeConfig = lib.makeOverridable ({ system, homeDirectory, username ? defaultUsername, modules, stateVersion, extraConfig ? emptyConfig }:
-        home-manager.lib.homeManagerConfiguration {
-          inherit system homeDirectory username stateVersion;
-          configuration = extraConfig;
-          extraModules = modules;
+      home-manager.lib.homeManagerConfiguration {
+          modules = modules ++ [
+            { home = { inherit username stateVersion homeDirectory; }; }
+            extraConfig
+          ];
+          pkgs = nixpkgs.legacyPackages.${system};
           extraSpecialArgs = {
             rusage = rusage.defaultPackage.${system};
           };
