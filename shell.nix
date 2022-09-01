@@ -637,6 +637,8 @@ in
         complete -F _complete_alias rm
         complete -F _complete_alias aa
         complete -F _complete_alias ss
+
+        source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"
       '';
 
     profileExtra = ''
