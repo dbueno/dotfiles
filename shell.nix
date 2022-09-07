@@ -35,60 +35,18 @@ let
     DiffChanged = Orange;
   };
 
-  onetrueawk = { stdenv, bison, yacc }: stdenv.mkDerivation rec {
-    pname = "onetrueawk";
-    version = "20210724";
-    src = pkgs.fetchFromGitHub {
-      owner = "${pname}";
-      repo = "awk";
-      rev = "f9affa922c5e074990a999d486d4bc823590fd93";
-      sha256 = "06590dqql0pg3fdqpssh7ca1d02kzswddrxwa8xd59c15vsz9r42";
-    };
-    patchPhase = '' substituteInPlace makefile --replace 'gcc' 'cc' '';
-    nativeBuildInputs = [ bison yacc ];
-    installPhase = ''
-      mkdir -p $out/bin
-      cp a.out $out/bin/onetrueawk
-    '';
-  };
+
+  onetrueawk = pkgs.callPackage ./pkgs/onetrueawk/default.nix {};
+  diff2html = pkgs.callPackage ./pkgs/diff2html/default.nix {};
+  completeAlias = pkgs.callPackage ./pkgs/complete-alias/default.nix {};
+  GraphEasy = pkgs.callPackage ./pkgs/GraphEasy/default.nix {};
+
+  bunch = pkgs.writeShellScriptBin "bunch" (builtins.readFile ./scripts/bunch.sh);
 
   sponge = pkgs.writeShellScriptBin "sponge" ''
     # Just calls moreutils sponge
     ${pkgs.moreutils}/bin/sponge "$@"
   '';
-
-  completeAlias = pkgs.stdenv.mkDerivation {
-    pname = "complete-alias";
-    version = "dev";
-    src = pkgs.fetchFromGitHub {
-      owner = "cykerway";
-      repo = "complete-alias";
-      rev = "b16b183f6bf0029b9714b0e0178b6bd28eda52f3";
-      sha256 = "1a3szf0bvj0mk2kcq1052q9xzjqiwgmavfg348dspfz543nigvk2";
-    };
-    installPhase = ''
-      mkdir -p $out
-      cp complete_alias $out/
-    '';
-  };
-
-  # ASCII graphs from graphviz input
-  GraphEasy = pkgs.perlPackages.buildPerlPackage {
-    pname = "Graph-Easy";
-    version = "0.76";
-    src = pkgs.fetchurl {
-      url = "mirror://cpan/authors/id/S/SH/SHLOMIF/Graph-Easy-0.76.tar.gz";
-      sha256 = "d4a2c10aebef663b598ea37f3aa3e3b752acf1fbbb961232c3dbe1155008d1fa";
-    };
-    buildInputs = [ pkgs.makeWrapper ];
-    postInstall = ''
-      wrapProgram $out/bin/graph-easy --set PERL5LIB ${pkgs.perlPackages.makeFullPerlPath []}
-    '';
-    meta = {
-      description = "Convert or render graphs (as ASCII, HTML, SVG or via Graphviz)";
-      license = lib.licenses.gpl1Plus;
-    };
-  };
 
   # Filters all zettel notes, then print the contents of each zettel, for a
   # subsequent fzf.vim search.
@@ -98,43 +56,6 @@ let
 
   ztl_tagcloud = pkgs.writeShellScriptBin "ztl_tagcloud" ''
     rg --no-column --no-line-number -I -o -w '#[a-zA-Z_-]\w*' | sort | uniq
-  '';
-
-  bunch = pkgs.writeShellScriptBin "bunch" ''
-    # Bunches stdin lines into groups in multiple output files. Each new output
-    # file is based on a trigger, which is just some text (not a regex,
-    # currently). Every time a line matches the trigger a new output file is
-    # created and subsequent input is echoed to that output file.
-
-    usage() { echo  "Usage: $0 [-d dir] trigger extension" 1>&2; exit 1; }
-
-    dir=""
-    while getopts d: flag
-    do
-        case "''${flag}" in
-            d) dir=''${OPTARG};;
-            *) usage;
-        esac
-    done
-    shift $((OPTIND-1))
-
-    trigger="$1"
-    ext="$2"
-
-    if test -z "$trigger" || test -z "$ext"; then
-        usage
-    fi
-    #echo $trigger $ext $dir
-    i=0
-    test -n "$dir" && cd "$dir"
-    exec &> $i.$ext
-    while read; do
-        if [[ "$REPLY" == *$trigger* ]]; then
-            i=$((i+1))
-            exec &> $i.$ext
-        fi
-        echo $REPLY
-    done
   '';
 
   record-my-session = pkgs.writeShellScriptBin "record-my-session" ''
@@ -171,7 +92,7 @@ let
   pythonWithNumpy = pkgs.python3.withPackages (p: with p; [
     pandas numpy scipy ]);
 
-  myVimPlugins =
+  vim-plugins =
     let
       my-vim-tweaks = pkgs.vimUtils.buildVimPlugin {
         pname = "denisbueno-vim-tweaks.vim";
@@ -237,24 +158,21 @@ let
           sha256 = "sha256-T8Uyxtf0ETOI9oonGbo0gSuwSpu6DxydKpR+jwzDhno=";
         };
       };
-    in [
-      my-vim-tweaks
-      vim-souffle
-      vim-euforia
-      vim-qfgrep
-      vim-voom
-      vim-textobj-sentence
-      #vim-riv
-    ];
-
-  # extra config for plugins
-  myVimPluginsConfig = ''
-    " riv wants to use large patterns
-    set maxmempattern=2000
-  ''
-  + lib.optionalString pkgs.stdenv.isDarwin ''
-    let g:fzf_preview_window = ['right:50%,~5', 'ctrl-/']
-  '';
+    in {
+      programs.vim.plugins = [
+        my-vim-tweaks
+        vim-souffle
+        vim-euforia
+        vim-qfgrep
+        vim-voom
+        vim-textobj-sentence
+        #vim-riv
+      ];
+      programs.vim.extraConfig = ''
+        " riv wants to use large patterns
+        set maxmempattern=2000
+      '';
+    };
 
   myScripts =
     let
@@ -343,6 +261,7 @@ in
 {
   imports = [
     diff-git-config
+    vim-plugins
   ];
 
   nixpkgs.overlays = [
@@ -739,14 +658,14 @@ in
       limelight-vim
       vim-textobj-user
       vim-markdown
-    ]
-    ++ myVimPlugins;
+    ];
     extraConfig = builtins.readFile ./vimrc_extra
     + builtins.readFile ./zettel-md.vim
     + ''
       set cmdheight=2
-
-      ${myVimPluginsConfig}
+    ''
+    + lib.optionalString pkgs.stdenv.isDarwin ''
+      let g:fzf_preview_window = ['right:50%,~5', 'ctrl-/']
     '';
   };
 
@@ -1139,14 +1058,14 @@ in
     sponge
     sshpass
     figlet toilet # ascii art
-    (pkgs.callPackage onetrueawk {})
+    onetrueawk
     mutt
     csvkit
     watch
     rlwrap
     # diff tools
     colordiff difftastic
-    nodePackages.json-diff
+    nodePackages.json-diff diff2html
   ]
   ++ myScripts;
 }
