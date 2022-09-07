@@ -102,9 +102,9 @@ nnoremap <Leader>T :TagbarToggle<CR>
 " <Leader>u - list of buffers
 nnoremap <Leader>u :Buffers<CR>
 " <Leader>f - list of files under the current Git repo
-nnoremap <Leader>f :<C-u>GitFiles<CR>
+nnoremap <Leader>F :<C-u>GitFiles<CR>
 " <Leader>f - list of files under the current directory
-nnoremap <Leader>F :<C-u>Files<CR>
+nnoremap <Leader>f :<C-u>Files<CR>
 " <Leader>f - list of tags
 nnoremap <Leader>t :Tags<CR>
 
