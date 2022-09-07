@@ -7,8 +7,8 @@ mkYarnPackage {
     hash = "sha256-Z0beAIXQq85qWUSE7F1azNIYekUJoiBNqdLtDUwH82Q=";
   };
 
-  preBuild = ''
-    yarn prepare
+  buildPhase = ''
+    yarn --offline run build
   '';
 
   meta = {
