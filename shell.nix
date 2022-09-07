@@ -1120,7 +1120,8 @@ in
     csvkit
     watch
     rlwrap
-    colordiff
+    # diff tools
+    colordiff difftastic
     nodePackages.json-diff
   ]
   ++ myScripts;
