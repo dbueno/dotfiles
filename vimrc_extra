@@ -109,7 +109,7 @@ nnoremap <Leader>f :<C-u>Files<CR>
 nnoremap <Leader>t :Tags<CR>
 
 " <Leader>d deletes the current buffer
-nnoremap <Leader>d :bd<CR>
+" nnoremap <Leader>d :bd<CR>
 
 " Insert current date into buffer. Used for note taking.
 nnoremap <Leader>it "=strftime("%c")<CR>p
