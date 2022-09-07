@@ -250,8 +250,11 @@ let
         # ansi directives. This reverts git to an older interactive diff engine
         # that doesn't have this parsing problem.
         add.interactive.useBuiltin = false;
-        delta.navigate = true;
-        delta.light = false;
+        delta = {
+          navigate = true;
+          light = false;
+          syntax-theme = "Dracula";
+        };
         merge.conflictstyle = "diff3";
         diff.colorMoved = "default";
       };
