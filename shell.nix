@@ -314,8 +314,37 @@ let
       (pkgs.writeShellScriptBin "sync-my-repos" (builtins.readFile ./sync-my-repos.sh))
       (pkgs.writeShellScriptBin "frequency" (builtins.readFile ./automation/frequency.sh))
     ];
+    diff-so-fancy-git-config = {
+      programs.git.extraConfig = {
+        core.pager = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=4 -RFX";
+        interactive.diffFilter = "${pkgs.diff-so-fancy}/bin/diff-so-fancy --patch";
+        # Works around what is apparently a git bug in parsing diff-so-fancy's
+        # ansi directives. This reverts git to an older interactive diff engine
+        # that doesn't have this parsing problem.
+        add.interactive.useBuiltin = false;
+      };
+    };
+    delta-git-config = {
+      programs.git.extraConfig = {
+        core.pager = "${pkgs.delta}/bin/delta";
+        interactive.diffFilter = "${pkgs.delta}/bin/delta --color-only";
+        # Works around what is apparently a git bug in parsing diff-so-fancy's
+        # ansi directives. This reverts git to an older interactive diff engine
+        # that doesn't have this parsing problem.
+        add.interactive.useBuiltin = false;
+        delta.navigate = true;
+        delta.light = false;
+        merge.conflictstyle = "diff3";
+        diff.colorMoved = "default";
+      };
+    };
+    diff-git-config = delta-git-config;
 in
 {
+  imports = [
+    diff-git-config
+  ];
+
   nixpkgs.overlays = [
     (import ./overlays/diff-so-fancy.nix)
     (import ./overlays/YouCompleteMe.nix)
@@ -407,21 +436,16 @@ in
       f = "fetch";
     };
 
-    extraConfig = {
+    extraConfig =
+      {
       init = { defaultBranch = "main"; };
       core = {
         sshCommand = "${pkgs.openssh}/bin/ssh -F ~/.ssh/config";
-        pager = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=4 -RFX";
       };
       diff = {
         tool = "kitty";
         guitool = "kitty.gui";
       };
-      # Works around what is apparently a git bug in parsing diff-so-fancy's
-      # ansi directives. This reverts git to an older interactive diff engine
-      # that doesn't have this parsing problem.
-      add.interactive.useBuiltin = false;
-      interactive.diffFilter = "${pkgs.diff-so-fancy}/bin/diff-so-fancy --patch";
       difftool = {
         prompt = false;
         trustExitCode = true;
