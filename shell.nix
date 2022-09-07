@@ -1121,6 +1121,7 @@ in
     watch
     rlwrap
     colordiff
+    nodePackages.json-diff
   ]
   ++ myScripts;
 }
