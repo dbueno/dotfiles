@@ -417,7 +417,6 @@ in
       confirm_os_window_close = 1;
       scrollback_pager_history_size = 10000;
       scrollback_fill_enlarged_window = true;
-      macos_thicken_font = "0.5";
     };
     keybindings = {
       "ctrl+p" = "scroll_page_up";
