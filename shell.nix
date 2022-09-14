@@ -518,6 +518,9 @@ in
       in
       (if pkgs.stdenv.isDarwin then { lldb = "PATH=/usr/bin:$PATH lldb"; } else {})
       // {
+      ztl = ''
+        vim -c ":cd %:p:h" "$HOME/thearchive/202004201149 Slip-box process checklist.md"
+      '';
       a =
         let
           cmd = pkgs.writeShellScriptBin "my-ls" ''
