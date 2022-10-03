@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
     sha256 = "06590dqql0pg3fdqpssh7ca1d02kzswddrxwa8xd59c15vsz9r42";
   };
   patchPhase = '' substituteInPlace makefile --replace 'gcc' 'cc' '';
-  nativeBuildInputs = [ bison yacc ];
+  nativeBuildInputs = [ bison ];
   installPhase = ''
     mkdir -p $out/bin
     cp a.out $out/bin/onetrueawk
