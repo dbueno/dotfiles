@@ -358,8 +358,9 @@ in
       f = "fetch";
     };
 
-    extraConfig =
-      {
+    extraConfig = {
+      # Force git to make me set an email inside each repo.
+      user.useConfigOnly = true;
       init = { defaultBranch = "main"; };
       core = {
         sshCommand = "${pkgs.openssh}/bin/ssh -F ~/.ssh/config";
