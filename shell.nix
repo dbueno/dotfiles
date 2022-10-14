@@ -138,6 +138,16 @@ let
           rev = "96ee4c9c7296dbb75f7e927e93e4576dec1c898e";
         };
       };
+      vim-shimple = pkgs.vimUtils.buildVimPlugin rec {
+        pname = "shimple.vim";
+        version = "1f652298569081579a773ed629fa7bde2ae7f115";
+        src = pkgs.fetchFromGitHub {
+          owner = "dbueno";
+          repo = "vim-shimple";
+          rev = "${version}";
+          sha256 = "mFZf59RoIMfGW/EbsEbdsVrYzJjOrOgA4oo3AsprZhc=";
+        };
+      };
       vim-voom = pkgs.vimUtils.buildVimPlugin rec {
         pname = "vim-voom";
         version = "master";
@@ -163,6 +173,7 @@ let
         my-vim-tweaks
         vim-souffle
         vim-euforia
+        vim-shimple
         vim-qfgrep
         vim-voom
         vim-textobj-sentence
