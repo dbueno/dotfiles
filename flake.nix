@@ -38,12 +38,12 @@
       nfsHomeHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/nfs-home/${username}"; } // args );
       hosts = {
         "GREATBELOW.localdomain" = slashUsersHost {
-          modules = [ ./shell.nix ./gui.nix ./darwin-host.nix ./my-email.nix ];
+          modules = [ ./shell.nix ./bash.nix ./gui.nix ./darwin-host.nix ./my-email.nix ];
           stateVersion = "21.11";
           system = "x86_64-darwin";
         };
         "thinklappy" = slashHomeHost {
-          modules = [ ./shell.nix ./gui.nix ./nixos-host.nix ./my-email.nix ];
+          modules = [ ./shell.nix ./bash.nix ./gui.nix ./nixos-host.nix ./my-email.nix ];
           stateVersion = "21.11";
           system = "x86_64-linux";
         };
