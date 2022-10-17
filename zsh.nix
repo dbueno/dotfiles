@@ -130,6 +130,9 @@ in
       promptcommand() { eval "$PROMPT_COMMAND" }
       precmd_functions=(promptcommand)
       bueno_minimalist_prompt
+
+      test -f "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.zsh" && . "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.zsh"
+      . $HOME/.zshrc_local
     '';
   };
 
