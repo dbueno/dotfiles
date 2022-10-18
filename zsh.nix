@@ -34,7 +34,8 @@ in
     history = {
       size = 1000000;
       save = 1000000;
-      ignorePatterns = [ "\"&\"" "\"[ ]*\"" "exit" "pwd" "\"[bf]g\"" "no" "lo" "lt" "pd" "c" "a" "aa" "s" "ss" "\"g a\"" "\"g s\"" "\"g ss\"" "reset" ];
+      ignorePatterns = [ "&" "exit" "pwd" "fg" "bg" "no" "lo" "lt" "pd" "c" "a" "aa" "s" "ss" "g a" "g s" "g ss" "reset" ];
+      share = false;
     };
 
     cdpath = [ "." "~/work/inprogress" ];
@@ -102,8 +103,12 @@ in
       d = "kitty +kitten diff";
     };
 
-    initExtra = ''
+    initExtraFirst = ''
       export LC_ALL="en_US.UTF-8"
+      export INC_APPEND_HISTORY
+    '';
+
+    initExtra = ''
       # PS1 settings are for interactive shells (login or no), so they should be
       # set in .bashrc.
       # Colors the prompt red if the exit code argument isn't 0.
@@ -111,7 +116,7 @@ in
           if test "$1" -eq 0; then
               print "%{%F{green}%B%};%{%f%b%}"
           else
-              print "%{%F{purple}%B};%{%f%b%}"
+              print "%{%F{red}%B%};%{%f%b%}"
           fi
       }
       function __colorcode_setps1 {
