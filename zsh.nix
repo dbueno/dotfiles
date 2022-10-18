@@ -103,15 +103,15 @@ in
     };
 
     initExtra = ''
+      export LC_ALL="en_US.UTF-8"
       # PS1 settings are for interactive shells (login or no), so they should be
       # set in .bashrc.
       # Colors the prompt red if the exit code argument isn't 0.
       function __colorcode_exit {
           if test "$1" -eq 0; then
-              # printf ";"
-              printf "\033[01;32m;\033[0m"
+              print "%{%F{green}%B%};%{%f%b%}"
           else
-              printf "\033[01;31m;\033[0m"
+              print "%{%F{purple}%B};%{%f%b%}"
           fi
       }
       function __colorcode_setps1 {
