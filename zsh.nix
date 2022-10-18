@@ -136,7 +136,7 @@ in
       precmd_functions=(promptcommand)
       bueno_minimalist_prompt
 
-      test -f "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.zsh" && . "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.zsh"
+      test -f "$KITTY_INSTALLATION_DIR/shell-integration/zsh/kitty.zsh" && . "$KITTY_INSTALLATION_DIR/shell-integration/zsh/kitty.zsh"
       . $HOME/.zshrc_local
     '';
   };
