@@ -43,7 +43,7 @@
           system = "x86_64-darwin";
         };
         "thinklappy" = slashHomeHost {
-          modules = [ ./shell.nix ./bash.nix ./gui.nix ./nixos-host.nix ./my-email.nix ];
+          modules = [ ./shell.nix ./zsh.nix ./gui.nix ./nixos-host.nix ./my-email.nix ];
           stateVersion = "21.11";
           system = "x86_64-linux";
         };
