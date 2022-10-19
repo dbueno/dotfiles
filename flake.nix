@@ -36,10 +36,12 @@
       slashHomeHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/home/${username}"; } // args );
       ascldapHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/ascldap/${username}"; } // args );
       nfsHomeHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/nfs-home/${username}"; } // args );
-      hosts = {
+      hosts =
+        let
+          dev-modules = [ ./development/python/default.nix ./development/ocaml/default.nix ];
+        in {
         "GREATBELOW.localdomain" = slashUsersHost {
-          modules = [ ./shell.nix ./bash.nix ./gui.nix ./darwin-host.nix ./my-email.nix
-            ./development/python/default.nix ];
+          modules = [ ./shell.nix ./bash.nix ./gui.nix ./darwin-host.nix ./my-email.nix ] ++ dev-modules;
           stateVersion = "21.11";
           system = "x86_64-darwin";
         };

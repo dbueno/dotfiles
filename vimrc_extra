@@ -70,9 +70,6 @@ command! ZettelFollowLink :call ZettelFzfRgLinkSource()
 " my simple statusline, airline was a steaming pile
 set statusline=%q%t\ @\ %P\ [ft=%Y%M%R%W%H]\ char:0x%B\ pos\ %l:%c\ %=%<%{expand('%:~:.:h')}
 
-" disables mappings from default ocaml ftplugin
-let g:no_ocaml_maps = 1
-
 set tags=./tags,./TAGS,tags,TAGS,./.tags,./.TAGS,.tags,.TAGS,../../tags,../tags
 let &tags.=expand(",$TAGS")
 " R mode customizations
@@ -223,14 +220,6 @@ endif
 
 " load all the vim packages now, including pathogen
 packloadall
-
-for opam2flake_dep in split($OPAM2FLAKE_OPAM_PACKAGES)
-    call pathogen#infect(opam2flake_dep . "/share/{}/vim")
-endfor
-
-if executable('ocamlmerlin')
-    let &rtp = &rtp . "," . fnamemodify(exepath("ocamlmerlin"), ":p:h:h") . "/share/merlin/vim"
-endif
 
 " vaporwave plz
 colorscheme dracula
