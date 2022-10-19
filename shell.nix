@@ -279,7 +279,6 @@ in
 
   nixpkgs.overlays = [
     (import ./overlays/diff-so-fancy.nix)
-    (import ./overlays/YouCompleteMe.nix)
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -532,8 +531,6 @@ in
       vim-commentary
       vim-repeat
       tabular
-      YouCompleteMe
-      jedi-vim
       vimoutliner
       goyo-vim
       limelight-vim

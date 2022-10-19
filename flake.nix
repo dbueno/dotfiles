@@ -38,7 +38,8 @@
       nfsHomeHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/nfs-home/${username}"; } // args );
       hosts = {
         "GREATBELOW.localdomain" = slashUsersHost {
-          modules = [ ./shell.nix ./bash.nix ./gui.nix ./darwin-host.nix ./my-email.nix ];
+          modules = [ ./shell.nix ./bash.nix ./gui.nix ./darwin-host.nix ./my-email.nix
+            ./development/python/default.nix ];
           stateVersion = "21.11";
           system = "x86_64-darwin";
         };
