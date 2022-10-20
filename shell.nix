@@ -942,6 +942,7 @@ in
     # diff tools
     colordiff difftastic
     nodePackages.json-diff diff2html
+    fd
   ]
   ++ myScripts;
 }
