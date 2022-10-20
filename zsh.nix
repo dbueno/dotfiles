@@ -25,6 +25,8 @@ in
 
     sessionVariables = {
       "FZF_BASE" = "${pkgs.fzf}/share/fzf";
+      GRAPHVIZ_DOT = "${pkgs.graphviz}/bin/dot";
+      RSVG_CONVERT = "${pkgs.librsvg}/bin/rsvg-convert";
     };
 
     history = {
@@ -107,6 +109,23 @@ in
     '';
 
     initExtra = ''
+      # alias average="Rscript -e 'd<-scan(\"stdin\", quiet=TRUE)' -e 'cat(min(d), max(d), median(d), mean(d), sep=\"\n\")'"
+
+      # Displays an image (png) in the terminal
+      function icat {
+          kitty +kitten icat --align=left
+      }
+      # Displays an SVG in the terminal
+      function isvg {
+          "$RSVG_CONVERT" | icat
+      }
+      # Displays a graph in the terminal
+      function idot {
+          "$GRAPHVIZ_DOT" -Gbgcolor=transparent -Nfontcolor=#2E3440 -Nstyle=filled \
+              -Nfillcolor=#D8DEE9 -Ecolor=#5E81AC -Efontcolor=#8FBCBB -Nfontname=Helvetica -Efontname=Helvetica \
+              -Nfontsize=11 -Efontsize=10 -Gratio=compress "$@" -Tsvg | isvg
+      }
+
       # PS1 settings are for interactive shells (login or no), so they should be
       # set in .bashrc.
       # Colors the prompt red if the exit code argument isn't 0.
