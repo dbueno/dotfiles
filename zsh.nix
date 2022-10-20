@@ -10,17 +10,13 @@ let
   ssh-cmd = "${ssh-script}/bin/my-ssh";
 in
 {
-  home.packages = with pkgs; [
-    zsh-completions nix-zsh-completions
-  ];
-
-  programs.kitty.settings.shell = "${pkgs.zsh}/bin/zsh --login --interactive";
-
   programs.zsh = {
     enable = true;
+    enableCompletion = true;
     oh-my-zsh = {
       enable = true;
       plugins = [
+        # "nix-zsh-completions"
         "git"
         "dash"
         "fzf"
@@ -106,6 +102,8 @@ in
     initExtraFirst = ''
       export LC_ALL="en_US.UTF-8"
       export INC_APPEND_HISTORY
+      fpath=(${config.xdg.configHome}/zsh/vendor-completions \
+             $fpath)
     '';
 
     initExtra = ''
@@ -141,5 +139,29 @@ in
     '';
   };
 
+  # XXX no idea
+  # system.environment.pathsToLink = [ "/share/zsh" ];
+
+  home.packages = with pkgs; [
+    zsh-completions nix-zsh-completions
+  ];
+
+  programs.kitty.settings.shell = "${pkgs.zsh}/bin/zsh --login --interactive";
+
+
   programs.dircolors.enableZshIntegration = true;
+
+  xdg.configFile."zsh/vendor-completions".source =
+    with pkgs;
+    let
+      compPackages = [home-manager];
+    in
+    runCommand "vendored-zsh-completions" {} ''
+     mkdir -p $out
+     echo ${lib.escapeShellArgs compPackages}
+     ${fd}/bin/fd -t f '^_[^.]+$' \
+       ${lib.escapeShellArgs compPackages} \
+       --exec ${ripgrep}/bin/rg -0l '^#compdef' {} \
+       | xargs -0 cp -t $out/
+    '';
 }
