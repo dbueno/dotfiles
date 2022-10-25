@@ -167,6 +167,16 @@ let
           sha256 = "sha256-T8Uyxtf0ETOI9oonGbo0gSuwSpu6DxydKpR+jwzDhno=";
         };
       };
+      my-vimoutliner = pkgs.vimUtils.buildVimPlugin rec {
+        pname = "vimoutliner";
+        version = "8c8b79700068482c6357626f2eae86fb68878d5b";
+        src = pkgs.fetchFromGitHub {
+          owner = "dbueno";
+          repo = "${pname}";
+          rev = "${version}";
+          sha256 = "8uD1dflyI8fn2rzk0l7aBHn6kOTGrpWKtsFv1p2oDXQ=";
+        };
+      };
     in {
       programs.vim.plugins = [
         my-vim-tweaks
@@ -176,6 +186,7 @@ let
         vim-qfgrep
         vim-voom
         vim-textobj-sentence
+        my-vimoutliner
         #vim-riv
       ];
       programs.vim.extraConfig = ''
@@ -531,7 +542,6 @@ in
       vim-commentary
       vim-repeat
       tabular
-      vimoutliner
       goyo-vim
       limelight-vim
       vim-textobj-user
