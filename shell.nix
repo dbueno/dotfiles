@@ -304,11 +304,9 @@ in
       theme = "Dracula";
     };
     themes = {
-      dracula = builtins.readFile (pkgs.fetchFromGitHub {
-        owner = "dracula";
-        repo = "sublime"; # Bat uses sublime syntax for its themes
+      dracula = builtins.readFile (builtins.fetchGit {
+        url = "https://github.com/dracula/sublime.git";
         rev = "26c57ec282abcaa76e57e055f38432bd827ac34e";
-        sha256 = "019hfl4zbn4vm4154hh3bwk6hm7bdxbr1hdww83nabxwjn99ndhv";
         } + "/Dracula.tmTheme");
       };
   };
@@ -456,11 +454,9 @@ in
       "ctrl+]" = "layout_action increase_num_full_size_windows";
     };
     # extraConfig = builtins.readFile ./kitty-themes/nord/nord.conf;
-    extraConfig = builtins.readFile (pkgs.fetchFromGitHub {
-      owner = "dracula";
-      repo = "kitty";
+    extraConfig = builtins.readFile (builtins.fetchGit {
+      url = "https://github.com/dracula/kitty.git";
       rev = "eeaa86a730e3d38649053574dc60a74ce06a01bc";
-      sha256 = "3yi5e/wnLYt7b3Lkf4fhSByr18SrOzJ4zYympUQMslc=";
     } + "/dracula.conf");
   };
 
