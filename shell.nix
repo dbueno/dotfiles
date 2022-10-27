@@ -496,6 +496,7 @@ in
   programs.tmux = {
     enable = true;
     extraConfig = builtins.readFile ./.tmux.conf;
+    terminal = "screen-256color";
   };
 
   programs.ssh = {
