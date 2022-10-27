@@ -31,7 +31,7 @@
           extraSpecialArgs = {
             rusage = rusage.defaultPackage.${system};
           };
-        });
+        } // { inherit username; });
       slashUsersHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/Users/${username}"; } // args );
       slashHomeHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/home/${username}"; } // args );
       ascldapHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/ascldap/${username}"; } // args );
@@ -53,7 +53,7 @@
       };
     in
     {
-      homeConfigurations = lib.mapAttrs' (hostname: config: { name = "${config.config.home.username}@${hostname}"; value = config; }) hosts;
+      homeConfigurations = lib.mapAttrs' (hostname: config: { name = "${config.username}@${hostname}"; value = config; }) hosts;
     };
 
 }
