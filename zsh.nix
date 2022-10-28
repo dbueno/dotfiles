@@ -166,7 +166,7 @@ in
   ];
 
   programs.kitty.settings.shell = "${pkgs.zsh}/bin/zsh --login --interactive";
-  programs.tmux.shell = "${pkgs.zsh}/bin/zsh --login --interactive";
+  programs.tmux.shell = "${pkgs.zsh}/bin/zsh";
   programs.dircolors.enableZshIntegration = true;
 
   xdg.configFile."zsh/vendor-completions".source =
