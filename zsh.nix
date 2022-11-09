@@ -163,7 +163,7 @@ in
   # system.environment.pathsToLink = [ "/share/zsh" ];
 
   home.packages = with pkgs; [
-    zsh-completions nix-zsh-completions
+    zsh-completions
   ];
 
   programs.kitty.settings.shell = "${pkgs.zsh}/bin/zsh --login --interactive";
@@ -173,7 +173,7 @@ in
   xdg.configFile."zsh/vendor-completions".source =
     with pkgs;
     let
-      compPackages = [home-manager];
+      compPackages = [home-manager nix];
     in
     runCommand "vendored-zsh-completions" {} ''
      mkdir -p $out
