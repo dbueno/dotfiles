@@ -54,7 +54,7 @@ let
   '';
 
   ztl_tagcloud = pkgs.writeShellScriptBin "ztl_tagcloud" ''
-    rg --no-column --no-line-number -I -o -w '#[a-zA-Z_-]\w*' | sort | uniq
+    rg --no-column --no-line-number -I -o -w '#\w[a-zA-Z0-9_-]*' | sort | uniq
   '';
 
   record-my-session = pkgs.writeShellScriptBin "record-my-session" ''
