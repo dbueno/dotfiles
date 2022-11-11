@@ -5,6 +5,8 @@ in
 {
   imports = [ ./font-fira-code.nix ];
 
+  nixpkgs.overlays = [ (import ./overlays/vim-git.nix) ];
+
   programs.vim = {
     packageConfigurable = pkgs.vim_configurable.override { darwinSupport = true; guiSupport = false; };
   };

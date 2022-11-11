@@ -38,7 +38,9 @@
       nfsHomeHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/nfs-home/${username}"; } // args );
       hosts =
         let
-          dev-modules = [ ./development/python/default.nix ./development/ocaml/default.nix ];
+          dev-modules = [
+            ./development/python/default.nix
+            ./development/ocaml/default.nix ];
         in {
         "GREATBELOW.localdomain" = slashUsersHost {
           modules = [ ./shell.nix ./bash.nix ./gui.nix ./mac-host.nix ./my-email.nix ] ++ dev-modules;
