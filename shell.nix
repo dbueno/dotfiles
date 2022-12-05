@@ -448,6 +448,7 @@ in
       "f10" = "show_last_command_output";
       "f1" = "create_marker";
       "f2" = "remove_marker";
+      "ctrl+f4" = "detach_window ask";
       "ctrl+0" = "scroll_to_mark next";
       "ctrl+9" = "scroll_to_mark prev";
       "ctrl+[" = "layout_action decrease_num_full_size_windows";
