@@ -43,7 +43,7 @@
             ./development/ocaml/default.nix ];
         in {
         "GREATBELOW.localdomain" = slashUsersHost {
-          modules = [ ./shell.nix ./zsh.nix ./gui.nix ./mac-host.nix ./my-email.nix ] ++ dev-modules;
+          modules = [ ./shell.nix ./bash.nix ./gui.nix ./mac-host.nix ./my-email.nix ] ++ dev-modules;
           stateVersion = "21.11";
           system = "x86_64-darwin";
         };
