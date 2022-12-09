@@ -528,7 +528,6 @@ in
       fzf-vim
       nord-vim
       dracula-vim
-      vim-ocaml
       vim-fugitive
       vim-surround
       vim-vinegar
