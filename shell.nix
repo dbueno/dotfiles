@@ -473,7 +473,8 @@ in
       goyo-vim
       limelight-vim
       vim-textobj-user
-      vim-markdown
+      #vim-markdown
+      #vim-pandoc vim-pandoc-syntax
     ];
     extraConfig = builtins.readFile ./vimrc_extra
     + builtins.readFile ./zettel-md.vim
