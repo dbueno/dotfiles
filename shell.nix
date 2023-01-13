@@ -290,6 +290,7 @@ in
 
   nixpkgs.overlays = [
     (import ./overlays/diff-so-fancy.nix)
+    (import ./overlays/kitty.nix)
   ];
 
   nixpkgs.config.allowUnfree = true;
