@@ -1,12 +1,11 @@
-result: prev: {
-  kitty =
-    let
-      kitty = prev.kitty.override { };
+result: prev:
+  let
+    kitty = result.callPackage ./kitty/default.nix {
+      harfbuzz = result.harfbuzz.override { withCoreText = result.stdenv.isDarwin; };
+      inherit (result.darwin.apple_sdk.frameworks) Cocoa CoreGraphics Foundation IOKit Kernel OpenGL;
+    };
     in
-    kitty.overridePythonAttrs (attrs: with attrs; {
-      buildInputs = buildInputs ++ (with result.darwin.apple_sdk_11_0.frameworks; [ SecurityFoundation ]);
-      meta = meta // { broken = false; };
-    });
+    { inherit kitty; }
 
   # kitty = prev.kitty.overridePythonAttrs (attrs: with attrs; {
   #   version = "0.25.2";
@@ -20,5 +19,4 @@ result: prev: {
   #   };
     # meta = meta // { broken = false; };
   # });
-}
 
