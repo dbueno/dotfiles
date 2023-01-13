@@ -1,5 +1,5 @@
 result: prev: {
-  kitty = prev.kitty.overrideAttrs (attrs: with attrs; {
+  kitty = prev.kitty.overridePythonAttrs (attrs: with attrs; {
     version = "0.26.2";
     name = "kitty-0.26.2";
     src = result.fetchFromGitHub {
