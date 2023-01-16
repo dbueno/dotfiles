@@ -319,7 +319,7 @@ in
 
   programs.fzf = {
     enable = true;
-    defaultCommand = ''rg --iglob "!/_opam" --iglob "!/_build" --iglob "!*.o" --files --hidden'';
+    defaultCommand = ''rg --iglob '!/_opam' --iglob '!/_build' --iglob '!*.o' --files --hidden'';
     defaultOptions = [
       # https://draculatheme.com/fzf
       "--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9"
