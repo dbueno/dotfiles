@@ -221,9 +221,6 @@ endif
 " load all the vim packages now, including pathogen
 packloadall
 
-" vaporwave plz
-colorscheme dracula
-
 " Python indenting {{{
 function PythonParenIndent(lnum)
     call cursor(a:lnum, 1)

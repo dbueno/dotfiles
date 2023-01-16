@@ -19,6 +19,8 @@ in
 
   programs.git.extraConfig.core.fsync = "all";
 
+  programs.matplotlib.config.backend = "MacOSX";
+
   home.file = {
     ".hammerspoon/init.lua".source = ./hammerspoon.lua;
   };

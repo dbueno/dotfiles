@@ -1,39 +1,5 @@
 { config, lib, pkgs, rusage, ... }:
 let
-  draculaTheme = rec {
-    Background = "#282A36";
-    Foreground = "#F8F8F2";
-    Selection = "#44475A";
-    Comment = "#6272A4";
-    Red = "#FF5555";
-    Orange = "#FFB86C";
-    Yellow = "#F1FA8C";
-    Green = "#50FA7B";
-    Purple = "#BD93F9";
-    Cyan = "#8BE9FD";
-    Pink = "#FF79C6";
-    AnsiBlack = "#21222C";
-    AnsiRed = "#FF5555";
-    AnsiGreen = "#50FA7B";
-    AnsiYellow = "#F1FA8C";
-    AnsiBlue = "#BD93F9";
-    AnsiMagenta = "#FF79C6";
-    AnsiCyan = "#8BE9FD";
-    AnsiWhite = "#F8F8F2";
-    AnsiBrightBlack = "#6272A4";
-    AnsiBrightRed = "#FF6E6E";
-    AnsiBrightGreen = "#69FF94";
-    AnsiBrightYellow = "#FFFFA5";
-    AnsiBrightBlue = "#D6ACFF";
-    AnsiBrightMagenta = "#FF92DF";
-    AnsiBrightCyan = "#A4FFFF";
-    AnsiBrightWhite = "#FFFFFF";
-    DiffText = Comment;
-    DiffHeader = Comment;
-    DiffInserted = Green;
-    DiffDeleted = Red;
-    DiffChanged = Orange;
-  };
 
 
   onetrueawk = pkgs.callPackage ./pkgs/onetrueawk/default.nix {};
@@ -302,31 +268,18 @@ in
   programs.bat = {
     enable = true;
     config = {
-      theme = "Dracula";
+      page = "less -FR";
     };
-    themes = {
-      dracula = builtins.readFile (builtins.fetchGit {
-        url = "https://github.com/dracula/sublime.git";
-        rev = "26c57ec282abcaa76e57e055f38432bd827ac34e";
-        } + "/Dracula.tmTheme");
-      };
+    extraPackages = with pkgs.bat-extras; [ batdiff ];
   };
 
   programs.dircolors = {
     enable = true;
-    settings = (import ./kitty-themes/dracula/dircolors.nix);
   };
 
   programs.fzf = {
     enable = true;
     defaultCommand = ''rg --iglob '!/_opam' --iglob '!/_build' --iglob '!*.o' --files --hidden'';
-    defaultOptions = [
-      # https://draculatheme.com/fzf
-      "--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9"
-      "--color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9"
-      "--color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6"
-      "--color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4"
-    ];
   };
 
   programs.direnv = {
@@ -405,18 +358,6 @@ in
       color = {
         interactive = "auto";
         # diff = "auto";
-        diff = with draculaTheme; {
-          context = Foreground;
-          meta = Comment;
-          frag = DiffHeader;
-          func = "${Green}";
-          commit = "${Yellow} bold";
-          old = DiffDeleted;
-          oldMoved = DiffDeleted;
-          new = DiffInserted;
-          newMoved = DiffInserted;
-          whitespace = DiffDeleted;
-        };
       };
     };
   };
@@ -456,20 +397,10 @@ in
       "ctrl+]" = "layout_action increase_num_full_size_windows";
     };
     # extraConfig = builtins.readFile ./kitty-themes/nord/nord.conf;
-    extraConfig = builtins.readFile (builtins.fetchGit {
-      url = "https://github.com/dracula/kitty.git";
-      rev = "eeaa86a730e3d38649053574dc60a74ce06a01bc";
-    } + "/dracula.conf");
   };
 
   xdg = {
     enable = true;
-    configFile."kitty/diff.conf".source = (pkgs.fetchFromGitHub {
-      owner = "dracula";
-      repo = "kitty";
-      rev = "eeaa86a730e3d38649053574dc60a74ce06a01bc";
-      sha256 = "3yi5e/wnLYt7b3Lkf4fhSByr18SrOzJ4zYympUQMslc=";
-    } + "/diff.conf");
     configFile."mutt/muttrc".source = ./.muttrc;
   };
 
@@ -528,7 +459,6 @@ in
       vim-sensible
       fzf-vim
       nord-vim
-      dracula-vim
       vim-fugitive
       vim-surround
       vim-vinegar
@@ -583,7 +513,6 @@ in
 
       vim-rooter
       fzf-vim
-      dracula-vim
     ];
     extraConfig = ''
       set completeopt=menuone,noinsert,noselect
@@ -591,8 +520,6 @@ in
       set cmdheight=2
 
       set updatetime=300
-
-      colorscheme dracula
 
       " LSP and Treesitter config
       lua << END
