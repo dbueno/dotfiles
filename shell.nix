@@ -848,6 +848,14 @@ in
     '';
   };
 
+  programs.matplotlib = {
+    enable = true;
+  };
+
+  programs.pandoc = {
+    enable = true;
+  };
+
   home.packages = with pkgs; [
     nix
     ripgrep
