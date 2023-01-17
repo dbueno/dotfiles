@@ -268,7 +268,7 @@ in
   programs.bat = {
     enable = true;
     config = {
-      page = "less -FR";
+      pager = "less -FR";
     };
     extraPackages = with pkgs.bat-extras; [ batdiff ];
   };
