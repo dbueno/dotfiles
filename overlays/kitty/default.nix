@@ -7,13 +7,11 @@
 , openssl
 , installShellFiles
 , dbus
-, darwin
+, Libsystem
 , Cocoa
-, CoreGraphics
-, Foundation
-, IOKit
 , Kernel
-, OpenGL
+, UniformTypeIdentifiers
+, UserNotifications
 , libcanberra
 , libicns
 , libpng
@@ -28,14 +26,14 @@
 with python3Packages;
 buildPythonApplication rec {
   pname = "kitty";
-  version = "0.26.2";
+  version = "0.26.5";
   format = "other";
 
   src = fetchFromGitHub {
     owner = "kovidgoyal";
     repo = "kitty";
-    rev = "v${version}";
-    sha256 = "sha256-IqXRkKzOfqWolH/534nmM2R/69olhFOk6wbbF4ifRd0=";
+    rev = "refs/tags/v${version}";
+    sha256 = "sha256-UloBlV26HnkvbzP/NynlPI77z09MBEVgtrg5SeTmwB4=";
   };
 
   buildInputs = [
@@ -46,16 +44,14 @@ buildPythonApplication rec {
     openssl.dev
   ] ++ lib.optionals stdenv.isDarwin [
     Cocoa
-    CoreGraphics
-    Foundation
-    IOKit
     Kernel
-    OpenGL
+    UniformTypeIdentifiers
+    UserNotifications
     libpng
     python3
     zlib
-  ] ++ lib.optionals (stdenv.isDarwin && (builtins.hasAttr "UserNotifications" darwin.apple_sdk.frameworks)) [
-    darwin.apple_sdk.frameworks.UserNotifications
+  ] ++ lib.optionals (stdenv.isDarwin && stdenv.isx86_64) [
+    Libsystem
   ] ++ lib.optionals stdenv.isLinux [
     fontconfig libunistring libcanberra libX11
     libXrandr libXinerama libXcursor libxkbcommon libXi libXext
@@ -109,6 +105,7 @@ buildPythonApplication rec {
     '';
   in ''
     runHook preBuild
+    ${ lib.optionalString (stdenv.isDarwin && stdenv.isx86_64) "export MACOSX_DEPLOYMENT_TARGET=11" }
     ${if stdenv.isDarwin then ''
       ${python.interpreter} setup.py build ${darwinOptions}
       make docs
@@ -218,6 +215,6 @@ buildPythonApplication rec {
     license = licenses.gpl3Only;
     changelog = "https://sw.kovidgoyal.net/kitty/changelog/";
     platforms = platforms.darwin ++ platforms.linux;
-    maintainers = with maintainers; [ tex rvolosatovs Luflosi ];
+    maintainers = with maintainers; [ tex rvolosatovs Luflosi adamcstephens ];
   };
 }

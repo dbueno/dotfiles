@@ -2,9 +2,14 @@ result: prev:
   let
     kitty = result.callPackage ./kitty/default.nix {
       harfbuzz = result.harfbuzz.override { withCoreText = result.stdenv.isDarwin; };
-      inherit (result.darwin.apple_sdk.frameworks) Cocoa CoreGraphics Foundation IOKit Kernel OpenGL;
+      inherit (result.darwin.apple_sdk_11_0) Libsystem;
+      inherit (result.darwin.apple_sdk_11_0.frameworks)
+        Cocoa
+        Kernel
+        UniformTypeIdentifiers
+        UserNotifications;
     };
-    in
+  in
     { inherit kitty; }
 
   # kitty = prev.kitty.overridePythonAttrs (attrs: with attrs; {
