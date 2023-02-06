@@ -95,14 +95,6 @@ let
           sha256 = "1drl291lq44hf7qx1g6l5ivqclfb6ih9lj5qy5cmv9w9b3svwlv4";
         };
       };
-      vim-euforia = pkgs.vimUtils.buildVimPlugin rec {
-        pname = "euforia.vim";
-        version = "master";
-        src = builtins.fetchGit {
-          url = "ssh://git@github.com/greedy/vim-euforia.git";
-          rev = "96ee4c9c7296dbb75f7e927e93e4576dec1c898e";
-        };
-      };
       vim-shimple = pkgs.vimUtils.buildVimPlugin rec {
         pname = "shimple.vim";
         version = "1f652298569081579a773ed629fa7bde2ae7f115";
@@ -147,7 +139,6 @@ let
       programs.vim.plugins = [
         my-vim-tweaks
         vim-souffle
-        vim-euforia
         vim-shimple
         vim-qfgrep
         vim-voom
