@@ -42,7 +42,7 @@ in
 
     shellAliases =
       let
-        ls-command = if pkgs.stdenv.isDarwin then "CLICOLOR_FORCE=1 ls -lFGth" else "ls -lF --color -th";
+        ls-command = "${pkgs.coreutils}/bin/ls -lF --color=always -th";
       in
       (if pkgs.stdenv.isDarwin then { lldb = "PATH=/usr/bin:$PATH lldb"; } else {})
       // {
@@ -55,7 +55,7 @@ in
           cmd = pkgs.writeShellScriptBin "my-ls" ''
               cutoff=20
               ${ls-command} "$@" | head -n $cutoff
-              num_files=$(ls -1 "$@" 2>/dev/null | wc -l | sed 's/[[:space:]]//g')
+              num_files=$(${pkgs.coreutils}/bin/ls -1 "$@" 2>/dev/null | wc -l | sed 's/[[:space:]]//g')
               if [ $num_files -gt $cutoff ]; then
                 printf "[showing 20 of %d files]\n" $num_files
               fi
