@@ -118,6 +118,12 @@ in
     initExtra = ''
       setopt ignoreeof # I hit ctrl-d *all the time*, never to exit
 
+      # case insensitive partial filename completion (??)
+      zstyle ':completion:*' matcher-list \
+        'm:{[:lower:]}={[:upper:]}' \
+        '+r:|[._-]=* r:|=*' \
+        '+l:|=*'
+
       # alias average="Rscript -e 'd<-scan(\"stdin\", quiet=TRUE)' -e 'cat(min(d), max(d), median(d), mean(d), sep=\"\n\")'"
 
       # Displays an image (png) in the terminal
