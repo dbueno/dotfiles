@@ -32,9 +32,11 @@ in
     };
 
     history = {
-      size = 1000000;
+      size = 1200000;
       save = 1000000;
       ignorePatterns = [ "&" "exit" "pwd" "fg" "bg" "no" "lo" "lt" "pd" "c" "a" "aa" "s" "ss" "g a" "g s" "g ss" "reset" ];
+      ignoreSpace = true;
+      ignoreDups = true;
       share = false;
     };
 
@@ -106,7 +108,9 @@ in
 
     initExtraFirst = ''
       export LC_ALL="en_US.UTF-8"
-      export INC_APPEND_HISTORY
+      setopt incappendhistory
+      setopt histsavenodups
+      setopt histexpiredupsfirst
       fpath=(${config.xdg.configHome}/zsh/vendor-completions \
              $fpath)
     '';
