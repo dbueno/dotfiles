@@ -3,7 +3,7 @@ let
   hammerspoon = pkgs.callPackage ./pkgs/hammerspoon/default.nix {};
 in
 {
-  imports = [ ./font-fira-code.nix ];
+  imports = [ ./font-inconsolata.nix ];
 
   nixpkgs.overlays = [ (import ./overlays/vim-git.nix) ];
 
