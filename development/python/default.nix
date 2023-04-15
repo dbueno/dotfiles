@@ -4,7 +4,7 @@
   ];
 
   programs.vim.plugins = with pkgs.vimPlugins; [
-    YouCompleteMe
-    jedi-vim
+    # YouCompleteMe
+    # jedi-vim
   ];
 }
