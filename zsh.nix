@@ -42,27 +42,13 @@ in
 
     shellAliases =
       let
-        ls-command = "${pkgs.coreutils}/bin/ls -lF --color=always -th";
+        ls-command = "${pkgs.coreutils}/bin/ls -Frth --color=always";
       in
       (if pkgs.stdenv.isDarwin then { lldb = "PATH=/usr/bin:$PATH lldb"; } else {})
       // {
-      # ztl = ''
-      #   vim -c ":cd %:p:h" "$HOME/thearchive/202004201149 Slip-box process checklist.md"
-      # '';
-      ztl = ''vim -c ":cd %:p:h" "$HOME/thearchive/writing-projects.otl"'';
-      a =
-        let
-          cmd = pkgs.writeShellScriptBin "my-ls" ''
-              cutoff=20
-              ${ls-command} "$@" | head -n $cutoff
-              num_files=$(${pkgs.coreutils}/bin/ls -1 "$@" 2>/dev/null | wc -l | sed 's/[[:space:]]//g')
-              if [ $num_files -gt $cutoff ]; then
-                printf "[showing 20 of %d files]\n" $num_files
-              fi
-          '';
-        in
-        "${cmd}/bin/my-ls";
-      aa = "${ls-command}";
+      a = "${ls-command}";
+      al = "${ls-command} -l";
+      aa = "${ls-command} -a";
       # there's always a story behind aliases like these
       rm = "rm -i";
       c = "clear";
@@ -74,6 +60,7 @@ in
       nows = "date '+%Y-%m-%dT%H%M%S'";
       today = "date '+%Y-%m-%d'";
       shuf = "${pkgs.coreutils}/bin/shuf";
+      ztl = ''vim -c ":cd %:p:h" "$HOME/thearchive/writing-projects.otl"'';
 
       # average = "${pkgs.R}/bin/Rscript -e 'd<-scan(\"stdin\", quiet=TRUE)' -e 'summary(d)'";
 
@@ -95,10 +82,6 @@ in
 
       g = "git";
 
-      # Greps and displays with less, with colors
-      lrg = ''rg --line-buffered --pretty "$@" | less -R'';
-      # Greps and fuzzy selects
-      frg = ''rg "$@" | fzf'';
       ssh = "${ssh-cmd}";
       make_cpptags = "${pkgs.universal-ctags}/bin/ctags --c++-kinds=+pf --c-kinds=+p --fields=+imaSft --extra=+q -Rnu";
       d = "kitty +kitten diff";
@@ -124,6 +107,14 @@ in
 
       # alias average="Rscript -e 'd<-scan(\"stdin\", quiet=TRUE)' -e 'cat(min(d), max(d), median(d), mean(d), sep=\"\n\")'"
 
+      # Greps and displays with less, with colors
+      function rgl {
+          rg --line-buffered --pretty "$@" | less -R
+      }
+      # Greps and fuzzy selects
+      function rgf {
+          rg "$@" | fzf
+      }
       # Displays an image (png) in the terminal
       function icat {
           kitty +kitten icat --align=left
