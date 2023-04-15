@@ -434,6 +434,7 @@ in
 
   programs.vim = {
     enable = true;
+    defaultEditor = true;
     settings = {
       # keep buffers around when they are not visible
       hidden = true;
@@ -450,7 +451,6 @@ in
     plugins = with pkgs.vimPlugins; [
       vim-sensible
       fzf-vim
-      nord-vim
       vim-fugitive
       vim-surround
       vim-vinegar

@@ -27,8 +27,6 @@ in
       "FZF_BASE" = "${pkgs.fzf}/share/fzf";
       GRAPHVIZ_DOT = "${pkgs.graphviz}/bin/dot";
       RSVG_CONVERT = "${pkgs.librsvg}/bin/rsvg-convert";
-      EDITOR = "vim";
-      ED = "vim";
     };
 
     history = {
