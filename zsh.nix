@@ -115,6 +115,9 @@ in
       function rgf {
           rg "$@" | fzf
       }
+      function sortinplace {
+        sort "$1" | sponge "$1"
+      }
       # Displays an image (png) in the terminal
       function icat {
           kitty +kitten icat --align=left
