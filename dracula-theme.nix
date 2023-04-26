@@ -68,12 +68,13 @@ in
     rev = "eeaa86a730e3d38649053574dc60a74ce06a01bc";
   } + "/dracula.conf");
 
-  xdg.configFile."kitty/diff.conf".source = (pkgs.fetchFromGitHub {
-      owner = "dracula";
-      repo = "kitty";
-      rev = "eeaa86a730e3d38649053574dc60a74ce06a01bc";
-      sha256 = "3yi5e/wnLYt7b3Lkf4fhSByr18SrOzJ4zYympUQMslc=";
-    } + "/diff.conf");
+  xdg.configFile."kitty/diff.conf".source = ./kitty-themes/dracula/diff.conf;
+  # xdg.configFile."kitty/diff.conf".source = (pkgs.fetchFromGitHub {
+  #     owner = "dracula";
+  #     repo = "kitty";
+  #     rev = "eeaa86a730e3d38649053574dc60a74ce06a01bc";
+  #     sha256 = "3yi5e/wnLYt7b3Lkf4fhSByr18SrOzJ4zYympUQMslc=";
+  #   } + "/diff.conf");
 
   programs.vim.plugins = [ pkgs.vimPlugins.dracula-vim ];
   programs.vim.extraConfig = ''
