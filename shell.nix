@@ -850,7 +850,7 @@ in
 
   home.packages = with pkgs; [
     nix
-    gitFull git-lfs git-filter-repo
+    gitFull
     ripgrep
     graphviz
     wget
