@@ -438,6 +438,7 @@ in
       --langmap=souffle:.dl
       --regex-souffle=/^.decl[ \t]*([a-zA-Z0-9_]+)/\1/d,definition/
       --regex-souffle=/^.type[ \t]*([a-zA-Z0-9_]+)/\1/d,definition/
+      --regex-souffle=/^#define[ \t]*([a-zA-Z0-9_]+)/\1/d,definition/
     '';
   };
 
