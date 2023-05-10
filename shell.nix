@@ -394,6 +394,23 @@ in
   xdg = {
     enable = true;
     configFile."mutt/muttrc".source = ./.muttrc;
+
+    # Datalog snippets, see ./dotvim/after/ftplugin/souffle.vim for keybindings
+    configFile."vim/snippets/datalog/rule.dl".text = ''
+      Head(x, y) :-
+          Foo(x, z), Bar(z, y).
+    '';
+    configFile."vim/snippets/datalog/decl.dl".text = ''
+      .decl Foo(a: symbol, b: number)
+    '';
+    configFile."vim/snippets/datalog/type.dl".text = ''
+      .type Ty <: symbol
+    '';
+    configFile."vim/snippets/datalog/macro.dl".text = ''
+      #define Foo(a, b) \
+        Bar(a, b) :- \
+          Baz(b, c)
+    '';
   };
 
   programs.readline = {
