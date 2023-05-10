@@ -384,8 +384,8 @@ in
       "ctrl+f4" = "detach_window ask";
       "ctrl+0" = "scroll_to_mark next";
       "ctrl+9" = "scroll_to_mark prev";
-      "ctrl+[" = "layout_action decrease_num_full_size_windows";
-      "ctrl+]" = "layout_action increase_num_full_size_windows";
+      "ctrl+shift+9" = "layout_action decrease_num_full_size_windows";
+      "ctrl+shift+0" = "layout_action increase_num_full_size_windows";
       "ctrl+shift+escape" = "no_op"; # disable kitty shell wtf
     };
     # extraConfig = builtins.readFile ./kitty-themes/nord/nord.conf;
