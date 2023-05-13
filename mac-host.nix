@@ -5,17 +5,16 @@ in
 {
   imports = [ ./font-intel-one-mono.nix ];
 
-  nixpkgs.overlays = [ (import ./overlays/vim-git.nix) ];
+  nixpkgs.overlays = [ ];
 
   programs.vim = {
     packageConfigurable = pkgs.vim_configurable.override { darwinSupport = true; guiSupport = false; };
   };
 
-  # programs.kitty.settings = {
-    # font_family = "SF Mono Regular";
-    # font_size = "11.0";
-    # macos_thicken_font = "0.5";
-  # };
+  programs.kitty.settings = {
+    text_gamma_adjustment = "1.7";
+    text_contrast = "30";
+  };
 
   programs.git.extraConfig.core.fsync = "all";
 
