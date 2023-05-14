@@ -3,7 +3,7 @@ let
   hammerspoon = pkgs.callPackage ./pkgs/hammerspoon/default.nix {};
 in
 {
-  imports = [ ./font-intel-one-mono.nix ];
+  imports = [ ./font-ibm-plex.nix ];
 
   nixpkgs.overlays = [ ];
 
