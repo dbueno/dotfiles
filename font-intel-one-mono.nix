@@ -22,7 +22,7 @@ in
 {
   programs.kitty.settings = {
     font_family = "Intel One Mono";
-    font_size = "11.0";
+    font_size = lib.mkDefault "11.0";
   };
 
   home.packages = [

@@ -2,7 +2,7 @@
 {
   programs.kitty.settings = {
     font_family = "Roboto Mono Medium";
-    font_size = "11.0";
+    font_size = lib.mkDefault "11.0";
   };
 
   home.packages = with pkgs; [

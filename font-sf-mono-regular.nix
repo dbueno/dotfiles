@@ -2,6 +2,6 @@
 {
   programs.kitty.settings = {
     font_family = "SF Mono Regular";
-    font_size = "11.0";
+    font_size = lib.mkDefault "11.0";
   };
 }
