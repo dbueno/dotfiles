@@ -387,6 +387,7 @@ in
       "ctrl+shift+9" = "layout_action decrease_num_full_size_windows";
       "ctrl+shift+0" = "layout_action increase_num_full_size_windows";
       "ctrl+shift+escape" = "no_op"; # disable kitty shell wtf
+      "ctrl+shift+w" = "close_window_with_confirmation";
     };
     # extraConfig = builtins.readFile ./kitty-themes/nord/nord.conf;
   };
