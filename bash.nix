@@ -61,67 +61,11 @@ in {
       RSVG_CONVERT = "${pkgs.librsvg}/bin/rsvg-convert";
     };
 
-    shellAliases =
-      let
-        ls-command = if pkgs.stdenv.isDarwin then "CLICOLOR_FORCE=1 ls -lFGth" else "ls -lF --color -th";
-      in
-      (if pkgs.stdenv.isDarwin then { lldb = "PATH=/usr/bin:$PATH lldb"; } else {})
-      // {
-      ztl = ''
-        vim -c ":cd %:p:h" "$HOME/thearchive/202004201149 Slip-box process checklist.md"
-      '';
-      a =
-        let
-          cmd = pkgs.writeShellScriptBin "my-ls" ''
-              cutoff=20
-              ${ls-command} "$@" | head -n $cutoff
-              num_files=$(ls -1 "$@" 2>/dev/null | wc -l | sed 's/[[:space:]]//g')
-              if [ $num_files -gt $cutoff ]; then
-                printf "[showing 20 of %d files]\n" $num_files
-              fi
-          '';
-        in
-        "${cmd}/bin/my-ls";
-      aa = "${ls-command}";
-      # there's always a story behind aliases like these
-      rm = "rm -i";
-      c = "clear";
-      pd = "cd \"$OLDPWD\"";
-      # Evaluates to an iso-conformant date.  The iso-conformance is good because
-      # lexicographic order coincides with date order.  'nows' just has seconds and
-      # is also iso-conformant.
-      now = "date '+%Y-%m-%dT%H%M'";
-      nows = "date '+%Y-%m-%dT%H%M%S'";
-      today = "date '+%Y-%m-%d'";
-      shuf = "${pkgs.coreutils}/bin/shuf";
-
-      # average = "${pkgs.R}/bin/Rscript -e 'd<-scan(\"stdin\", quiet=TRUE)' -e 'summary(d)'";
-
-      # XXX where is hb-view
-      hb-feat =
-        let cmd = pkgs.writeShellScriptBin "hb-feat" ''
-          # from @thingskatedid
-          # otfinfo --features <file.otf> to see features
-          # Default color is black so the sed changes it to whitish (nord palette).
-          ${pkgs.harfbuzz}/bin/hb-view --features="$2" -O svg "$1" "$3" | \
-              grep -v '<rect' | \
-              sed 's/<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">/<g style="fill:#ECEFF4">/' | \
-              ${pkgs.librsvg}/bin/rsvg-convert | \
-              ${pkgs.imagemagick}/bin/convert -trim -resize '25%' - - | \
-              kitty +kitten icat --align=left
-              '';
-        in
-        "${cmd}/bin/hb-feat";
-
-      g = "git";
-
+    shellAliases = (import ./shell-aliases.nix { inherit config lib pkgs; }) // {
       # Greps and displays with less, with colors
-      lrg = ''rg --line-buffered --pretty "$@" | less -R'';
+      rgl = ''rg --line-buffered --pretty "$@" | less -R'';
       # Greps and fuzzy selects
-      frg = ''rg "$@" | fzf'';
-      ssh = "${ssh-cmd}";
-      make_cpptags = "${pkgs.universal-ctags}/bin/ctags --c++-kinds=+pf --c-kinds=+p --fields=+imaSft --extra=+q -Rnu";
-      d = "kitty +kitten diff";
+      rgfzf = ''rg "$@" | fzf'';
     };
 
     # Settings for interactive shells
