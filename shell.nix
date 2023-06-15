@@ -350,6 +350,7 @@ in
         interactive = "auto";
         # diff = "auto";
       };
+      branch.sort = "creatordate";
     };
   };
 
