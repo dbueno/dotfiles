@@ -495,9 +495,6 @@ in
     ];
     extraConfig = builtins.readFile ./vimrc_extra
     + builtins.readFile ./zettel-md.vim
-    + ''
-      set cmdheight=2
-    ''
     + lib.optionalString pkgs.stdenv.isDarwin ''
       let g:fzf_preview_window = ['right:50%,~5', 'ctrl-/']
     '';

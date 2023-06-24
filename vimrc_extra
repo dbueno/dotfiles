@@ -52,6 +52,9 @@ set makeprg=make\ -j8
 " my simple statusline, airline was a steaming pile
 set statusline=%q%t\ @\ %P\ [ft=%Y%M%R%W%H]\ char:0x%B\ pos\ %l:%c\ %=%<%{expand('%:~:.:h')}
 
+" larger command display
+set cmdheight=2
+
 "set tags=./tags,./TAGS,tags,TAGS,./.tags,./.TAGS,.tags,.TAGS,../../tags,../tags
 let &tags.=expand(",$TAGS")
 " R mode customizations
