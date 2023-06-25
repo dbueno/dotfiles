@@ -70,8 +70,8 @@ in {
 
     # Settings for interactive shells
     # .bashrc is executed for interactive non-login shells
-    bashrcExtra = builtins.readFile ./bashrc_extra
-      + builtins.readFile ./.bash_completion
+    bashrcExtra = builtins.readFile ./config/bashrc_extra
+      + builtins.readFile ./config/bash_completion
       + ''
         . ${completeAlias}/complete_alias
         complete -F _complete_alias g

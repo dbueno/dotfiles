@@ -190,9 +190,9 @@ let
       rsync-with-env-pass
       viewjson
       viewhex
-      (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./ifnewer.sh))
-      (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./wtf.sh))
-      (pkgs.writeShellScriptBin "sync-my-repos" (builtins.readFile ./sync-my-repos.sh))
+      (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./automation/ifnewer.sh))
+      (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./automation/wtf.sh))
+      (pkgs.writeShellScriptBin "sync-my-repos" (builtins.readFile ./automation/sync-my-repos.sh))
       (pkgs.writeShellScriptBin "frequency" (builtins.readFile ./automation/frequency.sh))
     ];
     diff-so-fancy-git-config = {
@@ -478,7 +478,7 @@ in
       vim-textobj-user
       vim-markdown
     ];
-    extraConfig = builtins.readFile ./vimrc
+    extraConfig = builtins.readFile ./config/vimrc
     + lib.optionalString pkgs.stdenv.isDarwin ''
       let g:fzf_preview_window = ['right:50%,~5', 'ctrl-/']
     '';

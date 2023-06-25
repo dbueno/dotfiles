@@ -22,7 +22,7 @@ in
   programs.matplotlib.config.backend = "MacOSX";
 
   home.file = {
-    ".hammerspoon/init.lua".source = ./hammerspoon.lua;
+    ".hammerspoon/init.lua".source = ./config/hammerspoon.lua;
   };
   home.packages = with pkgs; [
     hammerspoon
