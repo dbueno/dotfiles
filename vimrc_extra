@@ -171,8 +171,6 @@ command! ZettelFindBackLinks :call ZettelFindLinksTo()
 command! ZettelFollowLink :call ZettelFzfRgLinkSource()
 
 " <Leader>j is the journal prefix
-runtime journal.vim
-
 let g:journal_dir = 'journal/'
 
 command! -complete=dir -nargs=1 ReadJournalFilesInDir call ReadJournalFilesInDirectory(<f-args>)
