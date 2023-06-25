@@ -170,6 +170,16 @@ command! ZettelNewLinkBack :call ZettelNewLinkBack()
 command! ZettelFindBackLinks :call ZettelFindLinksTo()
 command! ZettelFollowLink :call ZettelFzfRgLinkSource()
 
+" <Leader>j is the journal prefix
+runtime journal.vim
+
+let g:journal_dir = 'journal/'
+
+command! -complete=dir -nargs=1 ReadJournalFilesInDir call ReadJournalFilesInDirectory(<f-args>)
+nnoremap <Leader>je :call CreateJournalFile()<CR>
+nnoremap <Leader>jr :call ShowRecentJournalFiles()<CR>
+nnoremap <Leader>js :call ReadJournalFilesInDirectory(g:journal_dir . strftime("%Y") . '/' . strftime("%m"))<CR>
+
 " package fzf-vim {{{
 " :BD function to use fzf to delete buffers
 function! s:list_buffers()
