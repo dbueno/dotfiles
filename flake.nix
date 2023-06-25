@@ -43,12 +43,12 @@
             ./development/ocaml/default.nix ];
         in {
         "GREATBELOW.localdomain" = slashUsersHost {
-          modules = [ ./shell.nix ./dracula-theme.nix ./zsh.nix ./gui.nix ./mac-host.nix ./vim-euforia.nix ./my-email.nix ] ++ dev-modules;
+          modules = [ ./shell.nix ./dracula-theme.nix ./zsh.nix ./gui.nix ./mac-host.nix ./pkgs/vim-euforia/vim-euforia.nix ] ++ dev-modules;
           stateVersion = "21.11";
           system = "x86_64-darwin";
         };
         "thinklappy" = slashHomeHost {
-          modules = [ ./shell.nix ./dracula-theme.nix ./zsh.nix ./gui.nix ./nixos-host.nix ./vim-euforia.nix ./my-email.nix ];
+          modules = [ ./shell.nix ./dracula-theme.nix ./zsh.nix ./gui.nix ./nixos-host.nix ./pkgs/vim-euforia/vim-euforia.nix ];
           stateVersion = "21.11";
           system = "x86_64-linux";
         };

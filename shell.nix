@@ -73,7 +73,7 @@ let
           rev = "${version}";
           sha256 = "1y779fi2vfaca5c2285l7yn2cmj2sv8kzj9w00v9hsh1894kj2i4";
         };
-        patches = [ ./souffle-vim.patch ];
+        patches = [ ./pkgs/souffle-vim/souffle-vim.patch ];
       };
       vim-qfgrep = pkgs.vimUtils.buildVimPlugin rec {
         pname = "QFGrep.vim";
