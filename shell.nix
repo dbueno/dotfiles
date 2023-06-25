@@ -431,7 +431,7 @@ in
 
   programs.tmux = {
     enable = true;
-    extraConfig = builtins.readFile ./.tmux.conf;
+    extraConfig = builtins.readFile ./config/tmux.conf;
     terminal = "screen-256color";
   };
 
