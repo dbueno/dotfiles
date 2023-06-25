@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 {
-  imports = [ ./i3.nix ./font-ibm-plex.nix ];
+  imports = [ ./i3.nix ./fonts/font-ibm-plex.nix ];
 
   programs.firefox.enable = true;
 
