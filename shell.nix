@@ -85,16 +85,6 @@ let
           sha256 = "0jz8q0k839rw3dgb1c9ff8zlsir9qypicicxm8vw23ynmjk2zziy";
         };
       };
-      vim-riv = pkgs.vimUtils.buildVimPlugin rec {
-        pname = "riv.vim";
-        version = "201ffc4e8dbfc3deeb26c6e278980f53d81d7f6a";
-        src = pkgs.fetchFromGitHub {
-          owner = "gu-fan";
-          repo = "riv.vim";
-          rev = "${version}";
-          sha256 = "1drl291lq44hf7qx1g6l5ivqclfb6ih9lj5qy5cmv9w9b3svwlv4";
-        };
-      };
       vim-shimple = pkgs.vimUtils.buildVimPlugin rec {
         pname = "shimple.vim";
         version = "1f652298569081579a773ed629fa7bde2ae7f115";
@@ -144,12 +134,7 @@ let
         vim-voom
         vim-textobj-sentence
         my-vimoutliner
-        #vim-riv
       ];
-      programs.vim.extraConfig = ''
-        " riv wants to use large patterns
-        set maxmempattern=2000
-      '';
     };
 
   myScripts =
@@ -493,7 +478,7 @@ in
       vim-textobj-user
       vim-markdown
     ];
-    extraConfig = builtins.readFile ./vimrc_extra
+    extraConfig = builtins.readFile ./vimrc
     + lib.optionalString pkgs.stdenv.isDarwin ''
       let g:fzf_preview_window = ['right:50%,~5', 'ctrl-/']
     '';
