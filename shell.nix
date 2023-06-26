@@ -886,7 +886,6 @@ in
     colordiff difftastic
     nodePackages.json-diff diff2html
     fd
-    nodePackages.mermaid-cli
   ]
   ++ myScripts;
 }
