@@ -174,7 +174,50 @@ command! ZettelFollowLink :call ZettelFzfRgLinkSource()
 let g:journal_dir = 'journal/'
 
 command! -complete=dir -nargs=1 ReadJournalFilesInDir call ReadJournalFilesInDirectory(<f-args>)
+command! -complete=customlist,s:completeDate -nargs=1 CreateJournalFileByDate call CreateJournalFileByDate(<q-args>)
+function! s:completeDate(ArgLead, CmdLine, CursorPos)
+    if a:ArgLead =~# '^20\d\d$'
+        return [a:ArgLead . '/']
+    elseif a:ArgLead =~# '^20\d\d/$'
+        let current_year = str2nr(split(a:ArgLead, '/')[0])
+        let month_list = []
+        for month in range(1, 12)
+          let month_str = printf('%02d', month)
+          let month_list += [month_str . '/']
+        endfor
+        return month_list
+        "return [a:ArgLead . strftime('%m')]
+    elseif a:ArgLead =~# '^20\d\d/\d\d/$'
+        let arg_split = split(a:ArgLead, '/')
+        let current_year = str2nr(arg_split[0])
+        let current_month = str2nr(arg_split[1])
+        let month_days = s:monthDays(current_year, current_month)
+        let day_list = []
+        for day in range(1, month_days)
+            let day_str = printf('%02d', day)
+            let day_list += [day_str]
+        endfor
+        return day_list
+    elseif a:ArgLead =~# '^$'
+        return [strftime('%Y')]
+    else
+        return []
+    endif
+endfunction
+
+function! s:monthDays(year, month)
+  let leap = (a:year % 4 == 0 && a:year % 100 != 0) || a:year % 400 == 0
+  if a:month == 2
+    return leap ? 29 : 28
+  elseif index([4, 6, 9, 11], a:month) != -1
+    return 30
+  else
+    return 31
+  endif
+endfunction
+
 nnoremap <Leader>je :call CreateJournalFile()<CR>
+nnoremap <Leader>jn :CreateJournalFileByDate 
 nnoremap <Leader>jr :call ShowRecentJournalFiles()<CR>
 nnoremap <Leader>js :call ReadJournalFilesInDirectory(g:journal_dir . strftime("%Y") . '/' . strftime("%m"))<CR>
 

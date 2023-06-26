@@ -32,6 +32,21 @@ function! CreateJournalFile()
 endfunction
 
 
+function! CreateJournalFileByDate(date)
+    let file_name = g:journal_dir . a:date . '.md'
+
+    " Create the journal directory if it doesn't exist
+    if !isdirectory(g:journal_dir)
+        call mkdir(expand(fnamemodify(file_name, ':h')), 'p')
+    endif
+
+    " Create the file and open a buffer
+    execute 'edit ' . file_name
+    setlocal fdl=3
+    normal! G
+endfunction
+
+
 function! ShowRecentJournalFiles(nr_files=5)
 
     " Get the list of files matching the format year/month/day
