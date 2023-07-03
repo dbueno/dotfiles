@@ -1,4 +1,5 @@
 set nonumber
+set fdl=3
 
 map <buffer> <LocalLeader>zz :ZettelFiles<CR>
 map <buffer> <LocalLeader>zg :ZettelFollowLink<CR>
