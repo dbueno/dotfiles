@@ -80,6 +80,10 @@ in
   programs.vim.extraConfig = ''
     " vaporwave plz
     colorscheme dracula
+    augroup my_colorschemes
+      au!
+      au Colorscheme dracula hi Comment guifg=#7c8ca8 ctermfg=69
+    augroup END
   '';
 
   programs.neovim.plugins = [ pkgs.vimPlugins.dracula-vim ];
