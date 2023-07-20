@@ -35,7 +35,6 @@ set path+=**
 " unexplainable but helpful completion settings
 set wildmenu wildmode=list,list:longest
 set wildignore+=/.git/**
-set infercase
 
 " always include status line
 set laststatus=2
