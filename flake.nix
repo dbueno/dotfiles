@@ -4,6 +4,7 @@
   inputs = {
     home-manager.url = "github:nix-community/home-manager";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    mynixpkgs.url = "github:NixOS/nixpkgs/27aa241";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     rusage = {
       url = "https://github.com/dbueno/rusage/archive/main.tar.gz";
@@ -11,7 +12,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, rusage }:
+  outputs = { self, nixpkgs, home-manager, rusage, mynixpkgs }:
     let
       lib = nixpkgs.lib;
       defaultUsername = "dbueno";
@@ -20,6 +21,7 @@
           "hm-inputs/nixpkgs".source = nixpkgs;
           "hm-inputs/home-manager".source = home-manager;
         };
+        nix.registry.mynixpkgs.flake = mynixpkgs;
       };
       mkHomeConfig = lib.makeOverridable ({ system, homeDirectory, username ? defaultUsername, modules, stateVersion, extraConfig ? emptyConfig }:
       home-manager.lib.homeManagerConfiguration {
