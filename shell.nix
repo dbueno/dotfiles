@@ -256,6 +256,7 @@ in
   programs.fzf = {
     enable = true;
     defaultCommand = ''rg --iglob '!/_opam' --iglob '!/_build' --iglob '!*.o' --files --hidden'';
+    defaultOptions = [ "-m" ];
   };
 
   programs.direnv = {
