@@ -886,7 +886,8 @@ in
     # diff tools
     colordiff difftastic
     nodePackages.json-diff diff2html
-    fd
+    fd # find alternative
+    hyperfine
   ]
   ++ myScripts;
 }
