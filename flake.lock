@@ -51,13 +51,29 @@
         "type": "github"
       }
     },
+    "mynixpkgs": {
+      "locked": {
+        "lastModified": 1690343512,
+        "narHash": "sha256-oOgte+A9TJKKwbvjx5H47SDkao5YBIW3YUvQneJXsbY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "27aa2418a5cd0419e0c8327aea58ac6a4b77ee34",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "27aa241",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1686960236,
-        "narHash": "sha256-AYCC9rXNLpUWzD9hm+askOfpliLEC9kwAo7ITJc4HIw=",
+        "lastModified": 1693565476,
+        "narHash": "sha256-ya00zHt7YbPo3ve/wNZ/6nts61xt7wK/APa6aZAfey0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "04af42f3b31dba0ef742d254456dc4c14eedac86",
+        "rev": "aa8aa7e2ea35ce655297e8322dc82bf77a31d04b",
         "type": "github"
       },
       "original": {
@@ -70,6 +86,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "mynixpkgs": "mynixpkgs",
         "nixpkgs": "nixpkgs",
         "rusage": "rusage"
       }
