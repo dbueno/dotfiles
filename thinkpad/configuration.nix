@@ -11,8 +11,10 @@
       <home-manager/nixos>
     ];
 
+  nix.package = pkgs.nixVersions.nix_2_11;
+
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "hplip"
+    # "hplip"
   ];
 
   # Use the GRUB 2 boot loader.
@@ -61,8 +63,11 @@
   services.xserver.desktopManager.xterm.enable = true;
 
   # Configure keymap in X11
-  services.xserver.layout = "dvorak";
-  services.xserver.xkbOptions = "ctrl:nocaps";
+  services.xserver = {
+    layout = "us";
+    xkbVariant = "dvorak";
+    xkbOptions = "ctrl:nocaps";
+  };
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -71,14 +76,29 @@
   # sound.enable = true;
   # hardware.pulseaudio.enable = true;
 
+  fonts = {
+    fontconfig = {
+      antialias = true;
+      hinting = {
+        enable = true;
+        style = "full";
+        autohint = false;
+      };
+      subpixel = {
+        rgba = "rgb";
+        lcdfilter = "default";
+      };
+    };
+  };
+
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
   services.xserver.libinput.touchpad.disableWhileTyping = true;
 
-  services.printing = {
-    enable = true;
-    drivers = [ pkgs.hplipWithPlugin ];
-  };
+  # services.printing = {
+    # enable = true;
+    # drivers = [ pkgs.hplipWithPlugin ];
+  # };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   # users.users.jane = {
@@ -100,7 +120,6 @@
     firefox
     gitFull
     git-lfs
-    bpytop
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -114,7 +133,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -128,6 +147,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.05"; # Did you read the comment?
+  system.stateVersion = "21.11"; # Did you read the comment?
 
 }
