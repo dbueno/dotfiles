@@ -888,6 +888,7 @@ in
     nodePackages.json-diff diff2html
     fd # find alternative
     hyperfine
+    tree
   ]
   ++ myScripts;
 }
