@@ -15,6 +15,22 @@ let
       sha256 = "8uD1dflyI8fn2rzk0l7aBHn6kOTGrpWKtsFv1p2oDXQ=";
     };
   };
+  tree-sitter-souffle-langston-barrett = pkgs.fetchFromGitHub {
+    owner = "langston-barrett";
+    repo = "tree-sitter-souffle";
+    rev = "901e71368a29d5f893d43d099fbc2b4ab037660e";
+    hash = "sha256-thUT+hi0lHnrpCuOe/bjlcM7ZfHruCDqN3YFOS3JCHA=";
+  };
+  nvim-treesitter-souffle-lyxell = pkgs.vimUtils.buildVimPlugin rec {
+    pname = "nvim-treesitter-souffle";
+    version = "81c0003447c61ee2c54aeea0f7ec934acf795061";
+    src = pkgs.fetchFromGitHub {
+      owner = "lyxell";
+      repo = "${pname}";
+      rev = "${version}";
+      hash = "sha256-qZ3gB14ojTjd50cU2lwB5bT8uwdJ1wVfnRysmxfG68E=";
+    };
+  };
 in {
 
   programs.neovim = {
@@ -46,7 +62,13 @@ in {
       cmp-cmdline
       nvim-cmp
       lsp_signature-nvim
-      nvim-treesitter
+      (nvim-treesitter.withPlugins (_: nvim-treesitter.allGrammars ++ [
+        (pkgs.tree-sitter.buildGrammar {
+          language = "souffle";
+          version = "901e7136";
+          src = tree-sitter-souffle-langston-barrett;
+        })
+      ]))
 
       cmp-vsnip
       vim-vsnip
@@ -61,6 +83,8 @@ in {
       set cmdheight=2
 
       set updatetime=300
+
+      autocmd BufNewFile,BufRead *.dl setfiletype souffle
 
 
     '';
