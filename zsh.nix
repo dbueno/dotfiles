@@ -21,7 +21,7 @@
     history = {
       size = 1200000;
       save = 1000000;
-      ignorePatterns = [ "&*" "exit*" "pwd*" "fg*" "bg*" "pd*" "a*" "aa*" "al*" "g s*" "g ss*" "g reset *" "git reset *" ];
+      ignorePatterns = [ "&*" "exit*" "pwd*" "fg*" "bg*" "pd*" "a*" "aa*" "al*" "g s*" "g ss*" "g reset *" "git reset *" "g pull\n"];
       ignoreSpace = true;
       ignoreDups = true;
       ignoreAllDups = true;
