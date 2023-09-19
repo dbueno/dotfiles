@@ -21,9 +21,10 @@
     history = {
       size = 1200000;
       save = 1000000;
-      ignorePatterns = [ "&" "exit" "pwd" "fg" "bg" "no" "lo" "lt" "pd" "c" "a" "aa" "s" "ss" "g a" "g s" "g ss" "reset" ];
+      ignorePatterns = [ "&*" "exit*" "pwd*" "fg*" "bg*" "pd*" "a*" "aa*" "al*" "g s*" "g ss*" "g reset *" "git reset *" ];
       ignoreSpace = true;
       ignoreDups = true;
+      ignoreAllDups = true;
       share = false;
     };
 
@@ -36,11 +37,20 @@
       setopt incappendhistory
       setopt histsavenodups
       setopt histexpiredupsfirst
+      setopt hist_no_store # don't store "history" command in history
       fpath=(${config.xdg.configHome}/zsh/vendor-completions \
              $fpath)
     '';
 
     initExtra = ''
+      zshaddhistory() {
+        emulate -L zsh
+        ## uncomment if HISTORY_IGNORE
+        ## should use EXTENDED_GLOB syntax
+        setopt extendedglob
+        [[ $1 != ''${~HISTORY_IGNORE} ]]
+      }
+      setopt pushd_ignore_dups
       setopt ignoreeof # I hit ctrl-d *all the time*, never to exit
 
       # case insensitive partial filename completion (??)
