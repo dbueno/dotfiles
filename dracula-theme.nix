@@ -80,16 +80,22 @@ in
   programs.vim.extraConfig = ''
     " vaporwave plz
     colorscheme dracula
+    " lighten up dracula comments
     augroup my_colorschemes
       au!
       au Colorscheme dracula hi Comment guifg=#7c8ca8 ctermfg=69
     augroup END
   '';
 
-  programs.neovim.plugins = [ pkgs.vimPlugins.dracula-vim ];
-  programs.neovim.extraConfig = ''
-      colorscheme dracula
-  '';
+  # programs.neovim.plugins = [ pkgs.vimPlugins.dracula-vim ];
+  # programs.neovim.extraConfig = ''
+  #   augroup my_colorschemes
+  #     au!
+  #     au Colorscheme dracula hi Comment guifg=#7c8ca8 ctermfg=69
+  #   augroup END
+  #   colorscheme dracula
+  #   " lighten up dracula comments
+  # '';
 
   programs.bat.config.theme = "Dracula";
   programs.bat.themes = {
