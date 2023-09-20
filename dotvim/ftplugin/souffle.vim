@@ -1,2 +1,2 @@
 setlocal cursorline
-setlocal sw=4
+setlocal sw=2
