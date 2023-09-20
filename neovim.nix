@@ -5,6 +5,11 @@ let
     version = "dev";
     src = ./dotvim;
   };
+  my-neovim-tweaks = pkgs.vimUtils.buildVimPlugin {
+    pname = "denisbueno-neovim-tweaks.vim";
+    version = "dev";
+    src = ./neovim;
+  };
   my-vimoutliner = pkgs.vimUtils.buildVimPlugin rec {
     pname = "vimoutliner";
     version = "8c8b79700068482c6357626f2eae86fb68878d5b";
@@ -52,6 +57,7 @@ in {
     ];
     plugins = with pkgs.vimPlugins; [
       my-vim-tweaks
+      #my-neovim-tweaks
       my-vimoutliner
       vim-fugitive
       vim-nix
