@@ -53,10 +53,6 @@ let
   };
 in {
 
-  home.packages = with pkgs; [
-    nodePackages.pyright
-  ];
-
   programs.neovim = {
     enable = true;
     withRuby = false;
@@ -64,6 +60,7 @@ in {
     extraPackages = with pkgs; [
       clang-tools
       clang
+      nodePackages.pyright
     ];
     plugins = with pkgs.vimPlugins; [
       meh
