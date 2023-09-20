@@ -31,10 +31,20 @@ let
       hash = "sha256-qZ3gB14ojTjd50cU2lwB5bT8uwdJ1wVfnRysmxfG68E=";
     };
   };
+  souffle-treesitter-grammar = pkgs.tree-sitter.buildGrammar {
+    language = "souffle";
+    version = "901e7136";
+    src = tree-sitter-souffle-langston-barrett;
+  };
 in {
+
+  home.packages = with pkgs; [
+    nodePackages.pyright
+  ];
 
   programs.neovim = {
     enable = true;
+    withRuby = false;
     withPython3 = true;
     extraPackages = with pkgs; [
       clang-tools
@@ -63,11 +73,7 @@ in {
       nvim-cmp
       lsp_signature-nvim
       (nvim-treesitter.withPlugins (_: nvim-treesitter.allGrammars ++ [
-        (pkgs.tree-sitter.buildGrammar {
-          language = "souffle";
-          version = "901e7136";
-          src = tree-sitter-souffle-langston-barrett;
-        })
+        souffle-treesitter-grammar
       ]))
 
       cmp-vsnip
@@ -87,6 +93,22 @@ in {
       autocmd BufNewFile,BufRead *.dl setfiletype souffle
 
 
+    '';
+    extraLuaConfig = ''
+
+      require'nvim-treesitter.configs'.setup {
+        highlight = {
+          enable = true,              -- false will disable the whole extension
+          disable = { "rust" },  -- list of language that will be disabled
+          -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+          -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+          -- Using this option may slow down your editor, and you may see some duplicate highlights.
+          -- Instead of true it can also be a list of languages
+          additional_vim_regex_highlighting = false,
+        },
+      }
+
+      require'lspconfig'.pyright.setup{}
     '';
   };
 }
