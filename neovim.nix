@@ -63,6 +63,7 @@ in {
       nodePackages.pyright
     ];
     plugins = with pkgs.vimPlugins; [
+      tokyonight-nvim
       meh
       my-vim-tweaks
       #my-neovim-tweaks
@@ -89,6 +90,7 @@ in {
       (nvim-treesitter.withPlugins (_: nvim-treesitter.allGrammars ++ [
         souffle-treesitter-grammar
       ]))
+      nvim-treesitter-textobjects
 
       cmp-vsnip
       vim-vsnip
@@ -114,10 +116,15 @@ in {
 
       autocmd BufNewFile,BufRead *.dl setfiletype souffle
 
-      colorscheme meh
+      " lighten up dracula comments
+      augroup my_colorschemes
+        au!
+        au Colorscheme dracula hi Comment guifg=#7c8ca8 ctermfg=69
+      augroup END
 
-
+      colorscheme tokyonight
     '';
     extraLuaConfig = builtins.readFile ./config/nvim/init.lua;
+
   };
 }

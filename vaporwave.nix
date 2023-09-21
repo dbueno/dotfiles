@@ -34,9 +34,13 @@ let
     DiffDeleted = Red;
     DiffChanged = Orange;
   };
-in
-{
-  programs.fzf.defaultOptions = [
+
+  dracula-kitty-conf = builtins.readFile (builtins.fetchGit {
+    url = "https://github.com/dracula/kitty.git";
+    rev = "eeaa86a730e3d38649053574dc60a74ce06a01bc";
+  } + "/dracula.conf");
+
+  dracula-fzf-options = [
     # https://draculatheme.com/fzf
     # "--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9"
     # "--color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9"
@@ -46,6 +50,68 @@ in
     "--color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f"
     "--color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7"
   ];
+
+  tokyonight-storm-theme = rec {
+    background = "#24283b";
+    foreground = "#c0caf5";
+    selection_background = "#2e3c64";
+    selection_foreground = "#c0caf5";
+    url_color = "#73daca";
+    cursor = "#c0caf5";
+    cursor_text_color = "#24283b";
+    comment = "#565f89";
+    magenta = "#bb9af7";
+    cyan = "#7dcfff";
+
+    # Tabs
+    active_tab_background = "#7aa2f7";
+    active_tab_foreground = "#1f2335";
+    inactive_tab_background = "#292e42";
+    inactive_tab_foreground = "#545c7e";
+    #tab_bar_background #1d202f
+
+    # Windows
+    active_border_color = "#7aa2f7";
+    inactive_border_color = "#292e42";
+
+    # normal
+    color0 = "#1d202f";
+    color1 = "#f7768e";
+    color2 = "#9ece6a";
+    color3 = "#e0af68";
+    color4 = "#7aa2f7";
+    color5 = "#bb9af7";
+    color6 = "#7dcfff";
+    color7 = "#a9b1d6";
+
+    # bright
+    color8 = "#414868";
+    color9 = "#f7768e";
+    color10 = "#9ece6a";
+    color11 = "#e0af68";
+    color12 = "#7aa2f7";
+    color13 = "#bb9af7";
+    color14 = "#7dcfff";
+    color15 = "#c0caf5";
+
+    # extended colors
+    color16 = "#ff9e64";
+    color17 = "#db4b4b";
+  };
+
+  tokyonight-kitty-conf = 
+    builtins.readFile "${pkgs.vimPlugins.tokyonight-nvim}/extras/kitty/tokyonight_storm.conf";
+
+  tokyonight-fzf-options = with tokyonight-storm-theme; [
+    "--color=bg:${background},bg+:${selection_background},fg:${foreground},fg+:${selection_foreground}"
+    "--color=border:${inactive_border_color},spinner:${foreground}"
+    "--color=hl:${comment},hl+:${magenta},info:${cyan},prompt:${foreground},pointer:${foreground},marker:${cyan},header:${comment}"
+  ];
+in
+{
+
+  # dracula
+  programs.fzf.defaultOptions = tokyonight-fzf-options;
 
   programs.dircolors.settings = (import ./kitty-themes/dracula/dircolors.nix);
 
@@ -63,10 +129,7 @@ in
       whitespace = DiffDeleted;
     };
 
-  programs.kitty.extraConfig = builtins.readFile (builtins.fetchGit {
-    url = "https://github.com/dracula/kitty.git";
-    rev = "eeaa86a730e3d38649053574dc60a74ce06a01bc";
-  } + "/dracula.conf");
+  programs.kitty.extraConfig = tokyonight-kitty-conf;
 
   xdg.configFile."kitty/diff.conf".source = ./kitty-themes/dracula/diff.conf;
   # xdg.configFile."kitty/diff.conf".source = (pkgs.fetchFromGitHub {
@@ -87,15 +150,7 @@ in
     augroup END
   '';
 
-  # programs.neovim.plugins = [ pkgs.vimPlugins.dracula-vim ];
-  # programs.neovim.extraConfig = ''
-  #   augroup my_colorschemes
-  #     au!
-  #     au Colorscheme dracula hi Comment guifg=#7c8ca8 ctermfg=69
-  #   augroup END
-  #   colorscheme dracula
-  #   " lighten up dracula comments
-  # '';
+  programs.neovim.plugins = [ pkgs.vimPlugins.dracula-vim ];
 
   programs.bat.config.theme = "Dracula";
   programs.bat.themes = {
