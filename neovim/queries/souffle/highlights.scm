@@ -63,6 +63,15 @@
 
 ":-" @Keyword
 
+"#include" @Include
+"#define" @Define
+; "#if" @Precondit
+; "#ifdef" @Precondit
+; "#ifndef" @Keyword
+"#endif" @Precondit
+
+(preproc) @Comment
+
 (relation_decl
   head: (ident) @Function)
 (relation_decl
@@ -79,8 +88,12 @@
 (adt left: (ident) @Type)
 
 (subsumptive_rule ("<=") @Keyword)
+(subsumptive_rule
+  subsumes: (atom relation: (qualified_name) @Underlined))
+; (subsumptive_rule
+;   subsumes: (atom relation: (qualified_name) @Identifier))
 (monotonic_rule
   head: (atom relation: (qualified_name) @Underlined))
 
-(disjunction (";") @Delimiter)
+(disjunction (";") @Keyword)
 (conjunction (",") @Keyword)

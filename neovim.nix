@@ -41,6 +41,16 @@ let
     version = "901e7136";
     src = tree-sitter-souffle-langston-barrett;
   };
+  my-souffle-treesitter-grammar = pkgs.tree-sitter.buildGrammar {
+    language = "souffle";
+    version = "improve-preprocessor";
+    src = pkgs.fetchFromGitHub {
+      owner = "dbueno";
+      repo = "tree-sitter-souffle";
+      rev = "a2ac66e2d9442791cd3b6950dd422888d50a313d";
+      hash = "sha256-JdDVEFwCrMSHSJk2Z9lsaj9cCuapg1TuZp8gVMREwU4=";
+    };
+  };
   meh = pkgs.vimUtils.buildVimPlugin rec {
     pname = "vim-colors-meh";
     version = "e2962284bbd53db5cbe2db39efaa3ea74ade0fb1";
@@ -88,7 +98,7 @@ in {
       nvim-cmp
       lsp_signature-nvim
       (nvim-treesitter.withPlugins (_: nvim-treesitter.allGrammars ++ [
-        souffle-treesitter-grammar
+        my-souffle-treesitter-grammar
       ]))
       nvim-treesitter-textobjects
 
