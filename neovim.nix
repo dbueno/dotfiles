@@ -65,6 +65,8 @@ in {
 
   programs.neovim = {
     enable = true;
+    vimAlias = true;
+    viAlias = true;
     withRuby = false;
     withPython3 = true;
     extraPackages = with pkgs; [

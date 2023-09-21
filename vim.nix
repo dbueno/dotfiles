@@ -83,7 +83,7 @@ in {
   imports = [ vim-plugins ];
 
   programs.vim = {
-    enable = true;
+    enable = false;
     defaultEditor = true;
     settings = {
       # keep buffers around when they are not visible
