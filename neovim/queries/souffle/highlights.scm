@@ -68,7 +68,7 @@
 ; "#if" @Precondit
 ; "#ifdef" @Precondit
 ; "#ifndef" @Keyword
-"#endif" @Precondit
+; "#endif" @Precondit
 
 (preproc) @Comment
 
