@@ -119,10 +119,10 @@ nnoremap <Leader>o <C-w>o
 
 " C-w ] will open tag in a split
 " C-w g } will let you select tag for preview
-"nnoremap <C-n> :cnext<CR>
-"nnoremap <C-p> :cprevious<CR>
-"nnoremap <Leader>n :tnext<CR>
-"nnoremap <Leader>p :tprev<CR>
+nnoremap <C-n> :lua vim.diagnostic.goto_next()<CR>
+nnoremap <C-p> :lua vim.diagnostic.goto_prev()<CR>
+nnoremap <Leader>n :cnext<CR>
+nnoremap <Leader>p :cprev<CR>
 
 " Put timestamp in filename?
 cmap <F3> <C-R>=strftime("%Y%m%d%H%M")<CR>
