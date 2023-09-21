@@ -63,6 +63,10 @@ let
   };
 in {
 
+  nixpkgs.overlays = [
+    (import ./overlays/witchhazel.nix)
+  ];
+
   programs.neovim = {
     enable = true;
     vimAlias = true;
@@ -76,6 +80,7 @@ in {
     ];
     plugins = with pkgs.vimPlugins; [
       tokyonight-nvim
+      witchhazel-vim
       meh
       my-vim-tweaks
       #my-neovim-tweaks
