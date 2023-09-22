@@ -41,15 +41,16 @@ let
     version = "901e7136";
     src = tree-sitter-souffle-langston-barrett;
   };
+  my-souffle-treesitter-grammar-src = pkgs.fetchFromGitHub {
+    owner = "dbueno";
+    repo = "tree-sitter-souffle";
+    rev = "f088865188e78cfdaf19581d890c94d79db8054b";
+    hash = "sha256-J9yH0dJYNDSmuA23vkz2WLWNhk80g8FqwgGp9qrmnzc=";
+  };
   my-souffle-treesitter-grammar = pkgs.tree-sitter.buildGrammar {
     language = "souffle";
     version = "improve-preprocessor";
-    src = pkgs.fetchFromGitHub {
-      owner = "dbueno";
-      repo = "tree-sitter-souffle";
-      rev = "a2ac66e2d9442791cd3b6950dd422888d50a313d";
-      hash = "sha256-JdDVEFwCrMSHSJk2Z9lsaj9cCuapg1TuZp8gVMREwU4=";
-    };
+    src = my-souffle-treesitter-grammar-src;
   };
   meh = pkgs.vimUtils.buildVimPlugin rec {
     pname = "vim-colors-meh";
@@ -83,7 +84,7 @@ in {
       witchhazel-vim
       meh
       my-vim-tweaks
-      #my-neovim-tweaks
+      my-neovim-tweaks
       my-vimoutliner
       vim-fugitive
       vim-nix

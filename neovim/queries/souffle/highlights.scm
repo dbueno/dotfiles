@@ -1,99 +1,134 @@
-(block_comment) @Comment
-(line_comment) @Comment
+; comments
 
-"brie" @Keyword
-"btree" @Keyword
-"btree_delete" @Keyword
-"eqrel" @Keyword
-"inline" @Keyword
-"magic" @Keyword
-"no_inline" @Keyword
-"no_magic" @Keyword
-"override" @Keyword
-"overridable" @Keyword
+(block_comment) @comment
+(line_comment) @comment
+
+; keywords
+
+(primitive_type) @type.builtin
+"brie" @keyword
+"btree" @keyword
+"btree_delete" @keyword
+"eqrel" @keyword
+; "inline" @keyword
+"magic" @keyword
+"no_inline" @keyword
+"no_magic" @keyword
+"override" @keyword
+"overridable" @keyword
 ; Deprecated:
-"input" @Keyword
-"output" @Keyword
-"printsize" @Keyword
-".functor" @Keyword
-".comp" @Keyword
-".init" @Keyword
-".pragma" @Keyword
-".plan" @Keyword
-; (directive directive: (_directive_qualifier) @Keyword)
-".output" @Keyword
-".input" @Keyword
-".limitsize" @Keyword
-".printsize" @Keyword
-".type" @Keyword
-".decl" @Keyword
+"input" @keyword
+"output" @keyword
+"printsize" @keyword
+".functor" @keyword
+".comp" @keyword
+".init" @keyword
+".pragma" @keyword
+".plan" @keyword
+".type" @keyword
+".decl" @keyword
+;(relation_decl choice: (choice_domain (ident)) @keyword)
 
-"+" @Keyword
-"-" @Keyword
-"*" @Keyword
-"/" @Keyword
-"%" @Keyword
-"^" @Keyword
-"land" @Keyword
-"lor" @Keyword
-"lxor" @Keyword
-"band" @Keyword
-"bor" @Keyword
-"bxor" @Keyword
-"bshl" @Keyword
-"bshr" @Keyword
-"bshru" @Keyword
+"+" @keyword
+"-" @keyword
+"*" @keyword
+"/" @keyword
+"%" @keyword
+"^" @keyword
+"land" @keyword
+"lor" @keyword
+"lxor" @keyword
+"band" @keyword
+"bor" @keyword
+"bxor" @keyword
+"bshl" @keyword
+"bshr" @keyword
+"bshru" @keyword
 ; Undocumented, but appear in Soufflé parser:
-"&" @Keyword
-"|" @Keyword
-"&&" @Keyword
-"||" @Keyword
-"**" @Keyword
-"^^" @Keyword
-"<<" @Keyword
-">>" @Keyword
-">>>" @Keyword
+"&" @keyword
+"|" @keyword
+"&&" @keyword
+"||" @keyword
+"**" @keyword
+"^^" @keyword
+"<<" @keyword
+">>" @keyword
+">>>" @keyword
 
-"=" @Keyword
-"!=" @Keyword
-"<=" @Keyword
-">=" @Keyword
-"<" @Keyword
-">" @Keyword
+"=" @keyword
+"!=" @keyword
+"<=" @keyword
+">=" @keyword
+"<" @keyword
+">" @keyword
+[".input" ".limitsize" ".output" ".printsize"] @keyword
+["brie" "btree" "btree_delete" "eqrel" "inline" "magic" "no_inline" "no_magic" "override" "overridable" "input" "output" "printsize"] @keyword
 
-":-" @Keyword
+["acos" "acosh" "asin" "asinh" "atan" "atanh" "cos" "cosh" "exp" "log" "sin" "sinh" "tan" "tanh" "autoinc" "cat" "max" "min" "ord" "strlen" "substr" "to_float" "to_number" "to_string" "to_unsigned" "mean" "sum" "count" "range"] @keyword
 
-"#include" @Include
-"#define" @Define
-; "#if" @Precondit
-; "#ifdef" @Precondit
-; "#ifndef" @Keyword
-; "#endif" @Precondit
 
-(preproc) @Comment
+;(intrinsic_functor) @keyword
 
+(unary_op operator: "bnot" @keyword)
+(unary_op operator: "lnot" @keyword)
+(unary_op operator: "~" @keyword)
+(unary_op operator: "!" @keyword)
+
+(preprocessor) @keyword
+
+(preproc_include (string)) @string.special
+
+(preprocessor) @keyword
+
+(pragma key: (string) @string)
+(pragma value: (string) @string)
+
+(functor_decl name: (ident) @function)
+
+(component_decl (":" (component_type)* @type))
+(component_type name: (ident) @function)
+(component_type param: (ident) @type)
+
+(directive key: (ident) @tag)
+
+(monotonic_rule (atom relation: (qualified_name) @constructor))
+(monotonic_rule ":-" @keyword)
+
+(subsumptive_rule subsumes: (atom relation: (qualified_name) @underlined))
+(subsumptive_rule ":-" @keyword)
+
+(disjunction (";") @keyword)
+(conjunction (",") @keyword)
+
+(match "match" @keyword)
+(contains "contains" @keyword)
+
+(fact (atom relation: (qualified_name) @constructor))
+
+(adt_constructor constructor: (qualified_name) @constructor)
+
+(string) @string
+(include_string) @string
+(constant) @constant.builtin
+
+(as "as") @keyword
+
+(user_defined_functor ("@" (ident)) @constructor)
+
+
+(relation_decl (ident) @function)
 (relation_decl
-  head: (ident) @Function)
+  attribute: (attribute var: (ident) @variable.parameter))
 (relation_decl
-  attribute: (attribute type: (qualified_name) @Type))
-(relation_decl
-  attribute: (attribute var: (ident) @Identifier))
+  attribute: (attribute type: (qualified_name) @type))
 
-;(atom :relation (qualified_name)) @constant
-(primitive_type) @Type
-(type_synonym left: (ident) @Type)
-(subtype left: (ident) @Type)
-(type_union left: (ident) @Type)
-(type_record left: (ident) @Type)
-(adt left: (ident) @Type)
+(relation_decl choice: (choice_domain (ident) @variable.parameter) @keyword)
 
-(subsumptive_rule ("<=") @Keyword)
-(subsumptive_rule
-  subsumes: (atom relation: (qualified_name) @Underlined))
-; (subsumptive_rule
-;   subsumes: (atom relation: (qualified_name) @Identifier))
-(monotonic_rule
-  head: (atom relation: (qualified_name) @Underlined))
+(primitive_type) @type
+(type_synonym left: (ident) @type)
+(subtype left: (ident) @type)
+(type_union left: (ident) @type)
+(type_record left: (ident) @type)
+(adt left: (ident) @type)
 
-(disjunction (";") @Keyword)
-(conjunction (",") @Keyword)
+
