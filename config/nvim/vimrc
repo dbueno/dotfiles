@@ -30,6 +30,8 @@ set cursorline
 " show input commands as they're being typed
 set showcmd
 
+set signcolumn=yes
+
 " complete recursively in subdirs
 set path+=**
 " unexplainable but helpful completion settings
