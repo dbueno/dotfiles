@@ -404,6 +404,7 @@ in
     fd # find alternative
     hyperfine
     tree
+    ack
   ]
   ++ myScripts;
 }
