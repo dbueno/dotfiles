@@ -371,6 +371,7 @@ in
     enable = true;
   };
 
+  home.extraOutputsToInstall = [ "man" "doc" ];
   home.packages = with pkgs; [
     nix
     gitFull
