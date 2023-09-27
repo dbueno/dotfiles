@@ -2,6 +2,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
+    defaultKeymap = "emacs";
     oh-my-zsh = {
       enable = true;
       plugins = [
