@@ -4,6 +4,17 @@ let
   diff2html = pkgs.callPackage ./pkgs/diff2html/default.nix {};
   GraphEasy = pkgs.callPackage ./pkgs/GraphEasy/default.nix {};
 
+  marked = pkgs.buildNpmPackage {
+    pname = "marked";
+    version = "v9.0.3";
+    src = pkgs.fetchurl {
+      url = "https://github.com/markedjs/marked/archive/refs/tags/v9.0.3.tar.gz";
+      sha512 = "3hx9npd15nwcgbqcn63984q0kpsvipd9xm9dn29r5mfxap7433b2c62840vdxkdmkg8rp63pzrc53hy0d60lk1pnx6ixl1d4da0gill";
+    };
+
+    npmDepsHash = lib.fakeHash;
+  };
+
   bunch = pkgs.writeShellScriptBin "bunch" (builtins.readFile ./scripts/bunch.sh);
 
   sponge = pkgs.writeShellScriptBin "sponge" ''
