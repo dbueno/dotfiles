@@ -52,16 +52,6 @@ let
     version = "improve-preprocessor";
     src = my-souffle-treesitter-grammar-src;
   };
-  meh = pkgs.vimUtils.buildVimPlugin rec {
-    pname = "vim-colors-meh";
-    version = "e2962284bbd53db5cbe2db39efaa3ea74ade0fb1";
-    src = pkgs.fetchFromGitHub {
-      owner = "davidosomething";
-      repo = "${pname}";
-      rev = "${version}";
-      hash = "sha256-SRYWawm2WMGihwhicvqeubDE96+4JEUXIP5dpxzYVa4=";
-    };
-  };
 in {
 
   nixpkgs.overlays = [
@@ -83,7 +73,6 @@ in {
     plugins = with pkgs.vimPlugins; [
       tokyonight-nvim
       witchhazel-vim
-      meh
       my-vim-tweaks
       my-neovim-tweaks
       my-vimoutliner
