@@ -276,37 +276,7 @@ in
 
   programs.kitty = {
     enable = true;
-    settings = {
-      enabled_layouts = lib.concatStringsSep "," [
-        "tall:bias=50;full_size=1;mirrored=false"
-        "horizontal" "vertical" "fat" "stack"
-      ];
-      confirm_os_window_close = 1;
-      scrollback_pager_history_size = 10000;
-      scrollback_fill_enlarged_window = true;
-    };
-    keybindings = {
-      "ctrl+p" = "scroll_page_up";
-      "ctrl+n" = "scroll_page_down";
-      "kitty_mod+h" = "previous_window";
-      "kitty_mod+l" = "next_window";
-      # kitty-mod+l defaults to next_layout so put the layout
-      # commands on brackets.
-      "kitty_mod+]" = "next_layout";
-      "f12" = "show_scrollback";
-      "f11" = "toggle_layout stack";
-      "f10" = "show_last_command_output";
-      "f1" = "create_marker";
-      "f2" = "remove_marker";
-      "ctrl+f4" = "detach_window ask";
-      "ctrl+0" = "scroll_to_mark next";
-      "ctrl+9" = "scroll_to_mark prev";
-      "ctrl+shift+9" = "layout_action decrease_num_full_size_windows";
-      "ctrl+shift+0" = "layout_action increase_num_full_size_windows";
-      "ctrl+shift+escape" = "no_op"; # disable kitty shell wtf
-      "ctrl+shift+w" = "close_window_with_confirmation";
-    };
-    # extraConfig = builtins.readFile ./kitty-themes/nord/nord.conf;
+    extraConfig = builtins.readFile ./config/kitty.conf;
   };
 
   xdg = {
