@@ -365,7 +365,6 @@ in
     zip unzip p7zip
     wdiff
     fx jless # json viewer
-    exa # ls
     nix-prefetch-git
     nix-prefetch-github
     rusage
@@ -388,6 +387,7 @@ in
     hyperfine
     tree
     ack
+    jq
   ]
   ++ myScripts;
 }
