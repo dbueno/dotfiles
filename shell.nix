@@ -169,8 +169,6 @@ in
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  programs.man.enable = true;
-
   programs.bat = {
     enable = true;
     config = {
@@ -352,8 +350,11 @@ in
     enable = true;
   };
 
+  # https://github.com/nix-community/home-manager/issues/432
+  programs.man.enable = false;
   home.extraOutputsToInstall = [ "man" "doc" ];
   home.packages = with pkgs; [
+    man-pages-posix
     nix
     gitFull
     ripgrep
