@@ -88,6 +88,32 @@
               -Nfontsize=11 -Efontsize=10 -Gratio=compress "$@" -Tsvg | isvg
       }
 
+      # Setting and jumping to topic windows
+      function list-topics {
+        kitten @ ls | jq -r ".[].tabs[].windows[].user_vars.topic | select(. != null)"
+      }
+      function set-topic {
+        if test -z "$1"; then
+          echo "error: need topic argument"
+          return 1
+        fi
+        kitten @ set-user-vars topic="$1"
+      }
+      function topics {
+        f=`mktemp -t swwin XXXXXX`
+        list-topics > "$f"
+        topic=$(cat "$f" | fzf | tr -d "\n")
+        rm -f "$f"
+        kitten @ focus-window --match var:topic=$topic
+      }
+      function switch-tab {
+        f=`mktemp -t swtab XXXXXX`
+        list-topics > "$f"
+        topic=$(cat "$f" | fzf | tr -d "\n")
+        rm -f "$f"
+        kitten @ focus-tab --match var:topic=$topic
+      }
+
       # PS1 settings are for interactive shells (login or no), so they should be
       # set in .bashrc.
       # Colors the prompt red if the exit code argument isn't 0.
