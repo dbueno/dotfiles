@@ -388,6 +388,7 @@ in
     tree
     ack
     jq
+    xz
   ]
   ++ myScripts;
 }
