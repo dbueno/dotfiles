@@ -388,7 +388,7 @@ in
     tree
     ack
     jq
-    xz
+    pigz xz
   ]
   ++ myScripts;
 }
