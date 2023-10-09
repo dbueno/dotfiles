@@ -65,11 +65,6 @@ in {
     viAlias = true;
     withRuby = false;
     withPython3 = true;
-    extraPackages = with pkgs; [
-      clang-tools
-      clang
-      nodePackages.pyright
-    ];
     plugins = with pkgs.vimPlugins; [
       tokyonight-nvim
       witchhazel-vim
