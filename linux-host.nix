@@ -1,7 +1,7 @@
-{ config, lib, pkgs, ... }:
-{
+{ config, lib, pkgs, ... }: {
+  imports = [ ./fonts/font-hack.nix ];
+
   programs.kitty.settings = {
-    font_family = "DejaVu Sans Mono";
     font_size = "9.0";
   };
 
