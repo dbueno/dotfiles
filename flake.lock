@@ -159,7 +159,7 @@
         ]
       },
       "locked": {
-        "narHash": "sha256-r8tq0RDMmdNUnKN8MmKLyczOFUKl9S1iwFkkpYlXYsM=",
+        "narHash": "sha256-zbiEqXdOMOqfrV6vu+H4nA+9xp6PyYfpRhz0ZlO052E=",
         "type": "tarball",
         "url": "https://github.com/dbueno/rusage/archive/main.tar.gz"
       },
