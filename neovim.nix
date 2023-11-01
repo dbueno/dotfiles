@@ -55,7 +55,6 @@ let
 in {
 
   nixpkgs.overlays = [
-    (import ./overlays/witchhazel.nix)
   ];
 
   programs.neovim = {
@@ -67,7 +66,6 @@ in {
     withPython3 = true;
     plugins = with pkgs.vimPlugins; [
       tokyonight-nvim
-      witchhazel-vim
       my-vim-tweaks
       my-neovim-tweaks
       my-vimoutliner
@@ -80,7 +78,6 @@ in {
       editorconfig-vim
 
       plenary-nvim
-      telescope-nvim
 
       nvim-lspconfig
       lsp_extensions-nvim
@@ -112,10 +109,6 @@ in {
       set expandtab
       set shiftwidth=2
       set completeopt=menuone,noinsert,noselect
-
-      set cmdheight=2
-
-      set updatetime=300
 
       autocmd BufNewFile,BufRead *.dl setfiletype souffle
 
