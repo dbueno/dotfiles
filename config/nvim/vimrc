@@ -273,23 +273,23 @@ endif
 packloadall
 
 " Python indenting {{{
-function PythonParenIndent(lnum)
-    call cursor(a:lnum, 1)
-    let [pline, pcol] = searchpairpos('(\|{\|\[', '', ')\|}\|\]', 'bW',
-                        \ "synIDattr(synID(line('.'), col('.'), 1), 'name')" .
-                        \ " =~ '\\(Comment\\|String\\)$'",
-                        \ max([0,a:lnum-50]))
-    let plinecontent = getline(pline)
-    let lineend = match(plinecontent, '\s*$')
-    if pcol >= lineend
-        return &sw
-    else
-        return pcol-indent(pline)
-    endif
-endfunction
-
-let g:pyindent_nested_paren='PythonParenIndent(a:lnum)'
-let g:pyindent_open_paren='PythonParenIndent(a:lnum)'
+" function PythonParenIndent(lnum)
+"     call cursor(a:lnum, 1)
+"     let [pline, pcol] = searchpairpos('(\|{\|\[', '', ')\|}\|\]', 'bW',
+"                         \ "synIDattr(synID(line('.'), col('.'), 1), 'name')" .
+"                         \ " =~ '\\(Comment\\|String\\)$'",
+"                         \ max([0,a:lnum-50]))
+"     let plinecontent = getline(pline)
+"     let lineend = match(plinecontent, '\s*$')
+"     if pcol >= lineend
+"         return &sw
+"     else
+"         return pcol-indent(pline)
+"     endif
+" endfunction
+" 
+" let g:pyindent_nested_paren='PythonParenIndent(a:lnum)'
+" let g:pyindent_open_paren='PythonParenIndent(a:lnum)'
 " }}}
 
 " z3 specific style settings for c++
