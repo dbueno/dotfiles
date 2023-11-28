@@ -119,9 +119,9 @@
       # Colors the prompt red if the exit code argument isn't 0.
       function __colorcode_exit {
           if test "$1" -eq 0; then
-              print "%{%F{green}%B%};%{%f%b%}"
+              print "%{%F{magenta}%B%};%{%f%b%}"
           else
-              print "%{%F{red}%B%};%{%f%b%}"
+              print "%{%F{white}%B%};%{%f%b%}"
           fi
       }
       function __colorcode_setps1 {
@@ -132,14 +132,10 @@
           # PROMPT_COMMAND fixes this problem.
           PS1="$(__colorcode_exit $last_exit) "
       }
-      function bueno_minimalist_prompt {
-          # Default for earlier bash shells where PROMPT_COMMAND doesn't work.
-          PS1="; "
-          PROMPT_COMMAND+=('__colorcode_setps1')
+      mypromptcommand() {
+        PS1="$(__colorcode_exit $?) "
       }
-      promptcommand() { eval "$PROMPT_COMMAND" }
-      precmd_functions=(promptcommand)
-      bueno_minimalist_prompt
+      precmd_functions+=(mypromptcommand)
 
       test -f "$KITTY_INSTALLATION_DIR/shell-integration/zsh/kitty.zsh" && . "$KITTY_INSTALLATION_DIR/shell-integration/zsh/kitty.zsh"
       . $HOME/.zshrc_local
