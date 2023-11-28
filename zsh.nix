@@ -34,7 +34,7 @@
     shellAliases = (import ./shell-aliases.nix { inherit config lib pkgs; });
 
     initExtraFirst = ''
-      export LC_ALL="en_US.UTF-8"
+      export LANG="en_US.UTF-8"
       setopt incappendhistory
       setopt histsavenodups
       setopt histexpiredupsfirst
