@@ -387,7 +387,7 @@ in
     hyperfine
     tree
     ack
-    jq
+    jq gron
     pigz xz
   ]
   ++ myScripts;
