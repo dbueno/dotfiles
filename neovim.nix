@@ -95,7 +95,6 @@ in {
       cmp-vsnip
       vim-vsnip
 
-      vim-rooter
       fzf-vim
     ];
     extraConfig = builtins.readFile ./config/nvim/vimrc
