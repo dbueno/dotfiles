@@ -18,6 +18,7 @@ in
   # there's always a story behind aliases like these
   rm = "rm -i";
   c = "clear";
+  g = "git";
   pd = "cd \"$OLDPWD\"";
   # Evaluates to an iso-conformant date.  The iso-conformance is good because
   # lexicographic order coincides with date order.  'nows' just has seconds and
@@ -46,9 +47,7 @@ in
     in
     "${cmd}/bin/hb-feat";
 
-  g = "git";
-
   ssh = "${ssh-cmd}";
   make_cpptags = "${pkgs.universal-ctags}/bin/ctags --c++-kinds=+pf --c-kinds=+p --fields=+imaSft --extra=+q -Rnu";
-  d = "kitty +kitten diff";
+  d = "${config.programs.git.package}/bin/git diff";
 }
