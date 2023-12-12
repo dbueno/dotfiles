@@ -299,18 +299,6 @@ in
     '';
   };
 
-  programs.readline = {
-    enable = true;
-    variables = {
-      bell-style = "visible";
-      # Immediately show all TAB-completions -- don't require two TABs.
-      # show-all-if-ambiguous = true;
-      # Show status of completed filenames, like ls -F does.
-      visible-stats = true;
-      completion-ignore-case = true;
-    };
-  };
-
   home.file = {
     ".tmux-linux".source = ./.tmux-linux;
     ".gdbinit".source = ./.gdbinit;
@@ -329,6 +317,18 @@ in
     ".sqliterc".text = ''
       .mode column
     '';
+  };
+
+  programs.readline = {
+    enable = true;
+    variables = {
+      bell-style = "visible";
+      # Immediately show all TAB-completions -- don't require two TABs.
+      # show-all-if-ambiguous = true;
+      # Show status of completed filenames, like ls -F does.
+      visible-stats = true;
+      completion-ignore-case = true;
+    };
   };
 
   programs.tmux = {
