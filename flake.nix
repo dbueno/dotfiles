@@ -46,8 +46,9 @@
             ./development/python/default.nix
             ./development/ocaml/default.nix ];
         in {
-        "GREATBELOW.localdomain" = slashUsersHost {
-          modules = [ ./shell.nix ./vaporwave.nix ./zsh.nix ./gui.nix ./mac-host.nix ./pkgs/vim-euforia/vim-euforia.nix ] ++ dev-modules;
+        "GreaterGood.localdomain" = slashUsersHost {
+	  username = "denisbueno";
+          modules = [ ./login-helper.nix ./shell.nix ./vaporwave.nix ./zsh.nix ./gui.nix ./mac-host.nix ./pkgs/vim-euforia/vim-euforia.nix ] ++ dev-modules;
           stateVersion = "21.11";
           system = "x86_64-darwin";
         };
