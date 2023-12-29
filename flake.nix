@@ -10,9 +10,10 @@
       url = "https://github.com/dbueno/rusage/archive/main.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hm-login-shell-helper.url = "github:greedy/hm-login-shell-helper";
   };
 
-  outputs = { self, nixpkgs, home-manager, rusage, mynixpkgs }:
+  outputs = { self, nixpkgs, home-manager, rusage, mynixpkgs, ... }@inputs:
     let
       lib = nixpkgs.lib;
       defaultUsername = "dbueno";
@@ -32,6 +33,7 @@
           pkgs = nixpkgs.legacyPackages.${system};
           extraSpecialArgs = {
             rusage = rusage.defaultPackage.${system};
+            inherit (inputs) hm-login-shell-helper;
           };
         } // { inherit username; });
       slashUsersHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/Users/${username}"; } // args );
