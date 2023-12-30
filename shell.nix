@@ -17,10 +17,17 @@ let
 
   bunch = pkgs.writeShellScriptBin "bunch" (builtins.readFile ./scripts/bunch.sh);
 
-  sponge = pkgs.writeShellScriptBin "sponge" ''
-    # Just calls moreutils sponge
-    ${pkgs.moreutils}/bin/sponge "$@"
-  '';
+  my-moreutils = pkgs.stdenv.mkDerivation rec {
+    pname = "my-moreutils";
+    version = "20231230";
+    dontUnpack = true; # no source
+    installPhase = ''
+      mkdir -p $out/bin
+      for prog in sponge vidir vipe ts; do
+        ln -s ${pkgs.moreutils}/bin/$prog $out/bin/$prog
+      done
+    '';
+  };
 
   # Filters all zettel notes, then print the contents of each zettel, for a
   # subsequent fzf.vim search.
@@ -375,13 +382,13 @@ in
     record-my-session
     bunch
     ztl_filter ztl_tagcloud
-    sponge
     sshpass
     figlet toilet # ascii art
     onetrueawk
     mutt
     csvkit
     watch
+    my-moreutils
     rlwrap
     # diff tools
     colordiff difftastic
