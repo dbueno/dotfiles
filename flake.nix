@@ -20,6 +20,7 @@
       emptyConfig = {...}: {
         xdg.dataFile = {
           "hm-inputs/nixpkgs".source = nixpkgs;
+          "hm-inputs/mynixpkgs".source = mynixpkgs;
           "hm-inputs/home-manager".source = home-manager;
         };
         nix.registry.mynixpkgs.flake = mynixpkgs;
