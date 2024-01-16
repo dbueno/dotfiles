@@ -159,7 +159,7 @@ in
         url = "https://github.com/dracula/sublime.git";
         rev = "26c57ec282abcaa76e57e055f38432bd827ac34e";
       };
-      file = "Dracula.tmTheme");
+      file = "Dracula.tmTheme";
     };
   };
 }
