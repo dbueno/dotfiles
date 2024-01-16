@@ -154,9 +154,12 @@ in
 
   programs.bat.config.theme = "Dracula";
   programs.bat.themes = {
-    dracula = builtins.readFile (builtins.fetchGit {
-      url = "https://github.com/dracula/sublime.git";
-      rev = "26c57ec282abcaa76e57e055f38432bd827ac34e";
-    } + "/Dracula.tmTheme");
+    dracula = {
+      src = builtins.fetchGit {
+        url = "https://github.com/dracula/sublime.git";
+        rev = "26c57ec282abcaa76e57e055f38432bd827ac34e";
+      };
+      file = "Dracula.tmTheme");
     };
+  };
 }
