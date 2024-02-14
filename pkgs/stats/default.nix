@@ -1,6 +1,7 @@
 { stdenv 
-, fetchzip
-, undmg }:
+, fetchurl
+, undmg
+, lib }:
 
 let
   version = "v2.10.0";
@@ -9,23 +10,29 @@ stdenv.mkDerivation rec {
   pname = "stats";
   inherit version;
 
-  src = fetchzip {
+  src = fetchurl {
     url = "https://github.com/exelban/stats/releases/download/${version}/Stats.dmg";
-    sha256 = "sha256-00000000000000000000000000000OjnRRAA7hMn690=";
+    sha256 = "0vgpwjyci2mxiyrq2ig3gd8nkj55s66r85kgqhnq29vakj03qkqs";
   };
+  # fetchurl requires a custom unpackPhase to handle dmg, fetchurl cannot handle undmg producing >1 directory without this
+  sourceRoot = ".";
+
 
   nativeBuildInputs = [ undmg ];
 
+  dontBuild = true;
+  dontStrip = true;
+
   installPhase = ''
-    mkdir -p $out/Applications/Stats.app
-    mv ./* $out/Applications/Stats.app
+    mkdir -p $out/Applications/
+    mv ./* $out/Applications/
     chmod +x "$out/Applications/Stats.app/Contents/MacOS/Stats"
   '';
 
   meta = {
     description = "macOS system monitor in your menu bar";
-    license = stdenv.lib.licenses.mit;
+    license = lib.licenses.mit;
     homepage = "https://github.com/exelban/stats";
-    platforms = stdenv.lib.platforms.darwin;
+    platforms = lib.platforms.darwin;
   };
 }

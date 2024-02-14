@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   hammerspoon = pkgs.callPackage ./pkgs/hammerspoon/default.nix {};
+  stats = pkgs.callPackage ./pkgs/stats/default.nix {};
 in
 {
   imports = [ ./fonts/font-hack.nix ];
@@ -26,5 +27,6 @@ in
   };
   home.packages = with pkgs; [
     hammerspoon
+    stats
   ];
 }
