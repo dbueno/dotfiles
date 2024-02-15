@@ -15,6 +15,7 @@ in
   a = "${ls-command}";
   al = "${ls-command} -l";
   aa = "${ls-command} -a";
+  aal = "${ls-command} -al";
   # there's always a story behind aliases like these
   rm = "rm -i";
   c = "clear";
