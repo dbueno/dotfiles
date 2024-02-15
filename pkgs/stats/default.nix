@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/Applications/
-    mv ./* $out/Applications/
+    mv ./Stats.app $out/Applications/
     chmod +x "$out/Applications/Stats.app/Contents/MacOS/Stats"
   '';
 
