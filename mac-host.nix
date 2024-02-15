@@ -2,6 +2,7 @@
 let
   hammerspoon = pkgs.callPackage ./pkgs/hammerspoon/default.nix {};
   stats = pkgs.callPackage ./pkgs/stats/default.nix {};
+  skim-app = pkgs.callPackage ./pkgs/skim-app/default.nix {};
 in
 {
   imports = [ ./fonts/font-hack.nix ];
@@ -25,8 +26,9 @@ in
   home.file = {
     ".hammerspoon/init.lua".source = ./config/hammerspoon.lua;
   };
-  home.packages = with pkgs; [
+  home.packages = [
     hammerspoon
     stats
+    skim-app
   ];
 }
