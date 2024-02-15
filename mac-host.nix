@@ -5,7 +5,7 @@ let
   skim-app = pkgs.callPackage ./pkgs/skim-app/default.nix {};
 in
 {
-  imports = [ ./fonts/font-hack.nix ];
+  imports = [ ./fonts/font-ibm-plex.nix ];
 
   nixpkgs.overlays = [ ];
 
