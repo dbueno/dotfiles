@@ -120,9 +120,9 @@
       # Colors the prompt red if the exit code argument isn't 0.
       function __colorcode_exit {
           if test "$1" -eq 0; then
-              print "%{%F{magenta}%B%};%{%f%b%}"
-          else
               print "%{%F{white}%B%};%{%f%b%}"
+          else
+              print "%{%F{red}%B%};%{%f%b%}"
           fi
       }
       function __colorcode_setps1 {
