@@ -169,7 +169,6 @@ in
   ];
 
   nixpkgs.overlays = [
-    (import ./overlays/diff-so-fancy.nix)
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -245,25 +244,14 @@ in
       # Force git to make me set an email inside each repo.
       user.useConfigOnly = true;
       init = { defaultBranch = "main"; };
-      core = {
-        sshCommand = "${pkgs.openssh}/bin/ssh -F ~/.ssh/config";
-      };
-      diff = {
-        tool = "kitty";
-        guitool = "kitty.gui";
-      };
+      core.sshCommand = "${pkgs.openssh}/bin/ssh -F ~/.ssh/config";
       difftool = {
         prompt = false;
         trustExitCode = true;
-        kitty = {
-          cmd = "kitty +kitten diff $LOCAL $REMOTE";
-        };
-        "kitty.gui" = {
-          cmd = "kitty kitty +kitten diff $LOCAL $REMOTE";
-        };
-        vim = {
-          cmd = "vimdiff $LOCAL $REMOTE";
-        };
+        # Difftools
+        kitty = { cmd = "kitty +kitten diff $LOCAL $REMOTE"; };
+        "kitty.gui" = { cmd = "kitty kitty +kitten diff $LOCAL $REMOTE"; };
+        vim = { cmd = "vimdiff $LOCAL $REMOTE"; };
       };
       push = { default = "simple"; };
       pull = { rebase = "true"; };
