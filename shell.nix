@@ -159,11 +159,17 @@ let
         diff.colorMoved = "default";
       };
     };
+    difftastic-git-difftool-config = {
+      programs.git.extraConfig = {
+        diff.tool = "difftastic";
+      };
+    };
     diff-git-config = delta-git-config;
 in
 {
   imports = [
     diff-git-config
+    difftastic-git-difftool-config
     (import ./vim.nix)
     (import ./neovim.nix)
   ];
@@ -252,6 +258,7 @@ in
         kitty = { cmd = "kitty +kitten diff $LOCAL $REMOTE"; };
         "kitty.gui" = { cmd = "kitty kitty +kitten diff $LOCAL $REMOTE"; };
         vim = { cmd = "vimdiff $LOCAL $REMOTE"; };
+        difftastic = { cmd = ''${pkgs.difftastic}/bin/difft "$LOCAL" "$REMOTE"''; };
       };
       push = { default = "simple"; };
       pull = { rebase = "true"; };
