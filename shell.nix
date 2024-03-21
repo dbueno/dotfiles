@@ -132,16 +132,6 @@ let
       (pkgs.writeShellScriptBin "sync-my-repos" (builtins.readFile ./automation/sync-my-repos.sh))
       (pkgs.writeShellScriptBin "frequency" (builtins.readFile ./automation/frequency.sh))
     ];
-    diff-so-fancy-git-config = {
-      programs.git.extraConfig = {
-        core.pager = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=4 -RFX";
-        interactive.diffFilter = "${pkgs.diff-so-fancy}/bin/diff-so-fancy --patch";
-        # Works around what is apparently a git bug in parsing diff-so-fancy's
-        # ansi directives. This reverts git to an older interactive diff engine
-        # that doesn't have this parsing problem.
-        add.interactive.useBuiltin = false;
-      };
-    };
     delta-git-config = {
       programs.git.extraConfig = {
         core.pager = "${pkgs.delta}/bin/delta";
