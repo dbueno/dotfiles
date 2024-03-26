@@ -235,7 +235,8 @@
         ]
       },
       "locked": {
-        "narHash": "sha256-zbiEqXdOMOqfrV6vu+H4nA+9xp6PyYfpRhz0ZlO052E=",
+        "lastModified": 1711415223,
+        "narHash": "sha256-bkjjIdV1jQmfk/ZnEcL7YXietULjlMUC9rC97nERJz0=",
         "type": "tarball",
         "url": "https://github.com/dbueno/rusage/archive/main.tar.gz"
       },
