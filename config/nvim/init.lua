@@ -12,6 +12,7 @@ highlight = {
 
 require'lspconfig'.pyright.setup{}
 require'lspconfig'.ocamllsp.setup{}
+require'lspconfig'.rust_analyzer.setup {}
 
 -- Binds K to buf.hover. This should happen by default but doesn't happen, so
 -- force it.
