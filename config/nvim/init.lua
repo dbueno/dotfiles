@@ -11,3 +11,4 @@ highlight = {
 }
 
 require'lspconfig'.pyright.setup{}
+require'lspconfig'.ocamllsp.setup{}
