@@ -52,7 +52,7 @@
           system = "x86_64-darwin";
         };
         "thinklappy" = slashHomeHost {
-          modules = [ ./shell.nix ./vaporwave.nix ./zsh.nix ./gui.nix ./nixos-host.nix ./pkgs/vim-euforia/vim-euforia.nix ];
+          modules = [ ./login-helper.nix ./shell.nix ./vaporwave.nix ./zsh.nix ./gui.nix ./nixos-host.nix ./pkgs/vim-euforia/vim-euforia.nix ];
           stateVersion = "21.11";
           system = "x86_64-linux";
         };
