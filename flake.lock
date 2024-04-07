@@ -168,22 +168,6 @@
         "type": "github"
       }
     },
-    "mynixpkgs": {
-      "locked": {
-        "lastModified": 1690343512,
-        "narHash": "sha256-oOgte+A9TJKKwbvjx5H47SDkao5YBIW3YUvQneJXsbY=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "27aa2418a5cd0419e0c8327aea58ac6a4b77ee34",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "27aa241",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1701040486,
@@ -220,7 +204,6 @@
       "inputs": {
         "hm-login-shell-helper": "hm-login-shell-helper",
         "home-manager": "home-manager",
-        "mynixpkgs": "mynixpkgs",
         "nixpkgs": "nixpkgs_2",
         "rusage": "rusage"
       }
