@@ -198,14 +198,6 @@ in
     package = pkgs.gitFull;
     enable = true;
     userName = "Denis Bueno";
-    ignores = [
-      # vim
-      "*.swp" "*.swo"
-      # direnv
-      "/.direnv/" "/.envrc"
-      # files I make to store things
-      "*.out"
-    ];
     lfs = { enable = true; };
 
     aliases = {
@@ -259,6 +251,8 @@ in
       branch.sort = "creatordate";
     };
   };
+  
+  xdg.configFile."git/ignore".source = ./config/git/ignore;
 
   programs.htop = {
     enable = true;

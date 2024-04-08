@@ -1,0 +1,8 @@
+# vim
+.swp
+*.swo
+# direnv
+/.direnv/
+/.envrc
+# files I make to store things
+*.out
