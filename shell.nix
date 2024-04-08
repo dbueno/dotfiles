@@ -251,8 +251,6 @@ in
       branch.sort = "creatordate";
     };
   };
-  
-  xdg.configFile."git/ignore".source = ./config/git/ignore;
 
   programs.htop = {
     enable = true;
@@ -283,6 +281,8 @@ in
         Bar(a, b) :- \
           Baz(b, c)
     '';
+
+    configFile."git/ignore".source = ./config/git/ignore;
   };
 
   home.file = {
