@@ -198,7 +198,6 @@ in
     package = pkgs.gitFull;
     enable = true;
     userName = "Denis Bueno";
-    lfs = { enable = true; };
 
     aliases = {
       a = "add -p";
@@ -209,17 +208,18 @@ in
       co = "checkout";
       ci = "commit";
       sw = "switch";
-      s = let
-        # Prints status without untracked files
-        cmd = pkgs.writeShellScriptBin "my-git-status" ''
-          git status -uno || exit 0
-          # Prints only a count summary of untracked files
-          git status --short | \
-              awk '/[?][?]/ { c += 1 } END { if (c > 0) { printf("\n... and %s untracked files\n", c) } }' || exit 0
-          '';
-        in
-        "!${cmd}/bin/my-git-status";
-      ss = "status";
+      #s = let
+      #  # Prints status without untracked files
+      #  cmd = pkgs.writeShellScriptBin "my-git-status" ''
+      #    git status -uno || exit 0
+      #    # Prints only a count summary of untracked files
+      #    git status --short | \
+      #        awk '/[?][?]/ { c += 1 } END { if (c > 0) { printf("\n... and %s untracked files\n", c) } }' || exit 0
+      #    '';
+      #  in
+      #  "!${cmd}/bin/my-git-status";
+      s = "status";
+      ss = "status --no-short -u";
       # print git directory, toplevel of current repo
       pgd = "git rev-parse --show-toplevel";
       push-it-real-good = "push --force-with-lease";
@@ -242,13 +242,22 @@ in
         vim = { cmd = "vimdiff $LOCAL $REMOTE"; };
         difftastic = { cmd = ''${pkgs.difftastic}/bin/difft "$LOCAL" "$REMOTE"''; };
       };
-      push = { default = "simple"; };
+      push = {
+        default = "simple";
+        followTags = "true";
+      };
       pull = { rebase = "true"; };
       color = {
         interactive = "auto";
         # diff = "auto";
       };
+      status = {
+        branch = "true";
+        short = "true";
+        showUntrackedFiles = "no";
+      };
       branch.sort = "creatordate";
+      tag.sort = "taggerdate";
     };
   };
 
