@@ -1,5 +1,5 @@
 # vim
-.swp
+*.swp
 *.swo
 # direnv
 /.direnv/
