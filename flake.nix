@@ -43,6 +43,7 @@
         let
           dev-modules = [
             ./development/python/default.nix
+            ./development/python/dontcheck.nix
             ./development/ocaml/default.nix ];
         in {
         "GreaterGood.localdomain" = slashUsersHost {
