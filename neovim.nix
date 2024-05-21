@@ -20,6 +20,16 @@ let
       sha256 = "8uD1dflyI8fn2rzk0l7aBHn6kOTGrpWKtsFv1p2oDXQ=";
     };
   };
+  synthwave84-nvim = pkgs.vimUtils.buildVimPlugin rec {
+    pname = "synthwave84";
+    version = "a5caa80d9e1a7021f9ec6c06a96d09dfc2d99ed1";
+    src = pkgs.fetchFromGitHub {
+      "owner" = "artanikin";
+      "repo" = "vim-synthwave84";
+      "rev" = "a5caa80d9e1a7021f9ec6c06a96d09dfc2d99ed1";
+      "hash" = "sha256-5+rOp2xDdtIMxMdvV0N18yTSQuSzYIfnFvwNeufaDgQ=";
+    };
+  };
   tree-sitter-souffle-langston-barrett = pkgs.fetchFromGitHub {
     owner = "langston-barrett";
     repo = "tree-sitter-souffle";
@@ -64,7 +74,7 @@ in {
     viAlias = true;
     withRuby = false;
     withPython3 = true;
-    plugins = with pkgs.vimPlugins; [
+    plugins = [synthwave84-nvim] ++ (with pkgs.vimPlugins; [
       tokyonight-nvim
       my-vim-tweaks
       my-neovim-tweaks
@@ -96,7 +106,7 @@ in {
       vim-vsnip
 
       fzf-vim
-    ];
+    ]);
     extraConfig = builtins.readFile ./config/nvim/vimrc
     + ''
 
@@ -117,7 +127,14 @@ in {
         au Colorscheme dracula hi Comment guifg=#7c8ca8 ctermfg=69
       augroup END
 
-      colorscheme tokyonight
+      "colorscheme tokyonight
+
+      " lighten up synthwave84 comments
+      augroup my_colorschemes
+        au!
+        au Colorscheme synthwave84 hi Comment guifg=#7c8ca8 ctermfg=69
+      augroup END
+      colorscheme synthwave84
     '';
     extraLuaConfig = builtins.readFile ./config/nvim/init.lua;
 
