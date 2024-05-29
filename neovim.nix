@@ -121,20 +121,14 @@ in {
 
       autocmd BufNewFile,BufRead *.dl setfiletype souffle
 
-      " lighten up dracula comments
+      " lighten up theme comments
       augroup my_colorschemes
         au!
         au Colorscheme dracula hi Comment guifg=#7c8ca8 ctermfg=69
-      augroup END
-
-      "colorscheme tokyonight
-
-      " lighten up synthwave84 comments
-      augroup my_colorschemes
-        au!
         au Colorscheme synthwave84 hi Comment guifg=#7c8ca8 ctermfg=69
+        au Colorscheme tokyonight hi Comment guifg=#7c8ca8 ctermfg=69
       augroup END
-      colorscheme synthwave84
+      colorscheme tokyonight
     '';
     extraLuaConfig = builtins.readFile ./config/nvim/init.lua;
 
