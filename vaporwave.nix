@@ -100,7 +100,7 @@ let
   };
 
   tokyonight-kitty-conf = 
-    builtins.readFile "${pkgs.vimPlugins.tokyonight-nvim}/extras/kitty/tokyonight_storm.conf";
+    builtins.readFile "${pkgs.vimPlugins.tokyonight-nvim}/extras/kitty/tokyonight_night.conf";
 
   tokyonight-fzf-options = with tokyonight-storm-theme; [
     "--color=bg:${background},bg+:${selection_background},fg:${foreground},fg+:${selection_foreground}"

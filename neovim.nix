@@ -128,7 +128,7 @@ in {
         au Colorscheme synthwave84 hi Comment guifg=#7c8ca8 ctermfg=69
         au Colorscheme tokyonight hi Comment guifg=#7c8ca8 ctermfg=69
       augroup END
-      colorscheme tokyonight
+      colorscheme tokyonight-night
     '';
     extraLuaConfig = builtins.readFile ./config/nvim/init.lua;
 
