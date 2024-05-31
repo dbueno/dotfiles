@@ -1,3 +1,4 @@
+# defaults -currentHost write -g AppleFontSmoothing -int 0
 { config, lib, pkgs, ... }:
 let
   hammerspoon = pkgs.callPackage ./pkgs/hammerspoon/default.nix {};
