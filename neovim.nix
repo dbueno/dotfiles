@@ -82,7 +82,7 @@ in {
       vim-fugitive
       vim-nix
       vim-commentary
-      tabular
+      #tabular
       vim-surround
       securemodelines
       editorconfig-vim
