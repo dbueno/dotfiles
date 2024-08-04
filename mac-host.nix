@@ -25,5 +25,6 @@ in
     hammerspoon
     stats
     skim-app
+    pkgs.obsidian
   ];
 }
