@@ -6,7 +6,6 @@ let
   skim-app = pkgs.callPackage ./pkgs/skim-app/default.nix {};
 in
 {
-  imports = [ ./fonts/font-ibm-plex.nix ];
 
   nixpkgs.overlays = [ ];
 
@@ -22,9 +21,18 @@ in
     ".hammerspoon/init.lua".source = ./config/hammerspoon.lua;
   };
   home.packages = [
+    pkgs.ibm-plex
+    pkgs.jetbrains-mono
     hammerspoon
     stats
     skim-app
     pkgs.obsidian
   ];
+
+  programs.kitty.settings = {
+    font_family = "Jetbrains Mono";
+    font_size = lib.mkDefault "11.0";
+  #   font_family = "IBM Plex Mono";
+  #   font_size = lib.mkDefault "11.0";
+  };
 }
