@@ -273,6 +273,8 @@ in
   xdg = {
     enable = true;
     configFile."mutt/muttrc".source = ./.muttrc;
+    configFile."wezterm/wezterm.lua".source = ./wezterm/wezterm.lua;
+    configFile."wezterm/appearance.lua".source = ./wezterm/appearance.lua;
 
     # Datalog snippets, see ./dotvim/after/ftplugin/souffle.vim for keybindings
     configFile."vim/snippets/datalog/rule.dl".text = ''
