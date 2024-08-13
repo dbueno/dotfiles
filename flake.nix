@@ -48,12 +48,12 @@
         in {
         "GreaterGood.localdomain" = slashUsersHost {
 	  username = "denisbueno";
-          modules = [ ./login-helper.nix ./shell.nix ./vaporwave.nix ./zsh.nix ./gui.nix ./mac-host.nix ./pkgs/vim-euforia/vim-euforia.nix ] ++ dev-modules;
+          modules = [ ./home.nix ./login-helper.nix ./shell.nix ./vaporwave.nix ./zsh.nix ./gui.nix ./mac-host.nix ./pkgs/vim-euforia/vim-euforia.nix ] ++ dev-modules;
           stateVersion = "21.11";
           system = "x86_64-darwin";
         };
         "thinklappy" = slashHomeHost {
-          modules = [ ./login-helper.nix ./shell.nix ./vaporwave.nix ./zsh.nix ./gui.nix ./nixos-host.nix ./pkgs/vim-euforia/vim-euforia.nix ];
+          modules = [ ./home.nix ./login-helper.nix ./shell.nix ./vaporwave.nix ./zsh.nix ./gui.nix ./nixos-host.nix ./pkgs/vim-euforia/vim-euforia.nix ];
           stateVersion = "21.11";
           system = "x86_64-linux";
         };
