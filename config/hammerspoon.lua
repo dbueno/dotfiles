@@ -23,6 +23,9 @@ units = {
   maximum       = { x = 0.00, y = 0.00, w = 1.00, h = 1.00 }
 }
 
+--pinLeft = hs.geometry.rect(0, 0, 100, 100)
+pinLeft = { x = 0.00, y = 0.00, w = 0.2, h = 1.00 }
+
 animationDuration = 0
 
 -- bindings
@@ -32,6 +35,7 @@ animationDuration = 0
 -- 'down'
 
 mash = { 'shift', 'ctrl', 'cmd' }
+hs.hotkey.bind(mash, 'd', function() hs.window.focusedWindow():move(pinLeft,     nil, true) end)
 -- the n key in dvorak produces l
 -- when i hit j, it produces h because of dvorak
 hs.hotkey.bind(mash, 'h', function() hs.window.focusedWindow():move(units.left50,     nil, true) end)
