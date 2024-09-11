@@ -23,14 +23,20 @@ in
   home.packages = [
     pkgs.ibm-plex
     pkgs.jetbrains-mono
+    pkgs.iosevka-bin
     hammerspoon
     stats
     skim-app
   ];
 
   programs.kitty.settings = {
-    font_family = "Jetbrains Mono";
+    #font_family = "Jetbrains Mono";
+    font_family = ''family="Iosevka"'';
     font_size = lib.mkDefault "11.0";
+    bold_font = "auto";
+    italic_font = "auto";
+    bold_italic_font = "auto";
+    font_features = "Iosevka +ss20";
   #   font_family = "IBM Plex Mono";
   #   font_size = lib.mkDefault "11.0";
   };
