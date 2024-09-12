@@ -6,7 +6,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     rusage = {
-      url = "https://github.com/dbueno/rusage/archive/main.tar.gz";
+      url = "github:dbueno/rusage";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hm-login-shell-helper.url = "github:greedy/hm-login-shell-helper";

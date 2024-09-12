@@ -220,12 +220,15 @@
       "locked": {
         "lastModified": 1726155804,
         "narHash": "sha256-88zI7/sdvRK5ISRtMDlJIOGc+M6SpKvt8unHHm17iKY=",
-        "type": "tarball",
-        "url": "https://github.com/dbueno/rusage/archive/main.tar.gz"
+        "owner": "dbueno",
+        "repo": "rusage",
+        "rev": "eb86d9f8ef443f553a1b68141b500e99f27025a0",
+        "type": "github"
       },
       "original": {
-        "type": "tarball",
-        "url": "https://github.com/dbueno/rusage/archive/main.tar.gz"
+        "owner": "dbueno",
+        "repo": "rusage",
+        "type": "github"
       }
     },
     "rust-overlay": {
