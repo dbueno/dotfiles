@@ -358,6 +358,7 @@ in
     nix
     gitFull
     ripgrep
+    ripgrep-all
     graphviz
     wget
     parallel
