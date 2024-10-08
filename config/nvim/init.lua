@@ -65,5 +65,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
+    --vim.keymap.set('n', 'Ao', require'jdtls'.organize_imports, opts)
   end,
 })
