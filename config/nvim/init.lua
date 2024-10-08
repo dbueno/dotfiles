@@ -14,17 +14,44 @@ require'lspconfig'.pyright.setup{}
 require'lspconfig'.ocamllsp.setup{}
 require'lspconfig'.rust_analyzer.setup {}
 
+local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+local workspace_dir = vim.fn.expandcmd('~/.eclipse-workspace/') .. project_name
+local config = {
+  -- <here goes your normal configuration, like the cmd etc>
+  name = 'jdtls-server',
+  cmd = {'jdt-language-server', '-data', workspace_dir},
+  root_dir = vim.fs.dirname(vim.fs.find({'.git', 'build.gradle'}, { upward = true })[1]),
+  -- This is currently required to have the server read the settings,
+  -- In a future neovim build this may no longer be required
+  -- on_init = function(client)
+  --   client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
+  -- end
+}
+
+-- Set up initialization options, where we tell the java language server
+-- (jdtls) here the correct JDK lives.
+config.init_options = {
+  settings = {
+    java = {
+      configuration = {
+        runtimes = {
+          {
+            name = "JavaSE-8",
+            path = os.getenv("JAVA8_HOME"),
+            default = true,
+          },
+        },
+      },
+    },
+  },
+}
+
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'java',
   callback = function(args)
-    vim.lsp.start({
-      name = 'jdtls-server',
-      cmd = {'jdt-language-server', '-data', '.workspace'},
-      root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
-    })
+    vim.lsp.start(config)
   end,
 })
---require'lspconfig'.jdtls.setup {}
 
 -- Binds K to buf.hover. This should happen by default but doesn't happen, so
 -- force it.
