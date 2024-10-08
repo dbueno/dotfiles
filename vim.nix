@@ -116,6 +116,7 @@ in {
       limelight-vim
       vim-textobj-user
       vim-markdown
+      nvim-jdtls
     ];
     extraConfig = builtins.readFile ./config/vimrc
     + lib.optionalString pkgs.stdenv.isDarwin ''

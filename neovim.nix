@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   my-vim-tweaks = pkgs.vimUtils.buildVimPlugin {
-    pname = "denisbueno-vim-tweaks.vim";
+    pname = "denisbueno-vim-config.vim";
     version = "dev";
     src = ./dotvim;
   };
