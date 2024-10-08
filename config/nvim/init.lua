@@ -14,6 +14,18 @@ require'lspconfig'.pyright.setup{}
 require'lspconfig'.ocamllsp.setup{}
 require'lspconfig'.rust_analyzer.setup {}
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'java',
+  callback = function(args)
+    vim.lsp.start({
+      name = 'jdtls-server',
+      cmd = {'jdt-language-server', '-data', '.workspace'},
+      root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+    })
+  end,
+})
+--require'lspconfig'.jdtls.setup {}
+
 -- Binds K to buf.hover. This should happen by default but doesn't happen, so
 -- force it.
 vim.api.nvim_create_autocmd('LspAttach', {
