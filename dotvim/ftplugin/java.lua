@@ -8,7 +8,6 @@ local jdk_settings = {
           {
             name = "JavaSE-1.8",
             path = os.getenv("JAVA8_HOME"),
-            default = true,
           },
           {
             name = "JavaSE-11",
