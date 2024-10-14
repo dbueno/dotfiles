@@ -13,6 +13,10 @@ local jdk_settings = {
             name = "JavaSE-11",
             path = os.getenv("JAVA11_HOME"),
           },
+          {
+            name = "JavaSE-17",
+            path = os.getenv("JAVA17_HOME"),
+          },
         },
       },
     },
