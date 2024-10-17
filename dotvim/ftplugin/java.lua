@@ -1,7 +1,7 @@
 local root_dir = vim.fs.dirname(vim.fs.find({'.git', 'build.gradle'}, { upward = true })[1])
 local project_name = vim.fn.fnamemodify(root_dir, ':p:h:t')
 local workspace_dir = vim.fn.expandcmd('~/.eclipse-workspace/') .. project_name
-local jdk_settings = {
+local init_settings = {
     java = {
       configuration = {
         runtimes = {
@@ -19,6 +19,24 @@ local jdk_settings = {
           },
         },
       },
+      format = {
+        comments = { enabled = false },
+        enabled = true,
+        settings = {
+          url = os.getenv("ECLIPSE_FORMATTER_URL"),
+        },
+      },
+      completion = {
+        importOrder = {
+          "java",
+          "javax",
+          "org",
+          "com",
+          "",
+          "jadx",
+          "\\#",
+        },
+      },
     },
   }
 local config = {
@@ -30,10 +48,10 @@ local config = {
   -- on_init = function(client)
   --   client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
   -- end
-  settings = jdk_settings,
+  settings = init_settings,
   init_options = {
     bundles = {},
-    settings = jdk_settings,
+    settings = init_settings,
   },
 }
 require('jdtls').start_or_attach(config)
