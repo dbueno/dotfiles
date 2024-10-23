@@ -294,6 +294,8 @@ in
     '';
 
     configFile."git/ignore".source = ./config/git/ignore;
+
+    configFile."litecli/config".source = ./config/litecli/config;
   };
 
   home.file = {
