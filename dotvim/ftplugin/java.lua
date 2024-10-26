@@ -3,6 +3,13 @@ local project_name = vim.fn.fnamemodify(root_dir, ':p:h:t')
 local workspace_dir = vim.fn.expandcmd('~/.eclipse-workspace/') .. project_name
 local init_settings = {
     java = {
+      import = {
+        gradle = {
+          java = {
+            home = os.getenv("JDTLS_GRADLE_JAVA_HOME"),
+          }
+        },
+      },
       configuration = {
         runtimes = {
           {
