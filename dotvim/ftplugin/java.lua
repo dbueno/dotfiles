@@ -47,9 +47,9 @@ local init_settings = {
     },
   }
 
-if vim.fn.executable('jdt-language-server') then
+if vim.fn.executable('jdt-language-server') ~= 0 then
   jdtls_cmd = 'jdt-language-server'
-elseif vim.fn.executable('jdtls') then
+elseif vim.fn.executable('jdtls') ~= 0 then
   jdtls_cmd = 'jdtls'
 end
 
