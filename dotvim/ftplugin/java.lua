@@ -46,9 +46,16 @@ local init_settings = {
       },
     },
   }
+
+if vim.fn.executable('jdt-language-server') then
+  jdtls_cmd = 'jdt-language-server'
+elseif vim.fn.executable('jdtls') then
+  jdtls_cmd = 'jdtls'
+end
+
 local config = {
   name = 'jdtls-server',
-  cmd = {'jdt-language-server', '-data', workspace_dir},
+  cmd = {jdtls_cmd, '-data', workspace_dir},
   root_dir = root_dir,
   -- This is currently required to have the server read the settings,
   -- In a future neovim build this may no longer be required
@@ -61,4 +68,7 @@ local config = {
     settings = init_settings,
   },
 }
-require('jdtls').start_or_attach(config)
+
+if jdtls_cmd ~= nil then
+  require('jdtls').start_or_attach(config)
+end
