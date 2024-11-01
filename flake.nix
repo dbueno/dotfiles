@@ -9,10 +9,14 @@
       url = "github:dbueno/rusage";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    merjar = {
+      url = "github:dbueno/merjar";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hm-login-shell-helper.url = "github:greedy/hm-login-shell-helper";
   };
 
-  outputs = { self, nixpkgs, home-manager, rusage, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, rusage, merjar, ... }@inputs:
     let
       lib = nixpkgs.lib;
       defaultUsername = "dbueno";
@@ -32,6 +36,7 @@
           pkgs = nixpkgs.legacyPackages.${system};
           extraSpecialArgs = {
             rusage = rusage.defaultPackage.${system};
+            merjar = merjar.defaultPackage.${system};
             inherit (inputs) hm-login-shell-helper;
           };
         } // { inherit username; });
