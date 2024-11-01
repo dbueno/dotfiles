@@ -1,4 +1,4 @@
-{ config, lib, pkgs, rusage, ... }:
+{ config, lib, pkgs, rusage, merjar, ... }:
 let
   onetrueawk = pkgs.callPackage ./pkgs/onetrueawk/default.nix {};
   diff2html = pkgs.callPackage ./pkgs/diff2html/default.nix {};
@@ -371,6 +371,7 @@ in
     nix-prefetch-git
     nix-prefetch-github
     rusage
+    merjar
     GraphEasy
     record-my-session
     bunch
