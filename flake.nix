@@ -29,14 +29,20 @@
       };
       mkHomeConfig = lib.makeOverridable ({ system, homeDirectory, username ? defaultUsername, modules, stateVersion, extraConfig ? emptyConfig }:
       home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [
+            (final: prev: {
+              rusage = rusage.defaultPackage.${system};
+              merjar = merjar.defaultPackage.${system};
+            })
+          ];
+        };
           modules = modules ++ [
             { home = { inherit username stateVersion homeDirectory; }; }
             extraConfig
           ];
-          pkgs = nixpkgs.legacyPackages.${system};
           extraSpecialArgs = {
-            rusage = rusage.defaultPackage.${system};
-            merjar = merjar.defaultPackage.${system};
             inherit (inputs) hm-login-shell-helper;
           };
         } // { inherit username; });

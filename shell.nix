@@ -1,4 +1,4 @@
-{ config, lib, pkgs, rusage, merjar, ... }:
+{ config, lib, pkgs, ... }:
 let
   onetrueawk = pkgs.callPackage ./pkgs/onetrueawk/default.nix {};
   diff2html = pkgs.callPackage ./pkgs/diff2html/default.nix {};
