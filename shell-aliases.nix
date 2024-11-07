@@ -50,6 +50,6 @@ in
     "${cmd}/bin/hb-feat";
 
   ssh = "${ssh-cmd}";
-  make_cpptags = "${pkgs.universal-ctags}/bin/ctags --c++-kinds=+pf --c-kinds=+p --fields=+imaSft --extra=+q -Rnu";
+  cpptags = "${pkgs.universal-ctags}/bin/ctags --c++-kinds=+pf --c-kinds=+p --fields=+imaSft --extra=+q -Rnu";
   d = "${config.programs.git.package}/bin/git diff";
 }
