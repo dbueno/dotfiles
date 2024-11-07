@@ -203,10 +203,10 @@ in
       d = "diff";
       di = "diff --cached";
       dt = "difftool --no-symlinks --dir-diff";
-      pa = "push --all";
       co = "checkout";
       ci = "commit";
       sw = "switch";
+      wt = "worktree";
       #s = let
       #  # Prints status without untracked files
       #  cmd = pkgs.writeShellScriptBin "my-git-status" ''
