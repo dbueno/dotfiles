@@ -129,7 +129,6 @@ let
       viewhex
       (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./automation/ifnewer.sh))
       (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./automation/wtf.sh))
-      (pkgs.writeShellScriptBin "sync-my-repos" (builtins.readFile ./automation/sync-my-repos.sh))
       (pkgs.writeShellScriptBin "frequency" (builtins.readFile ./automation/frequency.sh))
     ];
     delta-git-config = {
