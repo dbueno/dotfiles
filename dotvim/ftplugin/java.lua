@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 local root_dir = vim.fs.dirname(vim.fs.find({'.git', 'build.gradle'}, { upward = true })[1])
-local project_name = vim.fn.fnamemodify(root_dir, ':~:h:gs?[~/]?_?')
+local project_name = vim.fn.fnamemodify(root_dir, ':p:h:h:t') .. '_' .. vim.fn.fnamemodify(root_dir, ':p:h:t')
 local workspace_dir = vim.fn.expandcmd('~/.eclipse-workspace/') .. project_name
 local init_settings = {
     java = {
