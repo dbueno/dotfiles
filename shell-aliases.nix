@@ -21,6 +21,7 @@ in
   c = "clear";
   g = "git";
   p = "git pull";
+  top = "git rev-parse --show-toplevel";
   pd = "cd \"$OLDPWD\"";
   # Evaluates to an iso-conformant date.  The iso-conformance is good because
   # lexicographic order coincides with date order.  'nows' just has seconds and
