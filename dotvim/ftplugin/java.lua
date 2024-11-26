@@ -78,6 +78,17 @@ local config = {
   },
 }
 
-if jdtls_cmd ~= nil then
+
+-- Decides which lsp to run
+local custom_lsp_cmd = os.getenv("CUSTOM_LSP_COMMAND")
+
+if custom_lsp_cmd ~= nil then
+  -- Test my lsp
+  vim.lsp.start({
+    name = 'custom_lsp',
+    cmd = {custom_lsp_cmd},
+    root_dir = vim.fs.find({'sources'}, { upward = true })[1],
+  })
+elseif jdtls_cmd ~= nil then
   require('jdtls').start_or_attach(config)
 end
