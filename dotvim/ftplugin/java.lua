@@ -81,12 +81,33 @@ local config = {
 
 -- Decides which lsp to run
 local custom_lsp_cmd = os.getenv("CUSTOM_LSP_COMMAND")
+local custom_lsp_srcroot = os.getenv("CUSTOM_LSP_SRCROOT")
+local custom_lsp_db = os.getenv("CUSTOM_LSP_DB")
+
+function concatenateArrays(array1, array2)
+  local result = {}
+  for i = 1, #array1 do
+    result[#result + 1] = array1[i]
+  end
+
+  for i = 1, #array2 do
+    result[#result + 1] = array2[i]
+  end
+  return result
+end
 
 if custom_lsp_cmd ~= nil then
+  local custom_lsp_cmd_list = { custom_lsp_cmd }
+  if custom_lsp_srcroot ~= nil then
+    custom_lsp_cmd_list = concatenateArrays(custom_lsp_cmd_list, { '--srcroot', custom_lsp_srcroot })
+  end
+  if custom_lsp_db ~= nil then
+    custom_lsp_cmd_list = concatenateArrays(custom_lsp_cmd_list, { '--db', custom_lsp_db })
+  end
   -- Test my lsp
   vim.lsp.start({
     name = 'custom_lsp',
-    cmd = {custom_lsp_cmd},
+    cmd = custom_lsp_cmd_list,
     root_dir = vim.fs.find({'sources'}, { upward = true })[1],
   })
 elseif jdtls_cmd ~= nil then
