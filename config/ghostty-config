@@ -1,5 +1,6 @@
 font-family = Iosevka
 font-size = 12
+font-thicken
 keybind = command+shift+plus=increase_font_size:1
 keybind = command+shift+minus=decrease_font_size:1
 keybind = command+equal=reset_font_size
