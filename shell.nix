@@ -272,6 +272,7 @@ in
   xdg = {
     enable = true;
     configFile."ghostty/config".source = ./config/ghostty-config;
+    configFile."ghostty/themes/tokyonight-night".source = ./config/ghostty/tokyonight-night;
     configFile."mutt/muttrc".source = ./.muttrc;
     configFile."wezterm/wezterm.lua".source = ./wezterm/wezterm.lua;
     configFile."wezterm/appearance.lua".source = ./wezterm/appearance.lua;
