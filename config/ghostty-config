@@ -5,7 +5,7 @@ keybind = command+shift+plus=increase_font_size:1
 keybind = command+shift+minus=decrease_font_size:1
 keybind = command+equal=reset_font_size
 
-keybind = ctrl+shift+g=write_scrollback_file:open
+keybind = ctrl+shift+g=write_screen_file:paste
 
 keybind = ctrl+shift+z=toggle_split_zoom
 keybind = ctrl+shift+i=inspector:toggle
