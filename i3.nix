@@ -3,7 +3,7 @@
 let 
   mod = "Mod1"; # alt
   refresh-i3status = "killall -SIGUSR1 i3status";
-  term = "${pkgs.kitty}/bin/kitty";
+  term = "${pkgs.ghostty-home-manager}/bin/ghostty";
   ws = n: {
     "${mod}+${n}" = "workspace number ${n}";
     "${mod}+Shift+${n}" = "move container to workspace number ${n}";
@@ -31,7 +31,6 @@ in {
         "${mod}+e" = "exec --no-startup-id ${pkgs.dmenu}/bin/dmenu_run";
         "${mod}+x" = "exec sh -c '${pkgs.maim}/bin/maim -s | xclip -selection clipboard -t image/png'";
         "${mod}+Shift+x" = "exec sh -c '${pkgs.i3lock}/bin/i3lock -c 222222 & sleep 5 && xset dpms force of'";
-        "${mod}+Shift+quotedbl" = "kill";
 
         # change focus
         "${mod}+h" = "focus left";
