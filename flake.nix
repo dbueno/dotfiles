@@ -14,6 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hm-login-shell-helper.url = "github:greedy/hm-login-shell-helper";
+    ghostty.url = "github:ghostty-org/ghostty?ref=v1.0.1";
   };
 
   outputs = { self, nixpkgs, home-manager, rusage, merjar, ... }@inputs:
@@ -35,6 +36,9 @@
             (final: prev: {
               rusage = rusage.defaultPackage.${system};
               merjar = merjar.defaultPackage.${system};
+            })
+            (final: prev: if !prev.stdenv.isLinux then {} else {
+              ghostty-home-manager = inputs.ghostty.packages.${system}.default;
             })
           ];
         };
