@@ -7,4 +7,8 @@
   programs.kitty.settings = {
     font_size = "8.0";
   };
+
+  home.packages = [
+    pkgs.ghostty-home-manager
+  ];
 }
