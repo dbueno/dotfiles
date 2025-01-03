@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   ssh-script = pkgs.writeShellScriptBin "my-ssh" ''
-    if [[ "$TERM" = *kitty ]]; then
+    if [[ ( "$TERM" = *kitty ) || ( "$TERM" = *ghostty ) ]]; then
         env TERM=xterm-256color ssh "$@"
     else
         env ssh "$@"

@@ -51,24 +51,16 @@ let
     fi
   '';
 
-  ssh-script = pkgs.writeShellScriptBin "my-ssh" ''
-    if [[ "$TERM" = *kitty ]]; then
-        env TERM=xterm-256color ssh "$@"
-    else
-        env ssh "$@"
-    fi
-    '';
-  ssh-cmd = "${ssh-script}/bin/my-ssh";
-  ssh-with-env-pass = pkgs.writeShellScriptBin "ssh-with-env-pass" ''
-    # You could add a function like this in your environment:
-    # function ssh-to-host() {
-    #   SSHPASS=$(cat ~/.host-password) ssh-with-env-pass host
-    # }
-    ${pkgs.sshpass}/bin/sshpass -e ${ssh-cmd} "$@"
-  '';
-  rsync-with-env-pass = pkgs.writeShellScriptBin "rsync-with-env-pass" ''
-    rsync --rsh='${pkgs.sshpass}/bin/sshpass -e ssh' "$@"
-  '';
+  # ssh-with-env-pass = pkgs.writeShellScriptBin "ssh-with-env-pass" ''
+  #   # You could add a function like this in your environment:
+  #   # function ssh-to-host() {
+  #   #   SSHPASS=$(cat ~/.host-password) ssh-with-env-pass host
+  #   # }
+  #   ${pkgs.sshpass}/bin/sshpass -e ${ssh-cmd} "$@"
+  # '';
+  # rsync-with-env-pass = pkgs.writeShellScriptBin "rsync-with-env-pass" ''
+  #   rsync --rsh='${pkgs.sshpass}/bin/sshpass -e ssh' "$@"
+  # '';
 
   pythonWithNumpy = pkgs.python3.withPackages (p: with p; [
     pandas numpy scipy ]);
@@ -123,8 +115,6 @@ let
       onChange
       google
       uncolor
-      ssh-with-env-pass
-      rsync-with-env-pass
       viewjson
       viewhex
       (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./automation/ifnewer.sh))
