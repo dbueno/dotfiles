@@ -136,7 +136,9 @@ in {
         au!
         au Colorscheme dracula hi Comment guifg=#7c8ca8 ctermfg=69
         au Colorscheme synthwave84 hi Comment guifg=#7c8ca8 ctermfg=69
-        au Colorscheme tokyonight hi Comment guifg=#7c8ca8 ctermfg=69
+        au Colorscheme tokyonight-night hi Comment guifg=#7c8ca8 ctermfg=69
+        au Colorscheme tokyonight-night hi Search guibg=#1a1b26 guifg=#FBEC5D gui=underline
+        au Colorscheme tokyonight-night hi IncSearch guibg=#1a1b26 guifg=#FBEC5D gui=underline
       augroup END
       colorscheme tokyonight-night
     '';
