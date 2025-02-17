@@ -385,6 +385,7 @@ in
     jq gron
     pigz xz
     ncdu
+    entr
   ]
   ++ myScripts;
 }
