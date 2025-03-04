@@ -12,6 +12,6 @@ vim.api.nvim_create_user_command('Black', Black, {})
 vim.cmd([[
   augroup pyBlack
     autocmd!
-    autocmd BufWritePost *.py execute ':Black'
+    autocmd BufWritePost <buffer> execute ':Black'
   augroup END
 ]])
