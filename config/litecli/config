@@ -5,7 +5,7 @@
 # this is set to True, then the end of the statements must have a semi-colon.
 # If this is set to False then sql statements can't be split into multiple
 # lines. End of line (return) is considered as the end of the statement.
-multi_line = False
+multi_line = True
 
 # Destructive warning mode will alert you before executing a sql statement
 # that may cause harm to the database such as "drop table", "drop database"
@@ -76,7 +76,7 @@ login_path_as_host = False
 
 # Cause result sets to be displayed vertically if they are too wide for the current window,
 # and using normal tabular format otherwise. (This applies to statements terminated by ; or \G.)
-auto_vertical_output = False
+auto_vertical_output = True
 
 # keyword casing preference. Possible values "lower", "upper", "auto"
 keyword_casing = auto
