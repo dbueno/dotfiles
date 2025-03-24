@@ -7,12 +7,11 @@
 }:
 stdenv.mkDerivation rec {
   pname = "Ghostty";
-  version = "1.1.2";
+  version = "1.1.3";
 
   src = fetchurl {
     url = "https://release.files.ghostty.org/${version}/Ghostty.dmg";
-    sha256 = "sha256-1K0BOWg0ykR/pdCE6/b7XUSVcoD6ryLqRz6WBnUcSOE=";
-    #sha256 = "sha256-3KKyJOpkbhGKtq01aDGDealjI2BCL6fpz5DW6rn0A/0=";
+    sha256 = "sha256-ZOUUGI9UlZjxZtbctvjfKfMz6VTigXKikB6piKFPJkc=";
   };
   sourceRoot = "Ghostty.app";
 
