@@ -139,6 +139,7 @@ in {
         au Colorscheme tokyonight-night hi Comment guifg=#7c8ca8 ctermfg=69
         au Colorscheme tokyonight-night hi Search guibg=#1a1b26 guifg=#FBEC5D gui=underline
         au Colorscheme tokyonight-night hi IncSearch guibg=#1a1b26 guifg=#FBEC5D gui=underline
+        au Colorscheme slate hi Comment ctermfg=188
       augroup END
       set notermguicolors
       colorscheme slate
