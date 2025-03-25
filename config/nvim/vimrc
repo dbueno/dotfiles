@@ -1,4 +1,4 @@
-set termguicolors
+set notermguicolors
 
 set nocompatible
 filetype plugin indent on

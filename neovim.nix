@@ -140,7 +140,9 @@ in {
         au Colorscheme tokyonight-night hi Search guibg=#1a1b26 guifg=#FBEC5D gui=underline
         au Colorscheme tokyonight-night hi IncSearch guibg=#1a1b26 guifg=#FBEC5D gui=underline
       augroup END
-      colorscheme tokyonight-night
+      set notermguicolors
+      colorscheme slate
+      "colorscheme tokyonight-night
     '';
     extraLuaConfig = builtins.readFile ./config/nvim/init.lua;
 
