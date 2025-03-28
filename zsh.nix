@@ -23,7 +23,7 @@
     sessionVariables = {
       GRAPHVIZ_DOT = "${pkgs.graphviz}/bin/dot";
       RSVG_CONVERT = "${pkgs.librsvg}/bin/rsvg-convert";
-      PAGER = "less -R";
+      PAGER = "less -SXRF";
     };
 
     history = {
