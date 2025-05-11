@@ -9,6 +9,5 @@
   };
 
   home.packages = [
-    pkgs.ghostty-home-manager
   ];
 }

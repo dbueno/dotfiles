@@ -3,7 +3,6 @@
 let 
   mod = "Mod1"; # alt
   refresh-i3status = "killall -SIGUSR1 i3status";
-  term = "${pkgs.ghostty-home-manager}/bin/ghostty";
   ws = n: {
     "${mod}+${n}" = "workspace number ${n}";
     "${mod}+Shift+${n}" = "move container to workspace number ${n}";
