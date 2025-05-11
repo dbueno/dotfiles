@@ -225,9 +225,6 @@ in
       difftool = {
         prompt = false;
         trustExitCode = true;
-        # Difftools
-        kitty = { cmd = "kitty +kitten diff $LOCAL $REMOTE"; };
-        "kitty.gui" = { cmd = "kitty kitty +kitten diff $LOCAL $REMOTE"; };
         vim = { cmd = "vimdiff $LOCAL $REMOTE"; };
         difftastic = { cmd = ''${pkgs.difftastic}/bin/difft "$LOCAL" "$REMOTE"''; };
       };
@@ -252,11 +249,6 @@ in
 
   programs.htop = {
     enable = true;
-  };
-
-  programs.kitty = {
-    enable = true;
-    extraConfig = builtins.readFile ./config/kitty.conf;
   };
 
   xdg = {

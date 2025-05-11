@@ -35,11 +35,6 @@ let
     DiffChanged = Orange;
   };
 
-  dracula-kitty-conf = builtins.readFile (builtins.fetchGit {
-    url = "https://github.com/dracula/kitty.git";
-    rev = "eeaa86a730e3d38649053574dc60a74ce06a01bc";
-  } + "/dracula.conf");
-
   dracula-fzf-options = [
     # https://draculatheme.com/fzf
     # "--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9"
@@ -99,9 +94,6 @@ let
     color17 = "#db4b4b";
   };
 
-  tokyonight-kitty-conf = 
-    builtins.readFile "${pkgs.vimPlugins.tokyonight-nvim}/extras/kitty/tokyonight_night.conf";
-
   tokyonight-fzf-options = with tokyonight-storm-theme; [
     "--color=bg:${background},bg+:${selection_background},fg:${foreground},fg+:${selection_foreground}"
     "--color=border:${inactive_border_color},spinner:${foreground}"
@@ -112,8 +104,6 @@ in
 
   # dracula
   programs.fzf.defaultOptions = tokyonight-fzf-options;
-
-  programs.dircolors.settings = (import ./kitty-themes/dracula/dircolors.nix);
 
   programs.git.extraConfig.color.diff =
     with draculaTheme; {
@@ -128,16 +118,6 @@ in
       newMoved = DiffInserted;
       whitespace = DiffDeleted;
     };
-
-  programs.kitty.extraConfig = tokyonight-kitty-conf;
-
-  xdg.configFile."kitty/diff.conf".source = ./kitty-themes/dracula/diff.conf;
-  # xdg.configFile."kitty/diff.conf".source = (pkgs.fetchFromGitHub {
-  #     owner = "dracula";
-  #     repo = "kitty";
-  #     rev = "eeaa86a730e3d38649053574dc60a74ce06a01bc";
-  #     sha256 = "3yi5e/wnLYt7b3Lkf4fhSByr18SrOzJ4zYympUQMslc=";
-  #   } + "/diff.conf");
 
   programs.vim.plugins = [ pkgs.vimPlugins.dracula-vim ];
   programs.vim.extraConfig = ''

@@ -306,11 +306,6 @@ autocmd BufRead
 " Trailing whitespace
 command StripTrailingWhitespace %s/\s\+$//e
 
-if !has('gui') && stridx($TERM, "kitty")
-  " turn off background color erase for kitty
-  let &t_ut=''
-endif
-
 " Goyo config {{{
 let g:goyo_width = 120
 

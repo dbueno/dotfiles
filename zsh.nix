@@ -74,20 +74,6 @@
       function sortinplace {
         sort "$1" | sponge "$1"
       }
-      # Displays an image (png) in the terminal
-      function icat {
-          kitty +kitten icat --align=left
-      }
-      # Displays an SVG in the terminal
-      function isvg {
-          "$RSVG_CONVERT" | icat
-      }
-      # Displays a graph in the terminal
-      function idot {
-          "$GRAPHVIZ_DOT" -Gbgcolor=transparent -Nfontcolor=#2E3440 -Nstyle=filled \
-              -Nfillcolor=#D8DEE9 -Ecolor=#5E81AC -Efontcolor=#8FBCBB -Nfontname=Helvetica -Efontname=Helvetica \
-              -Nfontsize=11 -Efontsize=10 -Gratio=compress "$@" -Tsvg | isvg
-      }
 
       # Setting and jumping to topic windows
       function list-topics {
@@ -138,12 +124,6 @@
       }
       precmd_functions+=(mypromptcommand)
 
-      if test -n "$KITTY_INSTALLATION_DIR"; then
-          export KITTY_SHELL_INTEGRATION="enabled"
-          autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
-          kitty-integration
-          unfunction kitty-integration
-      fi
       . $HOME/.zshrc_local
     '';
   };

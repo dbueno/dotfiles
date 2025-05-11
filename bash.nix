@@ -1,11 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   ssh-script = pkgs.writeShellScriptBin "my-ssh" ''
-    if [[ "$TERM" = *kitty ]]; then
-        env TERM=xterm-256color ssh "$@"
-    else
-        env ssh "$@"
-    fi
+      env ssh "$@"
     '';
   ssh-cmd = "${ssh-script}/bin/my-ssh";
   completeAlias = pkgs.callPackage ./pkgs/complete-alias/default.nix {};
@@ -14,8 +10,6 @@ in {
     bashInteractive
     bash-completion nix-bash-completions
   ];
-
-  programs.kitty.settings.shell = "${pkgs.bashInteractive}/bin/bash --login -i";
 
   programs.bash = {
     enable = true;
@@ -78,8 +72,6 @@ in {
         complete -F _complete_alias rm
         complete -F _complete_alias aa
         complete -F _complete_alias ss
-
-        test -f "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash" && . "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"
       '';
 
     profileExtra = ''

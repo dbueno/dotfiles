@@ -4,10 +4,6 @@
 
   programs.firefox.enable = true;
 
-  programs.kitty.settings = {
-    font_size = "8.0";
-  };
-
   home.packages = [
   ];
 }

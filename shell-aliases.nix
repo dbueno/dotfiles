@@ -1,12 +1,8 @@
 { config, lib, pkgs, ... }:
 let
   ssh-script = pkgs.writeShellScriptBin "my-ssh" ''
-    if [[ ( "$TERM" = *kitty ) || ( "$TERM" = *ghostty ) ]]; then
-        env TERM=xterm-256color ssh "$@"
-    else
-        env ssh "$@"
-    fi
-    '';
+    env ssh "$@"
+  '';
   ssh-cmd = "${ssh-script}/bin/my-ssh";
   ls-command = "${pkgs.coreutils}/bin/ls -Frth --color=always";
 in
@@ -45,7 +41,7 @@ in
           sed 's/<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">/<g style="fill:#ECEFF4">/' | \
           ${pkgs.librsvg}/bin/rsvg-convert | \
           ${pkgs.imagemagick}/bin/convert -trim -resize '25%' - - | \
-          kitty +kitten icat --align=left
+          cat
           '';
     in
     "${cmd}/bin/hb-feat";
