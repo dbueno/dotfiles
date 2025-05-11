@@ -28,7 +28,6 @@ in
     hammerspoon
     stats
     skim-app
-    ghostty-app
   ];
 
   programs.kitty.settings = {

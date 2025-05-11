@@ -61,8 +61,8 @@
             ./development/python/dontcheck.nix
             ./development/ocaml/default.nix ];
         in {
-        "GreaterGood.localdomain" = slashUsersHost {
-	  username = "denisbueno";
+        "NOTANYMORE" = slashUsersHost {
+	  username = "dbueno";
           modules = [ ./home.nix ./login-helper.nix ./shell.nix ./vaporwave.nix ./zsh.nix ./gui.nix ./mac-host.nix ./pkgs/vim-euforia/vim-euforia.nix ] ++ dev-modules;
           stateVersion = "21.11";
           system = "x86_64-darwin";
