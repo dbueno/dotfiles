@@ -156,6 +156,13 @@ in
   nixpkgs.overlays = [
   ];
 
+  nix.package = pkgs.nixVersions.stable;
+  nix.settings = {
+    cores = 0;
+    max-jobs = "auto";
+    extra-experimental-features = [ "flakes" "nix-command" ];
+  };
+
   nixpkgs.config.allowUnfree = true;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
