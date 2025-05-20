@@ -34,7 +34,8 @@
 
     shellAliases = (import ./shell-aliases.nix { inherit config lib pkgs; });
 
-    initContent = lib.mkBefore ''
+    initContent = lib.mkMerge [
+    (lib.mkOrder 500 ''
       export LANG="en_US.UTF-8"
       setopt incappendhistory
       setopt histsavenodups
@@ -42,9 +43,8 @@
       setopt hist_no_store # don't store "history" command in history
       fpath=(${config.xdg.configHome}/zsh/vendor-completions \
              $fpath)
-    '';
-
-    initContent = ''
+             '')
+   (''
       zshaddhistory() {
         emulate -L zsh
         ## uncomment if HISTORY_IGNORE
@@ -125,7 +125,7 @@
       precmd_functions+=(mypromptcommand)
 
       . $HOME/.zshrc_local
-    '';
+    '')];
   };
 
   # XXX no idea
