@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   vim-euforia = pkgs.vimUtils.buildVimPlugin rec {
     pname = "euforia.vim";
     version = "master";
@@ -9,9 +13,7 @@ let
     };
   };
 in {
-
   programs.vim.plugins = [
     vim-euforia
   ];
-
 }

@@ -1,21 +1,24 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, lib, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      <home-manager/nixos>
-    ];
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    <home-manager/nixos>
+  ];
 
   nix.package = pkgs.nixVersions.nix_2_11;
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    # "hplip"
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      # "hplip"
+    ];
 
   # Use the GRUB 2 boot loader.
   #boot.loader.grub.enable = true;
@@ -30,7 +33,7 @@
   networking.hostName = "thinklappy"; # Define your hostname.
   networking.wireless = {
     enable = true;
-    interfaces = [ "wlp3s0" ];
+    interfaces = ["wlp3s0"];
   };
   networking.wireless.networks = {
   };
@@ -96,8 +99,8 @@
   services.xserver.libinput.touchpad.disableWhileTyping = true;
 
   # services.printing = {
-    # enable = true;
-    # drivers = [ pkgs.hplipWithPlugin ];
+  # enable = true;
+  # drivers = [ pkgs.hplipWithPlugin ];
   # };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -107,7 +110,7 @@
   # };
   users.users.dbueno = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = ["wheel"];
   };
 
   home-manager.useGlobalPkgs = true;
@@ -148,5 +151,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.11"; # Did you read the comment?
-
 }

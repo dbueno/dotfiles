@@ -1,8 +1,6 @@
-self: super:
-let
+self: super: let
   lib = super.lib;
-in
-rec {
+in rec {
   python39 = super.python39.override {
     packageOverrides = self: super: {
       beautifulsoup4 = super.beautifulsoup4.overrideAttrs (old: {
@@ -12,7 +10,6 @@ rec {
   };
   python39Packages = python39.pkgs;
 }
-
 #let
 #  libxml2-with-iconv = super.libxml2.overrideAttrs (attrs: {
 #    propagatedBuildInputs = attrs.propagatedBuildInputs ++ self.lib.optional self.stdenv.isDarwin self.libiconv;
@@ -33,3 +30,4 @@ rec {
 #  };
 #  python3Packages = self.python3.pkgs;
 #}
+

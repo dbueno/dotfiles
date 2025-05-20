@@ -1,5 +1,10 @@
-{ config, lib, pkgs, ... }: {
-  imports = [ ./fonts/font-hack.nix ];
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [./fonts/font-hack.nix];
 
   programs.kitty.settings = {
     font_size = "9.0";

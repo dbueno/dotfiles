@@ -1,14 +1,19 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   ssh-script = pkgs.writeShellScriptBin "my-ssh" ''
-      env ssh "$@"
-    '';
+    env ssh "$@"
+  '';
   ssh-cmd = "${ssh-script}/bin/my-ssh";
   completeAlias = pkgs.callPackage ./pkgs/complete-alias/default.nix {};
 in {
   home.packages = with pkgs; [
     bashInteractive
-    bash-completion nix-bash-completions
+    bash-completion
+    nix-bash-completions
   ];
 
   programs.bash = {
@@ -16,7 +21,7 @@ in {
     historySize = 1000000;
     # The & removes dups; [ ]* ignores commands prefixed with spaces.  Other
     # commands, like job control and ls'ing are also ignored.
-    historyIgnore = [ "\"&\"" "\"[ ]*\"" "exit" "pwd" "\"[bf]g\"" "no" "lo" "lt" "pd" "c" "a" "aa" "s" "ss" "\"g a\"" "\"g s\"" "\"g ss\"" "reset" ];
+    historyIgnore = ["\"&\"" "\"[ ]*\"" "exit" "pwd" "\"[bf]g\"" "no" "lo" "lt" "pd" "c" "a" "aa" "s" "ss" "\"g a\"" "\"g s\"" "\"g ss\"" "reset"];
 
     shellOptions = [
       # Correct transpositions and other minor details from 'cd DIR' command.
@@ -55,16 +60,19 @@ in {
       RSVG_CONVERT = "${pkgs.librsvg}/bin/rsvg-convert";
     };
 
-    shellAliases = (import ./shell-aliases.nix { inherit config lib pkgs; }) // {
-      # Greps and displays with less, with colors
-      rgl = ''rg --line-buffered --pretty "$@" | less -R'';
-      # Greps and fuzzy selects
-      rgfzf = ''rg "$@" | fzf'';
-    };
+    shellAliases =
+      (import ./shell-aliases.nix {inherit config lib pkgs;})
+      // {
+        # Greps and displays with less, with colors
+        rgl = ''rg --line-buffered --pretty "$@" | less -R'';
+        # Greps and fuzzy selects
+        rgfzf = ''rg "$@" | fzf'';
+      };
 
     # Settings for interactive shells
     # .bashrc is executed for interactive non-login shells
-    bashrcExtra = builtins.readFile ./config/bashrc_extra
+    bashrcExtra =
+      builtins.readFile ./config/bashrc_extra
       + builtins.readFile ./config/bash_completion
       + ''
         . ${completeAlias}/complete_alias

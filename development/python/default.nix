@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   nixpkgs.overlays = [
     # (import ./overlays/YouCompleteMe.nix)
   ];

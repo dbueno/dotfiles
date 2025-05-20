@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   programs.kitty.settings = {
     font_family = "Input Mono";
     font_size = lib.mkDefault "11.0";

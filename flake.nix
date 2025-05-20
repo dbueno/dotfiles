@@ -16,18 +16,31 @@
     hm-login-shell-helper.url = "github:greedy/hm-login-shell-helper";
   };
 
-  outputs = { self, nixpkgs, home-manager, rusage, merjar, ... }@inputs:
-    let
-      lib = nixpkgs.lib;
-      defaultUsername = "dbueno";
-      emptyConfig = {...}: {
-        xdg.dataFile = {
-          "hm-inputs/homepkgs".source = nixpkgs;
-          "hm-inputs/home-manager".source = home-manager;
-        };
-        nix.registry.homepkgs.flake = nixpkgs;
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    rusage,
+    merjar,
+    ...
+  } @ inputs: let
+    lib = nixpkgs.lib;
+    defaultUsername = "dbueno";
+    emptyConfig = {...}: {
+      xdg.dataFile = {
+        "hm-inputs/homepkgs".source = nixpkgs;
+        "hm-inputs/home-manager".source = home-manager;
       };
-      mkHomeConfig = lib.makeOverridable ({ system, homeDirectory, username ? defaultUsername, modules, stateVersion, extraConfig ? emptyConfig }:
+      nix.registry.homepkgs.flake = nixpkgs;
+    };
+    mkHomeConfig = lib.makeOverridable ({
+      system,
+      homeDirectory,
+      username ? defaultUsername,
+      modules,
+      stateVersion,
+      extraConfig ? emptyConfig,
+    }:
       home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           inherit system;
@@ -36,44 +49,53 @@
               rusage = rusage.defaultPackage.${system};
               merjar = merjar.defaultPackage.${system};
             })
-            (final: prev: if !prev.stdenv.isLinux then {} else {
-            })
+            (final: prev:
+              if !prev.stdenv.isLinux
+              then {}
+              else {
+              })
           ];
         };
-          modules = modules ++ [
-            { home = { inherit username stateVersion homeDirectory; }; }
+        modules =
+          modules
+          ++ [
+            {home = {inherit username stateVersion homeDirectory;};}
             extraConfig
           ];
-          extraSpecialArgs = {
-            inherit (inputs) hm-login-shell-helper;
-          };
-        } // { inherit username; });
-      slashUsersHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/Users/${username}"; } // args );
-      slashHomeHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/home/${username}"; } // args );
-      ascldapHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/ascldap/${username}"; } // args );
-      nfsHomeHost = { username ? defaultUsername, ... }@args: mkHomeConfig ({ homeDirectory = "/nfs-home/${username}"; } // args );
-      hosts =
-        let
-          dev-modules = [
-            ./development/python/default.nix
-            ./development/python/dontcheck.nix
-            ./development/ocaml/default.nix ];
-        in {
-        "NOTANYMORE" = slashUsersHost {
-	  username = "dbueno";
-          modules = [ ./home.nix ./login-helper.nix ./shell.nix ./vaporwave.nix ./zsh.nix ./gui.nix ./mac-host.nix ./pkgs/vim-euforia/vim-euforia.nix ] ++ dev-modules;
-          stateVersion = "21.11";
-          system = "x86_64-darwin";
+        extraSpecialArgs = {
+          inherit (inputs) hm-login-shell-helper;
         };
-        "thinklappy" = slashHomeHost {
-          modules = [ ./home.nix ./login-helper.nix ./shell.nix ./vaporwave.nix ./zsh.nix ./gui.nix ./nixos-host.nix ./pkgs/vim-euforia/vim-euforia.nix ];
-          stateVersion = "21.11";
-          system = "x86_64-linux";
-        };
+      }
+      // {inherit username;});
+    slashUsersHost = {username ? defaultUsername, ...} @ args: mkHomeConfig ({homeDirectory = "/Users/${username}";} // args);
+    slashHomeHost = {username ? defaultUsername, ...} @ args: mkHomeConfig ({homeDirectory = "/home/${username}";} // args);
+    ascldapHost = {username ? defaultUsername, ...} @ args: mkHomeConfig ({homeDirectory = "/ascldap/${username}";} // args);
+    nfsHomeHost = {username ? defaultUsername, ...} @ args: mkHomeConfig ({homeDirectory = "/nfs-home/${username}";} // args);
+    hosts = let
+      dev-modules = [
+        ./development/python/default.nix
+        ./development/python/dontcheck.nix
+        ./development/ocaml/default.nix
+      ];
+    in {
+      "NOTANYMORE" = slashUsersHost {
+        username = "dbueno";
+        modules = [./home.nix ./login-helper.nix ./shell.nix ./vaporwave.nix ./zsh.nix ./gui.nix ./mac-host.nix ./pkgs/vim-euforia/vim-euforia.nix] ++ dev-modules;
+        stateVersion = "21.11";
+        system = "x86_64-darwin";
       };
-    in
-    {
-      homeConfigurations = lib.mapAttrs' (hostname: config: { name = "${config.username}@${hostname}"; value = config; }) hosts;
+      "thinklappy" = slashHomeHost {
+        modules = [./home.nix ./login-helper.nix ./shell.nix ./vaporwave.nix ./zsh.nix ./gui.nix ./nixos-host.nix ./pkgs/vim-euforia/vim-euforia.nix];
+        stateVersion = "21.11";
+        system = "x86_64-linux";
+      };
     };
-
+  in {
+    homeConfigurations =
+      lib.mapAttrs' (hostname: config: {
+        name = "${config.username}@${hostname}";
+        value = config;
+      })
+      hosts;
+  };
 }

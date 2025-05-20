@@ -1,4 +1,7 @@
-{ mkYarnPackage, fetchFromGitHub }:
+{
+  mkYarnPackage,
+  fetchFromGitHub,
+}:
 mkYarnPackage {
   src = fetchFromGitHub {
     owner = "rtfpessoa";
@@ -15,4 +18,3 @@ mkYarnPackage {
     mainProgram = "diff2html";
   };
 }
-

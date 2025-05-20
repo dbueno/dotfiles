@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   my-vim-tweaks = pkgs.vimUtils.buildVimPlugin {
     pname = "denisbueno-vim-config.vim";
     version = "dev";
@@ -73,7 +77,6 @@ let
     };
   };
 in {
-
   nixpkgs.overlays = [
   ];
 
@@ -84,68 +87,72 @@ in {
     viAlias = true;
     withRuby = false;
     withPython3 = true;
-    plugins = [synthwave84-nvim nvim-jdtls] ++ (with pkgs.vimPlugins; [
-      tokyonight-nvim
-      my-vim-tweaks
-      my-neovim-tweaks
-      my-vimoutliner
-      vim-fugitive
-      vim-nix
-      vim-commentary
-      #tabular
-      vim-surround
-      securemodelines
-      editorconfig-vim
+    plugins =
+      [synthwave84-nvim nvim-jdtls]
+      ++ (with pkgs.vimPlugins; [
+        tokyonight-nvim
+        my-vim-tweaks
+        my-neovim-tweaks
+        my-vimoutliner
+        vim-fugitive
+        vim-nix
+        vim-commentary
+        #tabular
+        vim-surround
+        securemodelines
+        editorconfig-vim
 
-      plenary-nvim
+        plenary-nvim
 
-      nvim-lspconfig
-      lsp_extensions-nvim
-      cmp-nvim-lsp
-      cmp-buffer
-      cmp-path
-      cmp-cmdline
-      nvim-cmp
-      lsp_signature-nvim
-      (nvim-treesitter.withPlugins (_: nvim-treesitter.allGrammars ++ [
-        my-souffle-treesitter-grammar
-      ]))
-      nvim-treesitter-textobjects
+        nvim-lspconfig
+        lsp_extensions-nvim
+        cmp-nvim-lsp
+        cmp-buffer
+        cmp-path
+        cmp-cmdline
+        nvim-cmp
+        lsp_signature-nvim
+        (nvim-treesitter.withPlugins (_:
+          nvim-treesitter.allGrammars
+          ++ [
+            my-souffle-treesitter-grammar
+          ]))
+        nvim-treesitter-textobjects
 
-      cmp-vsnip
-      vim-vsnip
+        cmp-vsnip
+        vim-vsnip
 
-      fzf-vim
-    ]);
-    extraConfig = builtins.readFile ./config/nvim/vimrc
-    + ''
+        fzf-vim
+      ]);
+    extraConfig =
+      builtins.readFile ./config/nvim/vimrc
+      + ''
 
-      set hidden
-      set smartcase
-      set ignorecase
-      set modeline
-      set number
-      set expandtab
-      set shiftwidth=2
-      set completeopt=menuone,noinsert,noselect
+        set hidden
+        set smartcase
+        set ignorecase
+        set modeline
+        set number
+        set expandtab
+        set shiftwidth=2
+        set completeopt=menuone,noinsert,noselect
 
-      autocmd BufNewFile,BufRead *.dl setfiletype souffle
+        autocmd BufNewFile,BufRead *.dl setfiletype souffle
 
-      " lighten up theme comments
-      augroup my_colorschemes
-        au!
-        au Colorscheme dracula hi Comment guifg=#7c8ca8 ctermfg=69
-        au Colorscheme synthwave84 hi Comment guifg=#7c8ca8 ctermfg=69
-        au Colorscheme tokyonight-night hi Comment guifg=#7c8ca8 ctermfg=69
-        au Colorscheme tokyonight-night hi Search guibg=#1a1b26 guifg=#FBEC5D gui=underline
-        au Colorscheme tokyonight-night hi IncSearch guibg=#1a1b26 guifg=#FBEC5D gui=underline
-        au Colorscheme slate hi Comment ctermfg=188
-      augroup END
-      set notermguicolors
-      colorscheme slate
-      "colorscheme tokyonight-night
-    '';
+        " lighten up theme comments
+        augroup my_colorschemes
+          au!
+          au Colorscheme dracula hi Comment guifg=#7c8ca8 ctermfg=69
+          au Colorscheme synthwave84 hi Comment guifg=#7c8ca8 ctermfg=69
+          au Colorscheme tokyonight-night hi Comment guifg=#7c8ca8 ctermfg=69
+          au Colorscheme tokyonight-night hi Search guibg=#1a1b26 guifg=#FBEC5D gui=underline
+          au Colorscheme tokyonight-night hi IncSearch guibg=#1a1b26 guifg=#FBEC5D gui=underline
+          au Colorscheme slate hi Comment ctermfg=188
+        augroup END
+        set notermguicolors
+        colorscheme slate
+        "colorscheme tokyonight-night
+      '';
     extraLuaConfig = builtins.readFile ./config/nvim/init.lua;
-
   };
 }
