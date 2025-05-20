@@ -34,7 +34,7 @@
 
     shellAliases = (import ./shell-aliases.nix { inherit config lib pkgs; });
 
-    initExtraFirst = ''
+    initContent = lib.mkBefore ''
       export LANG="en_US.UTF-8"
       setopt incappendhistory
       setopt histsavenodups
@@ -44,7 +44,7 @@
              $fpath)
     '';
 
-    initExtra = ''
+    initContent = ''
       zshaddhistory() {
         emulate -L zsh
         ## uncomment if HISTORY_IGNORE
