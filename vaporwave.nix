@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   draculaTheme = rec {
     Background = "#282A36";
     Foreground = "#F8F8F2";
@@ -103,7 +104,8 @@
     "--color=border:${inactive_border_color},spinner:${foreground}"
     "--color=hl:${comment},hl+:${magenta},info:${cyan},prompt:${foreground},pointer:${foreground},marker:${cyan},header:${comment}"
   ];
-in {
+in
+{
   # dracula
   programs.fzf.defaultOptions = tokyonight-fzf-options;
 
@@ -120,7 +122,7 @@ in {
     whitespace = DiffDeleted;
   };
 
-  programs.vim.plugins = [pkgs.vimPlugins.dracula-vim];
+  programs.vim.plugins = [ pkgs.vimPlugins.dracula-vim ];
   programs.vim.extraConfig = ''
     " vaporwave plz
     colorscheme dracula
@@ -131,7 +133,7 @@ in {
     augroup END
   '';
 
-  programs.neovim.plugins = [pkgs.vimPlugins.dracula-vim];
+  programs.neovim.plugins = [ pkgs.vimPlugins.dracula-vim ];
 
   programs.bat.config.theme = "Dracula";
   programs.bat.themes = {

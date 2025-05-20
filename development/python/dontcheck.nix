@@ -5,12 +5,14 @@
   ...
 }:
 with builtins;
-with lib.attrsets; let
+with lib.attrsets;
+let
   # These python packages are going to have "dontCheck = true;" added to them
   dontCheckPackages = [
     "dbf"
   ];
-  dontCheckPython = d:
+  dontCheckPython =
+    d:
     d.overridePythonAttrs (old: {
       doCheck = false;
       doInstallCheck = false;
@@ -19,16 +21,15 @@ with lib.attrsets; let
     name = "${attr}";
     value = dontCheckPython pythonPackages."${attr}";
   };
-  packageOverrides = selfPythonPackages: pythonPackages:
-    listToAttrs (map (f pythonPackages) dontCheckPackages);
+  packageOverrides =
+    selfPythonPackages: pythonPackages: listToAttrs (map (f pythonPackages) dontCheckPackages);
   overlay = result: prev: {
     python3 = prev.python3.override (old: {
-      packageOverrides =
-        prev.lib.composeExtensions
-        (old.packageOverrides or (_: _: {}))
-        packageOverrides;
+      packageOverrides = prev.lib.composeExtensions (old.packageOverrides or (_: _: { })
+      ) packageOverrides;
     });
   };
-in {
-  nixpkgs.overlays = [overlay];
+in
+{
+  nixpkgs.overlays = [ overlay ];
 }

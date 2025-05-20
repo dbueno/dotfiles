@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -28,16 +29,31 @@
     history = {
       size = 1200000;
       save = 1000000;
-      ignorePatterns = ["&\n" "exit\n" "pwd\n" "fg\n" "bg\n" "pd\n" "a\n" "aa\n" "al\n" "g reset*" "git reset*"];
+      ignorePatterns = [
+        "&\n"
+        "exit\n"
+        "pwd\n"
+        "fg\n"
+        "bg\n"
+        "pd\n"
+        "a\n"
+        "aa\n"
+        "al\n"
+        "g reset*"
+        "git reset*"
+      ];
       ignoreSpace = true;
       ignoreDups = true;
       ignoreAllDups = true;
       share = false;
     };
 
-    cdpath = ["." "~/work/inprogress"];
+    cdpath = [
+      "."
+      "~/work/inprogress"
+    ];
 
-    shellAliases = import ./shell-aliases.nix {inherit config lib pkgs;};
+    shellAliases = import ./shell-aliases.nix { inherit config lib pkgs; };
 
     initContent = lib.mkMerge [
       (lib.mkOrder 500 ''
@@ -143,10 +159,15 @@
 
   programs.dircolors.enableZshIntegration = true;
 
-  xdg.configFile."zsh/vendor-completions".source = with pkgs; let
-    compPackages = [home-manager nix];
-  in
-    runCommand "vendored-zsh-completions" {} ''
+  xdg.configFile."zsh/vendor-completions".source =
+    with pkgs;
+    let
+      compPackages = [
+        home-manager
+        nix
+      ];
+    in
+    runCommand "vendored-zsh-completions" { } ''
       mkdir -p $out
       echo ${lib.escapeShellArgs compPackages}
       ${fd}/bin/fd -t f '^_[^.]+$' \

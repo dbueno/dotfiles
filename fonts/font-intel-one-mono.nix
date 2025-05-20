@@ -3,12 +3,14 @@
   lib,
   pkgs,
   ...
-}: let
-  d = {
-    lib,
-    stdenv,
-    fetchzip,
-  }:
+}:
+let
+  d =
+    {
+      lib,
+      stdenv,
+      fetchzip,
+    }:
     stdenv.mkDerivation rec {
       pname = "intel-one-mono";
       version = "1.0.0";
@@ -23,8 +25,9 @@
         install -m644 --target $out/share/fonts/truetype/intel-one-mono -D $src/ttf/*.ttf
       '';
     };
-  intel-one-mono = pkgs.callPackage d {};
-in {
+  intel-one-mono = pkgs.callPackage d { };
+in
+{
   programs.kitty.settings = {
     font_family = "Intel One Mono";
     font_size = lib.mkDefault "11.0";

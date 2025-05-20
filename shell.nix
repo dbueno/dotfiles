@@ -3,10 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
-  onetrueawk = pkgs.callPackage ./pkgs/onetrueawk/default.nix {};
-  diff2html = pkgs.callPackage ./pkgs/diff2html/default.nix {};
-  GraphEasy = pkgs.callPackage ./pkgs/GraphEasy/default.nix {};
+}:
+let
+  onetrueawk = pkgs.callPackage ./pkgs/onetrueawk/default.nix { };
+  diff2html = pkgs.callPackage ./pkgs/diff2html/default.nix { };
+  GraphEasy = pkgs.callPackage ./pkgs/GraphEasy/default.nix { };
 
   marked = pkgs.buildNpmPackage {
     pname = "marked";
@@ -66,67 +67,70 @@
   #   rsync --rsh='${pkgs.sshpass}/bin/sshpass -e ssh' "$@"
   # '';
 
-  pythonWithNumpy = pkgs.python3.withPackages (p:
-    with p; [
+  pythonWithNumpy = pkgs.python3.withPackages (
+    p: with p; [
       pandas
       numpy
       scipy
-    ]);
+    ]
+  );
 
-  myScripts = let
-    onChange = pkgs.writeShellScriptBin "onchange" ''
-      # TODO: Add option to watch a directory other than the current directory.
+  myScripts =
+    let
+      onChange = pkgs.writeShellScriptBin "onchange" ''
+        # TODO: Add option to watch a directory other than the current directory.
 
-      msg="usage: onchange.sh command [arg ...]
-      Arguments should be what you want to run when anything on the filesystem
-      changes (relative to current directory)."
-      if [ -z "$1" ]; then
-          printf "%s\n" "$msg"
-          exit 1
-      fi
+        msg="usage: onchange.sh command [arg ...]
+        Arguments should be what you want to run when anything on the filesystem
+        changes (relative to current directory)."
+        if [ -z "$1" ]; then
+            printf "%s\n" "$msg"
+            exit 1
+        fi
 
-      # Runs command up front because usually this is what I want.
-      ( "$@" ) # || exit 1
+        # Runs command up front because usually this is what I want.
+        ( "$@" ) # || exit 1
 
-      while true; do
-          # fswatch returns exit code 0 regardless. If a file changes fswatch -1 will
-          # print its name. Sets n to 1 if that happens.
-          n=$(${pkgs.fswatch}/bin/fswatch -1 . | wc -l | tr -d ' \t')
-          if [[ $n -gt 0 ]]; then
-              ( "$@" ) # || exit 1
-          else
-              exit 0
-          fi
-      done
-    '';
-    google = pkgs.writeShellScriptBin "google" ''
-      ${pkgs.w3m}/bin/w3m http://www.google.com/search?q="$@"
-    '';
-    uncolor = pkgs.writeShellScriptBin "uncolor" ''
-      while getopts ":h" opt; do
-        case $opt in
-            h)
-              echo "Removes escaped colors from text intended for a terminal"
-              echo "Usage: uncolor <file>"
-              exit 0
-              ;;
-        esac
-      done
+        while true; do
+            # fswatch returns exit code 0 regardless. If a file changes fswatch -1 will
+            # print its name. Sets n to 1 if that happens.
+            n=$(${pkgs.fswatch}/bin/fswatch -1 . | wc -l | tr -d ' \t')
+            if [[ $n -gt 0 ]]; then
+                ( "$@" ) # || exit 1
+            else
+                exit 0
+            fi
+        done
+      '';
+      google = pkgs.writeShellScriptBin "google" ''
+        ${pkgs.w3m}/bin/w3m http://www.google.com/search?q="$@"
+      '';
+      uncolor = pkgs.writeShellScriptBin "uncolor" ''
+        while getopts ":h" opt; do
+          case $opt in
+              h)
+                echo "Removes escaped colors from text intended for a terminal"
+                echo "Usage: uncolor <file>"
+                exit 0
+                ;;
+          esac
+        done
 
-      ${pkgs.gnused}/bin/sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' "$@"
-    '';
-    viewhex = pkgs.writeShellScriptBin "viewhex" ''${pkgs.hexyl}/bin/hexyl "$@"'';
-    viewjson = pkgs.writeShellScriptBin "viewjson" ''${pkgs.fx}/bin/fx "$@"'';
-  in [
-    onChange
-    google
-    uncolor
-    viewjson
-    viewhex
-    (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./automation/ifnewer.sh))
-    (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./automation/wtf.sh))
-    (pkgs.writeShellScriptBin "frequency" (builtins.readFile ./automation/frequency.sh))
-  ];
+        ${pkgs.gnused}/bin/sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' "$@"
+      '';
+      viewhex = pkgs.writeShellScriptBin "viewhex" ''${pkgs.hexyl}/bin/hexyl "$@"'';
+      viewjson = pkgs.writeShellScriptBin "viewjson" ''${pkgs.fx}/bin/fx "$@"'';
+    in
+    [
+      onChange
+      google
+      uncolor
+      viewjson
+      viewhex
+      (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./automation/ifnewer.sh))
+      (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./automation/wtf.sh))
+      (pkgs.writeShellScriptBin "frequency" (builtins.readFile ./automation/frequency.sh))
+    ];
   delta-git-config = {
     programs.git.extraConfig = {
       core.pager = "${pkgs.delta}/bin/delta";
@@ -150,7 +154,8 @@
     };
   };
   diff-git-config = delta-git-config;
-in {
+in
+{
   imports = [
     diff-git-config
     difftastic-git-difftool-config
@@ -165,7 +170,10 @@ in {
   nix.settings = {
     cores = 0;
     max-jobs = "auto";
-    extra-experimental-features = ["flakes" "nix-command"];
+    extra-experimental-features = [
+      "flakes"
+      "nix-command"
+    ];
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -177,7 +185,7 @@ in {
     config = {
       pager = "less -FR";
     };
-    extraPackages = with pkgs.bat-extras; [batdiff];
+    extraPackages = with pkgs.bat-extras; [ batdiff ];
   };
 
   programs.dircolors = {
@@ -187,7 +195,7 @@ in {
   programs.fzf = {
     enable = true;
     defaultCommand = ''rg --iglob '!/_opam' --iglob '!/_build' --iglob '!*.o' --files --hidden'';
-    defaultOptions = ["-m"];
+    defaultOptions = [ "-m" ];
   };
 
   programs.direnv = {
@@ -232,19 +240,27 @@ in {
     extraConfig = {
       # Force git to make me set an email inside each repo.
       user.useConfigOnly = true;
-      init = {defaultBranch = "main";};
+      init = {
+        defaultBranch = "main";
+      };
       core.sshCommand = "${pkgs.openssh}/bin/ssh -F ~/.ssh/config";
       difftool = {
         prompt = false;
         trustExitCode = true;
-        vim = {cmd = "vimdiff $LOCAL $REMOTE";};
-        difftastic = {cmd = ''${pkgs.difftastic}/bin/difft "$LOCAL" "$REMOTE"'';};
+        vim = {
+          cmd = "vimdiff $LOCAL $REMOTE";
+        };
+        difftastic = {
+          cmd = ''${pkgs.difftastic}/bin/difft "$LOCAL" "$REMOTE"'';
+        };
       };
       push = {
         default = "simple";
         followTags = "true";
       };
-      pull = {rebase = "true";};
+      pull = {
+        rebase = "true";
+      };
       color = {
         interactive = "auto";
         # diff = "auto";
@@ -332,8 +348,12 @@ in {
   programs.ssh = {
     enable = true;
     matchBlocks = {
-      "*" = {identitiesOnly = true;};
-      "denisbueno.net" = {user = "dbueno";};
+      "*" = {
+        identitiesOnly = true;
+      };
+      "denisbueno.net" = {
+        user = "dbueno";
+      };
     };
   };
 
@@ -347,8 +367,12 @@ in {
 
   # https://github.com/nix-community/home-manager/issues/432
   programs.man.enable = false;
-  home.extraOutputsToInstall = ["man" "doc"];
-  home.packages = with pkgs;
+  home.extraOutputsToInstall = [
+    "man"
+    "doc"
+  ];
+  home.packages =
+    with pkgs;
     [
       man-pages-posix
       nix

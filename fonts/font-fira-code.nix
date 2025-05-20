@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   programs.kitty.settings = {
     font_family = "Fira Code";
     font_size = lib.mkDefault "11.0";

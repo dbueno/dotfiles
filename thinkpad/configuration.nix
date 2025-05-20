@@ -6,7 +6,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -15,7 +16,8 @@
 
   nix.package = pkgs.nixVersions.nix_2_11;
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       # "hplip"
     ];
@@ -33,7 +35,7 @@
   networking.hostName = "thinklappy"; # Define your hostname.
   networking.wireless = {
     enable = true;
-    interfaces = ["wlp3s0"];
+    interfaces = [ "wlp3s0" ];
   };
   networking.wireless.networks = {
   };
@@ -110,7 +112,7 @@
   # };
   users.users.dbueno = {
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = [ "wheel" ];
   };
 
   home-manager.useGlobalPkgs = true;

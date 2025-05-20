@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   mod = "Mod1"; # alt
   refresh-i3status = "killall -SIGUSR1 i3status";
   ws = n: {
@@ -11,7 +12,8 @@
     "${mod}+Shift+${n}" = "move container to workspace number ${n}";
   };
   workspaces = map ws (builtins.genList (n: toString (n + 1)) 10);
-in {
+in
+{
   xsession.enable = true;
   xsession.windowManager.i3 = {
     enable = true;
@@ -19,7 +21,7 @@ in {
       modifier = mod;
 
       fonts = {
-        names = ["DejaVu Sans Mono 8"];
+        names = [ "DejaVu Sans Mono 8" ];
       };
 
       floating.modifier = "${mod}";
@@ -27,13 +29,18 @@ in {
       keybindings =
         lib.mkOptionDefault {
           "${mod}+Return" = "exec ${term}";
-          "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && ${refresh-i3status}";
-          "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && ${refresh-i3status}";
-          "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && ${refresh-i3status}";
-          "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ${refresh-i3status}";
+          "XF86AudioRaiseVolume" =
+            "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && ${refresh-i3status}";
+          "XF86AudioLowerVolume" =
+            "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && ${refresh-i3status}";
+          "XF86AudioMute" =
+            "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && ${refresh-i3status}";
+          "XF86AudioMicMute" =
+            "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ${refresh-i3status}";
           "${mod}+e" = "exec --no-startup-id ${pkgs.dmenu}/bin/dmenu_run";
           "${mod}+x" = "exec sh -c '${pkgs.maim}/bin/maim -s | xclip -selection clipboard -t image/png'";
-          "${mod}+Shift+x" = "exec sh -c '${pkgs.i3lock}/bin/i3lock -c 222222 & sleep 5 && xset dpms force of'";
+          "${mod}+Shift+x" =
+            "exec sh -c '${pkgs.i3lock}/bin/i3lock -c 222222 & sleep 5 && xset dpms force of'";
 
           # change focus
           "${mod}+h" = "focus left";
@@ -70,7 +77,7 @@ in {
 
           "${mod}+a" = "focus parent";
         }
-        // lib.foldl' (x: y: x // y) {} workspaces;
+        // lib.foldl' (x: y: x // y) { } workspaces;
 
       bars = [
         {

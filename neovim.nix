@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   my-vim-tweaks = pkgs.vimUtils.buildVimPlugin {
     pname = "denisbueno-vim-config.vim";
     version = "dev";
@@ -76,7 +77,8 @@
       hash = "sha256-r9qbunFJ62IqibVAdGbLsWSwYL53YKElLy98ArsK5V8=";
     };
   };
-in {
+in
+{
   nixpkgs.overlays = [
   ];
 
@@ -88,7 +90,10 @@ in {
     withRuby = false;
     withPython3 = true;
     plugins =
-      [synthwave84-nvim nvim-jdtls]
+      [
+        synthwave84-nvim
+        nvim-jdtls
+      ]
       ++ (with pkgs.vimPlugins; [
         tokyonight-nvim
         my-vim-tweaks
@@ -112,11 +117,13 @@ in {
         cmp-cmdline
         nvim-cmp
         lsp_signature-nvim
-        (nvim-treesitter.withPlugins (_:
+        (nvim-treesitter.withPlugins (
+          _:
           nvim-treesitter.allGrammars
           ++ [
             my-souffle-treesitter-grammar
-          ]))
+          ]
+        ))
         nvim-treesitter-textobjects
 
         cmp-vsnip

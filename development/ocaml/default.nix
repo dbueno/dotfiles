@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   unbroken-vim-ocaml = pkgs.vimUtils.buildVimPlugin {
     pname = "vim-ocaml";
     version = "2022-11-14";
@@ -15,7 +16,8 @@
     };
     meta.homepage = "https://github.com/ocaml/vim-ocaml/";
   };
-in {
+in
+{
   programs.vim.plugins = with pkgs.vimPlugins; [
     unbroken-vim-ocaml
   ];

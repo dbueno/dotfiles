@@ -4,12 +4,14 @@
   lib,
   pkgs,
   ...
-}: let
-  hammerspoon = pkgs.callPackage ./pkgs/hammerspoon/default.nix {};
-  stats = pkgs.callPackage ./pkgs/stats/default.nix {};
-  skim-app = pkgs.callPackage ./pkgs/skim-app/default.nix {};
-in {
-  nixpkgs.overlays = [];
+}:
+let
+  hammerspoon = pkgs.callPackage ./pkgs/hammerspoon/default.nix { };
+  stats = pkgs.callPackage ./pkgs/stats/default.nix { };
+  skim-app = pkgs.callPackage ./pkgs/skim-app/default.nix { };
+in
+{
+  nixpkgs.overlays = [ ];
 
   programs.vim = {
     packageConfigurable = pkgs.vim_configurable.override {

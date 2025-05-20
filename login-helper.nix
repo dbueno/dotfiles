@@ -6,7 +6,8 @@
   config,
   hm-login-shell-helper,
   ...
-}: {
-  imports = ["${hm-login-shell-helper}/hm-modules/login-shell.nix"];
+}:
+{
+  imports = [ "${hm-login-shell-helper}/hm-modules/login-shell.nix" ];
   home.loginShell = "${config.programs.zsh.package}/bin/zsh";
 }
