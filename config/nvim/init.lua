@@ -29,3 +29,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gO', require'jdtls'.organize_imports, opts)
   end,
 })
+
+vim.diagnostic.config({
+  virtual_text = { current_line = true }
+})
