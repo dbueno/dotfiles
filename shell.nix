@@ -411,7 +411,7 @@ in
       colordiff
       difftastic
       nodePackages.json-diff
-      diff2html
+      # diff2html
       fd # find alternative
       hyperfine
       tree
