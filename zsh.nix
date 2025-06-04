@@ -20,7 +20,6 @@
     };
 
     sessionVariables = {
-      "FZF_BASE" = "${pkgs.fzf}/share/fzf";
       GRAPHVIZ_DOT = "${pkgs.graphviz}/bin/dot";
       RSVG_CONVERT = "${pkgs.librsvg}/bin/rsvg-convert";
       PAGER = "less -R";

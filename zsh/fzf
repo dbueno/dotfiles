@@ -1,0 +1,2 @@
+export FZF_DEFAULT_COMMAND="rg --iglob '!/_opam' --iglob '!/_build' --iglob '!*.o' --files --hidden''"
+export FZF_DEFAULT_OPTS="-m"

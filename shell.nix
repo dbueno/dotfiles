@@ -163,6 +163,7 @@ in
     (import ./neovim.nix)
     (import ./base16.nix)
     (import ./dotfiles.nix)
+    (import ./fzf.nix)
   ];
 
   nixpkgs.overlays = [
@@ -193,12 +194,6 @@ in
   #programs.dircolors = {
   #  enable = true;
   #};
-
-  programs.fzf = {
-    enable = true;
-    defaultCommand = ''rg --iglob '!/_opam' --iglob '!/_build' --iglob '!*.o' --files --hidden'';
-    defaultOptions = [ "-m" ];
-  };
 
   programs.direnv = {
     enable = true;
