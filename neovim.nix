@@ -161,7 +161,6 @@ in
           let base16colorspace=256
           colorscheme base16-$BASE16_THEME
         endif
-        let base16colorspace=256  " Access colors present in 256 colorspace
 
         autocmd BufNewFile,BufRead *.dl setfiletype souffle
 

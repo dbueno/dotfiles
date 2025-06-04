@@ -1,1 +1,3 @@
---pager='less -FR'
+--pager="less -FR"
+
+--theme="base16-256"
