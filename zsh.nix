@@ -5,6 +5,7 @@
   ...
 }:
 {
+  imports = [ (import ./shell-aliases.nix) ];
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -51,8 +52,6 @@
       "."
       "~/work/inprogress"
     ];
-
-    shellAliases = import ./shell-aliases.nix { inherit config lib pkgs; };
 
     initContent = lib.mkMerge [
       (lib.mkOrder 500 ''
