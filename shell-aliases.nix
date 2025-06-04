@@ -44,7 +44,7 @@ in
         in
         "${cmd}/bin/hb-feat";
 
-      ssh = "${ssh-cmd}";
+      #ssh = "${ssh-cmd}";
       cpptags = "${pkgs.universal-ctags}/bin/ctags --c++-kinds=+pf --c-kinds=+p --fields=+imaSft --extra=+q -Rnu";
     };
 }
