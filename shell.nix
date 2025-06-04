@@ -183,14 +183,6 @@ in
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  programs.bat = {
-    enable = true;
-    config = {
-      pager = "less -FR";
-    };
-    extraPackages = with pkgs.bat-extras; [ batdiff ];
-  };
-
   #programs.dircolors = {
   #  enable = true;
   #};
@@ -276,7 +268,7 @@ in
     enable = true;
   };
 
-  # See stuff in xdg_config
+  # See below how stuff in xdg_config is linked to home dir
   xdg = {
     enable = true;
   };
@@ -285,18 +277,6 @@ in
     "${config.xdg.configHome}" = {
       source = ./xdg_config;
       recursive = true;
-    };
-  };
-
-  programs.readline = {
-    enable = true;
-    variables = {
-      bell-style = "visible";
-      # Immediately show all TAB-completions -- don't require two TABs.
-      # show-all-if-ambiguous = true;
-      # Show status of completed filenames, like ls -F does.
-      visible-stats = true;
-      completion-ignore-case = true;
     };
   };
 
@@ -329,7 +309,10 @@ in
   home.packages =
     with pkgs;
     [
+      readline
       tmux
+      bat
+      bat-extras.batdiff
       man-pages-posix
       nix
       gitFull

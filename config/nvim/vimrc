@@ -137,10 +137,6 @@ nnoremap <silent> _ :aboveleft sp<CR>:exe "normal \<Plug>VinegarUp"<CR>
 nnoremap <silent> <Bar> :aboveleft vsp<CR>:exe "normal \<Plug>VinegarUp"<CR>
 " }}}
 
-" defines a command, MkDirs, that will make all the directories necessary so
-" that the path to current buffer-file exists
-command MkDirs call mkdir(expand('%:h'), 'p')
-
 command CtagsCpp !ctags --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q -Rnu .
 
 command HighlightCurrentLine call matchadd('Search', '\%'.line('.').'l')

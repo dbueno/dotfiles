@@ -1,0 +1,8 @@
+$include /etc/inputrc
+set bell-style visible
+set completion-ignore-case on
+set visible-stats on
+
+# Immediately show all TAB-completions -- don't require two TABs.
+# show-all-if-ambiguous = true;
+# Show status of completed filenames, like ls -F does.
