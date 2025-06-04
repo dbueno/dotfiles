@@ -300,12 +300,6 @@ in
     };
   };
 
-  programs.tmux = {
-    enable = true;
-    extraConfig = builtins.readFile ./config/tmux.conf;
-    terminal = "screen-256color";
-  };
-
   programs.ssh = {
     enable = true;
     matchBlocks = {
@@ -335,6 +329,7 @@ in
   home.packages =
     with pkgs;
     [
+      tmux
       man-pages-posix
       nix
       gitFull
