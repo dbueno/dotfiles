@@ -24,9 +24,6 @@ in
 
   programs.matplotlib.config.backend = "MacOSX";
 
-  home.file = {
-    ".hammerspoon/init.lua".source = ./config/hammerspoon.lua;
-  };
   home.packages = [
     pkgs.ibm-plex
     pkgs.jetbrains-mono
