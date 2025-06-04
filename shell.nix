@@ -161,6 +161,7 @@ in
     difftastic-git-difftool-config
     (import ./vim.nix)
     (import ./neovim.nix)
+    (import ./dotfiles.nix)
   ];
 
   nixpkgs.overlays = [
@@ -279,52 +280,16 @@ in
     enable = true;
   };
 
+  # See stuff in xdg_config
   xdg = {
     enable = true;
-    configFile."mutt/muttrc".source = ./.muttrc;
-    configFile."wezterm/wezterm.lua".source = ./wezterm/wezterm.lua;
-    configFile."wezterm/appearance.lua".source = ./wezterm/appearance.lua;
-
-    # Datalog snippets, see ./dotvim/after/ftplugin/souffle.vim for keybindings
-    configFile."vim/snippets/datalog/rule.dl".text = ''
-      Head(x, y) :-
-          Foo(x, z), Bar(z, y).
-    '';
-    configFile."vim/snippets/datalog/decl.dl".text = ''
-      .decl Foo(a: symbol, b: number)
-    '';
-    configFile."vim/snippets/datalog/type.dl".text = ''
-      .type Ty <: symbol
-    '';
-    configFile."vim/snippets/datalog/macro.dl".text = ''
-      #define Foo(a, b) \
-        Bar(a, b) :- \
-          Baz(b, c)
-    '';
-
-    configFile."git/ignore".source = ./config/git/ignore;
-
-    configFile."litecli/config".source = ./config/litecli/config;
   };
 
   home.file = {
-    ".tmux-linux".source = ./.tmux-linux;
-    ".gdbinit".source = ./.gdbinit;
-    ".ghci".source = ./.ghci;
-    ".lynxrc".source = ./.lynxrc;
-    # ".config/automate-everything/repos".source = ./repos.conf;
-    ".latexmkrc".source = ./.latexmkrc;
-    ".mailcap".source = ./.mailcap;
-    ".ctags".text = ''
-      --langdef=souffle
-      --langmap=souffle:.dl
-      --regex-souffle=/^.decl[ \t]*([a-zA-Z0-9_]+)/\1/d,definition/
-      --regex-souffle=/^.type[ \t]*([a-zA-Z0-9_]+)/\1/d,definition/
-      --regex-souffle=/^#define[ \t]*([a-zA-Z0-9_]+)/\1/d,definition/
-    '';
-    ".sqliterc".text = ''
-      .mode line
-    '';
+    "${config.xdg.configHome}" = {
+      source = ./xdg_config;
+      recursive = true;
+    };
   };
 
   programs.readline = {

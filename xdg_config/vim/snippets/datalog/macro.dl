@@ -1,0 +1,3 @@
+#define Foo(a, b) \
+    Bar(a, b) :- \
+        Baz(b, c)

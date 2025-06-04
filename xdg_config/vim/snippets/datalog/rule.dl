@@ -1,0 +1,2 @@
+Head(x, y) :-
+    Foo(x, z), Bar(z, y).
