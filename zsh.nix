@@ -127,7 +127,8 @@
         # Colors the prompt red if the exit code argument isn't 0.
         function __colorcode_exit {
             if test "$1" -eq 0; then
-                print "%{%F{white}%B%};%{%f%b%}"
+                print ";"
+                #print "%{%B%};%{%b%}"
             else
                 print "%{%F{red}%B%};%{%f%b%}"
             fi
@@ -145,6 +146,12 @@
         }
         precmd_functions+=(mypromptcommand)
 
+        # Base16 Shell
+        BASE16_SHELL="$HOME/.config/base16-shell/"
+        [ -n "$PS1" ] && \
+            [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+                source "$BASE16_SHELL/profile_helper.sh"
+
         . $HOME/.zshrc_local
       ''
     ];
@@ -157,7 +164,7 @@
     zsh-completions
   ];
 
-  programs.dircolors.enableZshIntegration = true;
+  #programs.dircolors.enableZshIntegration = true;
 
   xdg.configFile."zsh/vendor-completions".source =
     with pkgs;

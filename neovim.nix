@@ -5,6 +5,16 @@
   ...
 }:
 let
+  base16-vim = pkgs.vimUtils.buildVimPlugin {
+    pname = "base16-vim";
+    version = "master";
+    src = pkgs.fetchFromGitHub {
+      owner = "chriskempson";
+      repo = "base16-vim";
+      rev = "master";
+      hash = "sha256-uJvaYYDMXvoo0fhBZUhN8WBXeJ87SRgof6GEK2efFT0=";
+    };
+  };
   my-vim-tweaks = pkgs.vimUtils.buildVimPlugin {
     pname = "denisbueno-vim-config.vim";
     version = "dev";
@@ -91,6 +101,7 @@ in
     withPython3 = true;
     plugins =
       [
+        base16-vim
         synthwave84-nvim
         nvim-jdtls
       ]
@@ -144,20 +155,27 @@ in
         set shiftwidth=2
         set completeopt=menuone,noinsert,noselect
 
+        set notermguicolors
+        " base16-shell
+        if exists('$BASE16_THEME') && (!exists('g:colors_name') || g:colors_name != 'base16-$BASE16_THEME')
+          let base16colorspace=256
+          colorscheme base16-$BASE16_THEME
+        endif
+        let base16colorspace=256  " Access colors present in 256 colorspace
+
         autocmd BufNewFile,BufRead *.dl setfiletype souffle
 
         " lighten up theme comments
-        augroup my_colorschemes
-          au!
-          au Colorscheme dracula hi Comment guifg=#7c8ca8 ctermfg=69
-          au Colorscheme synthwave84 hi Comment guifg=#7c8ca8 ctermfg=69
-          au Colorscheme tokyonight-night hi Comment guifg=#7c8ca8 ctermfg=69
-          au Colorscheme tokyonight-night hi Search guibg=#1a1b26 guifg=#FBEC5D gui=underline
-          au Colorscheme tokyonight-night hi IncSearch guibg=#1a1b26 guifg=#FBEC5D gui=underline
-          au Colorscheme slate hi Comment ctermfg=188
-        augroup END
-        set notermguicolors
-        colorscheme slate
+        " augroup my_colorschemes
+        "   au!
+        "   au Colorscheme dracula hi Comment guifg=#7c8ca8 ctermfg=69
+        "   au Colorscheme synthwave84 hi Comment guifg=#7c8ca8 ctermfg=69
+        "   au Colorscheme tokyonight-night hi Comment guifg=#7c8ca8 ctermfg=69
+        "   au Colorscheme tokyonight-night hi Search guibg=#1a1b26 guifg=#FBEC5D gui=underline
+        "   au Colorscheme tokyonight-night hi IncSearch guibg=#1a1b26 guifg=#FBEC5D gui=underline
+        "   au Colorscheme slate hi Comment ctermfg=188
+        " augroup END
+        "colorscheme slate
         "colorscheme tokyonight-night
       '';
     extraLuaConfig = builtins.readFile ./config/nvim/init.lua;

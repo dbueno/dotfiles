@@ -115,7 +115,7 @@
               ./home.nix
               ./login-helper.nix
               ./shell.nix
-              ./vaporwave.nix
+              #./vaporwave.nix
               ./zsh.nix
               ./gui.nix
               ./mac-host.nix

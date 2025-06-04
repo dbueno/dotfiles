@@ -161,6 +161,7 @@ in
     difftastic-git-difftool-config
     (import ./vim.nix)
     (import ./neovim.nix)
+    (import ./base16.nix)
     (import ./dotfiles.nix)
   ];
 
@@ -189,9 +190,9 @@ in
     extraPackages = with pkgs.bat-extras; [ batdiff ];
   };
 
-  programs.dircolors = {
-    enable = true;
-  };
+  #programs.dircolors = {
+  #  enable = true;
+  #};
 
   programs.fzf = {
     enable = true;
