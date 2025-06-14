@@ -122,7 +122,7 @@
               ./pkgs/vim-euforia/vim-euforia.nix
             ] ++ dev-modules;
             stateVersion = "21.11";
-            system = "x86_64-darwin";
+            system = "aarch64-darwin";
           };
           "thinklappy" = slashHomeHost {
             modules = [
