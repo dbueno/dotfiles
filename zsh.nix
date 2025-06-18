@@ -55,6 +55,8 @@
 
     initContent = lib.mkMerge [
       (lib.mkOrder 500 ''
+        # Load nix in case it's not in path
+        [[ ! $(command -v nix) && -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]] && source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
         export LANG="en_US.UTF-8"
         setopt incappendhistory
         setopt histsavenodups
