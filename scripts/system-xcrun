@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Unset interfering things
+unset PYTHONPATH MACOSX_DEPLOYMENT_TARGET XDG_DATA_DIRS SDKROOT DEVELOPER_DIR XCODE_DEVELOPER_USR_PATH TOOLCHAINS
+
+PATH="/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/X11/bin:/Library/Apple/usr/bin"
+
+xcrun "$@"

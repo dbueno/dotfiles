@@ -22,6 +22,8 @@ let
 
   bunch = pkgs.writeShellScriptBin "bunch" (builtins.readFile ./scripts/bunch.sh);
 
+  system-xcrun = pkgs.writeShellScriptBin "system-xcrun" (builtins.readFile ./scripts/system-xcrun);
+
   my-moreutils = pkgs.stdenv.mkDerivation rec {
     pname = "my-moreutils";
     version = "20231230";
@@ -335,6 +337,7 @@ in
       GraphEasy
       record-my-session
       bunch
+      system-xcrun
       ztl_filter
       ztl_tagcloud
       sshpass
