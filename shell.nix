@@ -263,6 +263,7 @@ in
       };
       branch.sort = "creatordate";
       tag.sort = "taggerdate";
+      worktree.guessRemote = true;
     };
   };
 
