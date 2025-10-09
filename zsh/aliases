@@ -1,4 +1,3 @@
-alias d='git diff'
 alias now="date '+%Y-%m-%dT%H%M'";
 alias nows="date '+%Y-%m-%dT%H%M%S'";
 alias today="date '+%Y-%m-%d'";
@@ -6,8 +5,6 @@ alias today="date '+%Y-%m-%d'";
 # there's always a story behind aliases like these
 alias rm="rm -i";
 alias c="clear";
-alias g="git";
-alias p="git pull";
 alias top="git rev-parse --show-toplevel";
 alias pd="cd \"$OLDPWD\"";
 
