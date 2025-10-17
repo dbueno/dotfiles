@@ -162,27 +162,6 @@ on_attach = on_attach,
 capabilities = capabilities,
 }
 
--- enable Rust support
-lspconfig.rust_analyzer.setup {
-on_attach = on_attach,
-flags = {
-  debounce_text_changes = 150,
-  },
-settings = {
-  ["rust-analyzer"] = {
-    cargo = {
-      allFeatures = true,
-      },
-    completion = {
-      postfix = {
-      enable = false,
-      },
-    },
-  },
-},
-capabilities = capabilities,
-}
-
 -- enable Go support
 lspconfig.gopls.setup {
 on_attach = on_attach,
