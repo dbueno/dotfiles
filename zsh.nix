@@ -51,6 +51,7 @@
     cdpath = [
       "."
       "~/work/inprogress"
+      "~/proj"
     ];
 
     initContent = lib.mkMerge [
