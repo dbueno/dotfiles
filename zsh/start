@@ -1,0 +1,10 @@
+# Load nix in case it's not in path
+[[ ! $(command -v nix) && -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]] && source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+export LANG="en_US.UTF-8"
+setopt incappendhistory
+setopt histsavenodups
+setopt histexpiredupsfirst
+setopt hist_no_store # don't store "history" command in history
+fpath=($HM_XDG_CONFIG_HOME/zsh/vendor-completions \
+       $fpath)
+# vim: set filetype=zsh :
