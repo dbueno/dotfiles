@@ -6,11 +6,11 @@ lspconfig.rust_analyzer.setup {
     },
   settings = {
     ["rust-analyzer"] = {
-      check = {
-        command = "clippy",
-        extraArgs = { "--", "-W", "clippy::pedantic", "-W", "clippy::style",
-          "-A", "clippy::inline-always" },
-      },
+      -- check = {
+      --   command = "clippy",
+      --   extraArgs = { "--", "-W", "clippy::pedantic", "-W", "clippy::style",
+      --     "-A", "clippy::inline-always" },
+      -- },
       cargo = {
         allFeatures = true,
       },
