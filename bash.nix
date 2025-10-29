@@ -81,7 +81,7 @@ in
       RSVG_CONVERT = "${pkgs.librsvg}/bin/rsvg-convert";
     };
 
-    shellAliases = (import ./shell-aliases.nix { inherit config lib pkgs; }) // {
+    shellAliases = {
       # Greps and displays with less, with colors
       rgl = ''rg --line-buffered --pretty "$@" | less -R'';
       # Greps and fuzzy selects
