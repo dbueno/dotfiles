@@ -161,7 +161,6 @@ in
   imports = [
     diff-git-config
     difftastic-git-difftool-config
-    (import ./vim.nix)
     (import ./neovim.nix)
     (import ./base16.nix)
     (import ./dotfiles.nix)
