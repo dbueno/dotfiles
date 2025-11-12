@@ -109,8 +109,8 @@ vnoremap // y/\V<C-R>"<CR>
 
 " highlight matches in search
 " set hlsearch
-" <Leader>h will turn off highlights
-nnoremap <Leader>h :noh<CR>
+" CTRL-L turns off highlights
+" nnoremap <Leader>h :noh<CR>
 "nnoremap <Space> zz
 
 " close the current window
