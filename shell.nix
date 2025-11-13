@@ -316,7 +316,6 @@ in
       bat
       bat-extras.batdiff
       man-pages-posix
-      nix
       gitFull
       ripgrep
       ripgrep-all
