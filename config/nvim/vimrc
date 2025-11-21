@@ -1,4 +1,12 @@
 set notermguicolors
+set hidden
+set smartcase
+set ignorecase
+set modeline
+set number
+set expandtab
+set shiftwidth=2
+set completeopt=menuone,noinsert,noselect
 
 set nocompatible
 filetype plugin indent on
@@ -238,7 +246,23 @@ endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " }}}
+"
+" base16-shell
+function! s:base16_customize() abort
+  call Base16hi("Comment", g:base16_gui05, g:base16_gui00, g:base16_cterm04, g:base16_cterm00, "", "")
+endfunction
 
+augroup on_change_colorschema
+  autocmd!
+  autocmd ColorScheme * call s:base16_customize()
+augroup END
+
+if exists('$BASE16_THEME') && (!exists('g:colors_name') || g:colors_name != 'base16-$BASE16_THEME')
+  let base16colorspace=256
+  colorscheme base16-$BASE16_THEME
+endif
+
+autocmd BufNewFile,BufRead *.dl setfiletype souffle
 
 runtime vimrc_local
 

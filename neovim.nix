@@ -142,41 +142,7 @@ in
 
         fzf-vim
       ]);
-    extraConfig =
-      builtins.readFile ./config/nvim/vimrc
-      + ''
-
-        set hidden
-        set smartcase
-        set ignorecase
-        set modeline
-        set number
-        set expandtab
-        set shiftwidth=2
-        set completeopt=menuone,noinsert,noselect
-
-        set notermguicolors
-        " base16-shell
-        if exists('$BASE16_THEME') && (!exists('g:colors_name') || g:colors_name != 'base16-$BASE16_THEME')
-          let base16colorspace=256
-          colorscheme base16-$BASE16_THEME
-        endif
-
-        autocmd BufNewFile,BufRead *.dl setfiletype souffle
-
-        " lighten up theme comments
-        " augroup my_colorschemes
-        "   au!
-        "   au Colorscheme dracula hi Comment guifg=#7c8ca8 ctermfg=69
-        "   au Colorscheme synthwave84 hi Comment guifg=#7c8ca8 ctermfg=69
-        "   au Colorscheme tokyonight-night hi Comment guifg=#7c8ca8 ctermfg=69
-        "   au Colorscheme tokyonight-night hi Search guibg=#1a1b26 guifg=#FBEC5D gui=underline
-        "   au Colorscheme tokyonight-night hi IncSearch guibg=#1a1b26 guifg=#FBEC5D gui=underline
-        "   au Colorscheme slate hi Comment ctermfg=188
-        " augroup END
-        "colorscheme slate
-        "colorscheme tokyonight-night
-      '';
+    extraConfig = builtins.readFile ./config/nvim/vimrc;
     extraLuaConfig = builtins.readFile ./config/nvim/init.lua;
   };
 }
