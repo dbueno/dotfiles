@@ -15,6 +15,24 @@ let
       hash = "sha256-uJvaYYDMXvoo0fhBZUhN8WBXeJ87SRgof6GEK2efFT0=";
     };
   };
+  base16-synthwave84-vim = pkgs.vimUtils.buildVimPlugin {
+    pname = "base16-synthwave84-vim";
+    version = "main";
+    src =
+      let
+        pkg = { lib, stdenv, rwm-base16_synthwave-84 }:
+        stdenv.mkDerivation {
+          pname = "base16-synthwave84-vim-src";
+          version = "main";
+          src = rwm-base16_synthwave-84;
+          installPhase = ''
+          mkdir -p $out/colors
+          cp base16-synthwave-84.vim $out/colors/
+          '';
+        };
+      in
+      pkgs.callPackage pkg {};
+  };
   my-vim-tweaks = pkgs.vimUtils.buildVimPlugin {
     pname = "denisbueno-vim-config.vim";
     version = "dev";
@@ -33,16 +51,6 @@ let
       repo = "${pname}";
       rev = "${version}";
       sha256 = "8uD1dflyI8fn2rzk0l7aBHn6kOTGrpWKtsFv1p2oDXQ=";
-    };
-  };
-  synthwave84-nvim = pkgs.vimUtils.buildVimPlugin rec {
-    pname = "synthwave84";
-    version = "a5caa80d9e1a7021f9ec6c06a96d09dfc2d99ed1";
-    src = pkgs.fetchFromGitHub {
-      "owner" = "artanikin";
-      "repo" = "vim-synthwave84";
-      "rev" = "a5caa80d9e1a7021f9ec6c06a96d09dfc2d99ed1";
-      "hash" = "sha256-5+rOp2xDdtIMxMdvV0N18yTSQuSzYIfnFvwNeufaDgQ=";
     };
   };
   tree-sitter-souffle-langston-barrett = pkgs.fetchFromGitHub {
@@ -102,7 +110,7 @@ in
     plugins =
       [
         base16-vim
-        synthwave84-nvim
+        base16-synthwave84-vim
         nvim-jdtls
       ]
       ++ (with pkgs.vimPlugins; [

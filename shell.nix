@@ -168,6 +168,15 @@ in
   ];
 
   nixpkgs.overlays = [
+    (result: prev: {
+      rwm-base16_synthwave-84 = pkgs.fetchFromGitHub {
+        name = "rwm-source"; # This is needed so that unpacking doesn't collide with base16-shell
+        owner = "ReversingWithMe";
+        repo = "base16_synthwave-84";
+        rev = "main";
+        hash = "sha256-ICXbb7LwjvJ02oCKzg7s1O6doSsRfW6yTRDGKo6z/Vw=";
+      };
+    })
   ];
 
   nix.package = pkgs.nixVersions.stable;
