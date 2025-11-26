@@ -25,6 +25,7 @@ let
           pname = "base16-synthwave84-vim-src";
           version = "main";
           src = rwm-base16_synthwave-84;
+          patches = [./base16_synthwave-84-fix-identifier.patch];
           installPhase = ''
           mkdir -p $out/colors
           cp base16-synthwave-84.vim $out/colors/

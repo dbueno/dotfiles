@@ -173,8 +173,8 @@ in
         name = "rwm-source"; # This is needed so that unpacking doesn't collide with base16-shell
         owner = "ReversingWithMe";
         repo = "base16_synthwave-84";
-        rev = "main";
-        hash = "sha256-ICXbb7LwjvJ02oCKzg7s1O6doSsRfW6yTRDGKo6z/Vw=";
+        rev = "1c2311b6aec14365cc6ff1ab87c2fe90478f4e15";
+        hash = "sha256-om35BRI97pQl0tl/B5tkwOaE/rDQC25rL/rtBGC302I=";
       };
     })
   ];
