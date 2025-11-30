@@ -31,6 +31,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+
+-- show diagnostics based on current cursor line
 vim.diagnostic.config({
   virtual_text = { current_line = true }
 })
