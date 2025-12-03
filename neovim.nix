@@ -115,28 +115,24 @@ in
         nvim-jdtls
       ]
       ++ (with pkgs.vimPlugins; [
-        tokyonight-nvim
         my-vim-tweaks
         my-neovim-tweaks
-        my-vimoutliner
         vim-fugitive
         vim-nix
         vim-commentary
         #tabular
         vim-surround
         securemodelines
-        editorconfig-vim
 
-        plenary-nvim
+        # plenary-nvim
 
-        nvim-lspconfig
-        lsp_extensions-nvim
-        cmp-nvim-lsp
-        cmp-buffer
-        cmp-path
-        cmp-cmdline
-        nvim-cmp
-        lsp_signature-nvim
+        # lsp_extensions-nvim
+        # cmp-nvim-lsp
+        # cmp-buffer
+        # cmp-path
+        # cmp-cmdline
+        # nvim-cmp
+        # lsp_signature-nvim
         (nvim-treesitter.withPlugins (
           _:
           nvim-treesitter.allGrammars
@@ -146,8 +142,8 @@ in
         ))
         nvim-treesitter-textobjects
 
-        cmp-vsnip
-        vim-vsnip
+        #cmp-vsnip
+        #vim-vsnip
 
         fzf-vim
       ]);
