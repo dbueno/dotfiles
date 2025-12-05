@@ -1,0 +1,81 @@
+[add "interactive"]
+	useBuiltin = false
+
+[alias]
+	a = "add -p"
+	b = "branch"
+	ci = "commit"
+	co = "checkout"
+	d = "diff"
+	di = "diff --cached"
+	dt = "difftool --no-symlinks --dir-diff"
+	f = "fetch"
+	l = "log --graph --pretty='%Cred%h%Creset - %C(bold blue)<%an>%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)' --abbrev-commit --date=relative"
+	pgd = "git rev-parse --show-toplevel"
+	push-it-real-good = "push --force-with-lease"
+	s = "status"
+	ss = "status --no-short -u"
+	sw = "switch"
+	wt = "worktree"
+
+[branch]
+	sort = "creatordate"
+
+[color]
+	interactive = "auto"
+
+[core]
+	fsync = "all"
+	pager = "delta"
+
+[delta]
+	light = false
+	navigate = true
+	syntax-theme = "Dracula"
+
+[diff]
+	colorMoved = "default"
+	tool = "difftastic"
+
+[difftool]
+	prompt = false
+	trustExitCode = true
+
+[difftool "vim"]
+	cmd = "vimdiff $LOCAL $REMOTE"
+
+[gpg]
+	format = "openpgp"
+
+[init]
+	defaultBranch = "main"
+
+[interactive]
+	diffFilter = "delta --color-only"
+
+[merge]
+	conflictstyle = "diff3"
+
+[pull]
+	rebase = "true"
+
+[push]
+	default = "simple"
+	followTags = "true"
+
+[status]
+	branch = "true"
+	short = "true"
+	showUntrackedFiles = "no"
+
+[tag]
+	sort = "taggerdate"
+
+[user]
+	name = "Denis Bueno"
+	useConfigOnly = true
+
+[worktree]
+	guessRemote = true
+
+# vim: set filetype=gitconfig noexpandtab : 
