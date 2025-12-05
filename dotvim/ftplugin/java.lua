@@ -1,11 +1,11 @@
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(ev)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-    local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gF', vim.lsp.buf.format, opts)
-  end,
-})
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--   callback = function(ev)
+--     -- Enable completion triggered by <c-x><c-o>
+--     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+--     local opts = { buffer = ev.buf }
+--     vim.keymap.set('n', 'gF', vim.lsp.buf.format, opts)
+--   end,
+-- })
 
 local root_dir = vim.fs.dirname(vim.fs.find({'.git', 'build.gradle'}, { upward = true })[1])
 local project_name = vim.fn.fnamemodify(root_dir, ':p:h:h:t') .. '_' .. vim.fn.fnamemodify(root_dir, ':p:h:t')
