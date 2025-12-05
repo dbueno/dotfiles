@@ -158,8 +158,6 @@ let
 in
 {
   imports = [
-    diff-git-config
-    difftastic-git-difftool-config
     (import ./neovim.nix)
     (import ./base16.nix)
     (import ./dotfiles.nix)
@@ -201,78 +199,78 @@ in
     nix-direnv.enable = true;
   };
 
-  programs.git = {
-    package = pkgs.gitFull;
-    enable = true;
-    userName = "Denis Bueno";
+  #programs.git = {
+  #  package = pkgs.gitFull;
+  #  enable = true;
+  #  userName = "Denis Bueno";
 
-    aliases = {
-      a = "add -p";
-      d = "diff";
-      di = "diff --cached";
-      dt = "difftool --no-symlinks --dir-diff";
-      co = "checkout";
-      ci = "commit";
-      sw = "switch";
-      wt = "worktree";
-      #s = let
-      #  # Prints status without untracked files
-      #  cmd = pkgs.writeShellScriptBin "my-git-status" ''
-      #    git status -uno || exit 0
-      #    # Prints only a count summary of untracked files
-      #    git status --short | \
-      #        awk '/[?][?]/ { c += 1 } END { if (c > 0) { printf("\n... and %s untracked files\n", c) } }' || exit 0
-      #    '';
-      #  in
-      #  "!${cmd}/bin/my-git-status";
-      s = "status";
-      ss = "status --no-short -u";
-      # print git directory, toplevel of current repo
-      pgd = "git rev-parse --show-toplevel";
-      push-it-real-good = "push --force-with-lease";
-      b = "branch";
-      l = "log --graph --pretty='%Cred%h%Creset - %C(bold blue)<%an>%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)' --abbrev-commit --date=relative";
-      f = "fetch";
-    };
+  #  aliases = {
+  #    a = "add -p";
+  #    d = "diff";
+  #    di = "diff --cached";
+  #    dt = "difftool --no-symlinks --dir-diff";
+  #    co = "checkout";
+  #    ci = "commit";
+  #    sw = "switch";
+  #    wt = "worktree";
+  #    #s = let
+  #    #  # Prints status without untracked files
+  #    #  cmd = pkgs.writeShellScriptBin "my-git-status" ''
+  #    #    git status -uno || exit 0
+  #    #    # Prints only a count summary of untracked files
+  #    #    git status --short | \
+  #    #        awk '/[?][?]/ { c += 1 } END { if (c > 0) { printf("\n... and %s untracked files\n", c) } }' || exit 0
+  #    #    '';
+  #    #  in
+  #    #  "!${cmd}/bin/my-git-status";
+  #    s = "status";
+  #    ss = "status --no-short -u";
+  #    # print git directory, toplevel of current repo
+  #    pgd = "git rev-parse --show-toplevel";
+  #    push-it-real-good = "push --force-with-lease";
+  #    b = "branch";
+  #    l = "log --graph --pretty='%Cred%h%Creset - %C(bold blue)<%an>%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)' --abbrev-commit --date=relative";
+  #    f = "fetch";
+  #  };
 
-    extraConfig = {
-      # Force git to make me set an email inside each repo.
-      user.useConfigOnly = true;
-      init = {
-        defaultBranch = "main";
-      };
-      core.sshCommand = "${pkgs.openssh}/bin/ssh -F ~/.ssh/config";
-      difftool = {
-        prompt = false;
-        trustExitCode = true;
-        vim = {
-          cmd = "vimdiff $LOCAL $REMOTE";
-        };
-        difftastic = {
-          cmd = ''${pkgs.difftastic}/bin/difft "$LOCAL" "$REMOTE"'';
-        };
-      };
-      push = {
-        default = "simple";
-        followTags = "true";
-      };
-      pull = {
-        rebase = "true";
-      };
-      color = {
-        interactive = "auto";
-        # diff = "auto";
-      };
-      status = {
-        branch = "true";
-        short = "true";
-        showUntrackedFiles = "no";
-      };
-      branch.sort = "creatordate";
-      tag.sort = "taggerdate";
-      worktree.guessRemote = true;
-    };
-  };
+  #  extraConfig = {
+  #    # Force git to make me set an email inside each repo.
+  #    user.useConfigOnly = true;
+  #    init = {
+  #      defaultBranch = "main";
+  #    };
+  #    core.sshCommand = "${pkgs.openssh}/bin/ssh -F ~/.ssh/config";
+  #    difftool = {
+  #      prompt = false;
+  #      trustExitCode = true;
+  #      vim = {
+  #        cmd = "vimdiff $LOCAL $REMOTE";
+  #      };
+  #      difftastic = {
+  #        cmd = ''${pkgs.difftastic}/bin/difft "$LOCAL" "$REMOTE"'';
+  #      };
+  #    };
+  #    push = {
+  #      default = "simple";
+  #      followTags = "true";
+  #    };
+  #    pull = {
+  #      rebase = "true";
+  #    };
+  #    color = {
+  #      interactive = "auto";
+  #      # diff = "auto";
+  #    };
+  #    status = {
+  #      branch = "true";
+  #      short = "true";
+  #      showUntrackedFiles = "no";
+  #    };
+  #    branch.sort = "creatordate";
+  #    tag.sort = "taggerdate";
+  #    worktree.guessRemote = true;
+  #  };
+  #};
 
   programs.htop = {
     enable = true;
@@ -370,6 +368,7 @@ in
       xz
       ncdu
       entr
+      delta
     ]
     ++ myScripts;
 }

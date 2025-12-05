@@ -20,8 +20,6 @@ in
     };
   };
 
-  programs.git.extraConfig.core.fsync = "all";
-
   programs.matplotlib.config.backend = "MacOSX";
 
   home.packages = [
