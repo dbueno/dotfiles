@@ -5,7 +5,6 @@
   ...
 }:
 let
-  onetrueawk = pkgs.callPackage ./pkgs/onetrueawk/default.nix { };
   diff2html = pkgs.callPackage ./pkgs/diff2html/default.nix { };
   GraphEasy = pkgs.callPackage ./pkgs/GraphEasy/default.nix { };
 
@@ -351,7 +350,6 @@ in
       sshpass
       figlet
       toilet # ascii art
-      onetrueawk
       mutt
       csvkit
       watch
