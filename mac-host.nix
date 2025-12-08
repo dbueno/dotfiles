@@ -23,12 +23,8 @@ in
   programs.matplotlib.config.backend = "MacOSX";
 
   home.packages = [
-    pkgs.ibm-plex
-    pkgs.jetbrains-mono
-    pkgs.iosevka-bin
     hammerspoon
     stats
     skim-app
-    pkgs.obsidian
   ];
 }
