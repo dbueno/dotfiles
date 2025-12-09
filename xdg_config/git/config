@@ -10,7 +10,7 @@
 	di = "diff --cached"
 	dt = "difftool --no-symlinks --dir-diff"
 	f = "fetch"
-	l = "log --graph --pretty='%Cred%h%Creset - %C(bold blue)<%an>%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)' --abbrev-commit --date=relative"
+	l = "log --graph --pretty='%Cred%h%Creset - %C(bold blue)<%an>%Creset %s%C(yellow)%d%Creset %Cgreen(%cd)' --abbrev-commit --date=short"
 	pgd = "git rev-parse --show-toplevel"
 	push-it-real-good = "push --force-with-lease"
 	s = "status"
