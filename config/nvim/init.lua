@@ -45,7 +45,7 @@ vim.lsp.config['pyright_ls'] = {
     -- lsp settings go here
     python = {
       analysis = {
-        typeCheckingMode = "strict",
+        typeCheckingMode = "standard",
       },
     },
   },
