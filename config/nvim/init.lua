@@ -37,6 +37,21 @@ vim.lsp.config['rust-analyzer_ls'] = {
 }
 vim.lsp.enable('rust-analyzer_ls')
 
+vim.lsp.config['pyright_ls'] = {
+  cmd = { 'pyright-langserver', '--stdio' },
+  filetypes = { 'python' },
+  root_markers = { '.git' },
+  settings = {
+    -- lsp settings go here
+    python = {
+      analysis = {
+        typeCheckingMode = "strict",
+      },
+    },
+  },
+}
+vim.lsp.enable('pyright_ls')
+
 -- Normal bindings:
 -- gri: implementation
 -- grn: rename
