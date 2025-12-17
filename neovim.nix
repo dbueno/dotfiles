@@ -86,16 +86,6 @@ let
     version = "improve-preprocessor";
     src = my-souffle-treesitter-grammar-src;
   };
-  nvim-jdtls = pkgs.vimUtils.buildVimPlugin rec {
-    pname = "nvim-jdtls";
-    version = "efe813854432a314b472226dca813f0f2598d44a";
-    src = pkgs.fetchFromGitHub {
-      owner = "mfussenegger";
-      repo = "${pname}";
-      rev = "${version}";
-      hash = "sha256-r9qbunFJ62IqibVAdGbLsWSwYL53YKElLy98ArsK5V8=";
-    };
-  };
 in
 {
   nixpkgs.overlays = [
@@ -112,7 +102,6 @@ in
       [
         base16-vim
         base16-synthwave84-vim
-        nvim-jdtls
       ]
       ++ (with pkgs.vimPlugins; [
         my-vim-tweaks

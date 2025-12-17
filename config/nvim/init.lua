@@ -52,6 +52,75 @@ vim.lsp.config['pyright_ls'] = {
 }
 vim.lsp.enable('pyright_ls')
 
+
+
+if vim.fn.executable('jdt-language-server') ~= 0 then
+  jdtls_cmd = 'jdt-language-server'
+elseif vim.fn.executable('jdtls') ~= 0 then
+  jdtls_cmd = 'jdtls'
+end
+
+local root_dir = vim.fs.dirname(vim.fs.find({'.git', 'build.gradle'}, { upward = true })[1])
+local project_name = vim.fn.fnamemodify(root_dir, ':p:h:h:t') .. '_' .. vim.fn.fnamemodify(root_dir, ':p:h:t')
+local workspace_dir = vim.fn.expandcmd('~/.eclipse-workspace/') .. project_name
+
+vim.lsp.config['jdtls_ls'] = {
+  cmd = { jdtls_cmd, '-data', workspace_dir },
+  filetypes = { 'java' },
+  root_markers = { '.git', 'build.gradle' },
+  root_dir = root_dir,
+  settings = init_settings,
+  init_options = {
+    bundles = {},
+    settings = {
+      java = {
+        import = {
+          gradle = {
+            java = {
+              home = os.getenv("JDTLS_GRADLE_JAVA_HOME"),
+            }
+          },
+        },
+        configuration = {
+          runtimes = {
+            {
+              name = "JavaSE-1.8",
+              path = os.getenv("JAVA8_HOME"),
+            },
+            {
+              name = "JavaSE-11",
+              path = os.getenv("JAVA11_HOME"),
+            },
+            {
+              name = "JavaSE-17",
+              path = os.getenv("JAVA17_HOME"),
+            },
+          },
+        },
+        format = {
+          comments = { enabled = false },
+          enabled = true,
+          settings = {
+            url = os.getenv("ECLIPSE_FORMATTER_URL"),
+          },
+        },
+        completion = {
+          importOrder = {
+            "java",
+            "javax",
+            "org",
+            "com",
+            "",
+            "jadx",
+            "\\#",
+          },
+        },
+      },
+    },
+  },
+}
+vim.lsp.enable('jdtls_ls')
+
 -- Normal bindings:
 -- gri: implementation
 -- grn: rename
