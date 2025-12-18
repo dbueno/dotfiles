@@ -61,6 +61,8 @@
       (lib.mkOrder 500 (builtins.readFile ./zsh/start))
       (builtins.readFile ./zsh/rc)
     ];
+
+    envExtra = builtins.readFile ./zsh/env;
   };
 
   # XXX no idea
