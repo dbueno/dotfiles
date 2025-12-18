@@ -22,7 +22,6 @@
     sessionVariables = {
       GRAPHVIZ_DOT = "${pkgs.graphviz}/bin/dot";
       RSVG_CONVERT = "${pkgs.librsvg}/bin/rsvg-convert";
-      PAGER = "less -SXRF";
       COREUTILS_LS = "${pkgs.coreutils}/bin/ls";
       COREUTILS_SHUF = "${pkgs.coreutils}/bin/shuf";
       UNIVERSAL_CTAGS = "${pkgs.universal-ctags}/bin/ctags";
