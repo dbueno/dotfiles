@@ -110,7 +110,7 @@
         in
         {
           "NOTANYMORE" = slashUsersHost {
-            username = "denbuen";
+            username = "dbueno";
             modules = [
               ./home.nix
               ./login-helper.nix
