@@ -1,3 +1,4 @@
+# Links all the files under dotfiles to my home directory
 {
   config,
   lib,

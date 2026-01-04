@@ -35,16 +35,6 @@ let
     '';
   };
 
-  # Filters all zettel notes, then print the contents of each zettel, for a
-  # subsequent fzf.vim search.
-  ztl_filter = pkgs.writeShellScriptBin "ztl_filter" ''
-    rg -l -0 '#ztl' | xargs -0 rg --column --line-number --no-heading --color=always --smart-case -- '^|#ztl'
-  '';
-
-  ztl_tagcloud = pkgs.writeShellScriptBin "ztl_tagcloud" ''
-    rg --no-column --no-line-number -I -o -w '#\w[a-zA-Z0-9_-]*' | sort | uniq
-  '';
-
   record-my-session = pkgs.writeShellScriptBin "record-my-session" ''
     # Keeps a record of terminal input and output inside .terminal-logs by
     # default.
@@ -343,8 +333,6 @@ in
       record-my-session
       bunch
       system-xcrun
-      ztl_filter
-      ztl_tagcloud
       sshpass
       figlet
       toilet # ascii art
