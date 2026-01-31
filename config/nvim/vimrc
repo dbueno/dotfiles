@@ -115,6 +115,10 @@ nnoremap <Leader>it "=strftime("%c")<CR>p
 " select some text, then type // and it will search for the literal text
 vnoremap // y/\V<C-R>"<CR>
 
+" by default, do not highlight search matches
+set nohlsearch
+" bind kind to turn on highlighting for search matches
+nnoremap <Leader>h :set hlsearch! hlsearch?<CR>
 " highlight matches in search
 " set hlsearch
 " CTRL-L turns off highlights
