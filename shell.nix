@@ -93,9 +93,15 @@ let
             fi
         done
       '';
+
+      less-pager = pkgs.writeShellScriptBin "less-pager" ''
+        less -SXRF
+      '';
+
       google = pkgs.writeShellScriptBin "google" ''
         ${pkgs.w3m}/bin/w3m http://www.google.com/search?q="$@"
       '';
+
       uncolor = pkgs.writeShellScriptBin "uncolor" ''
         while getopts ":h" opt; do
           case $opt in
@@ -114,6 +120,7 @@ let
     in
     [
       onChange
+      less-pager
       google
       uncolor
       viewjson

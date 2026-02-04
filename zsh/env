@@ -1,2 +1,2 @@
-export PAGER="less -SXRF"
+export PAGER="less-pager"
 # vim: set filetype=zsh :
