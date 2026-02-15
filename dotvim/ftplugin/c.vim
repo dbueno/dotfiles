@@ -11,7 +11,6 @@ if expand("%:t") =~ ".\\(h\\|hh\\|hpp\\)"
 else
     setlocal fdl=1
 endif
-" set cursorline
 
 " Insert comment separator
 nnoremap <buffer> <Leader>is o//^----------------------------------------------------------------------------^<CR>

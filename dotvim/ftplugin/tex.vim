@@ -10,8 +10,6 @@ set iskeyword+=:
 " autowrite for builds
 set aw
 
-" set cursorline
-
 nnoremap <buffer> <Leader>is o%-----------------------------------------------------------------------------
 
 " remaps Command-B
