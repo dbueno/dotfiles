@@ -32,9 +32,6 @@ set sts=4
 " keep 4 lines above and below the cursor
 set so=4
 
-" I always lose the cursor, sigh
-set cursorline
-
 " show input commands as they're being typed
 set showcmd
 
