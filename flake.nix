@@ -120,7 +120,7 @@
               ./mac-host.nix
               ./pkgs/vim-euforia/vim-euforia.nix
             ] ++ dev-modules;
-            stateVersion = "21.11";
+            stateVersion = "24.11";
             system = "aarch64-darwin";
           };
           "thinklappy" = slashHomeHost {
