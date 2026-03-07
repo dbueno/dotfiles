@@ -123,19 +123,6 @@
             stateVersion = "24.11";
             system = "aarch64-darwin";
           };
-          "thinklappy" = slashHomeHost {
-            modules = [
-              ./home.nix
-              ./login-helper.nix
-              ./shell.nix
-              ./zsh.nix
-              ./gui.nix
-              ./nixos-host.nix
-              ./pkgs/vim-euforia/vim-euforia.nix
-            ];
-            stateVersion = "21.11";
-            system = "x86_64-linux";
-          };
         };
     in
     {
