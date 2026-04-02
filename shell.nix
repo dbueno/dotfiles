@@ -365,6 +365,8 @@ in
       entr
       delta
       nodejs
+      duckdb
+      visidata
     ]
     ++ myScripts;
 }
