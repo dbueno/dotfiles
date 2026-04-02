@@ -137,6 +137,6 @@ in
         fzf-vim
       ]);
     extraConfig = builtins.readFile ./config/nvim/vimrc;
-    extraLuaConfig = builtins.readFile ./config/nvim/init.lua;
+    initLua = builtins.readFile ./config/nvim/init.lua;
   };
 }

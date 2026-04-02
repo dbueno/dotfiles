@@ -287,6 +287,7 @@ in
 
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
     matchBlocks = {
       "*" = {
         identitiesOnly = true;
@@ -351,7 +352,7 @@ in
       # diff tools
       colordiff
       difftastic
-      nodePackages.json-diff
+      json-diff
       # diff2html
       fd # find alternative
       hyperfine

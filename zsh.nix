@@ -7,6 +7,7 @@
 {
   programs.zsh = {
     enable = true;
+    dotDir = "${config.xdg.configHome}/zsh";
     enableCompletion = true;
     defaultKeymap = "emacs";
     oh-my-zsh = {
