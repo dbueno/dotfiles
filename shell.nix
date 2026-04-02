@@ -364,6 +364,7 @@ in
       ncdu
       entr
       delta
+      nodejs
     ]
     ++ myScripts;
 }
