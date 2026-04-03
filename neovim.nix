@@ -136,6 +136,11 @@ in
 
         fzf-vim
       ]);
+    # Comment in to debug neovim config
+    # extraConfig = ''
+    #   lua dofile("${config.home.homeDirectory}/dotfiles/config/nvim/init.lua")
+    #   source ${config.home.homeDirectory}/dotfiles/config/nvim/vimrc
+    # '';
     extraConfig = builtins.readFile ./config/nvim/vimrc;
     initLua = builtins.readFile ./config/nvim/init.lua;
   };
