@@ -117,24 +117,17 @@ vim.lsp.enable('jdtls_ls')
 -- gO: document_symbol
 -- CTRL-S: insert mode, signature help
 vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup("LspFormatting", {}),
+  group = vim.api.nvim_create_augroup("LspFormatting", { clear = true }),
   callback = function(ev)
-    local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
     -- Enable completion triggered by <c-x><c-o>
-    --vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
     local opts = { buffer = ev.buf }
     vim.keymap.set('n', 'grD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', 'grd', vim.lsp.buf.definition, opts)
-    --vim.keymap.set('n', 'gx', vim.lsp.buf.references, opts)
-    --vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    --vim.keymap.set('n', 'grO', require'jdtls'.organize_imports, opts)
-
+ 
     -- auto format on save
     if client:supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
       vim.api.nvim_create_autocmd("BufWritePre", {
-        group = vim.api.nvim_create_augroup('LspFormatting', {clear=false}),
         buffer = ev.buf,
         callback = function()
           vim.lsp.buf.format({ bufnr = ev.buf, id = client.id, timeout_ms = 1000, async = false })
@@ -142,6 +135,44 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
   end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = {
+    'awk',
+    'bash',
+    'c',
+    'cmake',
+    'cpp',
+    'doxygen',
+    'git_config',
+    'git_rebase',
+    'gitattributes',
+    'gitcommit',
+    'gitignore',
+    'gnuplot',
+    'html',
+    'ini',
+    'java',
+    'javascript',
+    'jinja',
+    'jq',
+    'json',
+    'json5',
+    'lua',
+    'markdown',
+    'markdown_inline',
+    'menhir',
+    'nix',
+    'python',
+    'rust',
+    'smali',
+    'souffle',
+    'sql',
+    'ssh_config',
+    'zsh',
+  },
+  callback = function() vim.treesitter.start() end,
 })
 
 
