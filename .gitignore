@@ -1,3 +1,4 @@
 /userconfig.json
 /repos.conf
 /ssh_extra_blocks.nix
+.DS_Store
