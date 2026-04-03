@@ -10,7 +10,7 @@ set completeopt=menuone,noinsert,noselect
 
 set nocompatible
 filetype plugin indent on
-syntax on
+"syntax on
 
 let mapleader = ";"
 let maplocalleader = mapleader
