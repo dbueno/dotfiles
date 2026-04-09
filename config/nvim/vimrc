@@ -134,8 +134,6 @@ nnoremap <Leader>o <C-w>o
 
 " C-w ] will open tag in a split
 " C-w g } will let you select tag for preview
-nnoremap <C-n> :lua vim.diagnostic.goto_next()<CR>
-nnoremap <C-p> :lua vim.diagnostic.goto_prev()<CR>
 nnoremap <Leader>n :cnext<CR>
 nnoremap <Leader>p :cprev<CR>
 
