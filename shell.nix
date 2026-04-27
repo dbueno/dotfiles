@@ -299,6 +299,7 @@ in
       nodejs
       duckdb
       visidata
+      litecli
     ]
     ++ myScripts;
 }
