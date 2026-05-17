@@ -3,7 +3,7 @@ set hidden
 set smartcase
 set ignorecase
 set modeline
-set number
+set relativenumber
 set expandtab
 set shiftwidth=2
 set completeopt=menuone,noinsert,noselect
