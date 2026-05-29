@@ -300,6 +300,7 @@ in
       duckdb
       visidata
       litecli
+      mosh
     ]
     ++ myScripts;
 }
