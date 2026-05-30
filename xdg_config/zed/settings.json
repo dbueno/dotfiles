@@ -1,0 +1,47 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "indent_guides": {
+    "line_width": 1
+  },
+  "soft_wrap": "prefer_line",
+  "preferred_line_length": 100,
+  "relative_line_numbers": "enabled",
+  "show_wrap_guides": true,
+  "current_line_highlight": "gutter",
+  "agent_ui_font_size": 15.0,
+  "buffer_line_height": "standard",
+  "disable_ai": true,
+  "tabs": {
+    "close_position": "right",
+    "file_icons": false
+  },
+  "status_bar": {
+    "line_endings_button": false,
+    "show_active_file": false
+  },
+  "vim": {
+    "gdefault": true,
+    "toggle_relative_line_numbers": true
+  },
+  "buffer_font_family": "Monaspace Argon",
+  "vim_mode": false,
+  "base_keymap": "VSCode",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "ui_font_size": 15.0,
+  "buffer_font_size": 12.0,
+  "theme": {
+    "mode": "dark",
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Frappé",
+  },
+}
