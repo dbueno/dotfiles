@@ -252,6 +252,7 @@ in
       bat-extras.batdiff
       man-pages-posix
       gitFull
+      git-lfs
       ripgrep
       ripgrep-all
       graphviz
