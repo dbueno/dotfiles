@@ -2,6 +2,10 @@
 *.swp
 *.swo
 # direnv
-/.direnv/
+.direnv/
 # files I make to store things
 *.out
+.DS_Store
+.vscode/
+.opencode/
+*.o
