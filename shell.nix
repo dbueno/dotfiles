@@ -302,6 +302,7 @@ in
       visidata
       litecli
       mosh
+      mdbook
     ]
     ++ myScripts;
 }
