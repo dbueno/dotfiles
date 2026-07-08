@@ -303,6 +303,8 @@ in
       litecli
       mosh
       mdbook
+      nmap
+      rsync
     ]
     ++ myScripts;
 }
