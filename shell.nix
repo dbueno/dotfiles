@@ -219,12 +219,12 @@ in
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
+    settings = {
       "*" = {
-        identitiesOnly = true;
+        IdentitiesOnly = true;
       };
       "denisbueno.net" = {
-        user = "dbueno";
+        User = "dbueno";
       };
     };
   };

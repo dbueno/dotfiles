@@ -56,7 +56,7 @@
               })
               (
                 final: prev:
-                if !prev.stdenv.isLinux then
+                if !prev.stdenv.hostPlatform.isLinux then
                   { }
                 else
                   {
