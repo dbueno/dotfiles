@@ -1,2 +1,4 @@
+# Load nix in case it's not in path
+[[ ! $(command -v nix) && -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]] && source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 export PAGER="less-pager"
 # vim: set filetype=zsh :
