@@ -221,10 +221,17 @@ in
     enableDefaultConfig = false;
     settings = {
       "*" = {
+        AddKeysToAgent = "no";
+        Compression = false;
+        ControlMaster = "no";
+        ControlPath = "~/.ssh/master-%r@%n:%p";
+        ControlPersist = "no";
+        ForwardAgent = false;
+        HashKnownHosts = false;
         IdentitiesOnly = true;
-      };
-      "denisbueno.net" = {
-        User = "dbueno";
+        ServerAliveCountMax = 10;
+        ServerAliveInterval = 15;
+        UserKnownHostsFile = "~/.ssh/known_hosts";
       };
     };
   };
