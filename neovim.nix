@@ -5,35 +5,6 @@
   ...
 }:
 let
-  base16-vim = pkgs.vimUtils.buildVimPlugin {
-    pname = "base16-vim";
-    version = "master";
-    src = pkgs.fetchFromGitHub {
-      owner = "chriskempson";
-      repo = "base16-vim";
-      rev = "master";
-      hash = "sha256-uJvaYYDMXvoo0fhBZUhN8WBXeJ87SRgof6GEK2efFT0=";
-    };
-  };
-  base16-synthwave84-vim = pkgs.vimUtils.buildVimPlugin {
-    pname = "base16-synthwave84-vim";
-    version = "main";
-    src =
-      let
-        pkg = { lib, stdenv, rwm-base16_synthwave-84 }:
-        stdenv.mkDerivation {
-          pname = "base16-synthwave84-vim-src";
-          version = "main";
-          src = rwm-base16_synthwave-84;
-          patches = [./base16_synthwave-84-fix-identifier.patch];
-          installPhase = ''
-          mkdir -p $out/colors
-          cp base16-synthwave-84.vim $out/colors/
-          '';
-        };
-      in
-      pkgs.callPackage pkg {};
-  };
   my-vim-tweaks = pkgs.vimUtils.buildVimPlugin {
     pname = "denisbueno-vim-config.vim";
     version = "dev";
@@ -99,11 +70,7 @@ in
     withRuby = false;
     withPython3 = true;
     plugins =
-      [
-        base16-vim
-        base16-synthwave84-vim
-      ]
-      ++ (with pkgs.vimPlugins; [
+      (with pkgs.vimPlugins; [
         my-vim-tweaks
         my-neovim-tweaks
         vim-fugitive

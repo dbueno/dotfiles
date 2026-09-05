@@ -247,14 +247,12 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " }}}
 "
 " tinty (base16/base24). tinty writes the active scheme to a fixed path on every
-" `tinty apply`; sourcing it is how vim follows the terminal. tinted-vim exposes
-" g:tinted_*; the plain base16-vim plugin only exposes g:base16_* and Base16hi,
-" hence the two branches below.
+" `tinty apply`; sourcing it is how vim follows the terminal. Tinted_Hi and the
+" g:tinted_* palette come from that generated file, so the guard skips any
+" colorscheme that did not come from tinty.
 function! s:tinted_customize() abort
-  if exists('g:tinted_gui05') && exists('*g:Tinted_Hi')
+  if exists('*g:Tinted_Hi')
     call g:Tinted_Hi("Comment", g:tinted_gui05, g:tinted_gui00, g:tinted_cterm04, g:tinted_cterm00, "", "")
-  elseif exists('*Base16hi')
-    call Base16hi("Comment", g:base16_gui05, g:base16_gui00, g:base16_cterm04, g:base16_cterm00, "", "")
   endif
 endfunction
 
@@ -269,7 +267,6 @@ let s:tinty_data_dir = empty($TINTY_DATA_DIR)
 let s:tinty_theme_file = s:tinty_data_dir . '/tinted-vim-colors-file.vim'
 
 if filereadable(s:tinty_theme_file)
-  let base16colorspace=256
   let g:tinted_colorspace=256
   execute 'source' fnameescape(s:tinty_theme_file)
 
@@ -279,9 +276,6 @@ if filereadable(s:tinty_theme_file)
     autocmd FocusGained * if filereadable(s:tinty_theme_file)
           \ | execute 'source' fnameescape(s:tinty_theme_file) | endif
   augroup END
-elseif exists('$BASE16_THEME') && (!exists('g:colors_name') || g:colors_name != 'base16-$BASE16_THEME')
-  let base16colorspace=256
-  colorscheme base16-$BASE16_THEME
 endif
 
 autocmd BufNewFile,BufRead *.dl setfiletype souffle

@@ -4,10 +4,10 @@
   pkgs,
   ...
 }:
-# tinty (https://github.com/tinted-theming/tinty) replaces base16-shell. Unlike
-# base16-shell it understands both the base16 and base24 systems, and it drives
-# every themed tool from one `tinty apply` invocation. The binary comes from
-# nixpkgs; upstream's flake would drag in rust-overlay and build it from source.
+# tinty (https://github.com/tinted-theming/tinty) drives terminal and editor
+# theming: one `tinty apply` renders the chosen base16 or base24 scheme into
+# every template listed below. The binary comes from nixpkgs; upstream's flake
+# would drag in rust-overlay and build it from source.
 #
 # Normally `tinty sync` git-clones the schemes repo and each template repo into
 # its data dir at runtime. We don't: the three sources are pinned as flake inputs
