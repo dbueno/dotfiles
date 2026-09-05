@@ -100,11 +100,36 @@ mypromptcommand() {
 }
 precmd_functions+=(mypromptcommand)
 
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        source "$BASE16_SHELL/profile_helper.sh"
+# tinty (https://github.com/tinted-theming/tinty). tinty runs its hooks in a
+# subprocess, so the theme scripts it sources can't set variables in this shell.
+# The wrapper below re-sources whatever *.sh files tinty just refreshed, so the
+# escape codes land on this tty and $BASE16_THEME / $BASE24_THEME get exported
+# here. Straight from tinty's USAGE.md.
+tinty_source_shell_theme() {
+  newer_file=$(mktemp)
+  tinty "$@"
+  subcommand="$1"
+
+  if [ "$subcommand" = "apply" ] || [ "$subcommand" = "init" ]; then
+    tinty_data_dir="${TINTY_DATA_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/tinted-theming/tinty}"
+
+    while read -r script; do
+      # shellcheck disable=SC1090
+      . "$script"
+    done < <(find "$tinty_data_dir" -maxdepth 1 \( -type f -o -type l \) -name "*.sh" -newer "$newer_file")
+
+    unset tinty_data_dir
+  fi
+
+  rm -f "$newer_file"
+  unset newer_file subcommand
+}
+
+if [ -n "$(command -v 'tinty')" ]; then
+  tinty_source_shell_theme "init" > /dev/null
+
+  alias tinty=tinty_source_shell_theme
+fi
 
 . $HOME/.zshrc_local
 # vim: set filetype=zsh :

@@ -156,7 +156,7 @@ in
 {
   imports = [
     (import ./neovim.nix)
-    (import ./base16.nix)
+    (import ./tinty.nix)
     (import ./dotfiles.nix)
     (import ./fzf.nix)
   ];

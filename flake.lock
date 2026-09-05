@@ -262,7 +262,10 @@
         "home-manager": "home-manager",
         "merjar": "merjar",
         "nixpkgs": "nixpkgs_2",
-        "rusage": "rusage"
+        "rusage": "rusage",
+        "tinted-schemes": "tinted-schemes",
+        "tinted-shell": "tinted-shell",
+        "tinted-vim": "tinted-vim"
       }
     },
     "rusage": {
@@ -275,11 +278,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1726155804,
-        "narHash": "sha256-88zI7/sdvRK5ISRtMDlJIOGc+M6SpKvt8unHHm17iKY=",
+        "lastModified": 1787928126,
+        "narHash": "sha256-iBpbIDKr0xuwd2wLgQ82sehPBTFFNo1Yhb+r/pPtQDM=",
         "owner": "dbueno",
         "repo": "rusage",
-        "rev": "eb86d9f8ef443f553a1b68141b500e99f27025a0",
+        "rev": "4d011b23e3b2033d38f17734c083581fa78f75cb",
         "type": "github"
       },
       "original": {
@@ -357,6 +360,54 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tinted-schemes": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786274241,
+        "narHash": "sha256-LMHxSQJIv6QJJkO9W7sAkJujlwusFf9/Ct0SYJ6GyHQ=",
+        "owner": "tinted-theming",
+        "repo": "schemes",
+        "rev": "fdca32a0d14ec80ad83a78a9ccb85592ca6cb9e1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tinted-theming",
+        "repo": "schemes",
+        "type": "github"
+      }
+    },
+    "tinted-shell": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786843580,
+        "narHash": "sha256-sCX1USwHdstEYBt/iD2fdV10cHfUNYqdfaFSmvQ/960=",
+        "owner": "tinted-theming",
+        "repo": "tinted-shell",
+        "rev": "faa463871f5550a33e9d670f89a1c38e47116282",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tinted-theming",
+        "repo": "tinted-shell",
+        "type": "github"
+      }
+    },
+    "tinted-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786326058,
+        "narHash": "sha256-ZEQ8D9NKoL+JKpTp9MAm3+js1wCmjNLgicmwUXqIusM=",
+        "owner": "tinted-theming",
+        "repo": "tinted-vim",
+        "rev": "66829e04041ceba72a9006d1c6c9d0c818e2b3dd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tinted-theming",
+        "repo": "tinted-vim",
         "type": "github"
       }
     }

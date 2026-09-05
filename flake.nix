@@ -14,6 +14,22 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hm-login-shell-helper.url = "github:greedy/hm-login-shell-helper";
+    # Scheme and template sources for tinty (the binary itself is pkgs.tinty).
+    # Pinned here rather than let `tinty sync` clone them at activation time:
+    # tinty symlinks an `[[items]].path` naming a local directory instead of
+    # running git, so the whole theme set is reproducible and needs no network.
+    tinted-schemes = {
+      url = "github:tinted-theming/schemes";
+      flake = false;
+    };
+    tinted-shell = {
+      url = "github:tinted-theming/tinted-shell";
+      flake = false;
+    };
+    tinted-vim = {
+      url = "github:tinted-theming/tinted-vim";
+      flake = false;
+    };
   };
 
   outputs =
@@ -53,6 +69,7 @@
               (final: prev: {
                 rusage = rusage.defaultPackage.${system};
                 merjar = merjar.defaultPackage.${system};
+                inherit (inputs) tinted-schemes tinted-shell tinted-vim;
               })
               (
                 final: prev:
