@@ -18,9 +18,32 @@
 # nothing left for them to do.
 let
   dataDir = "${config.xdg.dataHome}/tinted-theming/tinty";
+
+  # Repairs two things tinty cannot: Terminal.app's bold text colour, which is
+  # a profile setting with no OSC escape behind it (so a light scheme applied
+  # over a profile saved from a dark one draws bold white-on-white), and the
+  # bright ANSI bank of the base24 light schemes, which is largely inherited
+  # from dark-background palettes. See the script's docstring. Runs from the
+  # tinty wrapper in zsh/rc, which has the tty the corrections must land on.
+  tinted-contrast-fixup = pkgs.writeShellScriptBin "tinted-contrast-fixup" ''
+    exec ${pkgs.python3}/bin/python3 ${./scripts/tinted-contrast-fixup.py} "$@"
+  '';
+
+  # Decides whether this host may repaint the terminal at all: false over ssh,
+  # where the terminal is the *local* machine's and has already been painted
+  # there. Shared with zsh/rc, because the two ways a theme reaches the
+  # terminal -- the hook below, and the shell re-sourcing the same script to
+  # pick up its variables -- have to be gated separately.
+  tinty-terminal-is-local = pkgs.writeShellScriptBin "tinty-terminal-is-local" (
+    builtins.readFile ./scripts/tinty-terminal-is-local.sh
+  );
 in
 {
-  home.packages = [ pkgs.tinty ];
+  home.packages = [
+    pkgs.tinty
+    tinted-contrast-fixup
+    tinty-terminal-is-local
+  ];
 
   # tinty resolves each template through <data-dir>/repos/<item name>, and the
   # schemes repo through <data-dir>/repos/schemes. Owning those links here is
@@ -46,7 +69,7 @@ in
     name = "tinted-shell"
     path = "${pkgs.tinted-shell}"
     themes-dir = "scripts"
-    hook = "source \"$TINTY_THEME_FILE_PATH\""
+    hook = "if ${tinty-terminal-is-local}/bin/tinty-terminal-is-local; then source \"$TINTY_THEME_FILE_PATH\"; fi"
     supported-systems = ["base16", "base24"]
 
     [[items]]

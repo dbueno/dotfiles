@@ -105,12 +105,22 @@ precmd_functions+=(mypromptcommand)
 # The wrapper below re-sources whatever *.sh files tinty just refreshed, so the
 # escape codes land on this tty and $BASE16_THEME / $BASE24_THEME get exported
 # here. Straight from tinty's USAGE.md.
+
+# Whether this shell may repaint the terminal -- false over ssh, where the
+# terminal belongs to the local machine. The reasoning lives in the helper,
+# which tinty's hook shares (see tinty.nix); it ships from the same
+# home-manager generation as this file, so the two cannot drift apart.
+tinty_paints_this_terminal() {
+  tinty-terminal-is-local
+}
+
 tinty_source_shell_theme() {
   newer_file=$(mktemp)
   tinty "$@"
   subcommand="$1"
 
-  if [ "$subcommand" = "apply" ] || [ "$subcommand" = "init" ]; then
+  if { [ "$subcommand" = "apply" ] || [ "$subcommand" = "init" ]; } \
+    && tinty_paints_this_terminal; then
     tinty_data_dir="${TINTY_DATA_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/tinted-theming/tinty}"
 
     while read -r script; do
@@ -119,6 +129,15 @@ tinty_source_shell_theme() {
     done < <(find "$tinty_data_dir" -maxdepth 1 \( -type f -o -type l \) -name "*.sh" -newer "$newer_file")
 
     unset tinty_data_dir
+
+    # tinted-shell has just repainted the palette; correct whatever it left
+    # below a legible contrast against the new background, and push a bold
+    # colour into Terminal.app, which has no escape sequence for one. Must run
+    # here rather than from a tinty hook: tinty runs hooks in a subprocess
+    # without our tty, and both fixes are per-terminal.
+    if command -v tinted-contrast-fixup > /dev/null 2>&1; then
+      tinted-contrast-fixup || true
+    fi
   fi
 
   rm -f "$newer_file"
@@ -126,7 +145,14 @@ tinty_source_shell_theme() {
 }
 
 if [ -n "$(command -v 'tinty')" ]; then
-  tinty_source_shell_theme "init" > /dev/null
+  # Skipped entirely over ssh: with the terminal off limits there is nothing
+  # left for init to do here, since the vim colorscheme file this host reads is
+  # already rendered by the tintyInit home-manager activation. An explicit
+  # `tinty apply` still works remotely -- it re-renders that file -- it just
+  # leaves the terminal alone.
+  if tinty_paints_this_terminal; then
+    tinty_source_shell_theme "init" > /dev/null
+  fi
 
   alias tinty=tinty_source_shell_theme
 fi
