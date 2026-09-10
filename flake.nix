@@ -44,6 +44,16 @@
     let
       lib = nixpkgs.lib;
       defaultUsername = "dbueno";
+      overlay =
+        final: prev:
+        let
+          system = final.stdenv.hostPlatform.system;
+        in
+        {
+          rusage = rusage.defaultPackage.${system};
+          merjar = merjar.defaultPackage.${system};
+          inherit (inputs) tinted-schemes tinted-shell tinted-vim;
+        };
       emptyConfig =
         { ... }:
         {
@@ -66,11 +76,7 @@
           pkgs = import nixpkgs {
             inherit system;
             overlays = [
-              (final: prev: {
-                rusage = rusage.defaultPackage.${system};
-                merjar = merjar.defaultPackage.${system};
-                inherit (inputs) tinted-schemes tinted-shell tinted-vim;
-              })
+              overlay
               (
                 final: prev:
                 if !prev.stdenv.hostPlatform.isLinux then
@@ -143,6 +149,8 @@
         };
     in
     {
+      overlays.default = overlay;
+
       homeConfigurations = lib.mapAttrs' (hostname: config: {
         name = "${config.username}@${hostname}";
         value = config;
