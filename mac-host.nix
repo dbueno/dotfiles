@@ -6,7 +6,6 @@
   ...
 }:
 let
-  hammerspoon = pkgs.callPackage ./pkgs/hammerspoon/default.nix { };
   stats = pkgs.callPackage ./pkgs/stats/default.nix { };
   skim-app = pkgs.callPackage ./pkgs/skim-app/default.nix { };
 in
@@ -23,7 +22,6 @@ in
   programs.matplotlib.config.backend = "MacOSX";
 
   home.packages = [
-    hammerspoon
     stats
     skim-app
   ];
