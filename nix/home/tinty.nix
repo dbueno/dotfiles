@@ -18,6 +18,18 @@
 # nothing left for them to do.
 let
   dataDir = "${config.xdg.dataHome}/tinted-theming/tinty";
+  # tinty expects a template repo's themes/ directory to be populated before
+  # apply. Build it from the same pinned schemes used by the other templates.
+  tuicrTemplate = pkgs.runCommand "tinted-tuicr" { nativeBuildInputs = [ pkgs.tinty ]; } ''
+    cp -R ${../../assets/tinted-tuicr} "$out"
+    chmod -R u+w "$out"
+    mkdir -p "$TMPDIR/tinty/repos"
+    ln -s ${pkgs.tinted-schemes} "$TMPDIR/tinty/repos/schemes"
+    cat > "$TMPDIR/tinty-config.toml" <<'EOF'
+    shell = "sh -c '{}'"
+    EOF
+    tinty --config "$TMPDIR/tinty-config.toml" --data-dir "$TMPDIR/tinty" build "$out"
+  '';
 
   # Repairs two things tinty cannot: Terminal.app's bold text colour, which is
   # a profile setting with no OSC escape behind it (so a light scheme applied
@@ -56,6 +68,7 @@ in
     "${dataDir}/repos/schemes".source = pkgs.tinted-schemes;
     "${dataDir}/repos/tinted-shell".source = pkgs.tinted-shell;
     "${dataDir}/repos/tinted-vim".source = pkgs.tinted-vim;
+    "${dataDir}/repos/tinted-tuicr".source = tuicrTemplate;
   };
 
   # https://github.com/tinted-theming/tinty#configuration
@@ -76,6 +89,13 @@ in
     name = "tinted-vim"
     path = "${pkgs.tinted-vim}"
     themes-dir = "colors"
+    supported-systems = ["base16", "base24"]
+
+    [[items]]
+    name = "tinted-tuicr"
+    path = "${tuicrTemplate}"
+    themes-dir = "themes"
+    hook = "mkdir -p '${config.xdg.configHome}/tuicr/themes' && ln -sfn \"$TINTY_THEME_FILE_PATH\" '${config.xdg.configHome}/tuicr/themes/tinty.toml'"
     supported-systems = ["base16", "base24"]
   '';
 

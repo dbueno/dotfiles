@@ -1,0 +1,3 @@
+tinted-tuicr:
+    supported-systems: [base24, base16]
+    filename: themes/{{ scheme-system }}-{{ scheme-slug }}.toml

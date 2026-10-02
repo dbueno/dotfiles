@@ -141,6 +141,7 @@ in
   imports = [
     (import ./neovim.nix)
     (import ./tinty.nix)
+    (import ./tuicr.nix)
     (import ./files.nix)
     (import ./zed.nix)
     (import ./fzf.nix)
