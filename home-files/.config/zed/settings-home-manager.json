@@ -7,8 +7,28 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "markdown_preview": {
+    "font_size": 14.0,
+    "font_family": "SF Pro",
+    "code_font_family": "SF Mono"
+  },
+  "agent_buffer_font_family": "SF Mono",
+  "terminal": {
+    "font_family": "SF Mono"
+  },
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
+  "use_autoclose": false,
+  "diff_view_style": "split",
+  "title_bar": {
+    "show_sign_in": false
+  },
+  "cli_default_open_behavior": "new_window",
   "indent_guides": {
-    "line_width": 1
+    "line_width": 1,
   },
   "soft_wrap": "prefer_line",
   "preferred_line_length": 100,
@@ -20,28 +40,28 @@
   "disable_ai": true,
   "tabs": {
     "close_position": "right",
-    "file_icons": false
+    "file_icons": false,
   },
   "status_bar": {
     "line_endings_button": false,
-    "show_active_file": false
+    "show_active_file": false,
   },
   "vim": {
     "gdefault": true,
-    "toggle_relative_line_numbers": true
+    "toggle_relative_line_numbers": true,
   },
-  "buffer_font_family": "Monaspace Argon",
+  "buffer_font_family": "SF Mono",
   "vim_mode": false,
   "base_keymap": "VSCode",
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "ui_font_size": 15.0,
   "buffer_font_size": 12.0,
   "theme": {
-    "mode": "dark",
-    "light": "Catppuccin Latte",
-    "dark": "Catppuccin Frappé",
+    "mode": "light",
+    "light": "macOS Classic Light",
+    "dark": "macOS Classic Dark",
   },
 }
