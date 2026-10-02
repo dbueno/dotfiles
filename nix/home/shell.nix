@@ -5,8 +5,8 @@
   ...
 }:
 let
-  diff2html = pkgs.callPackage ./pkgs/diff2html/default.nix { };
-  GraphEasy = pkgs.callPackage ./pkgs/GraphEasy/default.nix { };
+  diff2html = pkgs.callPackage ../pkgs/diff2html/default.nix { };
+  GraphEasy = pkgs.callPackage ../pkgs/GraphEasy/default.nix { };
 
   marked = pkgs.buildNpmPackage {
     pname = "marked";
@@ -19,9 +19,9 @@ let
     npmDepsHash = lib.fakeHash;
   };
 
-  bunch = pkgs.writeShellScriptBin "bunch" (builtins.readFile ./scripts/bunch.sh);
+  bunch = pkgs.writeShellScriptBin "bunch" (builtins.readFile ../../scripts/bunch.sh);
 
-  system-xcrun = pkgs.writeShellScriptBin "system-xcrun" (builtins.readFile ./scripts/system-xcrun);
+  system-xcrun = pkgs.writeShellScriptBin "system-xcrun" (builtins.readFile ../../scripts/system-xcrun);
 
   my-moreutils = pkgs.stdenv.mkDerivation rec {
     pname = "my-moreutils";
@@ -125,16 +125,16 @@ let
       uncolor
       viewjson
       viewhex
-      (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ./automation/ifnewer.sh))
-      (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./automation/wtf.sh))
-      (pkgs.writeShellScriptBin "frequency" (builtins.readFile ./automation/frequency.sh))
+      (pkgs.writeShellScriptBin "ifnewer" (builtins.readFile ../../scripts/ifnewer.sh))
+      (pkgs.writeShellScriptBin "wtf" (builtins.readFile ../../scripts/wtf.sh))
+      (pkgs.writeShellScriptBin "frequency" (builtins.readFile ../../scripts/frequency.sh))
     ];
 in
 {
   imports = [
     (import ./neovim.nix)
     (import ./tinty.nix)
-    (import ./dotfiles.nix)
+    (import ./files.nix)
     (import ./fzf.nix)
   ];
 
@@ -165,21 +165,7 @@ in
     enable = true;
   };
 
-  # See below how stuff in xdg_config is linked to home dir
-  xdg = {
-    enable = true;
-    configFile =
-      let
-        dir = ./xdg_config;
-        entries = builtins.readDir dir;
-      in
-      builtins.mapAttrs (name: type: {
-        source = dir + "/${name}";
-        recursive = type == "directory";
-      }) entries;
-  };
-
-  home.file.".ssh/config".source = ./config/ssh/config;
+  xdg.enable = true;
 
   programs.matplotlib = {
     enable = true;

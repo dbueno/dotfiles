@@ -31,11 +31,11 @@
     initContent = lib.mkMerge [
       # This puts some important shell and nix stuff first so the rest of the
       # shell init can access it
-      (lib.mkOrder 500 (builtins.readFile ./zsh/start))
-      (builtins.readFile ./zsh/rc)
+      (lib.mkOrder 500 (builtins.readFile ../../assets/zsh/start))
+      (builtins.readFile ../../assets/zsh/rc)
     ];
 
-    envExtra = builtins.readFile ./zsh/env;
+    envExtra = builtins.readFile ../../assets/zsh/env;
   };
 
   # XXX no idea

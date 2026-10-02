@@ -1,16 +1,10 @@
-# Links all the files under dotfiles to my home directory
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+# Links every file under home-files to the same path in the home directory.
+{ lib, ... }:
 {
   # See
   # https://github.com/nix-community/home-manager/issues/3849
 
   home.file =
-    with pkgs;
     let
       listFilesRecursive =
         dir: acc:
@@ -31,5 +25,5 @@
           }) (listFilesRecursive dir "")
         );
     in
-    toHomeFiles ./dotfiles;
+    toHomeFiles ../../home-files;
 }

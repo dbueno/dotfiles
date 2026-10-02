@@ -102,22 +102,22 @@
       hosts =
         let
           dev-modules = [
-            ./development/python/default.nix
-            ./development/python/dontcheck.nix
-            ./development/ocaml/default.nix
+            ./nix/development/python/default.nix
+            ./nix/development/python/dontcheck.nix
+            ./nix/development/ocaml/default.nix
           ];
         in
         {
           "NOTANYMORE" = slashUsersHost {
             username = "dbueno";
             modules = [
-              ./home.nix
-              ./login-helper.nix
-              ./shell.nix
-              ./zsh.nix
-              ./gui.nix
-              ./mac-host.nix
-              ./pkgs/vim-euforia/vim-euforia.nix
+              ./nix/home/default.nix
+              ./nix/home/login-helper.nix
+              ./nix/home/shell.nix
+              ./nix/home/zsh.nix
+              ./nix/home/gui.nix
+              ./nix/hosts/mac.nix
+              ./nix/pkgs/vim-euforia/vim-euforia.nix
             ]
             ++ dev-modules;
             stateVersion = "24.11";

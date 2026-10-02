@@ -8,12 +8,12 @@ let
   my-vim-tweaks = pkgs.vimUtils.buildVimPlugin {
     pname = "denisbueno-vim-config.vim";
     version = "dev";
-    src = ./dotvim;
+    src = ../../assets/editor/vim-plugin;
   };
   my-neovim-tweaks = pkgs.vimUtils.buildVimPlugin {
     pname = "denisbueno-neovim-tweaks.vim";
     version = "dev";
-    src = ./neovim;
+    src = ../../assets/editor/neovim-plugin;
   };
   my-vimoutliner = pkgs.vimUtils.buildVimPlugin rec {
     pname = "vimoutliner";
@@ -105,12 +105,7 @@ in
         fzf-vim
       ]
     );
-    # Comment in to debug neovim config
-    # extraConfig = ''
-    #   lua dofile("${config.home.homeDirectory}/dotfiles/config/nvim/init.lua")
-    #   source ${config.home.homeDirectory}/dotfiles/config/nvim/vimrc
-    # '';
-    extraConfig = builtins.readFile ./config/nvim/vimrc;
-    initLua = builtins.readFile ./config/nvim/init.lua;
+    extraConfig = builtins.readFile ../../assets/editor/nvim-config/vimrc;
+    initLua = builtins.readFile ../../assets/editor/nvim-config/init.lua;
   };
 }

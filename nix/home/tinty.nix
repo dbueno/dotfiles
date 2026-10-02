@@ -26,7 +26,7 @@ let
   # from dark-background palettes. See the script's docstring. Runs from the
   # tinty wrapper in zsh/rc, which has the tty the corrections must land on.
   tinted-contrast-fixup = pkgs.writeShellScriptBin "tinted-contrast-fixup" ''
-    exec ${pkgs.python3}/bin/python3 ${./scripts/tinted-contrast-fixup.py} "$@"
+    exec ${pkgs.python3}/bin/python3 ${../../scripts/tinted-contrast-fixup.py} "$@"
   '';
 
   # Decides whether this host may repaint the terminal at all: false over ssh,
@@ -35,7 +35,7 @@ let
   # terminal -- the hook below, and the shell re-sourcing the same script to
   # pick up its variables -- have to be gated separately.
   tinty-terminal-is-local = pkgs.writeShellScriptBin "tinty-terminal-is-local" (
-    builtins.readFile ./scripts/tinty-terminal-is-local.sh
+    builtins.readFile ../../scripts/tinty-terminal-is-local.sh
   );
 in
 {
