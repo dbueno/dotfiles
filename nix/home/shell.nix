@@ -8,9 +8,12 @@ let
   diff2html = pkgs.callPackage ../pkgs/diff2html/default.nix { };
   GraphEasy = pkgs.callPackage ../pkgs/GraphEasy/default.nix { };
   litecli-tinted-style = pkgs.callPackage ../pkgs/litecli-tinted-style { };
-  tinted-litecli = pkgs.litecli.overridePythonAttrs (old: {
-    propagatedBuildInputs = (old.propagatedBuildInputs or [ ]) ++ [ litecli-tinted-style ];
-  });
+  # Pygments discovers styles through package entry points on Python's search
+  # path. Keep the stock litecli derivation and expose only our style to it.
+  tinted-litecli = pkgs.writeShellScriptBin "litecli" ''
+    export PYTHONPATH="${litecli-tinted-style}/${pkgs.python3.sitePackages}''${PYTHONPATH:+:$PYTHONPATH}"
+    exec ${pkgs.litecli}/bin/litecli "$@"
+  '';
 
   marked = pkgs.buildNpmPackage {
     pname = "marked";
