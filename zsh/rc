@@ -1,3 +1,28 @@
+# Home Manager emits history defaults before this file. Keep these native
+# settings here so they take precedence.
+HISTSIZE="1200000"
+SAVEHIST="1000000"
+HISTORY_IGNORE='(&
+|exit
+|pwd
+|p
+|fg
+|bg
+|a
+|aa
+|al
+|git reset*)'
+
+set_opts=(
+  HIST_FCNTL_LOCK HIST_IGNORE_ALL_DUPS HIST_IGNORE_DUPS HIST_IGNORE_SPACE
+  NO_APPEND_HISTORY NO_EXTENDED_HISTORY NO_HIST_EXPIRE_DUPS_FIRST
+  NO_HIST_FIND_NO_DUPS NO_HIST_SAVE_NO_DUPS NO_SHARE_HISTORY
+)
+for opt in "${set_opts[@]}"; do
+  setopt "$opt"
+done
+unset opt set_opts
+
 # Evaluates to an iso-conformant date.  The iso-conformance is good because
 # lexicographic order coincides with date order.  'nows' just has seconds and
 # is also iso-conformant.

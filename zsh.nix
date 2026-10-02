@@ -9,7 +9,6 @@
     enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
     enableCompletion = true;
-    defaultKeymap = "emacs";
     oh-my-zsh = {
       enable = true;
       plugins = [
@@ -28,33 +27,6 @@
       UNIVERSAL_CTAGS = "${pkgs.universal-ctags}/bin/ctags";
       HM_XDG_CONFIG_HOME = "${config.xdg.configHome}";
     };
-
-    history = {
-      size = 1200000;
-      save = 1000000;
-      ignorePatterns = [
-        "&\n"
-        "exit\n"
-        "pwd\n"
-        "p\n"
-        "fg\n"
-        "bg\n"
-        "a\n"
-        "aa\n"
-        "al\n"
-        "git reset*"
-      ];
-      ignoreSpace = true;
-      ignoreDups = true;
-      ignoreAllDups = true;
-      share = false;
-    };
-
-    cdpath = [
-      "."
-      "~/work/inprogress"
-      "~/proj"
-    ];
 
     initContent = lib.mkMerge [
       # This puts some important shell and nix stuff first so the rest of the

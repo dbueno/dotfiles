@@ -7,4 +7,6 @@ setopt histexpiredupsfirst
 setopt hist_no_store # don't store "history" command in history
 fpath=($HM_XDG_CONFIG_HOME/zsh/vendor-completions \
        $fpath)
+cdpath+=("." "~/work/inprogress" "~/proj")
+bindkey -e
 # vim: set filetype=zsh :
