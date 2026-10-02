@@ -1,6 +1,4 @@
 {
-  config,
-  lib,
   pkgs,
   ...
 }:
@@ -28,11 +26,6 @@ let
   intel-one-mono = pkgs.callPackage d { };
 in
 {
-  programs.kitty.settings = {
-    font_family = "Intel One Mono";
-    font_size = lib.mkDefault "11.0";
-  };
-
   home.packages = [
     intel-one-mono
   ];
