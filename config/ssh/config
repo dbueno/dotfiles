@@ -1,0 +1,12 @@
+Host *
+  AddKeysToAgent no
+  Compression no
+  ControlMaster no
+  ControlPath ~/.ssh/master-%r@%n:%p
+  ControlPersist no
+  ForwardAgent no
+  HashKnownHosts no
+  IdentitiesOnly yes
+  ServerAliveCountMax 10
+  ServerAliveInterval 15
+  UserKnownHostsFile ~/.ssh/known_hosts

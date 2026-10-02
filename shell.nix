@@ -202,25 +202,7 @@ in
       }) entries;
   };
 
-  programs.ssh = {
-    enable = true;
-    enableDefaultConfig = false;
-    settings = {
-      "*" = {
-        AddKeysToAgent = "no";
-        Compression = false;
-        ControlMaster = "no";
-        ControlPath = "~/.ssh/master-%r@%n:%p";
-        ControlPersist = "no";
-        ForwardAgent = false;
-        HashKnownHosts = false;
-        IdentitiesOnly = true;
-        ServerAliveCountMax = 10;
-        ServerAliveInterval = 15;
-        UserKnownHostsFile = "~/.ssh/known_hosts";
-      };
-    };
-  };
+  home.file.".ssh/config".source = ./config/ssh/config;
 
   programs.matplotlib = {
     enable = true;
