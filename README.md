@@ -25,7 +25,7 @@ other source files go in `assets/` or `scripts/`.
 | `nix/pkgs/` | Custom package definitions and package-related modules. |
 | `nix/nixos/thinkpad/` | A separate NixOS machine configuration; it is not a flake output. |
 | `home-files/` | Files linked into the home directory by `nix/home/files.nix`. Paths mirror `$HOME`: `home-files/.config/git/config` becomes `~/.config/git/config`. |
-| `assets/` | Source files Nix reads or packages instead of linking directly. For example, Home Manager includes `assets/zsh/rc` in its generated `.zshrc`. Also holds editor sources and reference files under `assets/linux/` and `assets/tmux/`. |
+| `assets/` | Source files Nix reads or packages instead of linking directly. For example, Home Manager includes `assets/zsh/rc` in its generated `.zshrc`. Also holds editor sources and reference files under `assets/linux/`. |
 | `scripts/` | Utilities. Some are packaged by Nix modules; others are standalone. Platform-specific utilities live under `scripts/osx/`. |
 
 `flake.nix` and `flake.lock` stay at the repository root because they define the
@@ -33,8 +33,7 @@ flake. `.envrc` enables the development shell through direnv.
 
 Only the modules listed for `dbueno@NOTANYMORE` in `flake.nix` affect the current
 Home Manager build. The Linux and NixOS modules, the ThinkPad configuration, and
-some files under `assets/` are kept for other machines or reference. In
-particular, `assets/tmux/macosx.conf` is not installed by Home Manager.
+some files under `assets/` are kept for other machines or reference.
 
 ### Where to add something
 
