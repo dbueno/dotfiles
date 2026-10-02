@@ -67,5 +67,8 @@ home-manager switch --flake 'path:.#dbueno@NOTANYMORE'
 ```
 
 `build` creates a generation without activating it. `switch` activates the
-configuration on the intended host. Use the configuration name in `flake.nix`
-if it changes. `nix flake show` lists outputs; `nix fmt` formats Nix files.
+configuration on the intended host. Ask the user for explicit approval before
+running `switch` or otherwise activating a new configuration; a request to edit
+config files does not authorize activation. Use the configuration name in
+`flake.nix` if it changes. `nix flake show` lists outputs; `nix fmt` formats Nix
+files.
