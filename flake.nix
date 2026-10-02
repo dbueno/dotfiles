@@ -34,7 +34,6 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       home-manager,
       rusage,
@@ -50,7 +49,7 @@
       ];
       defaultUsername = "dbueno";
       overlay =
-        final: prev:
+        final: _:
         let
           system = final.stdenv.hostPlatform.system;
         in
@@ -80,17 +79,7 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [
-              overlay
-              (
-                final: prev:
-                if !prev.stdenv.hostPlatform.isLinux then
-                  { }
-                else
-                  {
-                  }
-              )
-            ];
+            overlays = [ overlay ];
           };
           modules = modules ++ [
             { home = { inherit username stateVersion homeDirectory; }; }
@@ -110,24 +99,6 @@
           ...
         }@args:
         mkHomeConfig ({ homeDirectory = "/Users/${username}"; } // args);
-      slashHomeHost =
-        {
-          username ? defaultUsername,
-          ...
-        }@args:
-        mkHomeConfig ({ homeDirectory = "/home/${username}"; } // args);
-      ascldapHost =
-        {
-          username ? defaultUsername,
-          ...
-        }@args:
-        mkHomeConfig ({ homeDirectory = "/ascldap/${username}"; } // args);
-      nfsHomeHost =
-        {
-          username ? defaultUsername,
-          ...
-        }@args:
-        mkHomeConfig ({ homeDirectory = "/nfs-home/${username}"; } // args);
       hosts =
         let
           dev-modules = [
