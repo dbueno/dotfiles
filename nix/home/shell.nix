@@ -7,6 +7,10 @@
 let
   diff2html = pkgs.callPackage ../pkgs/diff2html/default.nix { };
   GraphEasy = pkgs.callPackage ../pkgs/GraphEasy/default.nix { };
+  litecli-tinted-style = pkgs.callPackage ../pkgs/litecli-tinted-style { };
+  tinted-litecli = pkgs.litecli.overridePythonAttrs (old: {
+    propagatedBuildInputs = (old.propagatedBuildInputs or [ ]) ++ [ litecli-tinted-style ];
+  });
 
   marked = pkgs.buildNpmPackage {
     pname = "marked";
@@ -239,7 +243,7 @@ in
       nodejs
       duckdb
       visidata
-      litecli
+      tinted-litecli
       mosh
       mdbook
       nmap
