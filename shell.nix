@@ -129,29 +129,6 @@ let
       (pkgs.writeShellScriptBin "wtf" (builtins.readFile ./automation/wtf.sh))
       (pkgs.writeShellScriptBin "frequency" (builtins.readFile ./automation/frequency.sh))
     ];
-  delta-git-config = {
-    programs.git.extraConfig = {
-      core.pager = "${pkgs.delta}/bin/delta";
-      interactive.diffFilter = "${pkgs.delta}/bin/delta --color-only";
-      # Works around what is apparently a git bug in parsing diff-so-fancy's
-      # ansi directives. This reverts git to an older interactive diff engine
-      # that doesn't have this parsing problem.
-      add.interactive.useBuiltin = false;
-      delta = {
-        navigate = true;
-        light = false;
-        syntax-theme = "Dracula";
-      };
-      merge.conflictstyle = "diff3";
-      diff.colorMoved = "default";
-    };
-  };
-  difftastic-git-difftool-config = {
-    programs.git.extraConfig = {
-      diff.tool = "difftastic";
-    };
-  };
-  diff-git-config = delta-git-config;
 in
 {
   imports = [
