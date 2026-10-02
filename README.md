@@ -11,6 +11,13 @@ assuming a new file there is linked automatically.
 
 ``home-manager build --flake 'path:.#dbueno@<hostname>'``
 
+## Configuration Design
+
+Write configuration in each application's native format whenever practical. For example, keep Git
+settings in `xdg_config/git/config` instead of expressing them as Nix attributes. Use Nix to link
+those files and generate configuration only when it must refer to Nix state or genuinely needs
+programmatic variation.
+
 ## Build, Test, and Development Commands
 
 - `nix flake show` lists the flake's available outputs and checks evaluation.
