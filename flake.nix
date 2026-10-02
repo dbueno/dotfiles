@@ -142,7 +142,8 @@
               ./gui.nix
               ./mac-host.nix
               ./pkgs/vim-euforia/vim-euforia.nix
-            ] ++ dev-modules;
+            ]
+            ++ dev-modules;
             stateVersion = "24.11";
             system = "aarch64-darwin";
           };

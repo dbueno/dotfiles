@@ -196,13 +196,11 @@ in
         dir = ./xdg_config;
         entries = builtins.readDir dir;
       in
-      builtins.mapAttrs
-      (name: type: {
+      builtins.mapAttrs (name: type: {
         source = dir + "/${name}";
         recursive = type == "directory";
-      })
-      entries;
-    };
+      }) entries;
+  };
 
   programs.ssh = {
     enable = true;

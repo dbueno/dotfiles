@@ -69,8 +69,9 @@ in
     viAlias = true;
     withRuby = false;
     withPython3 = true;
-    plugins =
-      (with pkgs.vimPlugins; [
+    plugins = (
+      with pkgs.vimPlugins;
+      [
         my-vim-tweaks
         my-neovim-tweaks
         vim-fugitive
@@ -102,7 +103,8 @@ in
         #vim-vsnip
 
         fzf-vim
-      ]);
+      ]
+    );
     # Comment in to debug neovim config
     # extraConfig = ''
     #   lua dofile("${config.home.homeDirectory}/dotfiles/config/nvim/init.lua")
