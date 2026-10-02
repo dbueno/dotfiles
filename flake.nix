@@ -151,6 +151,13 @@
     {
       overlays.default = overlay;
 
+      formatter = lib.genAttrs [
+        "aarch64-darwin"
+        "x86_64-darwin"
+        "aarch64-linux"
+        "x86_64-linux"
+      ] (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
+
       homeConfigurations = lib.mapAttrs' (hostname: config: {
         name = "${config.username}@${hostname}";
         value = config;
