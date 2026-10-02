@@ -43,6 +43,11 @@
     }@inputs:
     let
       lib = nixpkgs.lib;
+      systems = [
+        "aarch64-darwin"
+        "aarch64-linux"
+        "x86_64-linux"
+      ];
       defaultUsername = "dbueno";
       overlay =
         final: prev:
@@ -152,12 +157,22 @@
     {
       overlays.default = overlay;
 
-      formatter = lib.genAttrs [
-        "aarch64-darwin"
-        "x86_64-darwin"
-        "aarch64-linux"
-        "x86_64-linux"
-      ] (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
+      formatter = lib.genAttrs systems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
+
+      devShells = lib.genAttrs systems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          default = pkgs.mkShell {
+            packages = with pkgs; [
+              nil
+              nixd
+            ];
+          };
+        }
+      );
 
       homeConfigurations = lib.mapAttrs' (hostname: config: {
         name = "${config.username}@${hostname}";
