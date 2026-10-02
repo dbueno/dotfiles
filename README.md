@@ -57,11 +57,6 @@ is writable, so Zed can edit it through its GUI; later Home Manager switches
 leave it alone. Update the seed separately when you want new machines to start
 with your latest preferences.
 
-Litecli uses the `tinted` Pygments style packaged in
-`nix/pkgs/litecli-tinted-style/`. Its SQL colors use the terminal's ANSI palette,
-which tinty updates when applying a Base16 or Base24 scheme. The style therefore
-follows light and dark themes without regenerating litecli's config.
-
 ## Build and activate
 
 From the repository root:

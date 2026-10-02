@@ -3,6 +3,6 @@ python3Packages.buildPythonPackage {
   pname = "litecli-tinted-style";
   version = "1.0";
   format = "setuptools";
-  src = ./.;
+  src = ../../../assets/litecli;
   propagatedBuildInputs = [ python3Packages.pygments ];
 }
