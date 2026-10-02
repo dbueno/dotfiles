@@ -1,1 +1,1 @@
-set -g status-right '#[fg=yellow]#(cut -d " " -f 1-3 /proc/loadavg)#[default]'
+set -g status-right '#(cut -d " " -f 1-3 /proc/loadavg)'
