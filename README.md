@@ -50,6 +50,13 @@ particular, `assets/tmux/macosx.conf` is not installed by Home Manager.
 - For an executable utility, add it to `scripts/`. Reference it from a Nix
   module if Home Manager should install it.
 
+Zed is an exception to the usual linked-file rule. On activation,
+`nix/home/zed.nix` copies `home-files/.config/zed/settings-home-manager.json` to
+`~/.config/zed/settings.json` only if that destination does not exist. The copy
+is writable, so Zed can edit it through its GUI; later Home Manager switches
+leave it alone. Update the seed separately when you want new machines to start
+with your latest preferences.
+
 ## Build and activate
 
 From the repository root:

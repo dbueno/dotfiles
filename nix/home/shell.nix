@@ -135,6 +135,7 @@ in
     (import ./neovim.nix)
     (import ./tinty.nix)
     (import ./files.nix)
+    (import ./zed.nix)
     (import ./fzf.nix)
   ];
 
