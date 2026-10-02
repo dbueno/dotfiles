@@ -29,9 +29,20 @@
 	pager = "delta"
 
 [delta]
-	light = false
 	navigate = true
-	syntax-theme = "Dracula"
+	# Use the ANSI palette that tinty applies to the terminal in both modes.
+	# Avoid delta's fixed dark backgrounds and RGB syntax colors.
+	syntax-theme = "ansi"
+	zero-style = "syntax"
+	minus-style = "red"
+	minus-emph-style = "bold red"
+	minus-empty-line-marker-style = "red"
+	plus-style = "green"
+	plus-emph-style = "bold green"
+	plus-empty-line-marker-style = "green"
+	file-style = "bold blue"
+	hunk-header-style = "cyan"
+	keep-plus-minus-markers = true
 
 [diff]
 	colorMoved = "default"
