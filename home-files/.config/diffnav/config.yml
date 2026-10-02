@@ -1,0 +1,3 @@
+# Use icons that render in Apple Terminal without a Nerd Font.
+ui:
+  icons: ascii

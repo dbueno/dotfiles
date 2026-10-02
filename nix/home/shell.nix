@@ -230,6 +230,11 @@ in
       # diff tools
       colordiff
       difftastic
+      # The pinned diffnav hard-codes dark colours and some Nerd Font glyphs.
+      # Follow tinty's terminal palette and use broadly available symbols.
+      (diffnav.overrideAttrs (old: {
+        patches = (old.patches or [ ]) ++ [ ../pkgs/diffnav/tinty-ansi.patch ];
+      }))
       json-diff
       # diff2html
       fd # find alternative

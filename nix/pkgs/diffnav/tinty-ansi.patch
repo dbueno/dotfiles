@@ -1,0 +1,264 @@
+--- a/pkg/ui/common/styles.go
++++ b/pkg/ui/common/styles.go
+@@ -1,7 +1,6 @@
+ package common
+ 
+ import (
+-	"fmt"
+ 	"image/color"
+ 
+ 	"charm.land/lipgloss/v2"
+@@ -15,18 +14,14 @@
+ 	DarkerSelected
+ )
+ 
+-var Colors = map[Key]color.RGBA{
+-	Selected:       {R: 0x2d, G: 0x2c, B: 0x35, A: 0xFF}, // "#2d2c35"
+-	DarkerSelected: {R: 0x20, G: 0x1F, B: 0x26, A: 0xFF}, // "#201F26"
++var Colors = map[Key]color.Color{
++	// ANSI 7 is the current terminal foreground; ANSI 0 is its background.
++	// tinty updates both slots for light and dark schemes.
++	Selected:       lipgloss.Color("7"),
++	DarkerSelected: lipgloss.Color("0"),
+ }
+ 
+ var BgStyles = map[Key]lipgloss.Style{
+-	Selected:       lipgloss.NewStyle().Background(Colors[Selected]),
++	Selected:       lipgloss.NewStyle(),
+ 	DarkerSelected: lipgloss.NewStyle().Background(Colors[DarkerSelected]),
+ }
+-
+-// lipglossColorToHex converts a color.Color to hex string
+-func LipglossColorToHex(c color.Color) string {
+-	r, g, b, _ := c.RGBA()
+-	return fmt.Sprintf("#%02x%02x%02x", r>>8, g>>8, b>>8)
+-}
+--- a/pkg/ui/panes/diffviewer/diffviewer.go
++++ b/pkg/ui/panes/diffviewer/diffviewer.go
+@@ -13,7 +13,6 @@
+ 	"github.com/bluekeyes/go-gitdiff/gitdiff"
+ 
+ 	"github.com/dlvhdr/diffnav/pkg/filenode"
+-	"github.com/dlvhdr/diffnav/pkg/icons"
+ 	"github.com/dlvhdr/diffnav/pkg/ui/common"
+ 	"github.com/dlvhdr/diffnav/pkg/utils"
+ 	"github.com/robinovitch61/viewport/filterableviewport"
+@@ -115,12 +114,12 @@
+ 				SelectionPrefix: lipgloss.NewStyle().Foreground(lipgloss.Blue).Render("▐"),
+ 				SelectedItemStyle: lipgloss.NewStyle().
+ 					Background(common.Colors[common.Selected]).
+-					Foreground(lipgloss.BrightWhite),
++					Foreground(common.Colors[common.DarkerSelected]),
+ 				FooterStyle: lipgloss.NewStyle().
+ 					BorderForeground(lipgloss.BrightBlack).
+-					Background(lipgloss.BrightBlack).
+-					Border(lipgloss.Border{Left: "", Right: ""}, false, true, false, true).
+-					Foreground(lipgloss.White).
++					Background(lipgloss.Color("7")).
++					Border(lipgloss.Border{Left: "[", Right: "]"}, false, true, false, true).
++					Foreground(lipgloss.Color("0")).
+ 					Italic(true),
+ 			},
+ 		),
+@@ -134,18 +133,18 @@
+ 
+ 	filterableViewportStyles := filterableviewport.DefaultStyles()
+ 	filterableViewportStyles.Filter.Focused.TextInput.Text = lipgloss.NewStyle().
+-		Foreground(lipgloss.BrightWhite)
++		Foreground(lipgloss.Color("7"))
+ 	filterableViewportStyles.Filter.Unfocused.TextInput.Text = lipgloss.NewStyle().
+-		Foreground(lipgloss.White)
+-	filterableViewportStyles.Filter.Empty = lipgloss.NewStyle().Foreground(lipgloss.White)
++		Foreground(lipgloss.Color("7"))
++	filterableViewportStyles.Filter.Empty = lipgloss.NewStyle().Foreground(lipgloss.Color("7"))
+ 	filterableViewportStyles.MatchesCount.Matches = lipgloss.NewStyle().
+-		Foreground(lipgloss.Color("#FF9E65"))
++		Foreground(lipgloss.Color("3"))
+ 	filterableViewportStyles.Match.Focused = lipgloss.NewStyle().
+-		Background(lipgloss.Color("#FF9E65")).
+-		Foreground(lipgloss.Color("#1E202F"))
++		Background(lipgloss.Color("3")).
++		Foreground(lipgloss.Color("0"))
+ 	filterableViewportStyles.Match.Unfocused = lipgloss.NewStyle().
+-		Background(lipgloss.Color("#3D59A1")).
+-		Foreground(lipgloss.White)
++		Background(lipgloss.Color("4")).
++		Foreground(lipgloss.Color("7"))
+ 
+ 	return Model{
+ 		sb: sb,
+@@ -305,7 +304,7 @@
+ 	name := m.file.path
+ 	base := lipgloss.NewStyle()
+ 
+-	fileIcon := icons.GetIcon(name, false)
++	fileIcon := "*"
+ 	prefix := base.Render(fileIcon) + base.Render(" ")
+ 	name = utils.TruncateString(name, m.contentWidth()-lipgloss.Width(prefix))
+ 	top := prefix + base.Bold(true).Render(name)
+@@ -323,7 +322,7 @@
+ 
+ func (m Model) dirHeaderView() string {
+ 	base := lipgloss.NewStyle().Foreground(lipgloss.Blue)
+-	prefix := base.Render(" ")
++	prefix := base.Render("/ ")
+ 	name := utils.TruncateString(m.dir.path, m.contentWidth()-lipgloss.Width(prefix))
+ 
+ 	top := prefix + base.Bold(true).Render(name)
+@@ -472,18 +471,15 @@
+ 	key := cacheKey(dir.path, sideBySide)
+ 	return func() tea.Msg {
+ 		s := common.BgStyles[common.Selected]
+-		c := common.LipglossColorToHex(common.Colors[common.Selected])
+ 		useSideBySide := sideBySide
+ 		args := []string{
+ 			"--paging=never",
+ 			fmt.Sprintf("--file-modified-label=%s",
+-				utils.RemoveReset(s.Foreground(lipgloss.Yellow).Render(" "))),
++				utils.RemoveReset(s.Foreground(lipgloss.Yellow).Render(" ~"))),
+ 			fmt.Sprintf("--file-removed-label=%s",
+-				utils.RemoveReset(s.Foreground(lipgloss.Red).Render(" "))),
++				utils.RemoveReset(s.Foreground(lipgloss.Red).Render(" -"))),
+ 			fmt.Sprintf("--file-added-label=%s",
+-				utils.RemoveReset(s.Foreground(lipgloss.Green).Render(" "))),
+-			fmt.Sprintf("--file-style='%s bold %s'", c, c),
+-			fmt.Sprintf("--file-decoration-style='%s box %s'", c, c),
++				utils.RemoveReset(s.Foreground(lipgloss.Green).Render(" +"))),
+ 			fmt.Sprintf("-w=%d", width),
+ 			// See `diffFile` for why these are set this way.
+ 			"--max-line-length=0",
+--- a/pkg/ui/panes/filetree/filetree.go
++++ b/pkg/ui/panes/filetree/filetree.go
+@@ -90,20 +90,20 @@
+ 		RootNodeStyle:   base.Foreground(lipgloss.BrightBlue),
+ 		ParentNodeStyle: base.Foreground(lipgloss.BrightBlue),
+ 		SelectedNodeStyleFunc: func(children tree.Nodes, i int) lipgloss.Style {
+-			base := base.Bold(true).Background(dimmed)
++			base := base.Bold(true).Background(dimmed).Foreground(common.Colors[common.DarkerSelected])
+ 			child := children.At(i)
+ 			switch child.GivenValue().(type) {
+ 			case *filenode.FileNode:
+ 				return base
+ 			case string, *dirnode.DirNode:
+-				return base.Foreground(lipgloss.BrightBlue)
++				return base
+ 			}
+ 			return base
+ 		},
+ 		HelpStyle:               base.MarginTop(1),
+-		EnumeratorStyle:         base.Foreground(dimmed),
+-		SelectedEnumeratorStyle: base.Bold(true).Foreground(lipgloss.BrightBlue),
+-		IndenterStyle:           base.Foreground(dimmed),
++		EnumeratorStyle:         base.Foreground(lipgloss.Color("8")),
++		SelectedEnumeratorStyle: base.Bold(true).Foreground(lipgloss.Color("0")),
++		IndenterStyle:           base.Foreground(lipgloss.Color("8")),
+ 	})
+ 
+ 	open, closed := getDirIcons(m.cfg.UI.Icons)
+--- a/pkg/filenode/file_node.go
++++ b/pkg/filenode/file_node.go
+@@ -67,7 +67,7 @@
+ 	if f.Selected {
+ 		bgStyle := lipgloss.NewStyle().
+ 			Bold(true).
+-			Foreground(f.StatusColor())
++			Foreground(lipgloss.Color("0"))
+ 		if f.PanelWidth > 0 {
+ 			availableWidth := f.PanelWidth - iconWidth - f.Depth
+ 			if availableWidth > 0 {
+@@ -117,7 +117,7 @@
+ 		return iconsPrefix + style.Render(truncatedName) + stats
+ 	}
+ 	return iconsPrefix + lipgloss.NewStyle().
+-		Foreground(lipgloss.Color("15")).
++		Foreground(lipgloss.Color("7")).
+ 		Render(truncatedName) +
+ 		stats
+ }
+--- a/pkg/ui/tui.go
++++ b/pkg/ui/tui.go
+@@ -29,7 +29,6 @@
+ 	"github.com/dlvhdr/diffnav/pkg/utils"
+ 	"github.com/dlvhdr/diffnav/pkg/watch"
+ 	"github.com/lrstanley/go-nf/glyphs/md"
+-	"github.com/lrstanley/go-nf/glyphs/neo"
+ )
+ 
+ const (
+@@ -124,7 +123,7 @@
+ 	m.filesSearch.ShowSuggestions = true
+ 	m.filesSearch.KeyMap.AcceptSuggestion = key.NewBinding(key.WithKeys("tab"))
+ 	m.filesSearch.Prompt = " "
+-	m.filesSearch.Placeholder = "Filter files 󰬛 "
++	m.filesSearch.Placeholder = "Filter files "
+ 	m.filesSearch.SetStyles(textinput.Styles{
+ 		Focused: textinput.StyleState{
+ 			Placeholder: lipgloss.NewStyle().Foreground(lipgloss.Color("8")),
+@@ -780,10 +779,10 @@
+ 		Render("DIFFNAV")
+ 
+ 	sep := lipgloss.NewStyle().Foreground(lipgloss.BrightBlack).Render(" • ")
+-	hashStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("132"))
+-	dateStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("172"))
+-	authorStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("109"))
+-	refStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("072"))
++	hashStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("5"))
++	dateStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("3"))
++	authorStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("6"))
++	refStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("2"))
+ 
+ 	headerParts := title
+ 	meta := m.cachedMeta
+@@ -845,7 +844,7 @@
+ 	added, deleted := m.diffViewer.RootDiffStats()
+ 	help := zone.Mark(
+ 		zoneHelp,
+-		base.Background(lipgloss.BrightBlack).PaddingLeft(1).PaddingRight(1).Render("F1/? help"),
++		base.Background(lipgloss.Color("7")).Foreground(lipgloss.Color("0")).PaddingLeft(1).PaddingRight(1).Render("F1/? help"),
+ 	)
+ 	stats := filenode.ViewDiffStats(added, deleted, base)
+ 	parts := []string{files, sep, stats}
+@@ -954,16 +953,10 @@
+ 
+ func (m mainModel) resultsView() string {
+ 	sb := strings.Builder{}
+-	baseStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("#F7F7F7"))
+-	dirStyle := lipgloss.NewStyle().Bold(false).Foreground(lipgloss.Color("#B8B8B8"))
++	baseStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("7"))
++	dirStyle := lipgloss.NewStyle().Bold(false).Foreground(lipgloss.Color("8"))
+ 	for i, f := range m.filtered {
+-		icon := neo.ByPath(f)
+-		if icon == nil {
+-			icon = neo.ByFileExtension("txt")
+-		}
+-		base := utils.RemoveReset(lipgloss.NewStyle().
+-			Foreground(icon.Color(true)).
+-			Render(icon.Glyph().String()) + " " + baseStyle.Render(path.Base(f)))
++		base := baseStyle.Render("* " + path.Base(f))
+ 		dir := utils.TruncateString(
+ 			dirStyle.Render(path.Dir(f)),
+ 			m.config.UI.SearchTreeWidth-2-lipgloss.Width(base),
+@@ -972,15 +965,14 @@
+ 			dir = ""
+ 		}
+ 		if i == m.resultsCursor {
+-			bg := lipgloss.NewStyle().Background(lipgloss.Color("#1b1b33"))
+-			fName := lipgloss.NewStyle().
+-				Bold(true).
+-				Render(bg.Render(base)) +
+-				bg.Render(
+-					" ",
+-				) + bg.Render(
+-				dir,
+-			)
++			bg := lipgloss.NewStyle().Background(lipgloss.Color("7")).Foreground(lipgloss.Color("0"))
++			selectedBase := "* " + path.Base(f)
++			selectedDir := path.Dir(f)
++			if selectedDir == "." {
++				selectedDir = ""
++			}
++			selectedDir = utils.TruncateString(selectedDir, m.config.UI.SearchTreeWidth-2-lipgloss.Width(base))
++			fName := bg.Bold(true).Render(selectedBase + " " + selectedDir)
+ 			sb.WriteString(bg.
+ 				Width(m.config.UI.SearchTreeWidth).
+ 				Render(fName) +
