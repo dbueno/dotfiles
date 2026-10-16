@@ -257,6 +257,12 @@ in
       mdbook
       nmap
       rsync
+      # PDF reading: text (pdftotext, mutool draw -F txt), page images
+      # (pdftoppm), structure/repair (qpdf), and OCR for scanned pages.
+      poppler-utils
+      mupdf-headless
+      qpdf
+      tesseract
     ]
     ++ myScripts;
 }
