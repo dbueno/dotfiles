@@ -35,6 +35,11 @@ Only the modules listed for `dbueno@NOTANYMORE` in `flake.nix` affect the curren
 Home Manager build. The Linux and NixOS modules, the ThinkPad configuration, and
 some files under `assets/` are kept for other machines or reference.
 
+The flake also exports `homeModules.default` (the modules listed for
+`dbueno@NOTANYMORE`) and `lib.mkHomeConfig`, so another flake can build a home
+from this one with a different username or home directory and its own modules
+layered on top.
+
 ### Where to add something
 
 - For a new Home Manager option or application, add a focused module in

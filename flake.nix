@@ -75,6 +75,7 @@
           modules,
           stateVersion,
           extraConfig ? emptyConfig,
+          extraSpecialArgs ? { },
         }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
@@ -87,7 +88,8 @@
           ];
           extraSpecialArgs = {
             inherit (inputs) hm-login-shell-helper;
-          };
+          }
+          // extraSpecialArgs;
         }
         // {
           inherit username;
@@ -99,34 +101,40 @@
           ...
         }@args:
         mkHomeConfig ({ homeDirectory = "/Users/${username}"; } // args);
-      hosts =
-        let
-          dev-modules = [
-            ./nix/development/python/default.nix
-            ./nix/development/python/dontcheck.nix
-            ./nix/development/ocaml/default.nix
-          ];
-        in
-        {
-          "NOTANYMORE" = slashUsersHost {
-            username = "dbueno";
-            modules = [
-              ./nix/home/default.nix
-              ./nix/home/login-helper.nix
-              ./nix/home/shell.nix
-              ./nix/home/zsh.nix
-              ./nix/home/gui.nix
-              ./nix/hosts/mac.nix
-              ./nix/pkgs/vim-euforia/vim-euforia.nix
-            ]
-            ++ dev-modules;
-            stateVersion = "24.11";
-            system = "aarch64-darwin";
-          };
+      # The modules dbueno@NOTANYMORE is built from. Other flakes build on
+      # them with `lib.mkHomeConfig { modules = [ homeModules.default ... ]; }`.
+      homeModule = {
+        imports = [
+          ./nix/home/default.nix
+          ./nix/home/login-helper.nix
+          ./nix/home/shell.nix
+          ./nix/home/zsh.nix
+          ./nix/home/gui.nix
+          ./nix/hosts/mac.nix
+          ./nix/pkgs/vim-euforia/vim-euforia.nix
+          ./nix/development/python/default.nix
+          ./nix/development/python/dontcheck.nix
+          ./nix/development/ocaml/default.nix
+        ];
+      };
+      hosts = {
+        "NOTANYMORE" = slashUsersHost {
+          username = "dbueno";
+          modules = [ homeModule ];
+          stateVersion = "24.11";
+          system = "aarch64-darwin";
         };
+      };
     in
     {
       overlays.default = overlay;
+
+      homeModules.default = homeModule;
+
+      # Builds a home from `modules` with this flake's nixpkgs, overlay and
+      # special arguments. Takes system, homeDirectory, username, modules,
+      # stateVersion, and optionally extraConfig and extraSpecialArgs.
+      lib = { inherit mkHomeConfig; };
 
       formatter = lib.genAttrs systems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
 
