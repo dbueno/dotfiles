@@ -120,7 +120,10 @@
         in
         pkgs.writeShellApplication {
           name = "switch";
-          runtimeInputs = [ home-manager.packages.${system}.home-manager ];
+          runtimeInputs = [
+            home-manager.packages.${system}.home-manager
+            pkgs.coreutils
+          ];
           text = ''
             homes=(${lib.escapeShellArgs names})
             host=$(uname -n)
@@ -129,6 +132,15 @@
               name=$1
               [[ $name == *@* ]] || name="$USER@$name"
               shift
+            fi
+
+            # Prefer a literal hostname when both forms are configured.
+            if [[ " ''${homes[*]} " != *" $name "* ]]; then
+              host_hash=$(printf '%s' "''${name#*@}" | sha256sum)
+              hashed_name="''${name%%@*}@sha256-''${host_hash%% *}"
+              if [[ " ''${homes[*]} " == *" $hashed_name "* ]]; then
+                name=$hashed_name
+              fi
             fi
 
             if [[ " ''${homes[*]} " != *" $name "* ]]; then
@@ -156,7 +168,7 @@
             program = lib.getExe (mkSwitch flake system);
           };
         });
-      # The modules dbueno@NOTANYMORE is built from. Other flakes build on
+      # The modules the default home is built from. Other flakes build on
       # them with `lib.mkHomeConfigurations { modules = [ homeModules.default ]; ... }`.
       homeModule = {
         imports = [
@@ -173,7 +185,7 @@
         ];
       };
       hosts = {
-        "NOTANYMORE" = {
+        "sha256-30bbcf701f7daea5cc810123ec37531d9cc355bd8d26b4fef36e8695ef6eec2b" = {
           username = "dbueno";
           homeDirectory = "/Users/dbueno";
           modules = [ homeModule ];
@@ -195,14 +207,16 @@
         inherit mkHomeConfig;
 
         # Builds homeConfigurations from `hosts`, a set of mkHomeConfig
-        # arguments keyed by short hostname (`uname -n` up to the first dot),
+        # arguments keyed by short hostname (`uname -n` up to the first dot)
+        # or "sha256-<hex SHA-256 of short hostname, without a newline>",
         # named "<username>@<host>". `modules` go before each host's own.
         inherit mkHomeConfigurations;
 
         # Takes a flake and gives its `apps`, where
         # `nix run .#switch [host] [home-manager args]` switches to the home in
         # its homeConfigurations for this machine's hostname, or the named
-        # host; with neither, it offers this system's homes to pick from.
+        # host, trying the literal name before its hash; with neither, it
+        # offers this system's homes to pick from.
         inherit mkSwitchApps;
       };
 

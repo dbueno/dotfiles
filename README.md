@@ -1,7 +1,7 @@
 # Dotfiles
 
 This is my Home Manager configuration. `flake.nix` defines the flake inputs and
-the available homes. At present it exposes `dbueno@NOTANYMORE` for macOS.
+the available homes. The current macOS home uses a hashed hostname.
 
 ## Configuration design
 
@@ -31,12 +31,12 @@ other source files go in `assets/` or `scripts/`.
 `flake.nix` and `flake.lock` stay at the repository root because they define the
 flake. `.envrc` enables the development shell through direnv.
 
-Only the modules listed for `dbueno@NOTANYMORE` in `flake.nix` affect the current
+Only the modules listed for the macOS home in `flake.nix` affect the current
 Home Manager build. The Linux and NixOS modules, the ThinkPad configuration, and
 some files under `assets/` are kept for other machines or reference.
 
-The flake also exports `homeModules.default` (the modules listed for
-`dbueno@NOTANYMORE`) and `lib.mkHomeConfig`, so another flake can build a home
+The flake also exports `homeModules.default` (the modules listed for the
+macOS home) and `lib.mkHomeConfig`, so another flake can build a home
 from this one with a different username or home directory and its own modules
 layered on top.
 
@@ -66,18 +66,35 @@ with your latest preferences.
 From the repository root:
 
 ```sh
-home-manager build --flake 'path:.#dbueno@NOTANYMORE'
-home-manager switch --flake 'path:.#dbueno@NOTANYMORE'
+nix run .#switch
+# Build without activating (substitute the host key from flake.nix):
+home-manager build --flake 'path:.#dbueno@sha256-<digest>'
 ```
 
-`nix run .#switch` does the `switch` for the home named after this machine's
-short hostname, `nix run .#switch -- <host>` for another, and with no match it
-offers this system's homes to pick from. Arguments after the host go to
-home-manager.
+`nix run .#switch` does the `switch` for this machine's short hostname
+(`uname -n` up to the first dot). It tries `<username>@<hostname>` first, then
+`<username>@sha256-<digest>`, where the digest is the lowercase hexadecimal
+SHA-256 of the short hostname with no trailing newline. Hostnames are
+case-sensitive. To compute a key for `hosts` in `flake.nix` on macOS or Linux:
+
+```sh
+host=$(uname -n)
+printf 'sha256-'; printf '%s' "${host%%.*}" | shasum -a 256 | cut -d ' ' -f 1
+```
+
+`nix run .#switch -- <host>` selects another host, accepting a hostname, a
+`sha256-<digest>` key, or either prefixed with `<username>@`. Hostname arguments
+also try the literal name before its hash. With no match, it offers this
+system's homes to pick from (or fails with a list when input isn't a terminal).
+Other arguments go to home-manager.
+
+Hashes keep readable hostnames out of the current configuration, but someone
+can still test guesses against them. Renaming an entry does not remove its
+previous name from Git history.
 
 Other flakes build homes the same way with `lib.mkHomeConfigurations`, which
-takes a set of hosts keyed by short hostname and modules shared by all of them
-(typically `homeModules.default`), and get the same `switch` with
+takes a set of hosts keyed by short hostname or `sha256-<digest>` and modules
+shared by all of them (typically `homeModules.default`), and get the same `switch` with
 `apps = lib.mkSwitchApps self`.
 
 `build` creates a generation without activating it. `switch` activates the
