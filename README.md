@@ -24,7 +24,7 @@ other source files go in `assets/` or `scripts/`.
 | `nix/fonts/` | Font modules used by platform configurations. |
 | `nix/pkgs/` | Custom package definitions and package-related modules. |
 | `nix/nixos/thinkpad/` | A separate NixOS machine configuration; it is not a flake output. |
-| `home-files/` | Files linked into the home directory by `nix/home/files.nix`. Paths mirror `$HOME`: `home-files/.config/git/config` becomes `~/.config/git/config`. |
+| `home-files/` | Files linked into the home directory by `nix/home/files.nix`. Paths mirror `$HOME`: `home-files/.config/git/config` becomes `~/.config/git/config`. A config built on `homeModules.default` links its own directories the same way by adding them to `dotfiles.homeFileDirs`. |
 | `assets/` | Source files Nix reads or packages instead of linking directly. For example, Home Manager includes `assets/zsh/rc` in its generated `.zshrc`. Also holds editor sources and reference files under `assets/linux/`. |
 | `scripts/` | Utilities. Some are packaged by Nix modules; others are standalone. Platform-specific utilities live under `scripts/osx/`. |
 

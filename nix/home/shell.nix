@@ -28,7 +28,9 @@ let
 
   bunch = pkgs.writeShellScriptBin "bunch" (builtins.readFile ../../scripts/bunch.sh);
 
-  system-xcrun = pkgs.writeShellScriptBin "system-xcrun" (builtins.readFile ../../scripts/system-xcrun);
+  system-xcrun = pkgs.writeShellScriptBin "system-xcrun" (
+    builtins.readFile ../../scripts/system-xcrun
+  );
 
   my-moreutils = pkgs.stdenv.mkDerivation rec {
     pname = "my-moreutils";
