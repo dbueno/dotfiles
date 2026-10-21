@@ -70,6 +70,16 @@ home-manager build --flake 'path:.#dbueno@NOTANYMORE'
 home-manager switch --flake 'path:.#dbueno@NOTANYMORE'
 ```
 
+`nix run .#switch` does the `switch` for the home named after this machine's
+short hostname, `nix run .#switch -- <host>` for another, and with no match it
+offers this system's homes to pick from. Arguments after the host go to
+home-manager.
+
+Other flakes build homes the same way with `lib.mkHomeConfigurations`, which
+takes a set of hosts keyed by short hostname and modules shared by all of them
+(typically `homeModules.default`), and get the same `switch` with
+`apps = lib.mkSwitchApps self`.
+
 `build` creates a generation without activating it. `switch` activates the
 configuration on the intended host. Ask the user for explicit approval before
 running `switch` or otherwise activating a new configuration; a request to edit

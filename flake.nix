@@ -34,6 +34,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       home-manager,
       rusage,
@@ -88,21 +89,75 @@
           ];
           extraSpecialArgs = {
             inherit (inputs) hm-login-shell-helper;
+            dotfiles = self;
           }
           // extraSpecialArgs;
         }
         // {
-          inherit username;
+          inherit username system;
         }
       );
-      slashUsersHost =
+      mkHomeConfigurations =
         {
-          username ? defaultUsername,
-          ...
-        }@args:
-        mkHomeConfig ({ homeDirectory = "/Users/${username}"; } // args);
+          hosts,
+          modules ? [ ],
+        }:
+        lib.mapAttrs' (
+          host: args:
+          let
+            home = mkHomeConfig (args // { modules = modules ++ args.modules or [ ]; });
+          in
+          {
+            name = "${home.username}@${host}";
+            value = home;
+          }
+        ) hosts;
+      mkSwitch =
+        flake: system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+          names = lib.attrNames (lib.filterAttrs (_: h: h.system == system) flake.homeConfigurations);
+        in
+        pkgs.writeShellApplication {
+          name = "switch";
+          runtimeInputs = [ home-manager.packages.${system}.home-manager ];
+          text = ''
+            homes=(${lib.escapeShellArgs names})
+            host=$(uname -n)
+            name="$USER@''${host%%.*}"
+            if [[ $# -gt 0 && $1 != -* ]]; then
+              name=$1
+              [[ $name == *@* ]] || name="$USER@$name"
+              shift
+            fi
+
+            if [[ " ''${homes[*]} " != *" $name "* ]]; then
+              echo "No home named $name for ${system}." >&2
+              if [[ ''${#homes[@]} -eq 0 || ! -t 0 ]]; then
+                echo "Configured: ''${homes[*]:-none}" >&2
+                exit 1
+              fi
+              PS3="Switch to which home? "
+              name=
+              select choice in "''${homes[@]}"; do
+                [[ -n $choice ]] && name=$choice && break
+              done
+              [[ -n $name ]] || exit 1
+            fi
+
+            exec home-manager switch --flake "path:${flake}#$name" "$@"
+          '';
+        };
+      mkSwitchApps =
+        flake:
+        lib.genAttrs systems (system: {
+          switch = {
+            type = "app";
+            program = lib.getExe (mkSwitch flake system);
+          };
+        });
       # The modules dbueno@NOTANYMORE is built from. Other flakes build on
-      # them with `lib.mkHomeConfig { modules = [ homeModules.default ... ]; }`.
+      # them with `lib.mkHomeConfigurations { modules = [ homeModules.default ]; ... }`.
       homeModule = {
         imports = [
           ./nix/home/default.nix
@@ -118,8 +173,9 @@
         ];
       };
       hosts = {
-        "NOTANYMORE" = slashUsersHost {
+        "NOTANYMORE" = {
           username = "dbueno";
+          homeDirectory = "/Users/dbueno";
           modules = [ homeModule ];
           stateVersion = "24.11";
           system = "aarch64-darwin";
@@ -131,10 +187,26 @@
 
       homeModules.default = homeModule;
 
-      # Builds a home from `modules` with this flake's nixpkgs, overlay and
-      # special arguments. Takes system, homeDirectory, username, modules,
-      # stateVersion, and optionally extraConfig and extraSpecialArgs.
-      lib = { inherit mkHomeConfig; };
+      lib = {
+        # Builds a home from `modules` with this flake's nixpkgs, overlay and
+        # special arguments, including `dotfiles` (this flake). Takes system,
+        # homeDirectory, username, modules, stateVersion, and optionally
+        # extraConfig and extraSpecialArgs.
+        inherit mkHomeConfig;
+
+        # Builds homeConfigurations from `hosts`, a set of mkHomeConfig
+        # arguments keyed by short hostname (`uname -n` up to the first dot),
+        # named "<username>@<host>". `modules` go before each host's own.
+        inherit mkHomeConfigurations;
+
+        # Takes a flake and gives its `apps`, where
+        # `nix run .#switch [host] [home-manager args]` switches to the home in
+        # its homeConfigurations for this machine's hostname, or the named
+        # host; with neither, it offers this system's homes to pick from.
+        inherit mkSwitchApps;
+      };
+
+      apps = mkSwitchApps self;
 
       formatter = lib.genAttrs systems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
 
@@ -153,9 +225,6 @@
         }
       );
 
-      homeConfigurations = lib.mapAttrs' (hostname: config: {
-        name = "${config.username}@${hostname}";
-        value = config;
-      }) hosts;
+      homeConfigurations = mkHomeConfigurations { inherit hosts; };
     };
 }
