@@ -45,6 +45,11 @@ if [[ "$(uname)" == "Darwin" ]]; then
   alias lldb="PATH=/usr/bin:$PATH lldb"
 fi
 
+# Use tinty's ANSI palette and foreground-only diffs in Codex.
+codex() {
+  FORCE_COLOR=1 command codex "$@"
+}
+
 zshaddhistory() {
   emulate -L zsh
   ## uncomment if HISTORY_IGNORE
