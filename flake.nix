@@ -192,6 +192,8 @@
           stateVersion = "24.11";
           system = "aarch64-darwin";
         };
+        "sha256-913309f1a8ab1fa1bebfbcf0c4c2ea669413af02d774df77390e456caeadd49a" =
+          hosts."sha256-30bbcf701f7daea5cc810123ec37531d9cc355bd8d26b4fef36e8695ef6eec2b";
       };
     in
     {
