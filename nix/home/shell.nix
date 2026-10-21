@@ -139,12 +139,12 @@ let
 in
 {
   imports = [
-    (import ./neovim.nix)
-    (import ./tinty.nix)
-    (import ./tuicr.nix)
-    (import ./files.nix)
-    (import ./zed.nix)
-    (import ./fzf.nix)
+    ./neovim.nix
+    ./tinty.nix
+    ./tuicr.nix
+    ./files.nix
+    ./zed.nix
+    ./fzf.nix
   ];
 
   nix.package = pkgs.nixVersions.stable;
