@@ -202,6 +202,7 @@ in
       man-pages-posix
       gitFull
       git-lfs
+      gh
       ripgrep
       ripgrep-all
       graphviz
