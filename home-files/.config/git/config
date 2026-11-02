@@ -89,4 +89,10 @@
 [worktree]
 	guessRemote = true
 
+# Per-machine settings (work email, proxy, CA). Last so its values win; git
+# skips it when missing. An absolute path, since this file is a link into the
+# Nix store.
+[include]
+	path = ~/.config/git/config.local
+
 # vim: set filetype=gitconfig noexpandtab : 
