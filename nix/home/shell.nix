@@ -141,6 +141,7 @@ let
 in
 {
   imports = [
+    ./cdpath.nix
     ./neovim.nix
     ./tinty.nix
     ./tuicr.nix

@@ -31,14 +31,39 @@ other source files go in `assets/` or `scripts/`.
 `flake.nix` and `flake.lock` stay at the repository root because they define the
 flake. `.envrc` enables the development shell through direnv.
 
-Only the modules listed for the macOS home in `flake.nix` affect the current
-Home Manager build. The Linux and NixOS modules, the ThinkPad configuration, and
-some files under `assets/` are kept for other machines or reference.
+Only the modules listed in `homeModule` in `flake.nix` affect the Home Manager
+build. Both `nix/hosts/mac.nix` and `nix/hosts/linux.nix` are among them; each
+applies only on its own platform. The NixOS modules, the ThinkPad
+configuration, and some files under `assets/` are kept for other machines or
+reference.
 
-The flake also exports `homeModules.default` (the modules listed for the
-macOS home) and `lib.mkHomeConfig`, so another flake can build a home
-from this one with a different username or home directory and its own modules
-layered on top.
+The flake also exports `homeModules.default` (those modules) and
+`lib.mkHomeConfig`, so another flake can build a home from this one with a
+different username or home directory and its own modules layered on top.
+
+### Per-machine hooks
+
+A config built on `homeModules.default` can change these without copying
+dotfiles' files:
+
+| Option | Default | Effect |
+| --- | --- | --- |
+| `dotfiles.homeFileDirs` | `[ ./home-files ]` | More directories to link into `$HOME`; later ones replace files at the same path. |
+| `dotfiles.loginShell.enable` | `true` | Sets `home.loginShell` to zsh for hm-login-shell-helper. Disable where the helper isn't installed. |
+| `dotfiles.gui.enable` | `true` | Installs graphical applications. |
+| `dotfiles.cdpath` | `~/work/inprogress`, `~/proj` | Directories `cd` searches (zsh `cdpath`, bash `CDPATH`). Entries add to the defaults; use absolute paths. |
+| `dotfiles.python.dontCheckPackages` | `[ "dbf" ]` | python3 packages built without their tests. Entries add to the defaults. |
+
+These files are read when present, so a config can add them through its own
+`home-files/` directory:
+
+| File | Read by |
+| --- | --- |
+| `~/.ssh/config.d/*` | ssh, before dotfiles' `Host *`, so its values win |
+| `~/.config/git/config.local` | git, after dotfiles' config, so its values win |
+| `~/.zshrc_local`, `~/.bashrc_local`, `~/.bash_profile_local` | zsh and bash |
+| `~/.config/tmux/local.conf` | tmux, after dotfiles' config |
+| `vimrc_local` on the runtime path | vim and neovim |
 
 ### Where to add something
 
@@ -93,9 +118,13 @@ can still test guesses against them. Renaming an entry does not remove its
 previous name from Git history.
 
 Other flakes build homes the same way with `lib.mkHomeConfigurations`, which
-takes a set of hosts keyed by short hostname or `sha256-<digest>` and modules
-shared by all of them (typically `homeModules.default`), and get the same `switch` with
-`apps = lib.mkSwitchApps self`.
+takes a set of hosts keyed by short hostname or `sha256-<digest>`, `modules`
+shared by all of them (typically `homeModules.default`), `extraSpecialArgs`
+passed to all of them (each host's own win), and `defaults` for host
+attributes a host doesn't set (e.g. `username`, `stateVersion`, `system`).
+`homeDirectory` defaults to `/Users/<username>` on Darwin and
+`/home/<username>` otherwise. They get the same `switch` app, and a `repl` app
+that opens `nix repl` on the flake, with `apps = lib.mkSwitchApps self`.
 
 `build` creates a generation without activating it. `switch` activates the
 configuration on the intended host. Ask the user for explicit approval before

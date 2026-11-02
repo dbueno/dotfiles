@@ -71,8 +71,9 @@
       mkHomeConfig = lib.makeOverridable (
         {
           system,
-          homeDirectory,
           username ? defaultUsername,
+          homeDirectory ?
+            if lib.hasSuffix "-darwin" system then "/Users/${username}" else "/home/${username}",
           modules,
           stateVersion,
           extraConfig ? emptyConfig,
@@ -101,11 +102,20 @@
         {
           hosts,
           modules ? [ ],
+          extraSpecialArgs ? { },
+          defaults ? { },
         }:
         lib.mapAttrs' (
-          host: args:
+          host: hostArgs:
           let
-            home = mkHomeConfig (args // { modules = modules ++ args.modules or [ ]; });
+            args = defaults // hostArgs;
+            home = mkHomeConfig (
+              args
+              // {
+                modules = modules ++ args.modules or [ ];
+                extraSpecialArgs = extraSpecialArgs // args.extraSpecialArgs or { };
+              }
+            );
           in
           {
             name = "${home.username}@${host}";
@@ -160,12 +170,24 @@
             exec home-manager switch --flake "path:${flake}#$name" "$@"
           '';
         };
+      mkRepl =
+        flake: system:
+        nixpkgs.legacyPackages.${system}.writeShellApplication {
+          name = "repl";
+          text = ''
+            exec nix repl "path:${flake}" "$@"
+          '';
+        };
       mkSwitchApps =
         flake:
         lib.genAttrs systems (system: {
           switch = {
             type = "app";
             program = lib.getExe (mkSwitch flake system);
+          };
+          repl = {
+            type = "app";
+            program = lib.getExe (mkRepl flake system);
           };
         });
       # The modules the default home is built from. Other flakes build on
@@ -178,6 +200,7 @@
           ./nix/home/zsh.nix
           ./nix/home/gui.nix
           ./nix/hosts/mac.nix
+          ./nix/hosts/linux.nix
           ./nix/pkgs/vim-euforia/vim-euforia.nix
           ./nix/development/python/default.nix
           ./nix/development/python/dontcheck.nix
@@ -204,21 +227,26 @@
       lib = {
         # Builds a home from `modules` with this flake's nixpkgs, overlay and
         # special arguments, including `dotfiles` (this flake). Takes system,
-        # homeDirectory, username, modules, stateVersion, and optionally
+        # modules and stateVersion, and optionally username, homeDirectory
+        # (default /Users/<username> on Darwin, /home/<username> otherwise),
         # extraConfig and extraSpecialArgs.
         inherit mkHomeConfig;
 
         # Builds homeConfigurations from `hosts`, a set of mkHomeConfig
         # arguments keyed by short hostname (`uname -n` up to the first dot)
         # or "sha256-<hex SHA-256 of short hostname, without a newline>",
-        # named "<username>@<host>". `modules` go before each host's own.
+        # named "<username>@<host>". `modules` go before each host's own;
+        # `extraSpecialArgs` merge under each host's own; `defaults` (e.g.
+        # username, stateVersion, system) apply to any host that doesn't set
+        # them.
         inherit mkHomeConfigurations;
 
         # Takes a flake and gives its `apps`, where
         # `nix run .#switch [host] [home-manager args]` switches to the home in
         # its homeConfigurations for this machine's hostname, or the named
         # host, trying the literal name before its hash; with neither, it
-        # offers this system's homes to pick from.
+        # offers this system's homes to pick from. `nix run .#repl` opens
+        # `nix repl` on the flake.
         inherit mkSwitchApps;
       };
 

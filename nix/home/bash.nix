@@ -76,7 +76,7 @@ in
       # switching.
       #
       # The . is here so that if I type cd <dir> it goes to curdir first
-      CDPATH = ".:~/work/inprogress";
+      CDPATH = lib.concatStringsSep ":" ([ "." ] ++ config.dotfiles.cdpath);
       GRAPHVIZ_DOT = "${pkgs.graphviz}/bin/dot";
       RSVG_CONVERT = "${pkgs.librsvg}/bin/rsvg-convert";
     };

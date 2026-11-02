@@ -1,35 +1,41 @@
+# Builds the python3 packages named in dotfiles.python.dontCheckPackages
+# without running their tests.
 {
   config,
   lib,
-  pkgs,
   ...
 }:
-with builtins;
-with lib.attrsets;
 let
-  # These python packages are going to have "dontCheck = true;" added to them
-  dontCheckPackages = [
-    "dbf"
-  ];
   dontCheckPython =
     d:
     d.overridePythonAttrs (old: {
       doCheck = false;
       doInstallCheck = false;
     });
-  f = pythonPackages: attr: {
-    name = "${attr}";
-    value = dontCheckPython pythonPackages."${attr}";
-  };
   packageOverrides =
-    selfPythonPackages: pythonPackages: listToAttrs (map (f pythonPackages) dontCheckPackages);
-  overlay = result: prev: {
+    _: pythonPackages:
+    lib.genAttrs config.dotfiles.python.dontCheckPackages (
+      name: dontCheckPython pythonPackages.${name}
+    );
+  overlay = _: prev: {
     python3 = prev.python3.override (old: {
-      packageOverrides = prev.lib.composeExtensions (old.packageOverrides or (_: _: { })
-      ) packageOverrides;
+      packageOverrides = lib.composeExtensions (old.packageOverrides or (_: _: { })) packageOverrides;
     });
   };
 in
 {
-  nixpkgs.overlays = [ overlay ];
+  options.dotfiles.python.dontCheckPackages = lib.mkOption {
+    type = lib.types.listOf lib.types.str;
+    description = ''
+      Names of python3 packages to build without running their tests, e.g.
+      ones whose tests need the network.
+    '';
+  };
+
+  config = {
+    # A definition, not the option's default, so other modules' entries add
+    # to it rather than replace it.
+    dotfiles.python.dontCheckPackages = [ "dbf" ];
+    nixpkgs.overlays = [ overlay ];
+  };
 }

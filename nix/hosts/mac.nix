@@ -1,4 +1,7 @@
 # defaults -currentHost write -g AppleFontSmoothing -int 0
+#
+# Imported on every host; applies only on Darwin. It must not set
+# nixpkgs.overlays: pkgs, which the condition reads, depends on them.
 {
   config,
   lib,
@@ -7,22 +10,18 @@
 }:
 let
   stats = pkgs.callPackage ../pkgs/stats/default.nix { };
-  skim-app = pkgs.callPackage ../pkgs/skim-app/default.nix { };
 in
 {
-  nixpkgs.overlays = [ ];
-
-  programs.vim = {
-    packageConfigurable = pkgs.vim_configurable.override {
-      darwinSupport = true;
-      guiSupport = false;
+  config = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
+    programs.vim = {
+      packageConfigurable = pkgs.vim_configurable.override {
+        darwinSupport = true;
+        guiSupport = false;
+      };
     };
+
+    programs.matplotlib.config.backend = "MacOSX";
+
+    home.packages = [ stats ];
   };
-
-  programs.matplotlib.config.backend = "MacOSX";
-
-  home.packages = [
-    stats
-    skim-app
-  ];
 }
