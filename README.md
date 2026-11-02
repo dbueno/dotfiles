@@ -91,10 +91,20 @@ with your latest preferences.
 From the repository root:
 
 ```sh
+nix run .#diff     # build this machine's home and compare it with the active one
 nix run .#switch
 # Build without activating (substitute the host key from flake.nix):
 home-manager build --flake 'path:.#dbueno@sha256-<digest>'
 ```
+
+`nix run .#diff` changes nothing. It builds the home that `switch` would pick
+(it takes the same host argument, and passes further arguments to
+`nix build`) and compares it with the active Home Manager generation:
+package changes, commands added to or removed from `PATH`, session
+variables, files linked into `$HOME`, and existing files the switch would
+refuse to overwrite. Store hashes are hidden in the diffs.
+`nix run .#diff -- ./result [OLD]` compares an already built generation
+instead, with OLD defaulting to the active one.
 
 `nix run .#switch` does the `switch` for this machine's short hostname
 (`uname -n` up to the first dot). It tries `<username>@<hostname>` first, then
@@ -123,7 +133,7 @@ shared by all of them (typically `homeModules.default`), `extraSpecialArgs`
 passed to all of them (each host's own win), and `defaults` for host
 attributes a host doesn't set (e.g. `username`, `stateVersion`, `system`).
 `homeDirectory` defaults to `/Users/<username>` on Darwin and
-`/home/<username>` otherwise. They get the same `switch` app, and a `repl` app
+`/home/<username>` otherwise. They get the same `switch` and `diff` apps, and a `repl` app
 that opens `nix repl` on the flake, with `apps = lib.mkSwitchApps self`.
 
 `build` creates a generation without activating it. `switch` activates the

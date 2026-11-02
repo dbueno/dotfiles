@@ -122,11 +122,53 @@
             value = home;
           }
         ) hosts;
+      # Shell code that sets `name` to the home in `flake` for this machine's
+      # short hostname, or for the host in a leading non-option argument
+      # (shifted off), trying the literal name before its hash; with
+      # neither, it offers this system's homes to pick from. `verb` goes in
+      # that prompt.
+      resolveHome =
+        flake: system: verb:
+        let
+          names = lib.attrNames (lib.filterAttrs (_: h: h.system == system) flake.homeConfigurations);
+        in
+        ''
+          homes=(${lib.escapeShellArgs names})
+          host=$(uname -n)
+          name="$USER@''${host%%.*}"
+          if [[ $# -gt 0 && $1 != -* ]]; then
+            name=$1
+            [[ $name == *@* ]] || name="$USER@$name"
+            shift
+          fi
+
+          # Prefer a literal hostname when both forms are configured.
+          if [[ " ''${homes[*]} " != *" $name "* ]]; then
+            host_hash=$(printf '%s' "''${name#*@}" | sha256sum)
+            hashed_name="''${name%%@*}@sha256-''${host_hash%% *}"
+            if [[ " ''${homes[*]} " == *" $hashed_name "* ]]; then
+              name=$hashed_name
+            fi
+          fi
+
+          if [[ " ''${homes[*]} " != *" $name "* ]]; then
+            echo "No home named $name for ${system}." >&2
+            if [[ ''${#homes[@]} -eq 0 || ! -t 0 ]]; then
+              echo "Configured: ''${homes[*]:-none}" >&2
+              exit 1
+            fi
+            PS3="${verb} which home? "
+            name=
+            select choice in "''${homes[@]}"; do
+              [[ -n $choice ]] && name=$choice && break
+            done
+            [[ -n $name ]] || exit 1
+          fi
+        '';
       mkSwitch =
         flake: system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          names = lib.attrNames (lib.filterAttrs (_: h: h.system == system) flake.homeConfigurations);
         in
         pkgs.writeShellApplication {
           name = "switch";
@@ -135,39 +177,46 @@
             pkgs.coreutils
           ];
           text = ''
-            homes=(${lib.escapeShellArgs names})
-            host=$(uname -n)
-            name="$USER@''${host%%.*}"
-            if [[ $# -gt 0 && $1 != -* ]]; then
-              name=$1
-              [[ $name == *@* ]] || name="$USER@$name"
-              shift
-            fi
-
-            # Prefer a literal hostname when both forms are configured.
-            if [[ " ''${homes[*]} " != *" $name "* ]]; then
-              host_hash=$(printf '%s' "''${name#*@}" | sha256sum)
-              hashed_name="''${name%%@*}@sha256-''${host_hash%% *}"
-              if [[ " ''${homes[*]} " == *" $hashed_name "* ]]; then
-                name=$hashed_name
-              fi
-            fi
-
-            if [[ " ''${homes[*]} " != *" $name "* ]]; then
-              echo "No home named $name for ${system}." >&2
-              if [[ ''${#homes[@]} -eq 0 || ! -t 0 ]]; then
-                echo "Configured: ''${homes[*]:-none}" >&2
-                exit 1
-              fi
-              PS3="Switch to which home? "
-              name=
-              select choice in "''${homes[@]}"; do
-                [[ -n $choice ]] && name=$choice && break
-              done
-              [[ -n $name ]] || exit 1
-            fi
-
+            ${resolveHome flake system "Switch to"}
             exec home-manager switch --flake "path:${flake}#$name" "$@"
+          '';
+        };
+      mkDiff =
+        flake: system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+          # Uses the nix on PATH, like home-manager does.
+          hm-diff = pkgs.writeShellApplication {
+            name = "hm-diff";
+            runtimeInputs = with pkgs; [
+              coreutils
+              diffutils
+              findutils
+              gnused
+            ];
+            text = builtins.readFile ./scripts/hm-diff.sh;
+            # Its quoted "~/" is display text, not a path to expand.
+            excludeShellChecks = [ "SC2088" ];
+          };
+        in
+        pkgs.writeShellApplication {
+          name = "diff";
+          runtimeInputs = [
+            hm-diff
+            pkgs.coreutils
+          ];
+          text = ''
+            # A built generation (e.g. ./result) and optionally the old one to
+            # compare it with, instead of a home to build.
+            if [[ $# -gt 0 && -e $1/activate ]]; then
+              exec hm-diff "$@"
+            fi
+
+            ${resolveHome flake system "Diff"}
+            echo "Building $name..." >&2
+            new=$(nix build --no-link --print-out-paths \
+              "path:${flake}#homeConfigurations.\"$name\".activationPackage" "$@")
+            exec hm-diff "$new"
           '';
         };
       mkRepl =
@@ -188,6 +237,10 @@
           repl = {
             type = "app";
             program = lib.getExe (mkRepl flake system);
+          };
+          diff = {
+            type = "app";
+            program = lib.getExe (mkDiff flake system);
           };
         });
       # The modules the default home is built from. Other flakes build on
@@ -245,7 +298,10 @@
         # `nix run .#switch [host] [home-manager args]` switches to the home in
         # its homeConfigurations for this machine's hostname, or the named
         # host, trying the literal name before its hash; with neither, it
-        # offers this system's homes to pick from. `nix run .#repl` opens
+        # offers this system's homes to pick from. `nix run .#diff` takes the
+        # same host argument, builds that home, and compares it with the
+        # active generation without switching; given a built generation
+        # (e.g. ./result) instead, it compares that. `nix run .#repl` opens
         # `nix repl` on the flake.
         inherit mkSwitchApps;
       };
