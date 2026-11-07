@@ -4,6 +4,9 @@
   inputs = {
     home-manager.url = "github:nix-community/home-manager";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # tuicr 0.28.0, newer than the main nixpkgs pin, whose bump is held back
+    # until nix/pkgs/diffnav/tinty-ansi.patch applies to diffnav 0.13.1.
+    nixpkgs-tuicr.url = "github:nixos/nixpkgs/f9a75f41be3a74eab55d3a7679d34ad6cc0da977";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     rusage = {
       url = "github:dbueno/rusage";
@@ -57,6 +60,7 @@
         {
           rusage = rusage.defaultPackage.${system};
           merjar = merjar.defaultPackage.${system};
+          inherit (inputs.nixpkgs-tuicr.legacyPackages.${system}) tuicr;
           inherit (inputs) tinted-schemes tinted-shell tinted-vim;
         };
       emptyConfig =

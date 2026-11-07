@@ -240,6 +240,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-tuicr": {
+      "locked": {
+        "lastModified": 1793876309,
+        "narHash": "sha256-Wojg9lIH/hDH91iDVH2/EPw8oDSpxjxhXONbU1yf4Zg=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1790822859,
@@ -262,6 +278,7 @@
         "home-manager": "home-manager",
         "merjar": "merjar",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-tuicr": "nixpkgs-tuicr",
         "rusage": "rusage",
         "tinted-schemes": "tinted-schemes",
         "tinted-shell": "tinted-shell",
