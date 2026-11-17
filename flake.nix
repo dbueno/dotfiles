@@ -262,6 +262,7 @@
           ./nix/development/python/default.nix
           ./nix/development/python/dontcheck.nix
           ./nix/development/ocaml/default.nix
+          ./nix/development/rust/sccache.nix
         ];
       };
       hosts = {
