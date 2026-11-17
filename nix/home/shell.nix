@@ -179,13 +179,6 @@ in
 
   xdg.enable = true;
 
-  # Claude Code in a Seatbelt sandbox, with the profile from ~/proj/shannon as
-  # committed on main. An alias rather than a flake input, so machines without
-  # that checkout still build this config.
-  home.shellAliases = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
-    sclaude = ''/usr/bin/sandbox-exec -f <(nix run "git+file://$HOME/proj/shannon?ref=main") claude'';
-  };
-
   programs.matplotlib = {
     enable = true;
   };
