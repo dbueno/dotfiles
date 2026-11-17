@@ -20,12 +20,4 @@ use_sccache() {
     return 1
   }
   export RUSTC_WRAPPER
-  # On macOS a proc-macro dylib's install name is its absolute output path, so
-  # it differs per target dir, and sccache (which hashes --extern files by
-  # content) misses every crate built on one. -C rpath makes the install name
-  # @rpath/<file> instead. RUSTFLAGS replaces a project's config rustflags, so
-  # a project that sets those needs -C rpath there instead.
-  if [[ $(uname) == Darwin && " ${RUSTFLAGS:-} " != *" -C rpath "* ]]; then
-    export RUSTFLAGS="${RUSTFLAGS:+$RUSTFLAGS }-C rpath"
-  fi
 }
