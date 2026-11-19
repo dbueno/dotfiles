@@ -18,7 +18,12 @@ use_sccache() {
   # keys include them (OUT_DIR from build scripts, workspace sources) hit
   # entries another worktree wrote. The server reads SCCACHE_BASEDIRS only at
   # startup, so each project gets its own server, on a port derived from its
-  # path; all of them share SCCACHE_DIR. Set CARGO_TARGET_DIR before this.
+  # path; all of them share SCCACHE_DIR. Set CARGO_TARGET_DIR before this:
+  # set after it, the real target dir stays in every key and build-script
+  # crates (and all that depend on them) miss in each new worktree.
+  if [[ -z ${CARGO_TARGET_DIR:-} ]]; then
+    log_error "sccache: CARGO_TARGET_DIR is not set yet; assuming $PWD/target. Export it before 'use sccache'."
+  fi
   local target=${CARGO_TARGET_DIR:-$PWD/target}
   [[ $target == /* ]] || target=$PWD/$target
   export SCCACHE_BASEDIRS="$PWD:$target"
