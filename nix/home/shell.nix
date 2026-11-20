@@ -267,6 +267,7 @@ in
       mupdf-headless
       qpdf
       tesseract
+      pv
     ]
     ++ myScripts;
 }
