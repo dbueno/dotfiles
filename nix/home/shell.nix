@@ -144,7 +144,6 @@ in
     ./cdpath.nix
     ./neovim.nix
     ./tinty.nix
-    ./tuicr.nix
     ./files.nix
     ./zed.nix
     ./fzf.nix
