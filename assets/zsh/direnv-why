@@ -1,0 +1,29 @@
+# Before direnv's prompt hook reloads, print and log each file direnv watches
+# whose mtime differs from the one it recorded at its last load. Once it
+# reloads, the record is current and the cause is gone. Must come after
+# `direnv hook zsh`, so that putting this first in precmd_functions puts it
+# ahead of _direnv_hook.
+zmodload -F zsh/stat b:zstat
+zmodload zsh/datetime
+_direnv_why_precmd() {
+  [[ -n $DIRENV_WATCHES ]] || return 0
+  local loaded file now was is out=
+  local -a mtime
+  while IFS=$'\t' read -r loaded file; do
+    now=0
+    [[ -e $file ]] && zstat -A mtime +mtime -- $file && now=$mtime[1]
+    [[ $now == $loaded ]] && continue
+    was=missing is=missing
+    (( loaded )) && strftime -s was '%F %T' $loaded
+    (( now )) && strftime -s is '%F %T' $now
+    out+="$file"$'\n'"  loaded: $was"$'\n'"  now:    $is"$'\n'
+  done < <(@direnv@ show_dump $DIRENV_WATCHES 2>/dev/null |
+    @jq@ -r '.[] | "\(.modtime)\t\(.path)"')
+  [[ -n $out ]] || return 0
+  local log=${XDG_STATE_HOME:-$HOME/.local/state}/direnv-why.log
+  print -u2 -rn -- "direnv-why: $out"
+  mkdir -p ${log:h}
+  print -rn -- "$(date '+%F %T') $PWD"$'\n'"$out" >> $log
+}
+precmd_functions=(_direnv_why_precmd ${precmd_functions:#_direnv_why_precmd})
+# vim: set filetype=zsh :

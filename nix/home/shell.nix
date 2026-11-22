@@ -171,6 +171,13 @@ in
     enable = true;
     nix-direnv.enable = true;
   };
+  # After home-manager's `direnv hook zsh`, which has the default order.
+  programs.zsh.initContent = lib.mkAfter (
+    builtins.replaceStrings
+      [ "@direnv@" "@jq@" ]
+      [ (lib.getExe config.programs.direnv.package) (lib.getExe pkgs.jq) ]
+      (builtins.readFile ../../assets/zsh/direnv-why)
+  );
 
   programs.htop = {
     enable = true;
