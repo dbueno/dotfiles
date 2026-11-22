@@ -61,7 +61,9 @@ These files are read when present, so a config can add them through its own
 | --- | --- |
 | `~/.ssh/config.d/*` | ssh, before dotfiles' `Host *`, so its values win |
 | `~/.config/git/config.local` | git, after dotfiles' config, so its values win |
-| `~/.zshrc_local`, `~/.bashrc_local`, `~/.bash_profile_local` | zsh and bash |
+| `~/.config/zsh/local-early.zsh` | zsh, once nix is set up, before dotfiles' rc |
+| `~/.config/zsh/local.zsh` | zsh, last, after dotfiles' rc and direnv's hook |
+| `~/.bashrc_local`, `~/.bash_profile_local` | bash |
 | `~/.config/tmux/local.conf` | tmux, after dotfiles' config |
 | `vimrc_local` on the runtime path | vim and neovim |
 

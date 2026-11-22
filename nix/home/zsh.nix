@@ -32,7 +32,13 @@
       # This puts some important shell and nix stuff first so the rest of the
       # shell init can access it
       (lib.mkOrder 500 (builtins.readFile ../../assets/zsh/start))
+      # Local hooks, read when present: local-early.zsh once nix is set up,
+      # local.zsh last, after everything else (direnv's hook included).
+      (lib.mkOrder 550 "[[ -e $ZDOTDIR/local-early.zsh ]] && . $ZDOTDIR/local-early.zsh")
       (builtins.readFile ../../assets/zsh/rc)
+      (lib.mkOrder 2000 ''
+        [[ -e $ZDOTDIR/local.zsh ]] && . $ZDOTDIR/local.zsh
+      '')
     ];
 
     envExtra = builtins.readFile ../../assets/zsh/env;

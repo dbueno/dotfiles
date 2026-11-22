@@ -161,5 +161,4 @@ if [ -n "$(command -v 'tinty')" ]; then
   alias tinty=tinty_source_shell_theme
 fi
 
-[[ -e ~/.zshrc_local ]] && . ~/.zshrc_local
 # vim: set filetype=zsh :
